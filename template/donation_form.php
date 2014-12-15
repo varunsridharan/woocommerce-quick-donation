@@ -22,10 +22,10 @@ global $donate;
 					
 					<div class="input text">
 						<label>Donation (&pound;):</label>
-						<input type="text" name="jc-donation" value="<?php echo $donate; ?>"/>
+						<input type="text" name="donation_ammount" value="<?php echo $donate; ?>"/>
 					</div>
 					<div class="submit_btn">
-						<input type="submit" name="donate-btn" value="Add Donation"/>
+						<input type="submit" name="donation_add" value="Add Donation"/>
 					</div>
 				</div>
 			</td>
