@@ -17,7 +17,7 @@
     Plugin Name: Woocommerce Quick Donation
     Plugin URI: http://varunsridharan.in/
     Description: Woocommerce Quick Donation
-    Version: 0.2
+    Version: 0.3
     Author: Varun Sridharan
     Author URI: http://varunsridharan.in/
     License: GPL2
@@ -339,49 +339,46 @@ class wc_quick_donation{
 	public function install() {
 		$exist = get_option('wc_quick_donation_product_id');
 		if($exist){
+            
 			return true;
-		} else {
-            $post_id = $this->create_donation();
+		} else { 
+            $post_id = create_donation();
 			add_option('wc_quick_donation_product_id',$post_id); 
             add_option('wc_quick_donation_orders','');
 		    add_site_option( 'wc_quick_donation_product_id', $post_id) ;
 		}
 	}
-    
-    /**
-     * Creats Donation Product IN WC
-     * @returns [[Type]] [[Description]]
-     */
-    public function create_donation(){
-			$userID = 1;
-			if(get_current_user_id()){
-				$userID = get_current_user_id();
-			}
-			$post = array(
-				'post_author' => $userID,
-				'post_content' => 'Used For Donation',
-				'post_status' => 'publish',
-				'post_title' => 'Donation',
-				'post_type' => 'product',
-			);
-
-			$post_id = wp_insert_post( $post, $wp_error );  
-			update_post_meta($post_id, '_stock_status', 'instock');
-			update_post_meta($post_id, '_tax_status', 'none');
-			update_post_meta($post_id, '_tax_class',  'zero-rate');
-			update_post_meta($post_id, '_visibility', 'hidden');
-			update_post_meta($post_id, '_stock', '');
-			update_post_meta($post_id, '_virtual', 'yes');
-			update_post_meta($post_id, '_featured', 'no');
-			
-			update_post_meta($post_id, '_manage_stock', "no" );
-			update_post_meta($post_id, '_sold_individually', "yes" );
-			update_post_meta($post_id, '_sku', 'checkout-donation');   			
-            return $post_id;
-    }
+     
 }
 
 
+function create_donation(){
+    $userID = 1;
+    if(get_current_user_id()){
+        $userID = get_current_user_id();
+    }
+    $post = array(
+        'post_author' => $userID,
+        'post_content' => 'Used For Donation',
+        'post_status' => 'publish',
+        'post_title' => 'Donation',
+        'post_type' => 'product',
+    );
+
+    $post_id = wp_insert_post( $post, $wp_error );  
+    update_post_meta($post_id, '_stock_status', 'instock');
+    update_post_meta($post_id, '_tax_status', 'none');
+    update_post_meta($post_id, '_tax_class',  'zero-rate');
+    update_post_meta($post_id, '_visibility', 'hidden');
+    update_post_meta($post_id, '_stock', '');
+    update_post_meta($post_id, '_virtual', 'yes');
+    update_post_meta($post_id, '_featured', 'no');
+
+    update_post_meta($post_id, '_manage_stock', "no" );
+    update_post_meta($post_id, '_sold_individually', "yes" );
+    update_post_meta($post_id, '_sku', 'checkout-donation');   			
+    return $post_id;
+}
 
 /**
  * Check if WooCommerce is active 

@@ -4,7 +4,7 @@ Donate link: http://varunsridharan.in
 Tags: Woocommerce,Quick Dontion,Donation,Online Payment,Payment,Online,Donate,Monthly Goal
 Requires at least: 3.0 plus WooCommerce 2.x or higher
 Tested up to: 4.0.1 + WooCommerce 2.x
-Stable tag: 0.2
+Stable tag: 0.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -37,11 +37,9 @@ This Plugin Can called by using the below short code
 1. Donation Form Template
 `wc-quick-donation/template/donation_form.php`
 2. Donation Processing Email Template
-`wc-quick-donation/template/donation_processing_html.php`
-`wc-quick-donation/template/donation_processing_plain.php`
+`wc-quick-donation/template/donation_processing_html.php && wc-quick-donation/template/donation_processing_plain.php`
 3. Donation Completed Email Template
-`wc-quick-donation/template/donation_completed_html.php`
-`wc-quick-donation/template/donation_completed_plain.php`
+`wc-quick-donation/template/donation_completed_html.php && wc-quick-donation/template/donation_completed_plain.php`
 
 
 Plugin Settings : ***Woocoomerce Settings => Quick Donation***
@@ -93,6 +91,10 @@ Oops. Please User github / WordPress to post bugs.  <a href="https://github.com/
 3. Email Template Settings For Donation Completed.
 
 == Changelog ==
+
+= 0.3 =
+* Plugin Activation Issue Fixed.
+
 = 0.2 =
 * Redirect User After Donation Added To Cart [Cart Page / Checkout Page]
 * Select Your Preferred Payment Gateway For Donation
