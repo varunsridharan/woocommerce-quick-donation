@@ -17,7 +17,7 @@
     Plugin Name: Woocommerce Quick Donation
     Plugin URI: http://varunsridharan.in/
     Description: Woocommerce Quick Donation
-    Version: 1.0
+    Version: 1.1
     Author: Varun Sridharan
     Author URI: http://varunsridharan.in/
     License: GPL2

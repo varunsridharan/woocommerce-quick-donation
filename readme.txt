@@ -2,9 +2,11 @@
 Contributors: varunms
 Donate link: http://varunsridharan.in
 Tags: WooCommerce,Quick Dontion,quick donation,online donation,wordpress donation,simple donation,donation form,WC donation,Online Payment,Payment,Online,Donate,Monthly Goal,affiliate, cart, checkout, commerce, configurable, digital, download, downloadable, e-commerce, ecommerce, inventory, reports, sales, sell, shipping, shop, shopping, stock, store, tax, variable, widgets, woothemes, wordpress ecommerce
-Requires at least: 3.0 plus WooCommerce 2.x or higher
-Tested up to: 4.1 + WooCommerce 2.x
-Stable tag: 1.0
+Requires at least: 3.0 or higher
+Tested up to: 4.1.1
+WC requires at least: 1.0
+WC tested up to: 2.3.5
+Stable tag: 1.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -125,6 +127,9 @@ Yes you can! Join in on our <a href="https://github.com/technofreaky/woocomerce-
 5. Email Template Settings For Donation Completed.
 
 == Changelog ==
+= 1.1 =
+* Plugin Activation Issue Fixed.
+
 = 1.0 =
 * Configurable Min & Max Donation Amount
 * Custom Error Messages

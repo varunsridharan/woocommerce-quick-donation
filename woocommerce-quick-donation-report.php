@@ -60,13 +60,16 @@ class wc_quick_donation_report {
     }
     
     private function get_status_count(){
-        foreach($this->donation_orderids as $id){
-            $order_status = get_post_status($id);
-            if($order_status == 'wc-on-hold' || $order_status == 'wc-processing'){
-                $this->status_count++;
+        if(!empty($this->donation_orderids)){
+            foreach($this->donation_orderids as $id){
+                $order_status = get_post_status($id);
+                if($order_status == 'wc-on-hold' || $order_status == 'wc-processing'){
+                    $this->status_count++;
+                }
             }
+            return $this->status_count;
         }
-        return $this->status_count;
+        return '';
     }
     
     private function generate_data(){
