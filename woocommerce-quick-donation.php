@@ -17,7 +17,7 @@
     Plugin Name: Woocommerce Quick Donation
     Plugin URI: http://varunsridharan.in/
     Description: Woocommerce Quick Donation
-    Version: 0.3
+    Version: 0.4
     Author: Varun Sridharan
     Author URI: http://varunsridharan.in/
     License: GPL2
@@ -29,27 +29,46 @@ define( 'wc_qd_p', plugin_dir_path( __FILE__ ) );
 class wc_quick_donation{
 	
 	private $donation_id;
-	private $plugin_slug;
 	
 	/**
 	 * Setup The Plugin Class
 	 */
 	function __construct() {
 		$this->donation_id = get_option('wc_quick_donation_product_id');
-		
 		add_shortcode( 'wc_quick_donation', array($this,'shortcode_handler' ));
-
-		add_action( 'init',array($this,'process_donation'));  
+       
+        add_action( 'get_the_generator_html',  array($this,'generate_meta_tags'), 15, 2 );
+        add_action( 'get_the_generator_xhtml', array($this,'generate_meta_tags'), 15, 2 );        
+		add_action( 'wp_loaded',array($this,'process_donation'));  
 		add_action( 'wc_qd_show_projects_list',array($this,'get_projects_list'));		 
 		add_action( 'woocommerce_checkout_update_order_meta',  array($this,'add_order_meta'));
 		add_action( 'woocommerce_available_payment_gateways',array($this,'remove_gateway'));
 		add_action( 'woocommerce_admin_order_data_after_billing_address', array($this,'custom_order_details_page_info'), 10, 1 ); 
-
+        
         add_filter( 'woocommerce_get_price', array($this,'get_price'),10,2);
 		add_filter( 'woocommerce_get_settings_pages',  array($this,'settings_page') );
 		add_filter( 'woocommerce_email_classes',  array($this,'email_classes'));	 
 	}
  
+    /**
+     * Adds Donation Meta Tag
+     * @param   String $gen  Refer WP.ORG
+     * @param   String $type Refer WP.ORG 
+     * @returns String
+     * @since 0.4
+     */
+    public function generate_meta_tags( $gen, $type ) {
+        switch ( $type ) {
+            case 'html':
+                $gen .= "\n" . '<meta name="generator" content="WooCommerce Quick Donation 0.4">';
+                break;
+            case 'xhtml':
+                $gen .= "\n" . '<meta name="generator" content="WooCommerce Quick Donation 0.4" />';
+                break;
+        }
+        return $gen;
+    }    
+    
 	/**
 	 * Adds Settings Page
 	 */
@@ -336,10 +355,9 @@ class wc_quick_donation{
 	/**
 	 * Install The Plugin
 	 */
-	public function install() {
+	public static function install() {
 		$exist = get_option('wc_quick_donation_product_id');
 		if($exist){
-            
 			return true;
 		} else { 
             $post_id = create_donation();
@@ -365,7 +383,7 @@ function create_donation(){
         'post_type' => 'product',
     );
 
-    $post_id = wp_insert_post( $post, $wp_error );  
+    $post_id = wp_insert_post($post);  
     update_post_meta($post_id, '_stock_status', 'instock');
     update_post_meta($post_id, '_tax_status', 'none');
     update_post_meta($post_id, '_tax_class',  'zero-rate');
@@ -386,8 +404,12 @@ function create_donation(){
  */
 if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) ) {
 	register_activation_hook( __FILE__, array( 'wc_quick_donation', 'install' ) );
-	$wc_quick_buy = new wc_quick_donation; 
-	 
+	$wc_quick_buy = new wc_quick_donation;
+} else {
+	add_action( 'admin_notices', 'wc_quick_donation_notice' );
 }
 
+function wc_quick_donation_notice() {
+	echo '<div class="error"><p><strong> <i> Woocommerce Quick Donation </i> </strong> Requires <a href="'.admin_url( 'plugin-install.php?tab=plugin-information&plugin=woocommerce').'"> <strong> <u>Woocommerce</u></strong>  </a> To Be Installed And Activated </p></div>';
+}
 ?>

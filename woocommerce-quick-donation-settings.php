@@ -29,7 +29,7 @@ class WC_Quick_Donation_Settings extends WC_Settings_Page {
      * Get sections
      *
      * @return array
-     */
+     
     public function get_sections() {
 
         $sections = array(
@@ -39,7 +39,7 @@ class WC_Quick_Donation_Settings extends WC_Settings_Page {
 
         return apply_filters( 'woocommerce_get_sections_' . $this->id, $sections );
     }
-
+*/
 
     /**
      * Get sections
@@ -113,18 +113,13 @@ class WC_Quick_Donation_Settings extends WC_Settings_Page {
 						'id' => 'wc_quick_donation_order_notes_title', 
 						'default' =>'Project Name %s'
 
-					),			 		
+					),					
 					'section_end' => array(
 						'type' => 'sectionend',
 						'id' => 'wc_settings_tab_demo_section_end'
 					)
 				);
             break;
-            case 'email_template':
-				  
-            break;
-            
-
         }
 
         return apply_filters( 'wc_settings_tab_'.$this->id.'_settings', $settings, $section );

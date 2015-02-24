@@ -1,18 +1,18 @@
-=== Plugin Name ===
+=== WooCommerce Quick Donation ===
 Contributors: varunms
 Donate link: http://varunsridharan.in
-Tags: Woocommerce,Quick Dontion,Donation,Online Payment,Payment,Online,Donate,Monthly Goal
+Tags: Woocommerce,Quick Dontion,quick donation,online donation,wordpress donation,simple donation,donation form,WC donation,Online Payment,Payment,Online,Donate,Monthly Goal
 Requires at least: 3.0 plus WooCommerce 2.x or higher
-Tested up to: 4.0.1 + WooCommerce 2.x
-Stable tag: 0.3
+Tested up to: 4.1 + WooCommerce 2.x
+Stable tag: 0.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Online Donation Using Woocoomerce. for woocommerce user's
+Trurns WooCommerce Into Online Donation.
 
 == Description ==
 
-<h3> <blink> What's New In 0.2 </blink></h3>
+<h3> <blink> Features </blink></h3>
 * Redirect User After Donation Added To Cart [Cart Page / Checkout Page]
 * Select Your Preferred Payment Gateway For Donation
 * Custom Email Template For Donation Processing
@@ -37,9 +37,11 @@ This Plugin Can called by using the below short code
 1. Donation Form Template
 `wc-quick-donation/template/donation_form.php`
 2. Donation Processing Email Template
-`wc-quick-donation/template/donation_processing_html.php && wc-quick-donation/template/donation_processing_plain.php`
+`wc-quick-donation/template/donation_processing_html.php
+ wc-quick-donation/template/donation_processing_plain.php`
 3. Donation Completed Email Template
-`wc-quick-donation/template/donation_completed_html.php && wc-quick-donation/template/donation_completed_plain.php`
+`wc-quick-donation/template/donation_completed_html.php
+ wc-quick-donation/template/donation_completed_plain.php`
 
 
 Plugin Settings : ***Woocoomerce Settings => Quick Donation***
@@ -91,6 +93,10 @@ Oops. Please User github / WordPress to post bugs.  <a href="https://github.com/
 3. Email Template Settings For Donation Completed.
 
 == Changelog ==
+
+= 0.4 =
+* Internal Server Error / php error fixed while adding donation to cart  [WP : 4.1 | WC : 2.3.3]
+* Minor Bug Fix
 
 = 0.3 =
 * Plugin Activation Issue Fixed.
