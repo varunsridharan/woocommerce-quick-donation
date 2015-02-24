@@ -1,407 +1,166 @@
 <?php
 /**
- * WC_Report_Sales_By_Date
- *
- * @author      WooThemes
- * @category    Admin
- * @package     WooCommerce/Admin/Reports
- * @version     2.1.0
+ * Package : WooCommerce Quick Donation
+ * Since : 1.0
+ * Usage : Custom Report Page For Donation
  */
-class WC_Report_wc_quick_donation_reports extends WC_Admin_Report {
 
-	public $chart_colours = array();
-
-	/**
-	 * Get the legend for the main chart sidebar
-	 * @return array
-	 */
-	public function get_chart_legend() {
-		$legend   = array();
+class wc_quick_donation_report {
+    private $donation_orderids;
+    private $status_count;
+    private $menu_name;
+    private $menu_slug;
+    /**
+     * Setup WC Quick Donation Report Page
+     */
+    function __construct(){
+        $this->status_count = 0;
+        $this->donation_orderids = json_decode(get_option('wc_quick_donation_ids')); 
+        $this->get_status_count();
+        $this->menu_name = 'Donations';
+        $this->menu_slug = 'wc-quick-donations-orders';
+        add_action('admin_menu', array($this,'register_menu'));
+        add_action('admin_menu',  array($this,'add_donation_notification_bubble'),99);
+        add_filter('woocommerce_screen_ids',array($this,'set_wc_screen_ids'));
+    }
  
- 
+    public function set_wc_screen_ids($screen){
+        $screen[] = 'woocommerce_page_wc-quick-donations-orders';
+        return $screen;
+    }
+    
+    
+    /**
+     * Registers A Menu In Admin
+     */
+    public function register_menu(){ 
+        add_submenu_page( 'woocommerce', $this->menu_name,$this->menu_name, 'view_woocommerce_reports', $this->menu_slug, array( $this, 'donation_orders_listing' ) );
+    }
+    
+    public function add_donation_notification_bubble()  {
+        global $submenu; 
+        if(isset($submenu['woocommerce'])){
+            
+        foreach($submenu['woocommerce'] as $menuK => $menu){
+            if($menu[2] === $this->menu_slug ){
+                $submenu['woocommerce'][$menuK][0] .=  "<span class='update-plugins count-1'><span class='update-count'>$this->status_count </span></span>"; 
+            }
+        }
+        }
+        
 
-		$legend[] = array(
-			'title' => 'sales in this period',
-			'color' => $this->chart_colours['sales_amount'],
-			'highlight_series' => 6
-		);
- 
-
-		return $legend;
-	}
-
-	/**
-	 * Output the report
-	 */
-	public function output_report() {
-
-		$ranges = array(
-			'year'         => __( 'Year', 'woocommerce' ),
-			'last_month'   => __( 'Last Month', 'woocommerce' ),
-			'month'        => __( 'This Month', 'woocommerce' ),
-			'7day'         => __( 'Last 7 Days', 'woocommerce' )
-		);
-
-		$this->chart_colours = array(
-			'sales_amount' => '#3498db',
-			'average'      => '#75b9e7',
-			'order_count'  => '#b8c0c5',
-			'item_count'   => '#d4d9dc',
-			'coupon_amount' => '#e67e22',
-			'shipping_amount' => '#1abc9c',
-			'refund_amount' => '#c0392b'
-		);
-
-		$current_range = ! empty( $_GET['range'] ) ? sanitize_text_field( $_GET['range'] ) : '7day';
-
-		if ( ! in_array( $current_range, array( 'custom', 'year', 'last_month', 'month', '7day' ) ) ) {
-			$current_range = '7day';
-		}
-
-		$this->calculate_current_range( $current_range );
-
-		include( WC()->plugin_path() . '/includes/admin/views/html-report-by-date.php');
-	}
-
-	/**
-	 * Output an export link
-	 */
-	public function get_export_button() {
-
-		$current_range = ! empty( $_GET['range'] ) ? sanitize_text_field( $_GET['range'] ) : '7day';
-		?>
-		<a
-			href="#"
-			download="report-<?php echo esc_attr( $current_range ); ?>-<?php echo date_i18n( 'Y-m-d', current_time('timestamp') ); ?>.csv"
-			class="export_csv"
-			data-export="chart"
-			data-xaxes="<?php _e( 'Date', 'woocommerce' ); ?>"
-			data-exclude_series="2"
-			data-groupby="<?php echo $this->chart_groupby; ?>"
-		>
-			<?php _e( 'Export CSV', 'woocommerce' ); ?>
-		</a>
-		<?php
-	}
-
-	/**
-	 * Get the main chart
-	 *
-	 * @return string
-	 */
-	public function get_main_chart() {
-		global $wp_locale;
-
-		// Get orders and dates in range - we want the SUM of order totals, COUNT of order items, COUNT of orders, and the date
-		$orders = $this->get_order_report_data( array(
-			'data' => array(
-				'_order_total' => array(
-					'type'     => 'meta',
-					'function' => 'SUM',
-					'name'     => 'total_sales'
-				),
-				'_order_shipping' => array(
-					'type'     => 'meta',
-					'function' => 'SUM',
-					'name'     => 'total_shipping'
-				),
-				'ID' => array(
-					'type'     => 'post_data',
-					'function' => 'COUNT',
-					'name'     => 'total_orders',
-					'distinct' => true,
-				),
-				'post_date' => array(
-					'type'     => 'post_data',
-					'function' => '',
-					'name'     => 'post_date'
-				),
-			),
-			'group_by'     => $this->group_by_query,
-			'order_by'     => 'post_date ASC',
-			'query_type'   => 'get_results',
-			'filter_range' => true,
-			'order_types'  => wc_get_order_types( 'sales-reports' ),
-			'order_status' => array( 'completed', 'processing', 'on-hold', 'refunded' ),
-		) );
-
-		// Order items
-		$order_items = $this->get_order_report_data( array(
-			'data' => array(
-				'_qty' => array(
-					'type'            => 'order_item_meta',
-					'order_item_type' => 'line_item',
-					'function'        => 'SUM',
-					'name'            => 'order_item_count'
-				),
-				'post_date' => array(
-					'type'     => 'post_data',
-					'function' => '',
-					'name'     => 'post_date'
-				),
-			),
-			'where' => array(
-				array(
-					'key'      => 'order_items.order_item_type',
-					'value'    => 'line_item',
-					'operator' => '='
-				)
-			),
-			'group_by'     => $this->group_by_query,
-			'order_by'     => 'post_date ASC',
-			'query_type'   => 'get_results',
-			'filter_range' => true,
-			'order_types'  => wc_get_order_types( 'sales-reports' ),
-			'order_status' => array( 'completed', 'processing', 'on-hold', 'refunded' ),
-		) );
-
-		// Get discount amounts in range
-		$coupons = $this->get_order_report_data( array(
-			'data' => array(
-				'order_item_name' => array(
-					'type'     => 'order_item',
-					'function' => '',
-					'name'     => 'order_item_name'
-				),
-				'discount_amount' => array(
-					'type'            => 'order_item_meta',
-					'order_item_type' => 'coupon',
-					'function'        => 'SUM',
-					'name'            => 'discount_amount'
-				),
-				'post_date' => array(
-					'type'     => 'post_data',
-					'function' => '',
-					'name'     => 'post_date'
-				),
-			),
-			'where' => array(
-				array(
-					'key'      => 'order_items.order_item_type',
-					'value'    => 'coupon',
-					'operator' => '='
-				)
-			),
-			'group_by'     => $this->group_by_query . ', order_item_name',
-			'order_by'     => 'post_date ASC',
-			'query_type'   => 'get_results',
-			'filter_range' => true,
-			'order_types'  => wc_get_order_types( 'sales-reports' ),
-			'order_status' => array( 'completed', 'processing', 'on-hold', 'refunded' ),
-		) );
-
-		$partial_refunds = $this->get_order_report_data( array(
-			'data' => array(
-				'_refund_amount' => array(
-					'type'     => 'meta',
-					'function' => 'SUM',
-					'name'     => 'total_refund'
-				),
-				'post_date' => array(
-					'type'     => 'post_data',
-					'function' => '',
-					'name'     => 'post_date'
-				)
-			),
-			'group_by'            => $this->group_by_query,
-			'order_by'            => 'post_date ASC',
-			'query_type'          => 'get_results',
-			'filter_range'        => true,
-			'order_status'        => false,
-			'parent_order_status' => array( 'completed', 'processing', 'on-hold' ),
-		) );
-		$full_refunds = $this->get_order_report_data( array(
-			'data' => array(
-				'_order_total' => array(
-					'type'     => 'meta',
-					'function' => 'SUM',
-					'name'     => 'total_refund'
-				),
-				'post_date' => array(
-					'type'     => 'post_data',
-					'function' => '',
-					'name'     => 'post_date'
-				),
-			),
-			'group_by'       => $this->group_by_query,
-			'order_by'     => 'post_date ASC',
-			'query_type'   => 'get_results',
-			'filter_range' => true,
-			'order_status' => array( 'refunded' ),
-		) );
-		$refunds = array_merge($partial_refunds, $full_refunds);
-
-		// Prepare data for report
-		$order_counts      = $this->prepare_chart_data( $orders, 'post_date', 'total_orders', $this->chart_interval, $this->start_date, $this->chart_groupby );
-		$order_item_counts = $this->prepare_chart_data( $order_items, 'post_date', 'order_item_count', $this->chart_interval, $this->start_date, $this->chart_groupby );
-		$order_amounts     = $this->prepare_chart_data( $orders, 'post_date', 'total_sales', $this->chart_interval, $this->start_date, $this->chart_groupby );
-		$coupon_amounts    = $this->prepare_chart_data( $coupons, 'post_date', 'discount_amount', $this->chart_interval, $this->start_date, $this->chart_groupby );
-		$shipping_amounts  = $this->prepare_chart_data( $orders, 'post_date', 'total_shipping', $this->chart_interval, $this->start_date, $this->chart_groupby );
-		$refund_amounts    = $this->prepare_chart_data( $refunds, 'post_date', 'total_refund', $this->chart_interval, $this->start_date, $this->chart_groupby );
-
-		// Encode in json format
-		$chart_data = json_encode( array(
-			'order_counts'      => array_values( $order_counts ),
-			'order_item_counts' => array_values( $order_item_counts ),
-			'order_amounts'     => array_values( $order_amounts ),
-			'coupon_amounts'    => array_values( $coupon_amounts ),
-			'shipping_amounts'  => array_values( $shipping_amounts ),
-			'refund_amounts'    => array_values( $refund_amounts )
-		) );
-		?>
-		<div class="chart-container">
-			<div class="chart-placeholder main"></div>
-		</div>
-		<script type="text/javascript">
-
-			var main_chart;
-
-			jQuery(function(){
-				var order_data = jQuery.parseJSON( '<?php echo $chart_data; ?>' );
-				var drawGraph = function( highlight ) {
-					var series = [
-						{
-							label: "<?php echo esc_js( __( 'Number of items sold', 'woocommerce' ) ) ?>",
-							data: order_data.order_item_counts,
-							color: '<?php echo $this->chart_colours['item_count']; ?>',
-							bars: { fillColor: '<?php echo $this->chart_colours['item_count']; ?>', fill: true, show: true, lineWidth: 0, barWidth: <?php echo $this->barwidth; ?> * 0.5, align: 'center' },
-							shadowSize: 0,
-							hoverable: false
-						},
-						{
-							label: "<?php echo esc_js( __( 'Number of orders', 'woocommerce' ) ) ?>",
-							data: order_data.order_counts,
-							color: '<?php echo $this->chart_colours['order_count']; ?>',
-							bars: { fillColor: '<?php echo $this->chart_colours['order_count']; ?>', fill: true, show: true, lineWidth: 0, barWidth: <?php echo $this->barwidth; ?> * 0.5, align: 'center' },
-							shadowSize: 0,
-							hoverable: false
-						},
-						{
-							label: "<?php echo esc_js( __( 'Average sales amount', 'woocommerce' ) ) ?>",
-							data: [ [ <?php echo min( array_keys( $order_amounts ) ); ?>, <?php echo $this->average_sales; ?> ], [ <?php echo max( array_keys( $order_amounts ) ); ?>, <?php echo $this->average_sales; ?> ] ],
-							yaxis: 2,
-							color: '<?php echo $this->chart_colours['average']; ?>',
-							points: { show: false },
-							lines: { show: true, lineWidth: 2, fill: false },
-							shadowSize: 0,
-							hoverable: false
-						},
-						{
-							label: "<?php echo esc_js( __( 'Coupon amount', 'woocommerce' ) ) ?>",
-							data: order_data.coupon_amounts,
-							yaxis: 2,
-							color: '<?php echo $this->chart_colours['coupon_amount']; ?>',
-							points: { show: true, radius: 5, lineWidth: 3, fillColor: '#fff', fill: true },
-							lines: { show: true, lineWidth: 4, fill: false },
-							shadowSize: 0,
-							prepend_tooltip: "<?php echo get_woocommerce_currency_symbol(); ?>"
-						},
-						{
-							label: "<?php echo esc_js( __( 'Refund amount', 'woocommerce' ) ) ?>",
-							data: order_data.refund_amounts,
-							yaxis: 2,
-							color: '<?php echo $this->chart_colours['refund_amount']; ?>',
-							points: { show: true, radius: 5, lineWidth: 3, fillColor: '#fff', fill: true },
-							lines: { show: true, lineWidth: 4, fill: false },
-							shadowSize: 0,
-							prepend_tooltip: "<?php echo get_woocommerce_currency_symbol(); ?>"
-						},
-						{
-							label: "<?php echo esc_js( __( 'Shipping amount', 'woocommerce' ) ) ?>",
-							data: order_data.shipping_amounts,
-							yaxis: 2,
-							color: '<?php echo $this->chart_colours['shipping_amount']; ?>',
-							points: { show: true, radius: 5, lineWidth: 3, fillColor: '#fff', fill: true },
-							lines: { show: true, lineWidth: 4, fill: false },
-							shadowSize: 0,
-							prepend_tooltip: "<?php echo get_woocommerce_currency_symbol(); ?>"
-						},
-						{
-							label: "<?php echo esc_js( __( 'Sales amount', 'woocommerce' ) ) ?>",
-							data: order_data.order_amounts,
-							yaxis: 2,
-							color: '<?php echo $this->chart_colours['sales_amount']; ?>',
-							points: { show: true, radius: 5, lineWidth: 3, fillColor: '#fff', fill: true },
-							lines: { show: true, lineWidth: 4, fill: false },
-							shadowSize: 0,
-							prepend_tooltip: "<?php echo get_woocommerce_currency_symbol(); ?>"
-						}
-					];
-
-					if ( highlight !== 'undefined' && series[ highlight ] ) {
-						highlight_series = series[ highlight ];
-
-						highlight_series.color = '#9c5d90';
-
-						if ( highlight_series.bars )
-							highlight_series.bars.fillColor = '#9c5d90';
-
-						if ( highlight_series.lines ) {
-							highlight_series.lines.lineWidth = 5;
-						}
-					}
-
-					main_chart = jQuery.plot(
-						jQuery('.chart-placeholder.main'),
-						series,
-						{
-							legend: {
-								show: false
-							},
-							grid: {
-								color: '#aaa',
-								borderColor: 'transparent',
-								borderWidth: 0,
-								hoverable: true
-							},
-							xaxes: [ {
-								color: '#aaa',
-								position: "bottom",
-								tickColor: 'transparent',
-								mode: "time",
-								timeformat: "<?php if ( $this->chart_groupby == 'day' ) echo '%d %b'; else echo '%b'; ?>",
-								monthNames: <?php echo json_encode( array_values( $wp_locale->month_abbrev ) ) ?>,
-								tickLength: 1,
-								minTickSize: [1, "<?php echo $this->chart_groupby; ?>"],
-								font: {
-									color: "#aaa"
-								}
-							} ],
-							yaxes: [
-								{
-									min: 0,
-									minTickSize: 1,
-									tickDecimals: 0,
-									color: '#d4d9dc',
-									font: { color: "#aaa" }
-								},
-								{
-									position: "right",
-									min: 0,
-									tickDecimals: 2,
-									alignTicksWithAxis: 1,
-									color: 'transparent',
-									font: { color: "#aaa" }
-								}
-							],
-						}
-					);
-
-					jQuery('.chart-placeholder').resize();
-				}
-
-				drawGraph();
-
-				jQuery('.highlight_series').hover(
-					function() {
-						drawGraph( jQuery(this).data('series') );
-					},
-					function() {
-						drawGraph();
-					}
-				);
-			});
-		</script>
-		<?php
-	}
+    }
+    
+    public function donation_orders_listing(){
+        global $wpdb;
+        $args = array(   'post_type' => 'shop_order', 'post_status' =>  array_keys(wc_get_order_statuses()),'post__in' => $this->donation_orderids );
+        $wp_query = new WP_Query($args);
+        require('wc_quick_donation_listing_table.php');
+        tt_render_list_page($wp_query);
+    }
+    
+    private function get_status_count(){
+        foreach($this->donation_orderids as $id){
+            $order_status = get_post_status($id);
+            if($order_status == 'wc-on-hold' || $order_status == 'wc-processing'){
+                $this->status_count++;
+            }
+        }
+        return $this->status_count;
+    }
+    
+    private function generate_data(){
+        foreach($this->donation_orderids as $id){
+            $order_details = $this->get_order_info($id);
+            $order_meta = $this->get_order_meta($id);
+            $order_info = array_merge($order_details,$order_meta);
+            unset($order_details,$order_meta);
+            $user_details = $this->get_user_info($order_info['by_user']);
+            $order = array_merge($order_info,$user_details);
+        }
+    }  
+    
+   /* private function _generate_data(){
+        require(wc_qd_p.'views/report_tbl_header.php');
+        global $i;
+        $i = 1;
+        foreach($this->donation_orderids as $id){
+            $order_details = $this->get_order_info($id);
+            $order_meta = $this->get_order_meta($id);
+            $order_info = array_merge($order_details,$order_meta);
+            unset($order_details,$order_meta);
+            $user_details = $this->get_user_info($order_info['by_user']);
+            global $order;
+            $order = array_merge($order_info,$user_details);
+            require(wc_qd_p.'views/report_tbl_content.php');
+            $i++;
+        }
+        require(wc_qd_p.'views/report_tbl_footer.php');
+    }*/
+    
+    /**
+     * Gets Order Details
+     * @param   INT $id Order Post ID
+     * @returns [[Type]] [[Description]]
+     */
+    private function get_order_info($id){
+        global $wc_quick_donation;
+        $return_details = array();
+        $order = new WC_Order($id);
+        $items = $order->get_items();
+        $order_details = $order->post; 
+        foreach($items as $item){
+            if($wc_quick_donation->donation_id == $item['product_id']){
+                $return_details['amount'] = floatval($item['item_meta']['_line_total'][0]);
+            }
+        }
+        $return_details['ID'] = $order_details->ID;
+        $return_details['by_user'] = $order->user_id;
+        $return_details['date_gmt'] = $order_details->post_date_gmt;
+        $return_details['date'] = $order_details->post_date; 
+        $return_details['address'] = $order->get_formatted_billing_address();
+        unset($order);
+        return $return_details;        
+    }
+    
+    /**
+     * Gets Order Meta Data Like pay_method, currency
+     * @param [[Type]] $id [[Description]]
+     * @since 1.0
+     */
+    private function get_order_meta($id){
+        $return_details = array();
+        $meta = get_post_meta($id);
+        $return_details['currency'] = $meta['_order_currency'][0];
+        $return_details['pay_method'] = $meta['_payment_method'][0];
+        $return_details['pay_method_title'] = $meta['_payment_method_title'][0];
+        $return_details['order_amount'] = $meta['_order_total'][0];
+        #$return_details['project_details'] = $meta['project_details'];
+        #$return_details['is_donation'] = $meta['is_donation'];
+        unset($meta);
+        return $return_details;
+    }
+    
+    /**
+     * Gets User Info By User ID
+     * @param   USERID $id 
+     * @returns Array User INFO
+     * @since 1.0
+     */
+    private function get_user_info($id){
+        $return_details = array();
+        $user = get_user_by('id',$id);
+        $userM = get_user_meta($id);
+        $return_details['uname'] = $user->data->user_login;
+        $return_details['email'] = $user->data->user_email;
+        $return_details['dname'] = $user->data->display_name;
+        $return_details['nickname'] = $userM['nickname'][0];
+        $return_details['fname'] = $userM['first_name'][0];
+        $return_details['lname'] = $userM['last_name'][0]; 
+        unset($user,$userM);
+        return $return_details;
+    }
 }
+
+new wc_quick_donation_report;
+?>
