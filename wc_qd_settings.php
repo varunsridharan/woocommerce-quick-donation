@@ -71,8 +71,29 @@ class WC_Quick_Donation_Settings extends WC_Settings_Page {
                         'css'     => $width,
 						'options' => array('false' => 'Keep All Items','true'=>'Remove All Items')
 					),	
+				    			
+
+					'auto_hide_donation_form' => array(
+						'name' => 'Hide Donation Form When Donation Exist In Cart',
+						'desc' => '',
+						'id' => 'wc_quick_donation_hide_form',
+						'type' => 'select', 
+						'class' =>'chosen_select',
+                        'css'     => $width,
+						'options' => array('false' => 'Yes','true'=>'No')
+					),	
                    
-                   
+                   			
+
+					'hide_order_notes' => array(
+						'name' => 'Hide Order Notes When Donation Checkout',
+						'desc' => '',
+						'id' => 'wc_quick_donation_hide_order_notes',
+						'type' => 'select', 
+						'class' =>'chosen_select',
+                        'css'     => $width,
+						'options' => array('true' => 'Yes','false'=>'No')
+					),	
 					'redirect' => array(
 						'name' => 'Redirect User To',
 						'desc' => 'After  Donation Added To Cart.',
@@ -165,7 +186,15 @@ class WC_Quick_Donation_Settings extends WC_Settings_Page {
                             'type' => 'title',
                             'desc' => '',
                             'id' => 'wc_quick_donation_message_start'
-                        ), 	
+                        ), 
+					 'donation_exist' => array(
+                            'name' => 'Donation Exist Error Message',
+                            'type' => 'textarea',
+                            'desc_tip' => 'Message Displayed When Donation Already Exist In Cart',
+                            'css' => 'width:75%; height:75px;',
+                            'id' => 'wc_quick_donation_msg_donation_exist', 
+                            'default' =>'<h2> Donation Already Exist </h2>'
+                        ),
                         'project_invalid_message' => array(
                             'name' => 'Invalid / No Project Selected',
                             'type' => 'textarea',

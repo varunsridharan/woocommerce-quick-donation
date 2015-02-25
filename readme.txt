@@ -6,7 +6,7 @@ Requires at least: 3.0 or higher
 Tested up to: 4.1.1
 WC requires at least: 1.0
 WC tested up to: 2.3.5
-Stable tag: 1.1
+Stable tag: 1.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -14,14 +14,18 @@ Turns WooCommerce Into Online Donation.
 
 == Description ==
 
-<h3> What's New In 1.0 </h3>
-* Configurable Min & Max Donation Amount
-* Custom Error Messages
-* Separate Menu with donation order listings
+<div class="plugin-notice plugin-notice-requested"> <span>!</span><span class="plugin-notice-banner-msg">Dear User, We are still trying to make this plugin a stable and prefect.. if you find any bug / any feature is required please open an issue at <a href="https://github.com/technofreaky/woocomerce-quick-donation/issues">GitHub</a> or <a href="https://wordpress.org/support/plugin/woocommerce-quick-donation">WordPress Support</a> </span></div>
+
+<h3> What's New In 1.2 </h3>
+* Donation Widget
+* Get Project's By Function
+* Added 2 Actions
+* Minor Bug Fixes 
+
 
 <h3> Feature Will Be Implemented In Next Release </h3>
 * Separate Donation Report Page
-* Useful Filters
+
 
 <h3> <blink> Features </blink></h3>
 * Redirect User After Donation Added To Cart [Cart Page / Checkout Page]
@@ -29,6 +33,7 @@ Turns WooCommerce Into Online Donation.
 * Custom Email Template For Donation Processing
 * Custom Email Template For Donation Completed
 * Configurable Min & Max Donation Amount
+* Donation From Widget
 * Custom Error Messages
 
 
@@ -50,6 +55,13 @@ This Plugin Can called by using the below short code
 `wc-quick-donation/template/donation_completed_html.php
  wc-quick-donation/template/donation_completed_plain.php`
 
+**Plugin Filters, Actions & Functions** 
+1. Before Donation Prints
+`wc_quick_donation_before_form`
+2. After Donation Prints
+`wc_quick_donation_after_form`
+3. Get Project's By Function
+`global $wc_quick_donation; $wc_quick_donation->donation_projects();`
 
 Plugin Settings : ***Woocoomerce Settings => Quick Donation***
 
@@ -57,6 +69,7 @@ Email Template Settings : ***WooCommerce Settings => Emails => Donation Processi
 
 == Upgrade Notice ==
 We have updated ***donation-form.php*** template. so please replace the template if you have modified
+please update the settings.
 
 == Installation ==
 
@@ -127,6 +140,12 @@ Yes you can! Join in on our <a href="https://github.com/technofreaky/woocomerce-
 5. Email Template Settings For Donation Completed.
 
 == Changelog ==
+= 1.2 =
+* Added Widget For Donation Form
+* Added Seperate function to get Donation Projects `donation_projects()`
+* Added 2 Actions `wc_quick_donation_before_form` & `wc_quick_donation_after_form` for donation form.
+* Minor Bug Fix.
+
 = 1.1 =
 * Plugin Activation Issue Fixed.
 

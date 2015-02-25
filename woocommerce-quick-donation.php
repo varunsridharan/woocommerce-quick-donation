@@ -12,12 +12,12 @@
 
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
-    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA 
  
     Plugin Name: Woocommerce Quick Donation
     Plugin URI: http://varunsridharan.in/
     Description: Woocommerce Quick Donation
-    Version: 1.1
+    Version: 1.2
     Author: Varun Sridharan
     Author URI: http://varunsridharan.in/
     License: GPL2
@@ -36,13 +36,13 @@ class wc_quick_donation{
 	 */
 	function __construct() {
 		$this->donation_id = get_option('wc_quick_donation_product_id');
-        $this->plugin_v = '1.0';
+        $this->plugin_v = '1.2';
 		add_shortcode( 'wc_quick_donation', array($this,'shortcode_handler' ));
         
         add_action( 'post_row_actions', array($this,'protect_donation_product'),99,2);
         add_action( 'get_the_generator_html',  array($this,'generate_meta_tags'), 15, 2 );
         add_action( 'get_the_generator_xhtml', array($this,'generate_meta_tags'), 15, 2 );        
-		add_action( 'wp_loaded',array($this,'process_donation'));  
+		add_action( 'wp_loaded',array($this,'process_donation'),20);  
 		add_action( 'wc_qd_show_projects_list',array($this,'get_projects_list'));	
     
 		add_action( 'woocommerce_checkout_update_order_meta',  array($this,'save_order_id_db'));
@@ -55,9 +55,24 @@ class wc_quick_donation{
         add_filter('woocommerce_hidden_order_itemmeta',array($this,'hide_core_fields'));
         add_filter( 'woocommerce_get_price', array($this,'get_price'),10,2);
 		add_filter( 'woocommerce_get_settings_pages',  array($this,'settings_page') );
-		add_filter( 'woocommerce_email_classes',  array($this,'email_classes'));	 
+		add_filter( 'woocommerce_email_classes',  array($this,'email_classes'));
+		add_filter('woocommerce_enable_order_notes_field',array($this,'order_notes'));
 	}
  
+	/**
+	 * Hides Order Notes
+	 * @return boolean [[Description]]
+	 * @since 1.2
+	 */
+	public function order_notes(){ 
+		if($this->donation_exsits() &&  $this->only_donation_exsits()){ 
+			if(get_option('wc_quick_donation_hide_order_notes') === true){
+				return false;
+			}
+		}
+		return true;
+	}
+	
     /**
      * Adds Donation Meta Tag
      * @param   String $gen  Refer WP.ORG
@@ -93,7 +108,7 @@ class wc_quick_donation{
 	 * Adds Settings Page
 	 */
  	public function settings_page( $settings ) {
-		$settings[] = include( wc_qd_p.'woocommerce-quick-donation-settings.php' );  
+		$settings[] = include( wc_qd_p.'wc_qd_settings.php' );  
 		return $settings;
 	}
 	 
@@ -101,8 +116,8 @@ class wc_quick_donation{
 	 * Adds Email Classes
 	 */
 	public function email_classes($email_classes){
-		require_once( wc_qd_p.'woocommerce-quick-donation-email-processing.php' );
-		require_once( wc_qd_p.'woocommerce-quick-donation-email-completed.php' );
+		require_once( wc_qd_p.'wc_qd_email_processing.php' );
+		require_once( wc_qd_p.'wc_qd_email_completed.php' );
 		$email_classes['wc_quick_donation_processing_donation_email'] = new wc_quick_donation_processing_donation_email();
 		$email_classes['wc_quick_donation_completed_donation_email'] = new wc_quick_donation_completed_donation_email();
 		return $email_classes;		
@@ -298,8 +313,14 @@ class wc_quick_donation{
                                 $found = true;
                         }
 
-                        if(!$found)
-                            $this->add_donation_cart();
+                        if(! $found){ 
+							$this->add_donation_cart();
+						 	
+						} else {
+							wc_add_notice(get_option('wc_quick_donation_msg_donation_exist'), 'error' );
+						}
+							
+                            
                     }else{
                         $this->add_donation_cart();
                     }
@@ -374,6 +395,7 @@ class wc_quick_donation{
 
 	/**
 	 * Gets Donation Form.
+	 * @updated 1.2
 	 */
 	public function wc_qd_form(){
 		global $woocommerce; 
@@ -383,30 +405,54 @@ class wc_quick_donation{
 			unset($woocommerce->session->jc_donation); 
 			unset($woocommerce->session->projects); 
 		}
-
+		
 		// $donate = jc_round_donation($woocommerce->cart->total ); 
-		if(!$this->donation_exsits()){
-			$wc_get_template = function_exists('wc_get_template') ? 'wc_get_template' : 'woocommerce_get_template';
-			$wc_get_template( 'donation_form.php', array(), '', wc_qd_p . 'template/' ); 
+		$show_form_donatio_exist = get_option('wc_quick_donation_hide_form');
+		if($this->donation_exsits() && $show_form_donatio_exist){
+			$this->_load_donation_form();
+		}else if(! $this->donation_exsits()){
+			$this->_load_donation_form();
+			
 		}
+		
+		 
 	}	
 	 
+ 	/**
+ 	 * Requires Donation Form
+ 	 * Actions 1 wc_quick_donation_before_form
+ 	 * Actions 2 wc_quick_donation_after_form
+ 	 * @since 1.2
+ 	 */
+ 	private function _load_donation_form(){
+		do_action('wc_quick_donation_before_form');
+		$wc_get_template = function_exists('wc_get_template') ? 'wc_get_template' : 'woocommerce_get_template';
+		$wc_get_template( 'donation_form.php', array(), '', wc_qd_p . 'template/' ); 
+		do_action('wc_quick_donation_after_form');
+	}
+	
+	public function donation_projects(){
+		$projects_db = get_option('wc_quick_donation_projects');
+		if(!empty($projects_db) && $projects_db != null){
+			$project = explode(',',$projects_db);
+			return $project;
+		}
+		return false;
+	}
+	
 	
 	/**
 	 * Generates Select Box For Projects List
+	 * @updated 1.2
 	 */
 	public function get_projects_list(){
-			$projects_db = get_option('wc_quick_donation_projects');
-		
+			$projects_db = $this->donation_projects();
 			if($projects_db){
-				$project = explode(',',$projects_db);
 				$project_list = '';
 				$project_list .= '<option value="" > Select A Project </option>';
-				
-				foreach($project as $proj){
+				foreach($projects_db as $proj){
 					$project_list .= '<option value="'.$proj.'" > '.$proj.'</option>';
 				}
-				
 				echo '<select name="projects">'.$project_list.'</select>';
 			}
 	}
@@ -416,7 +462,7 @@ class wc_quick_donation{
 	 * wc_quick_donation shortcode Handler
 	 */
 	public function shortcode_handler(){
-		echo $this->wc_qd_form();
+		return $this->wc_qd_form();
 	}
 	
 	
@@ -501,7 +547,14 @@ function create_donation(){
 if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) ) {
 	register_activation_hook( __FILE__, array( 'wc_quick_donation', 'install' ) );
 	$wc_quick_donation = new wc_quick_donation;
-    require(wc_qd_p.'woocommerce-quick-donation-report.php');
+    require(wc_qd_p.'wc_qd_donation_orders.php');
+    require(wc_qd_p.'wc_qd_widget.php');
+    
+    function register_foo_widget() {
+        register_widget( 'woocommerce_quick_donation_widget' );
+    }
+    add_action( 'widgets_init', 'register_foo_widget' );
+    
 } else {
 	add_action( 'admin_notices', 'wc_quick_donation_notice' );
 }

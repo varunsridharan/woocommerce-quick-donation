@@ -21,7 +21,7 @@ global $donate;
 					<?php do_action('wc_qd_show_projects_list'); ?>
 					
 					<div class="input text">
-						<label>Donation (&pound;):</label>
+						<label>Donation (<?php echo get_woocommerce_currency_symbol(); ?>):</label>
 						<input type="text" name="donation_ammount" value="<?php echo $donate; ?>"/>
 					</div>
 					<div class="submit_btn">
