@@ -216,7 +216,7 @@ class wc_quick_donation{
 	 */
 	public function donation_exsits(){
 		global $woocommerce; 
-		if( sizeof($woocommerce->cart->get_cart()) > 0){
+		if(is_object($woocommerce->cart) && sizeof($woocommerce->cart->get_cart()) > 0){
 			foreach($woocommerce->cart->get_cart() as $cart_item_key => $values){
 				$_product = $values['data'];
 				if($_product->id == $this->donation_id){
