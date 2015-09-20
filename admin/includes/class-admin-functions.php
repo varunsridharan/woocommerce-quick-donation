@@ -33,10 +33,7 @@ class WooCommerce_Quick_Donation_Admin_Function {
 	public function protect_donation_product($actions,$post) {
         
 		if('product' == $post->post_type) {  
-            
-            
-            
-			if($post->ID == WC_QD()->donation_id){
+			if($post->ID == WC_QD_ID){
 				unset($actions['inline hide-if-no-js']);
 				unset($actions['trash']);
 				unset($actions['duplicate']);

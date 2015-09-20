@@ -24,14 +24,16 @@ class WooCommerce_Quick_Donation_Shortcode {
     public function shortcode_handler($settings){
         global $donation_box,$donation_price,$currency;
         $settings = shortcode_atts( array(
-        'type' => 'radio',
-        'grouped' => true,
+        'type' => 'select',
+        'grouped' => false,
         ), $settings );
         
         $donation_box = WC_QD()->f()->generate_donation_selbox($settings['grouped'],$settings['type']);
         $donation_price =  WC_QD()->f()->generate_price_box();
         $currency = get_woocommerce_currency_symbol();
+        do_action('wc_quick_donation_before_doantion_form',$settings['type'],$settings['grouped']);
         WC_QD()->f()->load_template('donation_form.php',WC_QD_TEMPLATE);
+        do_action('wc_quick_donation_after_doantion_form',$settings['type'],$settings['grouped']);
     }
 
 }

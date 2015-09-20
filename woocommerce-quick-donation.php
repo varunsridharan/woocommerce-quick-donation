@@ -28,7 +28,7 @@ class WooCommerce_Quick_Donation {
     public static $is_donation_product_exist = true;
     protected static $f = null;
     public static $shortcode = null;
-    public $donation_id = null;
+    public static $donation_id = null;
 
     /**
      * Creates or returns an instance of this class.
@@ -45,7 +45,10 @@ class WooCommerce_Quick_Donation {
      */
     public function __construct() {
         $this->define_constant();
-        $this->donation_id = get_option(WC_QD_DB.'product_id');
+        self::$donation_id = get_option(WC_QD_DB.'product_id');
+        
+        $this->define('WC_QD_ID',intval(get_option(WC_QD_DB.'product_id')));
+        
         $this->load_required_files();
         
         register_activation_hook( __FILE__,array('WC_QD_INSTALL','INIT') );
@@ -74,15 +77,17 @@ class WooCommerce_Quick_Donation {
      * Loads Required Plugins For Plugin
      */
     private function load_required_files(){
-       $this->load_files(WC_QD_PATH.'includes/class-admin-notice.php');
-       $this->load_files(WC_QD_PATH.'includes/class-post-*.php');
-       
-       $this->load_files(WC_QD_PATH.'includes/class-install.php');
-       $this->load_files(WC_QD_PATH.'includes/class-quick-donation-functions.php');
+        $this->load_files(WC_QD_PATH.'includes/class-admin-notice.php');
+        $this->load_files(WC_QD_PATH.'includes/class-post-*.php');
+
+        $this->load_files(WC_QD_PATH.'includes/class-install.php');
+        $this->load_files(WC_QD_PATH.'includes/class-quick-donation-functions.php');
+        $this->load_files(WC_QD_PATH.'includes/class-quick-donation-process.php');
         $this->load_files(WC_QD_PATH.'includes/class-shortcode-handler.php');
-       if($this->is_request('admin')){
+        
+        if($this->is_request('admin')){
            $this->load_files(WC_QD_PATH.'admin/class-*.php');
-       } 
+        } 
 
     }
     
@@ -92,6 +97,7 @@ class WooCommerce_Quick_Donation {
     private function init_class(){
         self::$f = new WooCommerce_Quick_Donation_Functions;
         self::$shortcode = new WooCommerce_Quick_Donation_Shortcode;
+        $this->donation = new WooCommerce_Quick_Donation_Process;
         
         if($this->is_request('admin')){
             $this->admin = new WooCommerce_Quick_Donation_Admin;
@@ -158,7 +164,7 @@ class WooCommerce_Quick_Donation {
         $this->define('WC_QD_DB','wc_qd_');
         $this->define('WC_QD_PT','wcqd_project');
         $this->define('WC_QD_CAT','wcqd_category');
-        $this->define('WC_QD_TAG','wcqd_tags');
+        $this->define('WC_QD_TAG','wcqd_tags'); 
     }
     
     /**

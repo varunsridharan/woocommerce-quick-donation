@@ -28,17 +28,19 @@ class WooCommerce_Quick_Donation_Admin  {
         add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
         add_action( 'admin_init', array( $this, 'init_admin_class' ));
         add_action( 'plugins_loaded', array( $this, 'init' ) );
-
         add_filter( 'plugin_row_meta', array($this, 'plugin_row_links' ), 10, 2 );
-        add_filter( 'woocommerce_get_settings_pages',  array($this,'settings_page') ); 
+        
+        add_filter('woocommerce_screen_ids',array($this,'set_wc_screen_ids'));
+        
+        
 	}
 
+    
     /**
      * Inits Admin Sttings
      */
     public function init_admin_class(){
         $this->functions =  new WooCommerce_Quick_Donation_Admin_Function;
-        //$this->notice = new WordPress_Admin_Notice_Handler;
        # new WooCommerce_Plugin_Boiler_Plate_Admin_Settings;
     }
  
@@ -73,6 +75,13 @@ class WooCommerce_Quick_Donation_Admin  {
  
 	}
     
+    public function set_wc_screen_ids($screen){
+       
+        $screen[] = 'wcqd_project_page_wc_qd_settings';
+        
+        return $screen;
+    }    
+    
     /**
      * Gets Current Screen ID from wordpress
      * @return string [Current Screen ID]
@@ -90,6 +99,7 @@ class WooCommerce_Quick_Donation_Admin  {
         $screen_ids = array();
         $screen_ids[] = 'edit-product';
         $screen_ids[] = 'product';
+        $screen_ids[] = 'wcqd_project_page_wc_qd_settings';
         return $screen_ids;
     }
     
