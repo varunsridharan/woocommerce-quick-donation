@@ -7,15 +7,20 @@ class WC_QD_INSTALL{
      */
     public static function init(){
         $donation_exist = self::check_donation_exists();
-        if($donation_exist){
-            return true;
-            
-        }
+        self::check_db_version();
+        self::wc_qd_table_install();
+        if($donation_exist){ return true; }
         
         $post_id = self::create_donation(); 
         update_option(WC_QD_DB.'product_id',$post_id); 
     }
-    
+
+    public static function check_db_version(){
+        $current_version = get_option(WC_QD_DB.'db_version');
+        if(! $current_version){
+            add_option(WC_QD_DB.'db_version', WC_QD_DB_V);
+        } 
+    }
     
     /**
      * Checks Donation Product Exists
@@ -29,8 +34,26 @@ class WC_QD_INSTALL{
         return false;
     }
     
-    
-    
+    public static function wc_qd_table_install() {
+        global $wpdb;
+        global $jal_db_version;
+
+        $table_name = WC_QD_TB;
+        $charset_collate = $wpdb->get_charset_collate();
+
+        $sql = "CREATE TABLE $table_name (
+            id bigint(9) NOT NULL AUTO_INCREMENT,
+            date datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
+            userid bigint(20) NOT NULL,
+            donationid bigint(20) NOT NULL,
+            projectid bigint(20) NOT NULL, 
+            UNIQUE KEY id (id)
+        ) $charset_collate;";
+
+        require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
+        dbDelta( $sql ); 
+    }    
+     
     public static function create_donation(){
         $userID = 1;
         if(get_current_user_id()){

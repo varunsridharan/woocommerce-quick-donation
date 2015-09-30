@@ -1,0 +1,43 @@
+form h3.title {
+    margin: 0; 
+}
+
+form h3.title ~ p {
+    margin-bottom: 0; 
+    font-weight: normal;
+    margin-top:5px;
+}
+
+.form-table th { 
+    padding: 10px 10px 10px 0; 
+}
+
+.form-table  small {
+    display: block;
+    font-size: 13px;
+    letter-spacing: 1px;
+    margin: 0 auto;
+    padding: 5px 3px; 
+}   
+
+
+.wc_qd_settings .decs > span {
+    display: block;
+    font-size: 13px;  
+    margin-top: 5px;
+    padding: 5px 0 0 0;   
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

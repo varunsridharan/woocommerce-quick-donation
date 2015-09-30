@@ -32,7 +32,7 @@ class WooCommerce_Quick_Donation_Shortcode {
         $donation_price =  WC_QD()->f()->generate_price_box();
         $currency = get_woocommerce_currency_symbol();
         do_action('wc_quick_donation_before_doantion_form',$settings['type'],$settings['grouped']);
-        WC_QD()->f()->load_template('donation_form.php',WC_QD_TEMPLATE);
+        WC_QD()->f()->load_template('donation-form.php',WC_QD_TEMPLATE);
         do_action('wc_quick_donation_after_doantion_form',$settings['type'],$settings['grouped']);
     }
 
