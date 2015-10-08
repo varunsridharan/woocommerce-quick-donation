@@ -144,8 +144,10 @@ class WooCommerce_Quick_Donation_Settings {
         foreach($this->settings_page as $settings){
             $this->settings_key[] = WC_QD_DB.$settings['slug'];
             $db_val = get_option(WC_QD_DB.$settings['slug']);
-            unset($db_val['section_id']); 
-            $values = array_merge($db_val,$values);
+            if(is_array($db_val)){
+                unset($db_val['section_id']); 
+                $values = array_merge($db_val,$values);
+            }
         }
         
         $this->settings_values = $values;

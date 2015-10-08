@@ -2,14 +2,14 @@
 /**
  * Plugin Name:       WooCommerce Quick Donation
  * Plugin URI:        https://wordpress.org/plugins/woocommerce-plugin-boiler-plate/
- * Description:       Sample Plugin For WooCommerce
- * Version:           3.0
+ * Description:       Turns WooCommerce Into Online Donation
+ * Version:           1.3 BETA
  * Author:            Varun Sridharan
  * Author URI:        http://varunsridharan.in
  * Text Domain:       woocommerce-quick-donation
  * License:           GPL-2.0+
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt 
- * GitHub Plugin URI: @TODO
+ * GitHub Plugin URI: https://github.com/technofreaky/woocomerce-quick-donation
  */
 
 if ( ! defined( 'WPINC' ) ) { die; }
@@ -18,7 +18,7 @@ class WooCommerce_Quick_Donation {
 	/**
 	 * @var string
 	 */
-	public $version = '0.1';
+	public $version = '1.3';
 
 	/**
 	 * @var WooCommerce The single instance of the class
@@ -93,7 +93,6 @@ class WooCommerce_Quick_Donation {
      */
     private function load_required_files(){
         $this->load_files(WC_QD_ADMIN.'wps/*.php'); 
-        //$this->load_files(WC_QD_ADMIN.'wp_settings/class-settings.php');  
         $this->load_files(WC_QD_INC.'class-admin-notice.php');
         $this->load_files(WC_QD_INC.'class-post-*.php');
         $this->load_files(WC_QD_INC.'class-quick-donation-db.php');
@@ -163,7 +162,7 @@ class WooCommerce_Quick_Donation {
      * Gets Settings From DB 
      */
      public function get_option($key = ''){
-       var_dump(self::$settings_values);
+        var_dump(self::$settings_values);
      }
     
     /**
