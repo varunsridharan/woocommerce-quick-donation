@@ -13,8 +13,6 @@ class WooCommerce_Quick_Donation_Process extends WooCommerce_Quick_Donation  {
         parent::__construct();
         add_action( 'wp_loaded',array($this,'on_wp_loaded'),20);
         add_filter( 'woocommerce_get_price', array($this,'get_price'),10,2);
-        
-        
     }
     
     public function on_wp_loaded(){
@@ -24,50 +22,60 @@ class WooCommerce_Quick_Donation_Process extends WooCommerce_Quick_Donation  {
             add_action( 'woocommerce_checkout_update_order_meta',array($this,'update_order_meta'));
             add_action( 'woocommerce_checkout_update_order_meta',  array($this,'save_order_id_db'));
             add_action( 'woocommerce_email',array($this,'remove_email_actions'));
+            add_filter( 'woocommerce_cart_item_name', array($this,'change_donation_name'));
         } 
         $this->process_donation(); 
     }
     
+    public function change_donation_name(){
+        $post_id = $this->get_checkout_project_id();
+        $title = get_the_title($post_id);
+        return $title;        
+    }
+    
+    
+    
     
     public function remove_email_actions($email_class ){
             // New order emails
+            $email = $email_class;
             remove_action('woocommerce_order_status_pending_to_processing_notification',
-                            array($email_class->emails['WC_Email_New_Order'],'trigger'));
+                            array($email->emails['WC_Email_New_Order'],'trigger'));
             remove_action('woocommerce_order_status_pending_to_completed_notification',
-                            array($email_class->emails['WC_Email_New_Order'],'trigger'));
+                            array($email->emails['WC_Email_New_Order'],'trigger'));
             remove_action('woocommerce_order_status_pending_to_on-hold_notification',
-                            array($email_class->emails['WC_Email_New_Order'],'trigger'));
+                            array($email->emails['WC_Email_New_Order'],'trigger'));
             remove_action('woocommerce_order_status_failed_to_processing_notification',
-                            array($email_class->emails['WC_Email_New_Order'],'trigger'));
+                            array($email->emails['WC_Email_New_Order'],'trigger'));
             remove_action('woocommerce_order_status_failed_to_completed_notification',
-                            array($email_class->emails['WC_Email_New_Order'],'trigger'));
+                            array($email->emails['WC_Email_New_Order'],'trigger'));
             remove_action('woocommerce_order_status_failed_to_on-hold_notification',
-                            array($email_class->emails['WC_Email_New_Order'],'trigger'));
+                            array($email->emails['WC_Email_New_Order'],'trigger'));
 
             // Processing order emails
             remove_action('woocommerce_order_status_pending_to_processing_notification',
-                            array($email_class->emails['WC_Email_Customer_Processing_Order'],'trigger'));
+                            array($email->emails['WC_Email_Customer_Processing_Order'],'trigger'));
             remove_action('woocommerce_order_status_pending_to_on-hold_notification',
-                            array($email_class->emails['WC_Email_Customer_Processing_Order'],'trigger'));
+                            array($email->emails['WC_Email_Customer_Processing_Order'],'trigger'));
 
             // Completed order emails
             remove_action('woocommerce_order_status_completed_notification',
-                            array($email_class->emails['WC_Email_Customer_Completed_Order'],'trigger'));
+                            array($email->emails['WC_Email_Customer_Completed_Order'],'trigger'));
 
         
              // New order emails
             add_action('woocommerce_order_status_pending_to_processing_notification',
-                            array($email_class->emails[WC_QD_DB.'new_donation_email'],'trigger'));
+                            array($email->emails[WC_QD_DB.'new_donation_email'],'trigger'));
             add_action('woocommerce_order_status_pending_to_completed_notification',
-                            array($email_class->emails[WC_QD_DB.'new_donation_email'],'trigger'));
+                            array($email->emails[WC_QD_DB.'new_donation_email'],'trigger'));
             add_action('woocommerce_order_status_pending_to_on-hold_notification',
-                            array($email_class->emails[WC_QD_DB.'new_donation_email'],'trigger'));
+                            array($email->emails[WC_QD_DB.'new_donation_email'],'trigger'));
             add_action('woocommerce_order_status_failed_to_processing_notification',
-                            array($email_class->emails[WC_QD_DB.'new_donation_email'],'trigger'));
+                            array($email->emails[WC_QD_DB.'new_donation_email'],'trigger'));
             add_action('woocommerce_order_status_failed_to_completed_notification',
-                            array($email_class->emails[WC_QD_DB.'new_donation_email'],'trigger'));
+                            array($email->emails[WC_QD_DB.'new_donation_email'],'trigger'));
             add_action('woocommerce_order_status_failed_to_on-hold_notification',
-                            array($email_class->emails[WC_QD_DB.'new_donation_email'],'trigger'));       
+                            array($email->emails[WC_QD_DB.'new_donation_email'],'trigger'));       
         
         
         
@@ -76,6 +84,12 @@ class WooCommerce_Quick_Donation_Process extends WooCommerce_Quick_Donation  {
      
     public function process_donation(){
         if(isset($_POST['donation_add'])){
+            if($this->check_donation_already_exist()){
+                $message = WC_QD()->db()->get_message(WC_QD_DB.'donation_already_exist');
+                wc_add_notice($message,'error');
+                return ;
+            }
+            
             global $woocommerce;
             $donateprice = isset($_POST['wc_qd_donate_project_price']) ? $_POST['wc_qd_donate_project_price'] : false;
 			$projects = isset($_POST['wc_qd_donate_project_name']) && !empty($_POST['wc_qd_donate_project_name']) ? $_POST['wc_qd_donate_project_name'] : false;
@@ -97,18 +111,26 @@ class WooCommerce_Quick_Donation_Process extends WooCommerce_Quick_Donation  {
                 $this->is_donation_exists = true;
                 $this->redirect_cart();
                 wc_add_notice('Success','success');
-                
-                
             }
             
         }
     }
     
     
+    
+    public function check_donation_already_exist(){
+        global $woocommerce;
+        foreach($woocommerce->cart->get_cart() as $cart_item_key => $values ) {
+            $_product = $values['data'];
+            if( self::$donation_id == $_product->id ) { return true; }
+        }  
+        return false;
+    }
+    
     public function check_donation_price_status($price){
     
         if(empty($price)){ 
-            $message = WC_QD()->f()->get_message(WC_QD_DB.'empty_donation_msg');
+            $message = WC_QD()->db()->get_message(WC_QD_DB.'empty_donation_msg');
             wc_add_notice($message,'error');
             return false;
         }
@@ -116,7 +138,7 @@ class WooCommerce_Quick_Donation_Process extends WooCommerce_Quick_Donation  {
         if(empty($price) || ! is_int($price) && $price == 0){
             $id = WC_QD_DB.'invalid_donation_msg';
             $search_replace = array('{donation_amount}' => $price);
-            $message = WC_QD()->f()->get_message($id,$search_replace);
+            $message = WC_QD()->db()->get_message($id,$search_replace);
             wc_add_notice($message,'error');
             return false;
         }
@@ -126,8 +148,8 @@ class WooCommerce_Quick_Donation_Process extends WooCommerce_Quick_Donation  {
     
     
     public function check_min_max($project_id,$price){
-        $min_required = $this->f()->min_project($project_id);
-        $max_required = $this->f()->max_project($project_id);
+        $min_required = $this->db()->min_project($project_id);
+        $max_required = $this->db()->max_project($project_id);
         $price = intval($price);
         
         if($min_required){
@@ -135,7 +157,7 @@ class WooCommerce_Quick_Donation_Process extends WooCommerce_Quick_Donation  {
             if($price < $min_required){
                 $id = WC_QD_DB.'min_rda_msg';
                 $search_replace = array('{donation_amount}' => $price, '{min_amount}' => $min_required);
-                $message = WC_QD()->f()->get_message($id,$search_replace);
+                $message = WC_QD()->db()->get_message($id,$search_replace);
                 wc_add_notice($message,'error');
                 return false;
             }
@@ -147,7 +169,7 @@ class WooCommerce_Quick_Donation_Process extends WooCommerce_Quick_Donation  {
             if($price > $max_required){
                 $id = WC_QD_DB.'max_rda_msg';
                 $search_replace = array('{donation_amount}' => $price, '{max_amount}' => $max_required);
-                $message = WC_QD()->f()->get_message($id,$search_replace);
+                $message = WC_QD()->db()->get_message($id,$search_replace);
                 wc_add_notice($message,'error');
                 return false;
             }
@@ -187,9 +209,14 @@ class WooCommerce_Quick_Donation_Process extends WooCommerce_Quick_Donation  {
         global $woocommerce;
         $project_id = intval($woocommerce->session->projects);
         $user_id = get_current_user_id();
-        
         WC_QD()->db()->add_db_option($order_id,$project_id,$user_id);
-        
+    }
+    
+    
+    public function get_checkout_project_id(){
+        global $woocommerce;
+        $post_id = $woocommerce->session->projects;
+        return $post_id;
     }
     
 	/**

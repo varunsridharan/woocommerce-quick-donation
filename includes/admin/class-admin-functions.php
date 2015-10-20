@@ -19,7 +19,7 @@ class WooCommerce_Quick_Donation_Admin_Function {
     
     public function __construct(){
         add_action( 'post_row_actions', array($this,'protect_donation_product'),99,2);
-        add_filter( 'pre_get_posts', array($this,'hide_donation_order_woocommerce_order'));
+        add_action( 'parse_query', array( $this, 'hide_donation_order_woocommerce_order' ) );
         add_filter( 'wc_order_types',array($this,'add_wc_order_types'),99,2);
         
     } 
@@ -29,6 +29,7 @@ class WooCommerce_Quick_Donation_Admin_Function {
     public function hide_donation_order_woocommerce_order($query) {
         global $pagenow,$post_type;  
         $query = $query;
+        
         if(!defined('WC_QD_QRY_OVERRIDE')){
             if( 'edit.php' == $pagenow || $query->is_admin && 'shop_order' == $post_type){ 
                 $query->set('meta_query',array('relation' => 'AND', array('key' => '_is_donation','compare' => 'NOT EXISTS')));

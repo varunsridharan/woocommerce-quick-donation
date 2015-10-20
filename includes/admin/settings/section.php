@@ -7,5 +7,5 @@ $section['settings_message'][] = array(
     'id'=>'message',
     'title'=>'Donation Error :', 
     'desc' => '',
-    'validate_callback'=>true,
+    'validate_callback'=>array( $this, 'validate_section' ),
 );

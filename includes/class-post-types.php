@@ -3,12 +3,18 @@ if ( ! defined( 'WPINC' )  ) { die; }
 
 class WC_QD_Post_Types {
     
-    public static function init(){
+   /**
+    * Inits Post Types Class
+    */
+   public static function init(){
         add_action( 'init', array(__CLASS__,'register_donation_posttype'),5);
         add_action( 'init', array(__CLASS__,'register_donation_category'),5);
         add_action( 'init', array(__CLASS__,'register_donation_tags'    ), 5 );
    }
    
+   /**
+    * Registers Donation Post Type
+    */
    public static function register_donation_posttype(){
         $args = array(
             'label'               => __( 'Quick Donation Project', WC_QD_TXT ),
@@ -32,9 +38,11 @@ class WC_QD_Post_Types {
             'capability_type'     => 'page',
         );
         register_post_type( WC_QD_PT, $args );
-   
    }
-                   
+    
+   /**
+    * Post Types Labels
+    */
    public static function get_post_types_labels() {
        return array(
             'name'                => _x( 'Quick Donation Projects', 'Post Type General Name', WC_QD_TXT ),
@@ -55,6 +63,9 @@ class WC_QD_Post_Types {
         );
    }
                    
+   /**
+    * Returns Post Type Rewrites
+    */
    public static function get_posttype_rewrite(){
        return array(
             'slug'                => 'donations',
@@ -66,6 +77,9 @@ class WC_QD_Post_Types {
 
     
     
+   /**
+    * Registers Post Type Category
+    */
    public static function register_donation_category(){
    
         $labels = array(
@@ -110,7 +124,9 @@ class WC_QD_Post_Types {
     
     
     
-    
+    /**
+     * Registers Donation Tags
+     */
     public static function register_donation_tags() {
 
         $labels = array(

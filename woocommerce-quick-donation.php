@@ -3,7 +3,7 @@
  * Plugin Name:       WooCommerce Quick Donation
  * Plugin URI:        https://wordpress.org/plugins/woocommerce-plugin-boiler-plate/
  * Description:       Turns WooCommerce Into Online Donation
- * Version:           1.3.2 BETA
+ * Version:           1.3.3 BETA
  * Author:            Varun Sridharan
  * Author URI:        http://varunsridharan.in
  * Text Domain:       woocommerce-quick-donation
@@ -18,7 +18,7 @@ class WooCommerce_Quick_Donation {
 	/**
 	 * @var string
 	 */
-	public $version = '1.3.2';
+	public $version = '1.3.3';
 
 	/**
 	 * @var WooCommerce The single instance of the class
@@ -64,6 +64,9 @@ class WooCommerce_Quick_Donation {
         add_filter('load_textdomain_mofile',  array( $this, 'load_plugin_mo_files' ), 10, 2);
     }
     
+    /**
+     * Checks If Donation Product Exist In WooCommerce Products
+     */
     private function check_donation_product_exist(){
         $install = new WC_QD_INSTALL;
         if(! $install->check_donation_exists()){
@@ -117,8 +120,8 @@ class WooCommerce_Quick_Donation {
         
         self::$f = new WooCommerce_Quick_Donation_Functions;
         self::$settings = new WooCommerce_Quick_Donation_Settings;
-        self::$db = new WooCommerce_Quick_Donation_db;
-
+        self::$db = new WooCommerce_Quick_Donation_DB; 
+        
         if($this->is_request('frontend')){
             self::$shortcode = new WooCommerce_Quick_Donation_Shortcode;
             $this->donation = new WooCommerce_Quick_Donation_Process;

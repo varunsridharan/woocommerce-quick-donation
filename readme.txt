@@ -6,7 +6,7 @@ Requires at least: 3.0 or higher
 Tested up to: 4.4
 WC requires at least: 1.0
 WC tested up to: 2.4.8
-Stable tag: 1.3.2 Beta
+Stable tag: 1.3.3 Beta
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -160,14 +160,33 @@ Yes you can! Join in on our <a href="https://github.com/technofreaky/woocomerce-
 
 
 == Changelog ==
-= 1.3.2 BETA
-* Fixed Quick Donation Menu Not Listed In Some WP Settings.
-* Added Quick Links At Plugin Listing Table
+= 1.3.3 BETA =
+**Fixes**
+* Moved Few DB functions from Functions class to db class
+* Fixed template override issue [https://github.com/technofreaky/woocomerce-quick-donation/issues/12]
+* Removed Unwated Metabox For Donation order Page
 
-= 1.3.1 Beta =
-* Fixed Error At WooCommerce Settings Page
+= 1.3.2 BETA =
+
+**New**
+* Added Quick Links At Plugin Listing Table
+* Error Message When User Trying To Add Another Donation To Cart
+* Already Exist Donation Error Message Option Added In Settings
+
+**Tweaks**
+* Standardized Coding 
+* Settings Page Modified
+
+**Fixes**
+* Changed `Donation` Name To `Project Name` at Checkout in Review Order Section
+* Quick Donation Menu Not Listed In Some WP Settings.
+
+= 1.3.1 BETA =
+**Fixes**
+* Error At WooCommerce Settings Page
 
 = 1.3 Beta =
+**New**
 * Created Separate Custom Post Type For Donation
 * Created Separate Custom Settings Page
 * Total Plugin Redeveloped

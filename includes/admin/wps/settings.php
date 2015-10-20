@@ -122,12 +122,12 @@ class WooCommerce_Quick_Donation_Settings {
 	}
 
 
-	function validate_section( $fields ) {
-        global $send_fields; $send_fields =  $fields;
-        
-        include(WC_QD_ADMIN.'settings/validate.php');
-		return $fields;
-	}
+	//function validate_section( $fields ) {
+    //    global $send_fields; 
+    //    $send_fields =  $fields; 
+    //    include(WC_QD_ADMIN.'settings/validate.php');
+	//	return $fields;
+	//}
     
     function get_option($id = ''){
         if( ! empty($this->settings_values) &&  ! empty($id)){

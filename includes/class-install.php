@@ -15,6 +15,9 @@ class WC_QD_INSTALL{
         update_option(WC_QD_DB.'product_id',$post_id); 
     }
 
+    /**
+     * Checks Upgrade Status
+     */
     public static function check_db_version(){
         $current_version = get_option(WC_QD_DB.'db_version');
         if(! $current_version){
@@ -34,6 +37,9 @@ class WC_QD_INSTALL{
         return false;
     }
     
+    /**
+     * Create Quick Donation Table
+     */
     public static function wc_qd_table_install() {
         global $wpdb;
         global $jal_db_version;
@@ -54,11 +60,13 @@ class WC_QD_INSTALL{
         dbDelta( $sql ); 
     }    
      
+    /**
+     * Create Donation Product In WooCommerce
+     * @return int donation Post id
+     */
     public static function create_donation(){
         $userID = 1;
-        if(get_current_user_id()){
-            $userID = get_current_user_id();
-        }
+        if(get_current_user_id()){ $userID = get_current_user_id(); }
         
         $post = array(
             'post_author' => $userID,

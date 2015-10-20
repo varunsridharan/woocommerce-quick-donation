@@ -45,6 +45,16 @@ $fields['settings_message']['message'][] =  array(
 	'type'  => 'textarea'
 );
  
+
+$fields['settings_message']['message'][] = array(
+	'label'     => __( 'Donation Already Exist', WC_QD_TXT),
+	'desc'     => __( 'Custom Message To Show When User Trying To Add Another Donation To Cart',WC_QD_TXT),
+	'id'       =>  WC_QD_DB.'donation_already_exist',
+	'attr'  => array('style' => 'min-width:35%; width:auto;max-width:75%;'),
+	'type'     => 'textarea',
+	
+);
+
 $fields['settings_message']['message'][] =  array(
 	'label' => __( 'Invalid Donation Amount', WC_QD_TXT),
 	'desc'  => __( 'Custom Message To Show When Invalid Donation Entered',WC_QD_TXT),

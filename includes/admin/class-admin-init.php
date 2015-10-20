@@ -28,7 +28,6 @@ class WooCommerce_Quick_Donation_Admin  {
     
     public function load_required_files(){
         WC_QD()->load_files(WC_QD_ADMIN.'metabox_framework/meta-box.php'); 
-        
     } 
     
     public function init_hooks(){
@@ -84,6 +83,7 @@ class WooCommerce_Quick_Donation_Admin  {
      */
     public function init_admin_class(){
         $this->functions =  new WooCommerce_Quick_Donation_Admin_Function;
+        $this->admin_order_page = new WooCommerce_Quick_Donation_Admin_Order_Page_Functions;
     }
  
     

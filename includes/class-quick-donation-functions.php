@@ -153,6 +153,8 @@ class WooCommerce_Quick_Donation_Functions  {
     }
     
     public function wc_locate_template($template_full_path,$template_name,$template_dir){
+        if(file_exists($template_full_path)){ return $template_full_path; }
+        
         $template_full_path = $template_full_path;
 
         if(isset(self::$search_template['general'][$template_name])){
@@ -175,41 +177,6 @@ class WooCommerce_Quick_Donation_Functions  {
         }
         
         return $gateways;
-    }
-    
-    
-    /**
-     * Internal Post Meta Function
-     */
-    protected function post_meta($id,$meta_key,$single = false){
-        return get_post_meta($id,$meta_key,$single);
-    }
-    
-
-    
-    public function min_project($id){
-        $value = intval($this->post_meta($id,'_'.WC_QD_DB.'min_req_donation',true));
-        if($value > 0){ return $value;}
-        return false;
-    }
-    
-    public function max_project($id){
-        $value = intval($this->post_meta($id,'_'.WC_QD_DB.'max_req_donation',true));
-        if($value > 0){ return $value;}
-        return false;
-    }
-    
-    public function project_status($id){
-        return $this->post_meta($id,'_'.WC_QD_DB . 'visibility_project',true);
-    }    
-    
-    
-    public function get_message($id,$search_replace = array()){
-        if($id == null){ return false; }
-        $text = WC_QD()->settings()->get_option($id);
-        $replaced_text = str_replace(array_keys($search_replace),array_values($search_replace),$text);
-        return $replaced_text;
-        
     }
  
     public function get_admin_pay_gate(){

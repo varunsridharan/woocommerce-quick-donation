@@ -23,13 +23,8 @@ class WooCommerce_Quick_Donation_Admin_Settings {
      * @return [[Type]] [[Description]]
      */
     public function get_settings_page(){
-        $this->settings_pages[] = array('name' => __( 'Tab 2',WC_QD_TXT), 
-                                        'type' => 'heading' 
-                                       );
-        
-        $this->settings_pages[] = array('name' => __( 'Tab 2',WC_QD_TXT), 
-                                        'type' => 'heading' 
-                                       );
+        $this->settings_pages[] = array('name' => __( 'Tab 2',WC_QD_TXT), 'type' => 'heading');
+        $this->settings_pages[] = array('name' => __( 'Tab 2',WC_QD_TXT), 'type' => 'heading');
         $this->settings_pages = apply_filters('wc_quick_donation_settings_tab',$this->settings_pages);
         return $this->settings_pages;
     }
@@ -74,7 +69,6 @@ class WooCommerce_Quick_Donation_Admin_Settings {
     }
     
 	function admin_init() {
-
         $pages = $this->settings->add_pages($this->get_settings_page());
         $sections = $this->get_settings_section();
         $fields  = $this->get_settings_fields();
@@ -83,16 +77,11 @@ class WooCommerce_Quick_Donation_Admin_Settings {
         }
         
         foreach($fields as $page_id => $fields){
-            
             foreach($fields as $section_id => $field){
                 $pages = $this->settings->add_fields($page_id, $section_id, $field );
             } 
         }
-         
-
-		// Create a $pages array with the add_page(), add_pages(), add_section(), add_sections(), add_field() and add_fields() methods.
 		$this->settings->init( $pages, $this->page_hook );
-
 	}
 
 
@@ -100,14 +89,12 @@ class WooCommerce_Quick_Donation_Admin_Settings {
 		echo '<div class="wrap">';
 		settings_errors();
 		$this->settings->render_header( __( 'WP Settings Example', 'plugin-text-domain' ) );
-		echo $this->settings->debug;
-
+		//echo $this->settings->debug;
 		// Use the function get_settings() to get all the settings.
 		$settings = $this->settings->get_settings(); 
 		// Use the function get get_current_admin_page() to check what page you're on
 		// $page         = $this->settings->get_current_admin_page();
 		// $current_page = $page['id'];
-
 		// Display the form(s).
 		$this->settings->render_form();
 		echo '</div>';
