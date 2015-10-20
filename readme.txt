@@ -1,75 +1,99 @@
 === WooCommerce Quick Donation ===
 Contributors: varunms
-Donate link: http://varunsridharan.in
+Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=9MLKDVUVB7WBJ
 Tags: WooCommerce,Quick Dontion,quick donation,online donation,wordpress donation,simple donation,donation form,WC donation,Online Payment,Payment,Online,Donate,Monthly Goal,affiliate, cart, checkout, commerce, configurable, digital, download, downloadable, e-commerce, ecommerce, inventory, reports, sales, sell, shipping, shop, shopping, stock, store, tax, variable, widgets, woothemes, wordpress ecommerce
 Requires at least: 3.0 or higher
-Tested up to: 4.1.1
+Tested up to: 4.4
 WC requires at least: 1.0
-WC tested up to: 2.3.5
-Stable tag: 1.2
+WC tested up to: 2.4.8
+Stable tag: 1.3.2 Beta
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 Turns WooCommerce Into Online Donation.
 
 == Description ==
+<h1> Dear User I am still trying to make things plugin more stable and prefect if you find any bug / any feature is required please open an issue at <a href="https://github.com/technofreaky/woocomerce-quick-donation/issues">GitHub</a> or <a href="https://wordpress.org/support/plugin/woocommerce-quick-donation">WordPress Support</a> </h1>
 
-<div class="plugin-notice plugin-notice-requested"> <span>!</span><span class="plugin-notice-banner-msg">Dear User, We are still trying to make this plugin a stable and prefect.. if you find any bug / any feature is required please open an issue at <a href="https://github.com/technofreaky/woocomerce-quick-donation/issues">GitHub</a> or <a href="https://wordpress.org/support/plugin/woocommerce-quick-donation">WordPress Support</a> </span></div>
+WooCommerce Shopping Cart Donation which makes WooComerce to use for online donation purpose.
+This plugin will create a new product in the name of **donation**.
 
-<h3> What's New In 1.2 </h3>
-* Donation Widget
-* Get Project's By Function
-* Added 2 Actions
-* Minor Bug Fixes 
-
-
-<h3> Feature Will Be Implemented In Next Release </h3>
-* Separate Donation Report Page
-
-
-<h3> <blink> Features </blink></h3>
+<h3> Features </h3>
 * Redirect User After Donation Added To Cart [Cart Page / Checkout Page]
 * Select Your Preferred Payment Gateway For Donation
 * Custom Email Template For Donation Processing
 * Custom Email Template For Donation Completed
-* Configurable Min & Max Donation Amount
-* Donation From Widget
+* Configurable Min & Max Donation Amount Based On Project
 * Custom Error Messages
 
 
-WooCommerce Shopping Cart Donation which makes WooComerce to use for online donation purpose.
-
-This plugin will create a new product in the name of **donation**.
-
-This Plugin Can called by using the below short code
+**This Plugin Can called by using the below short code**
 `[wc_quick_donation]`
 
+**Shortcode Variables**
 
-**Plugin Template List** *[You Can Modify The Template Buy Copying To Your Theme's Folder]*
-1. Donation Form Template
-`wc-quick-donation/template/donation_form.php`
-2. Donation Processing Email Template
-`wc-quick-donation/template/donation_processing_html.php
- wc-quick-donation/template/donation_processing_plain.php`
-3. Donation Completed Email Template
-`wc-quick-donation/template/donation_completed_html.php
- wc-quick-donation/template/donation_completed_plain.php`
+1. type : select | radio
+2. grouped : true | false
 
-**Plugin Filters, Actions & Functions** 
-1. Before Donation Prints
-`wc_quick_donation_before_form`
-2. After Donation Prints
-`wc_quick_donation_after_form`
-3. Get Project's By Function
-`global $wc_quick_donation; $wc_quick_donation->donation_projects();`
 
-Plugin Settings : ***Woocoomerce Settings => Quick Donation***
+**Modifying Template**
 
-Email Template Settings : ***WooCommerce Settings => Emails => Donation Processing & Completed***
+1. Create A folder named *donation* under <code> your-theme/woocommerce/</code>
+2. Copy all files from <code>woocommerce-quick-donation/template/</code>
+3. Paste in <code> your-theme/woocommerce/donation/</code>
+
+<h3>Plugin Template List</h3>
+**Checkout Page Template**
+<code>
+checkout/donation-cart-errors.php
+checkout/donation-form-billing.php
+checkout/donation-form-checkout.php
+checkout/donation-form-coupon.php
+checkout/donation-form-login.php
+checkout/donation-form-pay.php
+checkout/donation-form-shipping.php
+checkout/donation-payment-method.php
+checkout/donation-payment.php
+checkout/donation-review-order.php
+checkout/donation-thankyou.php
+</code>
+
+**Email Template**
+<code>
+emails/donation-customer-invoice.php
+emails/plain/donation-customer-invoice.php
+</code>
+
+**Plugin Template**
+<code>
+donation-form.php
+fields/field-radio.php
+fields/field-select.php
+fields/field-text.php
+</code>
+
+<h3>Actions Hooks</h3>
+<code>
+wc_quick_donation_before_doantion_form
+wc_quick_donation_after_doantion_form
+</code>
+
+<h3> Filter Hooks </h3>
+<code>
+wcqd_project_name_select_class
+wcqd_project_name_select_attribute
+wcqd_project_name_radio_class
+wcqd_project_name_radio_attribute
+wcqd_project_price_text_class
+wcqd_project_price_text_attribute
+wc_quick_donation_settings_tab
+wc_quick_donation_settings_section
+wc_quick_donation_settings_fields
+</code>
+
 
 == Upgrade Notice ==
-We have updated ***donation-form.php*** template. so please replace the template if you have modified
-please update the settings.
+Note this release is in beta and from now this plugin is totally rebuild. it may not work with or like older version's
 
 == Installation ==
 
@@ -84,7 +108,7 @@ please update the settings.
 
 Automatic installation is the easiest option as WordPress handles the file transfers itself and you don't need to leave your web browser. To do an automatic install of WooCommerce Quick Donation, log in to your WordPress dashboard, navigate to the Plugins menu and click Add New.
 
-In the search field type "WooCommerce Quick Donation" and click Search Plugins. Once you've found our eCommerce plugin you can view details about it such as the the point release, rating and description. Most importantly of course, you can install it by simply clicking "Install Now"
+In the search field type "WooCommerce Quick Donation"Â and click Search Plugins. Once you've found our eCommerce plugin you can view details about it such as the the point release, rating and description. Most importantly of course, you can install it by simply clicking "Install Now"
 
 = Manual installation =
 
@@ -133,16 +157,26 @@ Oops. Please User github / WordPress to post bugs.  <a href="https://github.com/
 Yes you can! Join in on our <a href="https://github.com/technofreaky/woocomerce-quick-donation/">GitHub repository :)</a>
 
 == Screenshots ==
-1. General Settings 
-2. Donation Settings
-3. Custom Error Message
-4. Email Template Settings For Donation Processing
-5. Email Template Settings For Donation Completed.
+
 
 == Changelog ==
+= 1.3.2 BETA
+* Fixed Quick Donation Menu Not Listed In Some WP Settings.
+* Added Quick Links At Plugin Listing Table
+
+= 1.3.1 Beta =
+* Fixed Error At WooCommerce Settings Page
+
+= 1.3 Beta =
+* Created Separate Custom Post Type For Donation
+* Created Separate Custom Settings Page
+* Total Plugin Redeveloped
+* Min & Max Donation Amount Based On Project
+* Separate Page For Donation Orders
+
 = 1.2 =
 * Added Widget For Donation Form
-* Added Seperate function to get Donation Projects `donation_projects()`
+* Added Separate function to get Donation Projects `donation_projects()`
 * Added 2 Actions `wc_quick_donation_before_form` & `wc_quick_donation_after_form` for donation form.
 * Minor Bug Fix.
 
