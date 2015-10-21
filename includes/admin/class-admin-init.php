@@ -54,6 +54,7 @@ class WooCommerce_Quick_Donation_Admin  {
         global $submenu;
         //echo '<pre>'.print_r($submenu,true).'</pre>'; exit;
         $name = 'edit.php?post_type='.WC_QD_PT;
+        if(empty($submenu)){return $submenu;}
         $arr = array();
         $arr[] = $submenu[$name][18];
         $arr[] = $submenu[$name][5];
@@ -104,9 +105,14 @@ class WooCommerce_Quick_Donation_Admin  {
 	 * Register the stylesheets for the admin area.
 	 */
 	public function enqueue_styles() { 
+        wp_enqueue_style(WC_QD_SLUG.'_quick_hacks',WC_QD_CSS.'admin-hack-style.css' , array(), WC_QD()->version, 'all' );  
+        
         if('wcqd_project_page_WC_QD_settings' == $this->current_screen()){
             wp_enqueue_style(WC_QD_SLUG.'_core_style',WC_QD_CSS.'admin-settings-style.css' , array(), WC_QD()->version, 'all' );  
         }
+        
+         
+        
         if(in_array($this->current_screen() , $this->get_screen_ids())) {
             wp_enqueue_style(WC_QD_SLUG.'_core_style',WC_QD_CSS.'admin-style.css' , array(), WC_QD()->version, 'all' );  
         }

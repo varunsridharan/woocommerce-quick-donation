@@ -6,7 +6,7 @@ Requires at least: 3.0 or higher
 Tested up to: 4.4
 WC requires at least: 1.0
 WC tested up to: 2.4.8
-Stable tag: 1.3.3 Beta
+Stable tag: 1.3.4 Beta
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -18,6 +18,10 @@ Turns WooCommerce Into Online Donation.
 WooCommerce Shopping Cart Donation which makes WooComerce to use for online donation purpose.
 This plugin will create a new product in the name of **donation**.
 
+<h3> Plugin Support / Feature Request </h3>
+Dear User, if you need any help regarding this plugin or require any new feature in this plugin kindly contact me via
+Email : plugin@varunsridharan.in / kindly post it in github.
+
 <h3> Features </h3>
 * Redirect User After Donation Added To Cart [Cart Page / Checkout Page]
 * Select Your Preferred Payment Gateway For Donation
@@ -27,20 +31,20 @@ This plugin will create a new product in the name of **donation**.
 * Custom Error Messages
 
 
-**This Plugin Can called by using the below short code**
-`[wc_quick_donation]`
+**This Plugin Can called by using the below short code** `[wc_quick_donation]`
 
 **Shortcode Variables**
-
+<code>
 1. type : select | radio
 2. grouped : true | false
-
+</code>
 
 **Modifying Template**
-
+<code>
 1. Create A folder named *donation* under <code> your-theme/woocommerce/</code>
 2. Copy all files from <code>woocommerce-quick-donation/template/</code>
 3. Paste in <code> your-theme/woocommerce/donation/</code>
+</code>
 
 <h3>Plugin Template List</h3>
 **Checkout Page Template**
@@ -56,6 +60,17 @@ checkout/donation-payment-method.php
 checkout/donation-payment.php
 checkout/donation-review-order.php
 checkout/donation-thankyou.php
+order/donation-order-details.php
+</code>
+
+
+**Cart Page Template**
+<code>
+cart/donation-cart-item-data
+cart/donation-cart-shipping.php
+cart/donation-cart-totals.php
+cart/donation-cart.php
+cart/donation-proceed-to-checkout-button.php
 </code>
 
 **Email Template**
@@ -91,6 +106,16 @@ wc_quick_donation_settings_section
 wc_quick_donation_settings_fields
 </code>
 
+== Screenshots ==
+1. Menu In WP-ADMIN View
+2. Donation Project Listing View
+3. New Donation Project View
+4. General Settings View
+5. Custom Error Message View
+6. 2 Types Of Donation Form
+7. Donation Cart View
+8. Donation Checkout View
+9. Donation Order Success View
 
 == Upgrade Notice ==
 Note this release is in beta and from now this plugin is totally rebuild. it may not work with or like older version's
@@ -160,8 +185,26 @@ Yes you can! Join in on our <a href="https://github.com/technofreaky/woocomerce-
 
 
 == Changelog ==
+= 1.3.4 BETA =
+**Fixes**
+
+* Menu Error In Front End When Logged In Using Custom ID
+
+**Tweaks**
+
+* Removed Unwated Metabox For Donation order Page
+* Added New Custom Metabox For Donation Order details
+* Added Few Functions In WC Quick Donation DB Class
+* Modifed Core WC Quick Donation Templates
+
+**Added**
+
+* Custom Cart Page Template Support
+* Custom Order Thank You Page & Order Details Tables Support
+
 = 1.3.3 BETA =
 **Fixes**
+
 * Moved Few DB functions from Functions class to db class
 * Fixed template override issue [https://github.com/technofreaky/woocomerce-quick-donation/issues/12]
 * Removed Unwated Metabox For Donation order Page
@@ -169,24 +212,29 @@ Yes you can! Join in on our <a href="https://github.com/technofreaky/woocomerce-
 = 1.3.2 BETA =
 
 **New**
+
 * Added Quick Links At Plugin Listing Table
 * Error Message When User Trying To Add Another Donation To Cart
 * Already Exist Donation Error Message Option Added In Settings
 
 **Tweaks**
+
 * Standardized Coding 
 * Settings Page Modified
 
 **Fixes**
+
 * Changed `Donation` Name To `Project Name` at Checkout in Review Order Section
 * Quick Donation Menu Not Listed In Some WP Settings.
 
 = 1.3.1 BETA =
 **Fixes**
+
 * Error At WooCommerce Settings Page
 
 = 1.3 Beta =
 **New**
+
 * Created Separate Custom Post Type For Donation
 * Created Separate Custom Settings Page
 * Total Plugin Redeveloped

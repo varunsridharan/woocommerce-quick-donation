@@ -22,15 +22,17 @@ class WooCommerce_Quick_Donation_Process extends WooCommerce_Quick_Donation  {
             add_action( 'woocommerce_checkout_update_order_meta',array($this,'update_order_meta'));
             add_action( 'woocommerce_checkout_update_order_meta',  array($this,'save_order_id_db'));
             add_action( 'woocommerce_email',array($this,'remove_email_actions'));
-            add_filter( 'woocommerce_cart_item_name', array($this,'change_donation_name'));
+            add_filter( 'wc_quick_donation_cart_project_name', array($this,'change_donation_name'));
         } 
         $this->process_donation(); 
     }
     
     public function change_donation_name(){
-        $post_id = $this->get_checkout_project_id();
+        $post_id = $this->get_checkout_project_id(); 
         $title = get_the_title($post_id);
-        return $title;        
+        $link = get_permalink($post_id);
+        $link = sprintf('<a href="%s"> %s </a> ',$link,$title);
+        return $link;        
     }
     
     

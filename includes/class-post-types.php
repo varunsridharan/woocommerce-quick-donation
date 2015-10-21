@@ -48,7 +48,7 @@ class WC_QD_Post_Types {
             'name'                => _x( 'Quick Donation Projects', 'Post Type General Name', WC_QD_TXT ),
             'singular_name'       => _x( 'Quick Donation Project', 'Post Type Singular Name', WC_QD_TXT ),
             'menu_name'           => __( 'Quick Donation', WC_QD_TXT ),
-            'name_admin_bar'      => __( 'Quick Donation', WC_QD_TXT ),
+            'name_admin_bar'      => __( 'Donation', WC_QD_TXT ),
             'parent_item_colon'   => __( 'Parent Project :', WC_QD_TXT ),
             'all_items'           => __( 'All Project', WC_QD_TXT ),
             'add_new_item'        => __( 'Add New Project', WC_QD_TXT ),

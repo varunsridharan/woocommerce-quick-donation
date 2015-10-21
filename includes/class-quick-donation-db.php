@@ -45,6 +45,11 @@ class WooCommerce_Quick_Donation_DB  {
         return false;
     }
     
+    public function get_project_id($id){
+        $project_id = intval($this->post_meta($id,'_project_details',true));
+        return $project_id;
+    }
+    
     public function add_db_option($order_id,$project_id,$user_id){
         global $wpdb; 
         $data_c = array('date' => current_time( 'mysql' ),'userid' => $user_id,'donationid' => $order_id,'projectid' => $project_id); 

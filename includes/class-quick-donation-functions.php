@@ -18,7 +18,12 @@ class WooCommerce_Quick_Donation_Functions  {
             'emails/plaint/donation-customer-invoice.php' => 'emails/plain/donation-customer-invoice.php',
         ),
 
-        'is_donation' => array(
+        'is_donation' => array( 
+            'cart/cart-item-data.php' => 'cart/donation-cart-item-data',
+            'cart/cart-shipping.php' => 'cart/donation-cart-shipping.php',
+            'cart/cart-totals.php' => 'cart/donation-cart-totals.php',
+            'cart/cart.php' => 'cart/donation-cart.php',
+            'cart/proceed-to-checkout-button.php' => 'cart/donation-proceed-to-checkout-button.php',
             'checkout/cart-errors.php' => 'checkout/donation-cart-errors.php',
             'checkout/form-billing.php' => 'checkout/donation-form-billing.php',
             'checkout/form-checkout.php' => 'checkout/donation-form-checkout.php',
@@ -29,8 +34,12 @@ class WooCommerce_Quick_Donation_Functions  {
             'checkout/payment-method.php' => 'checkout/donation-payment-method.php',
             'checkout/payment.php' => 'checkout/donation-payment.php',
             'checkout/review-order.php' => 'checkout/donation-review-order.php',
-            'checkout/thankyou.php' => 'checkout/donation-thankyou.php',
         ),
+        
+        'after_order' => array(
+            'order/order-details.php' => 'order/donation-order-details.php',
+            'checkout/thankyou.php' => 'checkout/donation-thankyou.php',
+        )
         
         
         );    
@@ -40,10 +49,27 @@ class WooCommerce_Quick_Donation_Functions  {
         add_filter( 'woocommerce_email_classes',  array($this,'add_email_classes'));
         add_action( 'woocommerce_available_payment_gateways',array($this,'remove_gateway'));
         add_filter( 'woocommerce_locate_template' , array($this,'wc_locate_template'),10,3);
-        
-        
+        add_filter( 'the_title', array($this,'wc_page_endpoint_title' ),1);
     }
     
+    
+    public function wc_page_endpoint_title($title){
+        global $wp_query;
+
+        if ( ! is_null( $wp_query ) && ! is_admin() && is_main_query() && in_the_loop() && is_page() && is_wc_endpoint_url() ) {
+            
+            $endpoint = WC()->query->get_current_endpoint();
+            if('order-received' == $endpoint){
+                $order_id = $wp_query->query['order-received'];
+                if(WC_QD()->db()->_is_donation($order_id)){
+                    $title = 'Donation Received';
+                    remove_filter( 'the_title', 'wc_page_endpoint_title' );
+                }
+            } 
+        }
+
+        return $title;    
+    }
     
     public function add_email_classes($email_classes){
         $email_classes[WC_QD_DB.'new_donation_email'] = require(WC_QD_INC.'emails/class-new-email.php');
@@ -140,6 +166,7 @@ class WooCommerce_Quick_Donation_Functions  {
     }
     
     public function load_template($file,$path){
+        
         $wc_get_template = function_exists('wc_get_template') ? 'wc_get_template' : 'woocommerce_get_template';
         $wc_get_template( $file,array(), '', $path); 
     }
@@ -148,7 +175,7 @@ class WooCommerce_Quick_Donation_Functions  {
         $default_path = WC_QD_TEMPLATE;
         $template_path = WC_TEMPLATE.'donation/';
         $template = $template;
-        $locate = wc_locate_template($template,$template_path, $default_path);
+        $locate = wc_locate_template($template,$template_path, $default_path); 
         return $locate;
     }
     
@@ -205,15 +232,21 @@ class WooCommerce_Quick_Donation_Functions  {
     
     public function get_template($located, $template_name, $args, $template_path, $default_path ){
         $file = $located; 
-        
+        if(isset($args['order_id'])){ $order_id = $args['order_id']; }
+        if(isset($args['order']->id)){ $order_id = $args['order']->id; }
+         
         if(isset(self::$search_template['general'][$template_name])){
             $file = WC_QD()->f()->locate_template(self::$search_template['general'][$template_name]);
-        }
-        
-        if(WC_QD()->check_donation_exists_cart()){
+        } else  if(WC_QD()->check_donation_exists_cart()){
             if(isset(self::$search_template['is_donation'][$template_name])){
                 $file = WC_QD()->f()->locate_template(self::$search_template['is_donation'][$template_name]);
             } 
+        } else {
+            if(WC_QD()->db()->_is_donation($order_id)){
+                if(isset(self::$search_template['after_order'][$template_name])){
+                    $file = WC_QD()->f()->locate_template(self::$search_template['after_order'][$template_name]);
+                }             
+            }
         }
         return $file;
     }    
