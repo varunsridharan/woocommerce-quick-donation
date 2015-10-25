@@ -6,7 +6,7 @@ Requires at least: 3.0 or higher
 Tested up to: 4.4
 WC requires at least: 1.0
 WC tested up to: 2.4.8
-Stable tag: 1.3.4 Beta
+Stable tag: 1.3.5 Beta
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -185,6 +185,14 @@ Yes you can! Join in on our <a href="https://github.com/technofreaky/woocomerce-
 
 
 == Changelog ==
+= 1.3.5 BETA =
+**Fixes**
+
+* Metabox Error While Creating New Order Via Admin
+* Fixed Count Notification Bubble Count
+* Minor Bug Fix
+
+
 = 1.3.4 BETA =
 **Fixes**
 

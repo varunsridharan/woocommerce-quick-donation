@@ -38,9 +38,10 @@ class WooCommerce_Quick_Donation_Admin_Function {
      
     public function add_wc_order_types($order_types,$type){ 
         $order_type = $order_types;
+        global $post_type; 
         if('' == $type){
             $order_type[] = WC_QD_PT; 
-            $order_type[] = 'wc_qd_orders';
+            $order_type[] = 'wcqd_project'; 
         } 
         return $order_type;
     }

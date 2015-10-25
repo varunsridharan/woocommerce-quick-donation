@@ -59,7 +59,17 @@ class WooCommerce_Quick_Donation_DB  {
     
     public function get_donation_order_ids(){
         global $wpdb;
-        $db_request = $wpdb->get_results("SELECT donationid FROM ".WC_QD_TB,ARRAY_N);
+        $db_request = $wpdb->get_results("SELECT donationid FROM ".WC_QD_TB,ARRAY_A);
+        if(!empty($db_request)){
+            return $db_request;
+        }
+        return array();
+    }
+    
+    public function get_user_donations_ids($user_id = ''){
+        global $wpdb;
+        if($user_id == ''){ $user_id = get_current_user_id();}
+        $db_request = $wpdb->get_results("SELECT donationid FROM ".WC_QD_TB.' WHERE userid = '.$user_id,ARRAY_A);
         if(!empty($db_request)){
             return $db_request;
         }

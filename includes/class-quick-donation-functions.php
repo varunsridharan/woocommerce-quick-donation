@@ -13,9 +13,11 @@ class WooCommerce_Quick_Donation_Functions  {
             'field-radio.php' => 'fields/field-radio.php',
             'field-select.php' => 'fields/field-select.php',
             'field-text.php' => 'fields/field-text.php',
-        
+            
             'emails/donation-customer-invoice.php' => 'emails/donation-customer-invoice.php',
             'emails/plaint/donation-customer-invoice.php' => 'emails/plain/donation-customer-invoice.php',
+            
+            'myaccount/my-donations.php' => 'myaccount/my-donations.php',
         ),
 
         'is_donation' => array( 
@@ -51,7 +53,6 @@ class WooCommerce_Quick_Donation_Functions  {
         add_filter( 'woocommerce_locate_template' , array($this,'wc_locate_template'),10,3);
         add_filter( 'the_title', array($this,'wc_page_endpoint_title' ),1);
     }
-    
     
     public function wc_page_endpoint_title($title){
         global $wp_query;
@@ -166,7 +167,6 @@ class WooCommerce_Quick_Donation_Functions  {
     }
     
     public function load_template($file,$path){
-        
         $wc_get_template = function_exists('wc_get_template') ? 'wc_get_template' : 'woocommerce_get_template';
         $wc_get_template( $file,array(), '', $path); 
     }
@@ -232,6 +232,7 @@ class WooCommerce_Quick_Donation_Functions  {
     
     public function get_template($located, $template_name, $args, $template_path, $default_path ){
         $file = $located; 
+        $order_id = 0;
         if(isset($args['order_id'])){ $order_id = $args['order_id']; }
         if(isset($args['order']->id)){ $order_id = $args['order']->id; }
          
@@ -248,6 +249,7 @@ class WooCommerce_Quick_Donation_Functions  {
                 }             
             }
         }
+        
         return $file;
     }    
 }

@@ -69,16 +69,29 @@ class WooCommerce_Quick_Donation_Admin  {
     
     public function add_donation_notification_bubble()  {
         global $submenu; 
+        $c = $this->get_status_count();
         if(isset($submenu['edit.php?post_type='.WC_QD_PT])){
             foreach($submenu['edit.php?post_type='.WC_QD_PT] as $menuK => $menu){
                 if($menu[2] === 'wc_qd_orders' ){
                     $submenu['edit.php?post_type='.WC_QD_PT][$menuK][0] .=  "<span class='update-plugins count-1'>
-                                                                             <span class='update-count'>0</span></span>"; 
+                                                                             <span class='update-count'>$c</span></span>"; 
                 }
             }
         }
     }    
     
+    private function get_status_count(){
+        $order_ids = WC_QD()->db()->get_donation_order_ids(); 
+        $count = 0;
+        foreach($order_ids as $id){
+            $order_status = get_post_status($id['donationid']); 
+            if($order_status == 'wc-on-hold' || $order_status == 'wc-processing'){
+                $count++; 
+            }
+        }
+        
+        return $count;
+    }
     /**
      * Inits Admin Sttings
      */
@@ -95,7 +108,26 @@ class WooCommerce_Quick_Donation_Admin  {
         $order_ids = WC_QD()->db()->get_donation_order_ids();
         $order_ids = WC_QD()->db()->extract_donation_id($order_ids);
 
-        $args = array('post_type' => 'shop_order', 'post_status' =>  array_keys(wc_get_order_statuses()),'post__in' => $order_ids );
+        $args = array('posts_per_page' => '0',
+                      'post_type' => 'shop_order', 
+                      'post_status' =>  array_keys(wc_get_order_statuses()),
+                      'post__in' => $order_ids 
+                     );
+        
+        if(isset($_GET['paged'])){$args['paged'] = $_GET['paged']; }
+        if(isset($_GET['m'])){ $args['m'] = $_GET['m'];}        
+        if(isset($_GET['_customer_user'])) { 
+            $args['meta_query'][]['key'] = '_customer_user';
+            $args['meta_query'][]['value'] = $_GET['_customer_user'];
+            $args['meta_query'][]['compare'] = '=';
+        }
+        
+        if(isset($_GET['dproj'])) { 
+            $args['meta_query'][]['key'] = '_project_details';
+            $args['meta_query'][]['value'] = $_GET['dproj'];
+            $args['meta_query'][]['compare'] = '=';
+        } 
+        
         $wp_query = new WP_Query($args);
         require('wp-donation-listing-table.php');
         tt_render_list_page($wp_query);

@@ -35,7 +35,7 @@ class WooCommerce_Quick_Donation_Admin_Order_Page_Functions {
 	 */
 	public function shop_order_columns( $existing_columns ) {
         $existingc = $existing_columns;
-        if("wcqd_project_page_wc_qd_orders" == WC_QD()->admin()->current_screen()){
+        if(isset($_REQUEST['page']) && "wc_qd_orders" == $_REQUEST['page']){
             $existingc = '';
             $existingc['cb'] = $existing_columns['cb'];
             $existingc['order_status'] = $existing_columns['order_status'];

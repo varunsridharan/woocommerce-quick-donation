@@ -192,6 +192,7 @@ class WC_Quick_Donation_Meta_Box_Order_Data {
 						<h4><?php _e( 'General Details', 'woocommerce' ); ?></h4>
 
 						<p class="form-field form-field-wide"><label for="order_date"><?php _e( 'Order date:', 'woocommerce' ) ?></label>
+                            <input type="hidden" name="post_is_donation" value="TRUE"/>
 							<input type="text" class="date-picker" name="order_date" id="order_date" maxlength="10" value="<?php echo date_i18n( 'Y-m-d', strtotime( $post->post_date ) ); ?>" pattern="[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|1[0-9]|2[0-9]|3[01])" />@<input type="text" class="hour" placeholder="<?php esc_attr_e( 'h', 'woocommerce' ) ?>" name="order_date_hour" id="order_date_hour" maxlength="2" size="2" value="<?php echo date_i18n( 'H', strtotime( $post->post_date ) ); ?>" pattern="\-?\d+(\.\d{0,})?" />:<input type="text" class="minute" placeholder="<?php esc_attr_e( 'm', 'woocommerce' ) ?>" name="order_date_minute" id="order_date_minute" maxlength="2" size="2" value="<?php echo date_i18n( 'i', strtotime( $post->post_date ) ); ?>" pattern="\-?\d+(\.\d{0,})?" />
 						</p>
 
@@ -344,7 +345,12 @@ class WC_Quick_Donation_Meta_Box_Order_Data {
 	public static function save( $post_id, $post ) {
 		global $wpdb;
 
-		self::init_address_fields();
+		if(isset($_POST['post_is_donation'])){
+        
+        
+        self::init_address_fields();
+        
+        
 
 		// Add key
 		add_post_meta( $post_id, '_order_key', uniqid( 'order_' ), true );
@@ -402,4 +408,5 @@ class WC_Quick_Donation_Meta_Box_Order_Data {
 
 		wc_delete_shop_order_transients( $post_id );
 	}
+    }
 }
