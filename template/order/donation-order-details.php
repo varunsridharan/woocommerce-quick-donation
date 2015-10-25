@@ -37,6 +37,7 @@ $order = wc_get_order( $order_id );
 	<tfoot>
 		<?php
 			foreach ( $order->get_order_item_totals() as $key => $total ) {
+                    if('cart_subtotal' == $key ||  'order_total' == $key){continue;}
 				?>
 				<tr>
 					<th scope="row"><?php echo $total['label']; ?></th>

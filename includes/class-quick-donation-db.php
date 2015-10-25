@@ -76,6 +76,30 @@ class WooCommerce_Quick_Donation_DB  {
         return array();
     }
     
+    public function get_donation_grouped_count($user_id = ''){
+        global $wpdb;
+        $query = 'SELECT projectid, userid,COUNT( * ) AS num_posts FROM '.WC_QD_TB;
+        if(!empty($user_id)){ $query .= ' WHERE userid = '.$user_id; }
+        $query .= ' GROUP BY projectid';
+        $query .= ' , userid ';
+        
+        $db_request = $wpdb->get_results($query,ARRAY_A);
+        if(!empty($db_request)){
+            return $db_request;
+        }
+        return array();
+    }
+    
+    
+    public function get_doners_ids(){
+        global $wpdb;
+        $db_request = $wpdb->get_results("SELECT DISTINCT  `userid` FROM ".WC_QD_TB,ARRAY_A);
+        if(!empty($db_request)){
+            return $db_request;
+        }
+        return array();
+    }
+    
     public function extract_donation_id($ids){
         $return_ids = array();
         foreach($ids as $i){

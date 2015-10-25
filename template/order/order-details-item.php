@@ -10,25 +10,16 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
-
-if ( ! apply_filters( 'woocommerce_order_item_visible', true, $item ) ) {
-	return;
-}
+ 
 ?>
 <tr class="<?php echo esc_attr( apply_filters( 'woocommerce_order_item_class', 'order_item', $item, $order ) ); ?>">
 	<td class="product-name">
 		<?php
 			$is_visible = $product && $product->is_visible();
-
-			echo apply_filters( 'woocommerce_order_item_name', $is_visible ? sprintf( '<a href="%s">%s</a>', get_permalink( $item['product_id'] ), $item['name'] ) : $item['name'], $item, $is_visible );
-			echo apply_filters( 'woocommerce_order_item_quantity_html', ' <strong class="product-quantity">' . sprintf( '&times; %s', $item['qty'] ) . '</strong>', $item );
-
-			do_action( 'woocommerce_order_item_meta_start', $item_id, $item, $order );
-
-			$order->display_item_meta( $item );
-			$order->display_item_downloads( $item );
-
-			do_action( 'woocommerce_order_item_meta_end', $item_id, $item, $order );
+            $project_id = WC_QD()->db()->get_project_id($order->id); 
+			echo sprintf( '<a href="%s">%s</a>', get_permalink( $project_id ), get_the_title($project_id ));
+		 
+ 
 		?>
 	</td>
 	<td class="product-total">

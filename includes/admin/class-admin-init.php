@@ -45,8 +45,19 @@ class WooCommerce_Quick_Donation_Admin  {
     
     public function sub_donation_order_menu(){
         
-        $this->order_menu_slug = add_submenu_page('edit.php?post_type=wcqd_project','Donation Orders','Donation\'s','administrator','wc_qd_orders',array($this,'donation_orders_page'));
-
+        $this->order_menu_slug = add_submenu_page('edit.php?post_type=wcqd_project',
+                                                  __('Donation Orders',WC_QD_TXT),
+                                                  __('Donation\'s',WC_QD_TXT),
+                                                  'administrator',
+                                                  'wc_qd_orders',
+                                                  array($this,'donation_orders_page'));
+        
+        $this->donors_list = add_submenu_page('edit.php?post_type=wcqd_project',
+                                                  __('Donors List',WC_QD_TXT),
+                                                  __('Donors List',WC_QD_TXT),
+                                                  'administrator',
+                                                  'wc_qd_donors',
+                                                  array($this,'donors_listing_page'));
     }
     
     
@@ -56,7 +67,9 @@ class WooCommerce_Quick_Donation_Admin  {
         $name = 'edit.php?post_type='.WC_QD_PT;
         if(empty($submenu)){return $submenu;}
         $arr = array();
+
         $arr[] = $submenu[$name][18];
+        $arr[] = $submenu[$name][19];
         $arr[] = $submenu[$name][5];
         $arr[] = $submenu[$name][10];
         $arr[] = $submenu[$name][15];
@@ -72,12 +85,14 @@ class WooCommerce_Quick_Donation_Admin  {
         $c = $this->get_status_count();
         if(isset($submenu['edit.php?post_type='.WC_QD_PT])){
             foreach($submenu['edit.php?post_type='.WC_QD_PT] as $menuK => $menu){
-                if($menu[2] === 'wc_qd_orders' ){
+                
+                if($menu[2] == 'wc_qd_orders' ){
+                    
                     $submenu['edit.php?post_type='.WC_QD_PT][$menuK][0] .=  "<span class='update-plugins count-1'>
                                                                              <span class='update-count'>$c</span></span>"; 
                 }
             }
-        }
+        } 
     }    
     
     private function get_status_count(){
@@ -100,6 +115,15 @@ class WooCommerce_Quick_Donation_Admin  {
         $this->admin_order_page = new WooCommerce_Quick_Donation_Admin_Order_Page_Functions;
     }
  
+    
+    public function donors_listing_page(){
+        $ids = WC_QD()->db()->get_doners_ids();
+        $ids = WC_QD()->db()->extract_donation_id($ids);
+        $args = array('include'  => $ids); 
+        require('wp-donors-listing-table.php');
+        donor_render_list_page($args); 
+    }
+        
     
     public function donation_orders_page(){
         global $wpdb;

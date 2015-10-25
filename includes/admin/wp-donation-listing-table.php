@@ -1087,7 +1087,7 @@ function tt_render_list_page($shop = ''){
     <div id="icon-users" class="icon32"><br/></div>
     <h2>Donations</h2>
     <form id="movies-filter" method="get"> 
-        <input type="hidden" name="post_type" value="<?php echo $_REQUEST['post_type'] ?>" />
+        <input type="hidden" name="post_type" value="wc_qd_orders" />
         <input type="hidden" name="page" value="<?php echo $_REQUEST['page'] ?>" />
         <?php $wc_qd_donation_orders_listing->search_box(__('Search Donations',WC_QD_TXT), 'post' ); ?>
         <?php  

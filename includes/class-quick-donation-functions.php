@@ -13,10 +13,8 @@ class WooCommerce_Quick_Donation_Functions  {
             'field-radio.php' => 'fields/field-radio.php',
             'field-select.php' => 'fields/field-select.php',
             'field-text.php' => 'fields/field-text.php',
-            
             'emails/donation-customer-invoice.php' => 'emails/donation-customer-invoice.php',
             'emails/plaint/donation-customer-invoice.php' => 'emails/plain/donation-customer-invoice.php',
-            
             'myaccount/my-donations.php' => 'myaccount/my-donations.php',
         ),
 
@@ -41,6 +39,10 @@ class WooCommerce_Quick_Donation_Functions  {
         'after_order' => array(
             'order/order-details.php' => 'order/donation-order-details.php',
             'checkout/thankyou.php' => 'checkout/donation-thankyou.php',
+            'myaccount/view-order.php' => 'myaccount/view-donation.php',
+            'order/order-details-item.php' => 'order/order-details-item.php',
+            'order/order-details-customer.php' => 'order/order-details-customer.php',
+            
         )
         
         
@@ -51,24 +53,34 @@ class WooCommerce_Quick_Donation_Functions  {
         add_filter( 'woocommerce_email_classes',  array($this,'add_email_classes'));
         add_action( 'woocommerce_available_payment_gateways',array($this,'remove_gateway'));
         add_filter( 'woocommerce_locate_template' , array($this,'wc_locate_template'),10,3);
-        add_filter( 'the_title', array($this,'wc_page_endpoint_title' ),1);
+        add_filter( 'the_title', array($this,'wc_page_endpoint_title' ),10,2);
     }
     
-    public function wc_page_endpoint_title($title){
-        global $wp_query;
+    public function wc_page_endpoint_title($title, $id){
+        if(is_page($id)){
+            global $wp_query;
 
-        if ( ! is_null( $wp_query ) && ! is_admin() && is_main_query() && in_the_loop() && is_page() && is_wc_endpoint_url() ) {
-            
-            $endpoint = WC()->query->get_current_endpoint();
-            if('order-received' == $endpoint){
-                $order_id = $wp_query->query['order-received'];
-                if(WC_QD()->db()->_is_donation($order_id)){
-                    $title = 'Donation Received';
-                    remove_filter( 'the_title', 'wc_page_endpoint_title' );
+            if ( ! is_null( $wp_query ) && ! is_admin() && is_main_query() && in_the_loop() && is_page() && is_wc_endpoint_url() ) {
+
+                $endpoint = WC()->query->get_current_endpoint();
+
+                if('order-received' == $endpoint){
+                    $order_id = $wp_query->query['order-received'];
+                    if(WC_QD()->db()->_is_donation($order_id)){
+                        $title = 'Donation Received';
+
+                    }
                 }
-            } 
-        }
 
+                if('view-order' == $endpoint){
+                    $order_id = $wp_query->query['view-order'];
+                    if(WC_QD()->db()->_is_donation($order_id)){
+                        $title = 'Donation #'.$order_id;
+                        remove_filter( 'the_title', 'wc_page_endpoint_title' );
+                    }
+                }
+            }
+        }
         return $title;    
     }
     
