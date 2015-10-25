@@ -31,9 +31,13 @@ class WooCommerce_Quick_Donation_Shortcode {
         $donation_box = WC_QD()->f()->generate_donation_selbox($settings['grouped'],$settings['type']);
         $donation_price =  WC_QD()->f()->generate_price_box();
         $currency = get_woocommerce_currency_symbol();
-        do_action('wc_quick_donation_before_doantion_form',$settings['type'],$settings['grouped']);
+        $return_value = '';
+        ob_start();
+        do_action('wc_quick_donation_before_doantion_form',$return_value , $settings['type'],$settings['grouped']);
         WC_QD()->f()->load_template('donation-form.php',WC_QD_TEMPLATE);
-        do_action('wc_quick_donation_after_doantion_form',$settings['type'],$settings['grouped']);
+        do_action('wc_quick_donation_after_doantion_form',$return_value , $settings['type'],$settings['grouped']);
+        
+        return ob_get_clean();
     }
 
 }
