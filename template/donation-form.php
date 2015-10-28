@@ -6,16 +6,16 @@ wc_print_notices();
 
     <table>
         <tr>
-            <td> Donation Project </td>
+            <td> <?php _e('Donation Project','wcqd'); ?> </td>
             <td> <?php echo $donation_box; ?></td>
         </tr>
         <tr>
-            <td>Donation Amount <?php echo $currency; ?></td>
+            <td><?php _e('Donation Amount','wcqd'); ?> <?php echo $currency; ?></td>
             <td><?php echo $donation_price; ?></td>
         </tr>
         <tr>
             <td></td>
-            <td><input type="submit" name="donation_add" value="Add Donation"/></td>
+            <td><input type="submit" name="donation_add" value="<?php _e('Add Donation','wcqd'); ?>"/></td>
         </tr>
     </table>
     

@@ -33,7 +33,7 @@ if ( $order ) : ?>
 
 	<?php else : ?>
 
-		<p><?php echo apply_filters( 'woocommerce_thankyou_order_received_text', __( 'Thank you. Your Donation has been received.', WC_QD_TXT), $order ); ?></p>
+		<p><?php echo apply_filters( 'woocommerce_thankyou_order_received_text', __( 'Thank you. Your Donation has been received.', 'wcqd'), $order ); ?></p>
 
 		<ul class="order_details">
 			<li class="order">

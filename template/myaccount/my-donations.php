@@ -23,7 +23,7 @@ $customer_orders = get_posts(  array(
 
 if ( $customer_orders ) : ?>
 
-	<h2><?php echo apply_filters( 'woocommerce_my_account_my_orders_title', __( 'Recent Donations', WC_QD_TXT) ); ?></h2>
+	<h2><?php echo apply_filters( 'woocommerce_my_account_my_orders_title', __( 'Recent Donations', 'wcqd') ); ?></h2>
 
 	<table class="shop_table shop_table_responsive my_account_orders">
 

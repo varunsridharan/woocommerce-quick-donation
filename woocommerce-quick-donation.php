@@ -278,4 +278,11 @@ function WC_QD(){
 
 $GLOBALS['woocommerce_quick_donation'] =  WC_QD();
 
+
+//Load language files for the theme
+add_action( 'plugins_loaded', 'wcqd_load_textdomain' );
+function wcqd_load_textdomain() {
+    load_plugin_textdomain( 'wcqd', false, plugin_basename( dirname( __FILE__ ) ) . '/languages' );
+}
+
 ?>
