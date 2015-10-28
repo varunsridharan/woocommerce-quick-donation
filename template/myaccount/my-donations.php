@@ -1,12 +1,12 @@
 <?php
 /**
- * My Orders
+ * My Donaions
  *
- * Shows recent orders on the account page
+ * Shows recent donaions on the account page
  *
- * @author  WooThemes
- * @package WooCommerce/Templates
- * @version 2.3.10
+ * @author  Varun Sridharan
+ * @package WooCommerce Quick Donation/Templates/myaccount
+ * @version 0.1
  */
 
 if ( ! defined( 'ABSPATH' ) ) {

@@ -1,10 +1,10 @@
 <?php
 /**
- * Order tracking
- *
- * @author  WooThemes
- * @package WooCommerce/Templates
- * @version 2.2.0
+ * Donation tracking
+ * 
+ * @author  Varun Sridharan
+ * @package WooCommerce Quick Donation/Templates/order
+ * @version 0.1
  */
 
 if ( ! defined( 'ABSPATH' ) ) {

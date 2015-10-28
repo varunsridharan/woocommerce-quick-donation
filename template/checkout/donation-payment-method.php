@@ -2,9 +2,9 @@
 /**
  * Output a single payment method
  *
- * @author 		WooThemes
- * @package 	WooCommerce/Templates
- * @version     2.3.0
+ * @author  Varun Sridharan
+ * @package WooCommerce Quick Donation/Templates/checkout
+ * @version 0.1
  */
 
 if ( ! defined( 'ABSPATH' ) ) {

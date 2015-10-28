@@ -2,9 +2,9 @@
 /**
  * Customer invoice email (plain text)
  *
- * @author		WooThemes
- * @package		WooCommerce/Templates/Emails/Plain
- * @version		2.2.0
+ * @author  Varun Sridharan
+ * @package WooCommerce Quick Donation/Templates/emails/plain
+ * @version 0.1
  */
 
 if ( ! defined( 'ABSPATH' ) ) {

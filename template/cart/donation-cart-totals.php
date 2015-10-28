@@ -2,9 +2,9 @@
 /**
  * Cart totals
  *
- * @author 		WooThemes
- * @package 	WooCommerce/Templates
- * @version     2.3.6
+ * @author  Varun Sridharan
+ * @package WooCommerce Quick Donation/Templates/cart
+ * @version 0.1
  */
 
 if ( ! defined( 'ABSPATH' ) ) {

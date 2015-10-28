@@ -1,10 +1,10 @@
 <?php
 /**
- * Order Customer Details
- *
- * @author  WooThemes
- * @package WooCommerce/Templates
- * @version 2.4.0
+ * Donor Details
+ * 
+ * @author  Varun Sridharan
+ * @package WooCommerce Quick Donation/Templates/order
+ * @version 0.1
  */
 
 if ( ! defined( 'ABSPATH' ) ) {

@@ -1,12 +1,10 @@
 <?php
 /**
- * Shipping Methods Display
+ * Shipping Methods Display 
  *
- * In 2.1 we show methods per package. This allows for multiple methods per order if so desired.
- *
- * @author 		WooThemes
- * @package 	WooCommerce/Templates
- * @version     2.3.0
+ * @author  Varun Sridharan
+ * @package WooCommerce Quick Donation/Templates/cart
+ * @version 0.1
  */
 
 if ( ! defined( 'ABSPATH' ) ) {

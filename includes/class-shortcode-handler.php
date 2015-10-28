@@ -41,12 +41,14 @@ class WooCommerce_Quick_Donation_Shortcode {
             $messages .= ob_get_clean(); 
             ob_flush();
         }
-        
-        ob_start();
+
+       // ob_start();
         do_action('wc_quick_donation_before_doantion_form',$return_value , $settings['type'],$settings['grouped']);
-        WC_QD()->f()->load_template('donation-form.php',WC_QD_TEMPLATE);
+        $messages .= WC_QD()->f()->load_template('donation-form.php',WC_QD_TEMPLATE,array('donation_box' => $donation_box,
+                                                                             'donation_price' => $donation_price,
+                                                                             'currency' => $currency));
         do_action('wc_quick_donation_after_doantion_form',$return_value , $settings['type'],$settings['grouped']);
-        $messages .= ob_get_clean(); 
+        //$messages .= ob_get_clean(); 
         
         return $messages;
     }

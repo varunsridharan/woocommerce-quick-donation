@@ -226,7 +226,8 @@ class WooCommerce_Quick_Donation {
         $this->define('WC_QD_CSS',WC_QD_URL.'/includes/css/');
         
         $this->define('WC_QD_TEMPLATE',WC_QD_PATH.'template/'); # Plugin Template DIR
-        $this->define('WC_TEMPLATE','woocommerce/');
+        $this->define('WC_CORE_TEMPLATE','woocommerce/');
+        $this->define('WC_QD_THEME_TEMPLATE','/'.WC_CORE_TEMPLATE.'donation/');
         $this->define('WC_QD_LANG',WC_QD_PATH.'languages');
         $this->define('WC_QD_TXT','woocommerce-quick-donation'); #plugin lang Domain
 

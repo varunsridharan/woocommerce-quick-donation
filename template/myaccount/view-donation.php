@@ -1,14 +1,12 @@
 <?php
 /**
- * View Order
+ * View Donation
  *
  * Shows the details of a particular order on the account page
- *
- * @author    WooThemes
- * @package   WooCommerce/Templates
- * @version   2.2.0
+ * @author  Varun Sridharan
+ * @package WooCommerce Quick Donation/Templates/myaccount
+ * @version 0.1
  */
-
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
