@@ -1,6 +1,11 @@
 <?php
-global $donation_box,$donation_price,$currency;
-wc_print_notices();
+/**
+ * Donation Form
+ * 
+ * @author  Varun Sridharan
+ * @package WooCommerce Quick Donation/Templates
+ * @version 0.1
+ */
 ?>
 <form method="post">
 
