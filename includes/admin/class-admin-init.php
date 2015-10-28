@@ -151,7 +151,7 @@ class WooCommerce_Quick_Donation_Admin  {
             $args['meta_query'][]['value'] = $_GET['dproj'];
             $args['meta_query'][]['compare'] = '=';
         } 
-        
+        if(isset($_GET['order_status'])){ $args['post_status'] = $_GET['order_status'];}    
         $wp_query = new WP_Query($args);
         require('wp-donation-listing-table.php');
         tt_render_list_page($wp_query);
