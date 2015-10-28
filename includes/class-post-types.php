@@ -7,9 +7,10 @@ class WC_QD_Post_Types {
     * Inits Post Types Class
     */
    public static function init(){
-        add_action( 'init', array(__CLASS__,'register_donation_posttype'),5);
-        add_action( 'init', array(__CLASS__,'register_donation_category'),5);
+        add_action( 'init', array(__CLASS__,'register_donation_posttype'), 5 );
+        add_action( 'init', array(__CLASS__,'register_donation_category'), 5 );
         add_action( 'init', array(__CLASS__,'register_donation_tags'    ), 5 );
+        add_action( 'init', array(__CLASS__,'register_post_status'      ), 0 );
    }
    
    /**
@@ -167,6 +168,35 @@ class WC_QD_Post_Types {
         register_taxonomy( 'wcqd_tags', array(WC_QD_PT ), $args );
 
     }    
+
+    // Register Custom Status
+    public static function register_post_status() {
+        register_post_status( 'donation-completed', array(
+            'label'                     => _x( 'Completed', 'Order status',WC_QD_TXT),
+            'label_count'               => _n_noop( 'Completed (%s)',  'Completed (%s)', WC_QD_TXT),
+            'public'                    => false,
+            'show_in_admin_all_list'    => true,
+            'show_in_admin_status_list' => true,
+            'exclude_from_search'       => true,
+        ) );
+        
+        register_post_status( 'donation-on-hold', array(
+            'label'                     => _x( 'Donation On Hold', 'Order status', WC_QD_TXT),
+            'public'                    => false,
+            'exclude_from_search'       => false,
+            'show_in_admin_all_list'    => true,
+            'show_in_admin_status_list' => true,
+            'label_count'               => _n_noop( 'Donation On Hold <span class="count">(%s)</span>', 'DonationOn Hold <span class="count">(%s)</span>',WC_QD_TXT)
+        ) );
+        register_post_status( 'donation-refunded', array(
+            'label'                     => _x( 'Donation Refunded', 'Order status', WC_QD_TXT),
+            'public'                    => false,
+            'exclude_from_search'       => false,
+            'show_in_admin_all_list'    => true,
+            'show_in_admin_status_list' => true,
+            'label_count'               => _n_noop( 'Refunded <span class="count">(%s)</span>', 'Refunded <span class="count">(%s)</span>', WC_QD_TXT)
+        ) );        
+    }
 }
 
 

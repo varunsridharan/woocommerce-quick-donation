@@ -95,6 +95,7 @@ class WooCommerce_Quick_Donation {
      * Loads Required Plugins For Plugin
      */
     private function load_required_files(){
+        $this->load_files(WC_QD_INC.'wc-quick-donation-*.php'); 
         $this->load_files(WC_QD_ADMIN.'wps/*.php'); 
         $this->load_files(WC_QD_INC.'class-admin-notice.php');
         $this->load_files(WC_QD_INC.'class-post-*.php');
@@ -273,10 +274,17 @@ class WooCommerce_Quick_Donation {
     
 }
 
-function WC_QD(){
-    return WooCommerce_Quick_Donation::get_instance();
-}
+require_once(plugin_dir_path(__FILE__).'includes/class-wc-dependencies.php');
+require_once(plugin_dir_path(__FILE__).'includes/class-admin-notice.php');
 
-$GLOBALS['woocommerce_quick_donation'] =  WC_QD();
+if(WC_QD_Dependencies()){
+    function WC_QD(){
+        return WooCommerce_Quick_Donation::get_instance();
+    }
+
+    $GLOBALS['woocommerce_quick_donation'] =  WC_QD();
+} else {
+    wc_qd_notice('WooCommerce Is Required. To Use This Plugin :)','error');
+}
 
 ?>
