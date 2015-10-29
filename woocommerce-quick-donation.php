@@ -287,4 +287,11 @@ if(WC_QD_Dependencies()){
     wc_qd_notice(__('WooCommerce Is Required. To Use This Plugin :)','woocommerce-quick-donation'),'error');
 }
 
+
+//Load language files for the theme
+add_action( 'plugins_loaded', 'wcqd_load_textdomain' );
+function wcqd_load_textdomain() {
+    load_plugin_textdomain( 'wcqd', false, plugin_basename( dirname( __FILE__ ) ) . '/languages' );
+}
+
 ?>

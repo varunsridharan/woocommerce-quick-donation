@@ -13,7 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 $order = wc_get_order( $order_id );
 ?>
-<h2><?php _e( 'Donation Details', WC_QD_TXT ); ?></h2>
+<h2><?php _e( 'Donation Details', 'wcqd' ); ?></h2>
 <table class="shop_table order_details">
 	<thead>
 		<tr>
