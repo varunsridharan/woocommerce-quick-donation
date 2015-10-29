@@ -1,12 +1,13 @@
 <?php
 /**
  * Plugin Name:       WooCommerce Quick Donation
- * Plugin URI:        https://wordpress.org/plugins/woocommerce-plugin-boiler-plate/
+ * Plugin URI:        http://wordpress.org/plugins/woocommerce-quick-donation/
  * Description:       Turns WooCommerce Into Online Donation
  * Version:           1.3.5 BETA
  * Author:            Varun Sridharan
  * Author URI:        http://varunsridharan.in
  * Text Domain:       woocommerce-quick-donation
+ * Domain Path:       /languages/
  * License:           GPL-2.0+
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt 
  * GitHub Plugin URI: https://github.com/technofreaky/woocomerce-quick-donation
@@ -190,7 +191,6 @@ class WooCommerce_Quick_Donation {
      * Set Plugin Text Domain
      */
     public function after_plugins_loaded(){
-        
         load_plugin_textdomain(WC_QD_TXT, false, WC_QD_LANG );
     }
     
@@ -198,9 +198,9 @@ class WooCommerce_Quick_Donation {
      * load translated mo file based on wp settings
      */
     public function load_plugin_mo_files($mofile, $domain) {
-        if (WC_QD_TXT === $domain)
-            return WC_QD_LANG.'/'.get_locale().'.mo';
-
+        if (WC_QD_TXT === $domain){ 
+            return WC_QD_LANG.'/'.get_locale().'/'.get_locale().'.mo';
+        }
         return $mofile;
     }
     
@@ -284,7 +284,7 @@ if(WC_QD_Dependencies()){
 
     $GLOBALS['woocommerce_quick_donation'] =  WC_QD();
 } else {
-    wc_qd_notice('WooCommerce Is Required. To Use This Plugin :)','error');
+    wc_qd_notice(__('WooCommerce Is Required. To Use This Plugin :)','woocommerce-quick-donation'),'error');
 }
 
 ?>
