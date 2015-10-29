@@ -4,9 +4,9 @@
  *
  * Contains the markup for the proceed to checkout button on the cart
  *
- * @author  WooThemes
- * @package WooCommerce/Templates
- * @version 2.4.0
+ * @author  Varun Sridharan
+ * @package WooCommerce Quick Donation/Templates/cart
+ * @version 0.1
  */
 
 if ( ! defined( 'ABSPATH' ) ) {

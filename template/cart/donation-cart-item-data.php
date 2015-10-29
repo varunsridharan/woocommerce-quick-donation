@@ -1,10 +1,10 @@
 <?php
 /**
  * Cart item data (when outputting non-flat)
- *
- * @author 		WooThemes
- * @package 	WooCommerce/Templates
- * @version 	2.4.0
+ * 
+ * @author  Varun Sridharan
+ * @package WooCommerce Quick Donation/Templates/cart
+ * @version 0.1
  */
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;

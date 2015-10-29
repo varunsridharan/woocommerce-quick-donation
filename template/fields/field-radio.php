@@ -1,5 +1,11 @@
 <?php
-global $id, $name, $class, $field_output, $is_grouped, $project_list,$attributes;
+/**
+ * HTML Radio Field Template
+ *
+ * @author  Varun Sridharan
+ * @package WooCommerce Quick Donation/Templates/fields
+ * @version 0.1
+ */
 
 foreach($project_list as $id => $val){
     
@@ -14,3 +20,5 @@ foreach($project_list as $id => $val){
     }
     
 }
+echo $field_output;
+?>

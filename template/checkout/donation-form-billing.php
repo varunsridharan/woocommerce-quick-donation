@@ -2,9 +2,9 @@
 /**
  * Checkout billing information form
  *
- * @author 		WooThemes
- * @package 	WooCommerce/Templates
- * @version     2.1.2
+ * @author  Varun Sridharan
+ * @package WooCommerce Quick Donation/Templates/checkout
+ * @version 0.1
  */
 
 if ( ! defined( 'ABSPATH' ) ) {

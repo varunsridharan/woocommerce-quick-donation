@@ -2,9 +2,9 @@
 /**
  * Pay for order form
  *
- * @author 		WooThemes
- * @package 	WooCommerce/Templates
- * @version     1.6.4
+ * @author  Varun Sridharan
+ * @package WooCommerce Quick Donation/Templates/checkout
+ * @version 0.1
  */
 
 if ( ! defined( 'ABSPATH' ) ) {

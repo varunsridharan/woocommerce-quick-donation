@@ -1,10 +1,10 @@
 <?php
 /**
- * Order again button
- *
- * @author  WooThemes
- * @package WooCommerce/Templates
- * @version 2.3.0
+ * Donate Again
+ * 
+ * @author  Varun Sridharan
+ * @package WooCommerce Quick Donation/Templates/order
+ * @version 0.1
  */
 
 if ( ! defined( 'ABSPATH' ) ) {

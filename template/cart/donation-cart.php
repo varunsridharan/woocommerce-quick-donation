@@ -1,10 +1,10 @@
 <?php
 /**
- * Cart Page
+ * Donation Cart Template
  *
- * @author  WooThemes
- * @package WooCommerce/Templates
- * @version 2.3.8
+ * @author  Varun Sridharan
+ * @package WooCommerce Quick Donation/Templates/cart
+ * @version 0.1
  */
 
 if ( ! defined( 'ABSPATH' ) ) {

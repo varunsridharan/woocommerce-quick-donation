@@ -30,9 +30,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 	die( 'Access denied.' );
 }
 
-if ( ! class_exists( 'Admin_Notice_Helper' ) ) {
+if ( ! class_exists( 'WC_QD_Admin_Notice_Helper' ) ) {
 
-	class Admin_Notice_Helper {
+	class WC_QD_Admin_Notice_Helper {
 		// Declare variables and constants
 		protected static $instance;
 		protected $notices, $notices_were_updated;
@@ -42,7 +42,7 @@ if ( ! class_exists( 'Admin_Notice_Helper' ) ) {
 		 */
 		protected function __construct() {
             $this->init();
-			//add_action( 'init',          array( $this, 'init' ));         // needs to run before other plugin's init callbacks so that they can enqueue messages in their init callbacks
+			//add_action( 'init', array( $this, 'init' ));         // needs to run before other plugin's init callbacks so that they can enqueue messages in their init callbacks
 			add_action( 'admin_notices', array( $this, 'print_notices' ) );
 			add_action( 'shutdown',      array( $this, 'shutdown' ) );
 		}
@@ -56,7 +56,7 @@ if ( ! class_exists( 'Admin_Notice_Helper' ) ) {
 		 */
 		public static function get_singleton() {
 			if ( ! isset( self::$instance ) ) {
-				self::$instance = new Admin_Notice_Helper();
+				self::$instance = new WC_QD_Admin_Notice_Helper();
 			}
 
 			return self::$instance;
@@ -67,7 +67,6 @@ if ( ! class_exists( 'Admin_Notice_Helper' ) ) {
 		 */
 		public function init() {
 			$default_notices             = array( 'update' => array(), 'error' => array() );
-            
 			$this->notices               = array_merge( $default_notices, get_option( 'anh_notices', array() ) );
 			$this->notices_were_updated  = false;
 		}
@@ -96,9 +95,9 @@ if ( ! class_exists( 'Admin_Notice_Helper' ) ) {
 		 * Displays updates and errors
 		 */
 		public function print_notices() {
-            
+            //$this->notices_were_updated = true;
 			foreach ( array( 'update', 'error' ) as $type ) {
-                
+
 				if ( count( $this->notices[ $type ] ) ) {
 					$class = 'update' == $type ? 'updated' : 'error';
 
@@ -129,11 +128,11 @@ if ( ! class_exists( 'Admin_Notice_Helper' ) ) {
 		}
 	} // end Admin_Notice_Helper
 
-	Admin_Notice_Helper::get_singleton(); // Create the instance immediately to make sure hook callbacks are registered in time
+	WC_QD_Admin_Notice_Helper::get_singleton(); // Create the instance immediately to make sure hook callbacks are registered in time
 
 	if ( ! function_exists( 'wc_qd_notice' ) ) {
 		function wc_qd_notice( $message, $type = 'update' ) {
-			Admin_Notice_Helper::get_singleton()->enqueue( $message, $type );
+			WC_QD_Admin_Notice_Helper::get_singleton()->enqueue( $message, $type );
 		}
 	}
 }

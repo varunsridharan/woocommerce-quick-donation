@@ -76,12 +76,13 @@ class WC_Quick_Donation_Listing_Table extends WP_List_Table {
         set_current_screen( 'shop_order' );
 
         parent::__construct( array(
-            'plural' => 'posts',
+            'plural' => 'Donations',
             'screen' => get_current_screen(),
         ) );
         
         
         $this->screen->post_type = 'shop_order';
+        //$this->screen->id = 'shop_order';
         $post_type = $this->screen->post_type;
         $post_type_object = get_post_type_object( $post_type );
         $this->user_posts_count = 0;
@@ -274,7 +275,7 @@ class WC_Quick_Donation_Listing_Table extends WP_List_Table {
 			if ( isset($_REQUEST['post_status']) && $status_name == $_REQUEST['post_status'] )
 				$class = ' class="current"';
 
-			$status_links[$status_name] = "<a href='edit.php?post_status=$status_name&amp;post_type=$post_type'$class>" . sprintf( translate_nooped_plural( $status->label_count, $num_posts->$status_name ), number_format_i18n( $num_posts->$status_name ) ) . '</a>';
+			$status_links[$status_name] = "<a href='edit.php?post_type=wcqd_project&amp;page=wc_qd_orders&amp;order_status=$status_name'$class>" . sprintf( translate_nooped_plural( $status->label_count, $num_posts->$status_name ), number_format_i18n( $num_posts->$status_name ) ) . '</a>';
 		}
 
 		if ( ! empty( $this->sticky_posts_count ) ) {

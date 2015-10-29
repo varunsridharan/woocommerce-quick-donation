@@ -1,10 +1,10 @@
 <?php
 /**
- * Order Item Details
- *
- * @author  WooThemes
- * @package WooCommerce/Templates
- * @version 2.4.0
+ * Donation Item Details
+ * 
+ * @author  Varun Sridharan
+ * @package WooCommerce Quick Donation/Templates/order
+ * @version 0.1
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -18,8 +18,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 			$is_visible = $product && $product->is_visible();
             $project_id = WC_QD()->db()->get_project_id($order->id); 
 			echo sprintf( '<a href="%s">%s</a>', get_permalink( $project_id ), get_the_title($project_id ));
-		 
- 
 		?>
 	</td>
 	<td class="product-total">

@@ -1,8 +1,15 @@
 <?php
-global $id, $name, $class, $field_output, $is_grouped, $project_list,$attributes;
+/**
+ * HTML Select Field Template
+ *
+ * @author  Varun Sridharan
+ * @package WooCommerce Quick Donation/Templates/fields
+ * @version 0.1
+ */
+?>
 
-$field_output = '<select id="'.$id.'" name="'.$name.'" class="'.$class.'" '.$attributes.'>';
-
+<select id="<?php echo $id; ?>" name="<?php echo $name; ?>" class="<?php echo $class.' '.$attributes;?>">
+<?php
 foreach($project_list as $id => $val){
     
     if(is_array($val)){
@@ -16,4 +23,6 @@ foreach($project_list as $id => $val){
     }
     
 }
-$field_output .= '</select>';
+echo $field_output;
+?>
+</select>

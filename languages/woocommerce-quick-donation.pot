@@ -1,0 +1,1395 @@
+# Copyright (C) 2015 WooCommerce Quick Donation
+# This file is distributed under the same license as the WooCommerce Quick Donation package.
+msgid ""
+msgstr ""
+"Project-Id-Version: WooCommerce Quick Donation 1.3.5 BETA\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/woocommerce-quick-donation\n"
+"POT-Creation-Date: 2015-10-29 13:56:30+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2015-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+
+#: includes/admin/class-admin-functions.php:59
+msgid "<strong>Your theme (%s) contains outdated copies of some WooCommerce Quick Donation template files.</strong> These files may need updating to ensure they are compatible with the current version of WooCommerce Quick Donation. You can see which files are affected from the %ssystem status page%s. If in doubt, check with the author of the theme."
+msgstr ""
+
+#: includes/admin/class-admin-init.php:49
+msgid "Donation Orders"
+msgstr ""
+
+#: includes/admin/class-admin-init.php:50
+msgid "Donation's"
+msgstr ""
+
+#: includes/admin/class-admin-init.php:56
+#: includes/admin/class-admin-init.php:57
+msgid "Donors List"
+msgstr ""
+
+#: includes/admin/class-admin-init.php:227
+msgid "Settings"
+msgstr ""
+
+#: includes/admin/class-admin-init.php:228
+msgid "F.A.Q"
+msgstr ""
+
+#: includes/admin/class-admin-init.php:229
+msgid "View On Github"
+msgstr ""
+
+#: includes/admin/class-admin-init.php:230
+msgid "Report Issue"
+msgstr ""
+
+#: includes/admin/class-admin-init.php:231
+msgid "Donate"
+msgstr ""
+
+#: includes/admin/class-admin-init.php:232
+msgid "Contact Author"
+msgstr ""
+
+#: includes/admin/class-admin-order-page.php:42
+#: template/myaccount/my-donations.php:32
+msgid "ID"
+msgstr ""
+
+#: includes/admin/class-admin-order-page.php:43
+msgid "Donor"
+msgstr ""
+
+#: includes/admin/class-admin-order-page.php:44
+#: template/cart/donation-cart.php:27 template/myaccount/my-donations.php:33
+#: template/myaccount/my-donations.php:54
+#: template/order/donation-order-details.php:20
+msgid "Project"
+msgstr ""
+
+#: includes/admin/class-admin-order-page.php:68
+msgctxt "Order number by X"
+msgid "%s "
+msgstr ""
+
+#: includes/admin/class-admin-order-page.php:90
+#: includes/admin/metabox/class-donation-info-metabox.php:231
+msgid "Guest"
+msgstr ""
+
+#: includes/admin/class-admin-order-page.php:104
+msgid "%s Data"
+msgstr ""
+
+#: includes/admin/class-metabox.php:22
+msgid "Min Donation"
+msgstr ""
+
+#: includes/admin/class-metabox.php:23
+msgid "Min Required Donation"
+msgstr ""
+
+#: includes/admin/class-metabox.php:31
+msgid "Max Donation"
+msgstr ""
+
+#: includes/admin/class-metabox.php:32
+msgid "Max Required Donation"
+msgstr ""
+
+#: includes/admin/class-metabox.php:40
+msgid "Visibility"
+msgstr ""
+
+#: includes/admin/class-metabox.php:41
+msgid "Show Or Hide In Donation Form"
+msgstr ""
+
+#: includes/admin/donation-settings.php:26
+#: includes/admin/donation-settings.php:27
+msgid "Tab 2"
+msgstr ""
+
+#: includes/admin/donation-settings.php:36
+msgid "First Section"
+msgstr ""
+
+#: includes/admin/donation-settings.php:40
+msgid "Second Section."
+msgstr ""
+
+#: includes/admin/donation-settings.php:46
+msgid "Welcome to the second page"
+msgstr ""
+
+#: includes/admin/donation-settings.php:61
+msgid "Text field label (required)"
+msgstr ""
+
+#: includes/admin/donation-settings.php:63
+msgid "This is a required field."
+msgstr ""
+
+#: includes/admin/donation-settings.php:91
+msgid "WP Settings Example"
+msgstr ""
+
+#: includes/admin/donation-settings.php:121
+msgid "Error: please enter some text."
+msgstr ""
+
+#: includes/admin/metabox/class-donation-info-metabox.php:43
+#: includes/admin/metabox/class-donation-info-metabox.php:92
+msgid "First Name"
+msgstr ""
+
+#: includes/admin/metabox/class-donation-info-metabox.php:47
+#: includes/admin/metabox/class-donation-info-metabox.php:96
+msgid "Last Name"
+msgstr ""
+
+#: includes/admin/metabox/class-donation-info-metabox.php:51
+#: includes/admin/metabox/class-donation-info-metabox.php:100
+msgid "Company"
+msgstr ""
+
+#: includes/admin/metabox/class-donation-info-metabox.php:55
+#: includes/admin/metabox/class-donation-info-metabox.php:104
+msgid "Address 1"
+msgstr ""
+
+#: includes/admin/metabox/class-donation-info-metabox.php:59
+#: includes/admin/metabox/class-donation-info-metabox.php:108
+msgid "Address 2"
+msgstr ""
+
+#: includes/admin/metabox/class-donation-info-metabox.php:63
+#: includes/admin/metabox/class-donation-info-metabox.php:112
+msgid "City"
+msgstr ""
+
+#: includes/admin/metabox/class-donation-info-metabox.php:67
+#: includes/admin/metabox/class-donation-info-metabox.php:116
+msgid "Postcode"
+msgstr ""
+
+#: includes/admin/metabox/class-donation-info-metabox.php:71
+#: includes/admin/metabox/class-donation-info-metabox.php:120
+msgid "Country"
+msgstr ""
+
+#: includes/admin/metabox/class-donation-info-metabox.php:75
+#: includes/admin/metabox/class-donation-info-metabox.php:124
+msgid "Select a country&hellip;"
+msgstr ""
+
+#: includes/admin/metabox/class-donation-info-metabox.php:78
+#: includes/admin/metabox/class-donation-info-metabox.php:127
+msgid "State/County"
+msgstr ""
+
+#: includes/admin/metabox/class-donation-info-metabox.php:83
+msgid "Email"
+msgstr ""
+
+#: includes/admin/metabox/class-donation-info-metabox.php:86
+msgid "Phone"
+msgstr ""
+
+#: includes/admin/metabox/class-donation-info-metabox.php:165
+msgid "Order"
+msgstr ""
+
+#: includes/admin/metabox/class-donation-info-metabox.php:169
+msgid "%s %s details"
+msgstr ""
+
+#: includes/admin/metabox/class-donation-info-metabox.php:173
+msgid "Payment via %s"
+msgstr ""
+
+#: includes/admin/metabox/class-donation-info-metabox.php:186
+msgid "Customer IP"
+msgstr ""
+
+#: includes/admin/metabox/class-donation-info-metabox.php:192
+#: includes/admin/metabox/class-donation-info-metabox.php:320
+#: template/order/donation-order-details.php:16
+msgid "Donation Details"
+msgstr ""
+
+#: includes/admin/metabox/class-donation-info-metabox.php:194
+msgid "Donation date:"
+msgstr ""
+
+#: includes/admin/metabox/class-donation-info-metabox.php:196
+msgid "h"
+msgstr ""
+
+#: includes/admin/metabox/class-donation-info-metabox.php:196
+msgid "m"
+msgstr ""
+
+#: includes/admin/metabox/class-donation-info-metabox.php:199
+msgid "Donation status:"
+msgstr ""
+
+#: includes/admin/metabox/class-donation-info-metabox.php:210
+msgid "Customer:"
+msgstr ""
+
+#: includes/admin/metabox/class-donation-info-metabox.php:218
+msgid "View other orders"
+msgstr ""
+
+#: includes/admin/metabox/class-donation-info-metabox.php:237
+#: template/checkout/donation-form-billing.php:23
+msgid "Donor Details"
+msgstr ""
+
+#: includes/admin/metabox/class-donation-info-metabox.php:238
+#: includes/admin/wp-donation-listing-table.php:305
+#: includes/admin/wp-donors-listing-table.php:349
+msgid "Edit"
+msgstr ""
+
+#: includes/admin/metabox/class-donation-info-metabox.php:239
+msgid "Load billing address"
+msgstr ""
+
+#: includes/admin/metabox/class-donation-info-metabox.php:246
+#: includes/admin/metabox/class-donation-info-metabox.php:248
+#: includes/admin/metabox/html/html-donation-info.php:61
+msgid "Address"
+msgstr ""
+
+#: includes/admin/metabox/class-donation-info-metabox.php:248
+msgid "No billing address set."
+msgstr ""
+
+#: includes/admin/metabox/class-donation-info-metabox.php:286
+#: template/checkout/donation-thankyou.php:49
+msgid "Payment Method:"
+msgstr ""
+
+#: includes/admin/metabox/class-donation-info-metabox.php:288
+#: template/order/order-details-customer.php:18
+msgid "N/A"
+msgstr ""
+
+#: includes/admin/metabox/class-donation-info-metabox.php:302
+#: includes/admin/metabox/class-donation-info-metabox.php:304
+msgid "Other"
+msgstr ""
+
+#: includes/admin/metabox/class-donation-info-metabox.php:311
+msgid "Transaction ID"
+msgstr ""
+
+#: includes/admin/metabox/class-donation-info-metabox.php:328
+#: includes/admin/metabox/html/html-donation-info.php:63
+#: includes/admin/metabox/html/html-donation-info.php:78
+msgid "Customer Provided Note"
+msgstr ""
+
+#: includes/admin/metabox/html/html-donation-info.php:4
+msgid "Project Name"
+msgstr ""
+
+#: includes/admin/metabox/html/html-donation-info.php:35
+msgid "Donation Amount"
+msgstr ""
+
+#: includes/admin/metabox/html/html-donation-info.php:61
+msgid "No shipping address set."
+msgstr ""
+
+#: includes/admin/metabox/html/html-donation-info.php:79
+msgid "Customer's notes about the order"
+msgstr ""
+
+#: includes/admin/metabox_framework/inc/common.php:53
+msgid "Documentation"
+msgstr ""
+
+#: includes/admin/metabox_framework/inc/common.php:54
+msgid "Extensions"
+msgstr ""
+
+#: includes/admin/metabox_framework/inc/field.php:244
+msgid "+"
+msgstr ""
+
+#: includes/admin/metabox_framework/inc/field.php:257
+msgid "&#8211;"
+msgstr ""
+
+#: includes/admin/metabox_framework/inc/fields/autocomplete.php:18
+#: includes/admin/metabox_framework/inc/fields/autocomplete.php:83
+#: includes/admin/metabox_framework/inc/fields/autocomplete.php:100
+#: includes/admin/wp-donors-listing-table.php:355
+msgid "Delete"
+msgstr ""
+
+#: includes/admin/metabox_framework/inc/fields/button.php:35
+msgid "Click me"
+msgstr ""
+
+#: includes/admin/metabox_framework/inc/fields/checkbox.php:75
+msgid "Yes"
+msgstr ""
+
+#: includes/admin/metabox_framework/inc/fields/checkbox.php:75
+msgid "No"
+msgstr ""
+
+#: includes/admin/metabox_framework/inc/fields/file-advanced.php:23
+msgid "Select Files"
+msgstr ""
+
+#: includes/admin/metabox_framework/inc/fields/file-advanced.php:66
+msgctxt "file upload"
+msgid "Select or Upload Files"
+msgstr ""
+
+#: includes/admin/metabox_framework/inc/fields/file-advanced.php:103
+#: includes/admin/metabox_framework/inc/fields/file.php:168
+msgctxt "file upload"
+msgid "Delete"
+msgstr ""
+
+#: includes/admin/metabox_framework/inc/fields/file-advanced.php:104
+#: includes/admin/metabox_framework/inc/fields/file.php:169
+msgctxt "file upload"
+msgid "Edit"
+msgstr ""
+
+#: includes/admin/metabox_framework/inc/fields/file-input.php:17
+msgid "Select File"
+msgstr ""
+
+#: includes/admin/metabox_framework/inc/fields/file-input.php:40
+#: includes/admin/metabox_framework/inc/fields/select.php:207
+msgid "Select"
+msgstr ""
+
+#: includes/admin/metabox_framework/inc/fields/file-input.php:42
+#: includes/admin/wp-donors-listing-table.php:357
+msgid "Remove"
+msgstr ""
+
+#: includes/admin/metabox_framework/inc/fields/file.php:19
+msgid "You may only upload maximum %d file"
+msgstr ""
+
+#: includes/admin/metabox_framework/inc/fields/file.php:20
+msgid "You may only upload maximum %d files"
+msgstr ""
+
+#: includes/admin/metabox_framework/inc/fields/file.php:98
+msgid "Error: Cannot delete file"
+msgstr ""
+
+#: includes/admin/metabox_framework/inc/fields/file.php:111
+msgctxt "file upload"
+msgid "Upload Files"
+msgstr ""
+
+#: includes/admin/metabox_framework/inc/fields/file.php:112
+msgctxt "file upload"
+msgid "+ Add new file"
+msgstr ""
+
+#: includes/admin/metabox_framework/inc/fields/image-advanced.php:23
+msgid "Select Images"
+msgstr ""
+
+#: includes/admin/metabox_framework/inc/fields/image-advanced.php:71
+msgctxt "image upload"
+msgid "Select or Upload Images"
+msgstr ""
+
+#: includes/admin/metabox_framework/inc/fields/image-advanced.php:108
+#: includes/admin/metabox_framework/inc/fields/image.php:136
+msgctxt "image upload"
+msgid "Delete"
+msgstr ""
+
+#: includes/admin/metabox_framework/inc/fields/image-advanced.php:109
+#: includes/admin/metabox_framework/inc/fields/image.php:137
+msgctxt "image upload"
+msgid "Edit"
+msgstr ""
+
+#: includes/admin/metabox_framework/inc/fields/image.php:70
+#: includes/admin/metabox_framework/inc/fields/thickbox-image.php:34
+msgctxt "image upload"
+msgid "Upload Images"
+msgstr ""
+
+#: includes/admin/metabox_framework/inc/fields/image.php:71
+msgctxt "image upload"
+msgid "+ Add new image"
+msgstr ""
+
+#: includes/admin/metabox_framework/inc/fields/key-value.php:19
+msgid "Key"
+msgstr ""
+
+#: includes/admin/metabox_framework/inc/fields/key-value.php:20
+msgid "Value"
+msgstr ""
+
+#: includes/admin/metabox_framework/inc/fields/map.php:46
+msgid "Find Address"
+msgstr ""
+
+#: includes/admin/metabox_framework/inc/fields/oembed.php:55
+msgid "Embed HTML not available."
+msgstr ""
+
+#: includes/admin/metabox_framework/inc/fields/oembed.php:77
+msgid "Preview"
+msgstr ""
+
+#: includes/admin/metabox_framework/inc/fields/plupload-image.php:105
+msgctxt "image upload"
+msgid "Drop images here"
+msgstr ""
+
+#: includes/admin/metabox_framework/inc/fields/plupload-image.php:106
+msgctxt "image upload"
+msgid "or"
+msgstr ""
+
+#: includes/admin/metabox_framework/inc/fields/plupload-image.php:107
+msgctxt "image upload"
+msgid "Select Files"
+msgstr ""
+
+#: includes/admin/metabox_framework/inc/fields/plupload-image.php:182
+msgctxt "image upload"
+msgid "Allowed Image Files"
+msgstr ""
+
+#: includes/admin/metabox_framework/inc/fields/post.php:67
+msgid "Select a post"
+msgstr ""
+
+#: includes/admin/metabox_framework/inc/fields/post.php:71
+#: includes/admin/metabox_framework/inc/fields/taxonomy.php:40
+msgid "Select a %s"
+msgstr ""
+
+#: includes/admin/metabox_framework/inc/fields/select.php:207
+msgid "All"
+msgstr ""
+
+#: includes/admin/metabox_framework/inc/fields/select.php:207
+#: includes/admin/wp-donors-listing-table.php:378
+msgid "None"
+msgstr ""
+
+#: includes/admin/metabox_framework/inc/fields/user.php:49
+msgid "Select an user"
+msgstr ""
+
+#: includes/admin/metabox_framework/inc/meta-box.php:253
+msgid "Please correct the errors highlighted below and try again."
+msgstr ""
+
+#: includes/admin/settings/fields.php:8
+#: includes/admin/settings/settings-general.php:7
+msgid "Redirect User To"
+msgstr ""
+
+#: includes/admin/settings/fields.php:9
+#: includes/admin/settings/settings-general.php:8
+msgid "After Donation Added To Cart"
+msgstr ""
+
+#: includes/admin/settings/fields.php:16
+#: includes/admin/settings/settings-general.php:18
+msgid "Donation Payment Gateway"
+msgstr ""
+
+#: includes/admin/settings/fields.php:17
+msgid "Select Payment gateway for users to pay for donation"
+msgstr ""
+
+#: includes/admin/settings/fields.php:31
+msgid ""
+"<div class=\"decs\"> <span> Add <code>{donation_amount}</code> To Get Ented Amount By User.  </span> \n"
+"               <span> Add <code>{min_amount}</code> To Get Minimum Required Amount From Selected Project </span> \n"
+"               <span> Add <code>{max_amount}</code> To Get Minimum Required Amount From Selected Project  </span> </div>"
+msgstr ""
+
+#: includes/admin/settings/fields.php:41
+#: includes/admin/settings/settings-message.php:18
+msgid "Empty Donation Amount"
+msgstr ""
+
+#: includes/admin/settings/fields.php:42
+#: includes/admin/settings/settings-general.php:19
+#: includes/admin/settings/settings-message.php:19
+msgid "Custom Message To Show When Empty Donation Entered"
+msgstr ""
+
+#: includes/admin/settings/fields.php:50
+msgid "Donation Already Exist"
+msgstr ""
+
+#: includes/admin/settings/fields.php:51
+msgid "Custom Message To Show When User Trying To Add Another Donation To Cart"
+msgstr ""
+
+#: includes/admin/settings/fields.php:59
+#: includes/admin/settings/settings-message.php:27
+msgid "Invalid Donation Amount"
+msgstr ""
+
+#: includes/admin/settings/fields.php:60
+#: includes/admin/settings/settings-message.php:28
+msgid "Custom Message To Show When Invalid Donation Entered"
+msgstr ""
+
+#: includes/admin/settings/fields.php:67
+#: includes/admin/settings/settings-message.php:38
+msgid "Minimum Required Donation Amount"
+msgstr ""
+
+#: includes/admin/settings/fields.php:68
+#: includes/admin/settings/settings-message.php:39
+msgid "Custom Message To Show When Minimum Required Donation Not Entered"
+msgstr ""
+
+#: includes/admin/settings/fields.php:75
+#: includes/admin/settings/settings-message.php:46
+msgid "Maximum Required Donation Amount"
+msgstr ""
+
+#: includes/admin/settings/fields.php:76
+#: includes/admin/settings/settings-message.php:47
+msgid "Custom Message To Show When Maximum Required Donation Not Entered "
+msgstr ""
+
+#: includes/admin/settings/settings-general.php:3
+msgid "General"
+msgstr ""
+
+#: includes/admin/settings/settings-message.php:3
+msgid "Message"
+msgstr ""
+
+#: includes/admin/settings/settings-message.php:8
+msgid "Donation Error : "
+msgstr ""
+
+#: includes/admin/settings/validate-general.php:4
+#: includes/admin/settings/validate.php:6
+msgid "Error: Please Select Atlest 1 Payment Gateway."
+msgstr ""
+
+#: includes/admin/wp-donation-listing-table.php:237
+msgctxt "posts"
+msgid "Mine <span class=\"count\">(%s)</span>"
+msgid_plural "Mine <span class=\"count\">(%s)</span>"
+msgstr[0] ""
+msgstr[1] ""
+
+#: includes/admin/wp-donation-listing-table.php:253
+msgctxt "posts"
+msgid "All <span class=\"count\">(%s)</span>"
+msgid_plural "All <span class=\"count\">(%s)</span>"
+msgstr[0] ""
+msgstr[1] ""
+
+#: includes/admin/wp-donation-listing-table.php:284
+msgctxt "posts"
+msgid "Sticky <span class=\"count\">(%s)</span>"
+msgid_plural "Sticky <span class=\"count\">(%s)</span>"
+msgstr[0] ""
+msgstr[1] ""
+
+#: includes/admin/wp-donation-listing-table.php:303
+msgid "Restore"
+msgstr ""
+
+#: includes/admin/wp-donation-listing-table.php:310
+msgid "Delete Permanently"
+msgstr ""
+
+#: includes/admin/wp-donation-listing-table.php:312
+msgid "Move to Trash"
+msgstr ""
+
+#: includes/admin/wp-donation-listing-table.php:329
+#: template/emails/donation-customer-invoice.php:31
+msgid "Donation Project"
+msgstr ""
+
+#: includes/admin/wp-donation-listing-table.php:355
+msgid "All categories"
+msgstr ""
+
+#: includes/admin/wp-donation-listing-table.php:363
+msgid "Filter by category"
+msgstr ""
+
+#: includes/admin/wp-donation-listing-table.php:377
+msgid "Filter"
+msgstr ""
+
+#: includes/admin/wp-donation-listing-table.php:381
+msgid "Empty Trash"
+msgstr ""
+
+#. translators: manage posts column name
+
+#: includes/admin/wp-donation-listing-table.php:432
+msgctxt "column name"
+msgid "Title"
+msgstr ""
+
+#: includes/admin/wp-donation-listing-table.php:435
+msgid "Author"
+msgstr ""
+
+#: includes/admin/wp-donation-listing-table.php:468
+msgid "Comments"
+msgstr ""
+
+#: includes/admin/wp-donation-listing-table.php:470
+#: template/myaccount/my-donations.php:34
+#: template/myaccount/my-donations.php:60
+msgid "Date"
+msgstr ""
+
+#: includes/admin/wp-donation-listing-table.php:731
+#: includes/admin/wp-donors-listing-table.php:372
+msgid "Select %s"
+msgstr ""
+
+#: includes/admin/wp-donation-listing-table.php:804
+msgid "Edit &#8220;%s&#8221;"
+msgstr ""
+
+#: includes/admin/wp-donation-listing-table.php:822
+msgid "%s is currently editing"
+msgstr ""
+
+#: includes/admin/wp-donation-listing-table.php:851
+msgid "Unpublished"
+msgstr ""
+
+#: includes/admin/wp-donation-listing-table.php:854
+msgid "Y/m/d g:i:s a"
+msgstr ""
+
+#: includes/admin/wp-donation-listing-table.php:861
+msgid "%s ago"
+msgstr ""
+
+#: includes/admin/wp-donation-listing-table.php:863
+msgid "Y/m/d"
+msgstr ""
+
+#: includes/admin/wp-donation-listing-table.php:890
+msgid "Published"
+msgstr ""
+
+#: includes/admin/wp-donation-listing-table.php:893
+msgid "Missed schedule"
+msgstr ""
+
+#: includes/admin/wp-donation-listing-table.php:895
+msgid "Scheduled"
+msgstr ""
+
+#: includes/admin/wp-donation-listing-table.php:898
+msgid "Last Modified"
+msgstr ""
+
+#. translators: used between list items, there is a space after the comma
+
+#: includes/admin/wp-donation-listing-table.php:979
+msgid ", "
+msgstr ""
+
+#: includes/admin/wp-donation-listing-table.php:1093
+msgid "Search Donations"
+msgstr ""
+
+#: includes/admin/wp-donors-listing-table.php:132
+msgid "No users found."
+msgstr ""
+
+#: includes/admin/wp-donors-listing-table.php:169
+msgctxt "users"
+msgid "All <span class=\"count\">(%s)</span>"
+msgid_plural "All <span class=\"count\">(%s)</span>"
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: User role name with count
+
+#: includes/admin/wp-donors-listing-table.php:182
+msgid "%1$s <span class=\"count\">(%2$s)</span>"
+msgstr ""
+
+#: includes/admin/wp-donors-listing-table.php:246
+msgid "Username"
+msgstr ""
+
+#: includes/admin/wp-donors-listing-table.php:247
+msgid "Name"
+msgstr ""
+
+#: includes/admin/wp-donors-listing-table.php:248
+msgid "E-mail"
+msgstr ""
+
+#: includes/admin/wp-donors-listing-table.php:249
+msgid "Contribute To"
+msgstr ""
+
+#: includes/admin/wp-donors-listing-table.php:250
+msgid "Total Donations"
+msgstr ""
+
+#: includes/class-post-types.php:21
+msgid "Quick Donation Project"
+msgstr ""
+
+#: includes/class-post-types.php:22
+msgid "WooCommerce Donation Projects"
+msgstr ""
+
+#: includes/class-post-types.php:49
+msgctxt "Post Type General Name"
+msgid "Quick Donation Projects"
+msgstr ""
+
+#: includes/class-post-types.php:50
+msgctxt "Post Type Singular Name"
+msgid "Quick Donation Project"
+msgstr ""
+
+#: includes/class-post-types.php:51
+msgid "Quick Donation"
+msgstr ""
+
+#: includes/class-post-types.php:52
+msgid "Donation"
+msgstr ""
+
+#: includes/class-post-types.php:53
+msgid "Parent Project :"
+msgstr ""
+
+#: includes/class-post-types.php:54
+msgid "All Project"
+msgstr ""
+
+#: includes/class-post-types.php:55
+msgid "Add New Project"
+msgstr ""
+
+#: includes/class-post-types.php:56
+msgid "Add Project"
+msgstr ""
+
+#: includes/class-post-types.php:57
+msgid "New Project"
+msgstr ""
+
+#: includes/class-post-types.php:58
+msgid "Edit Project"
+msgstr ""
+
+#: includes/class-post-types.php:59
+msgid "Update ProjectNot found in Trash"
+msgstr ""
+
+#: includes/class-post-types.php:60
+msgid "View Project"
+msgstr ""
+
+#: includes/class-post-types.php:61
+msgid "Search Project"
+msgstr ""
+
+#: includes/class-post-types.php:62
+msgid "No Project Found"
+msgstr ""
+
+#: includes/class-post-types.php:63
+msgid "No Project Found in Trash"
+msgstr ""
+
+#: includes/class-post-types.php:87
+msgctxt "Taxonomy General Name"
+msgid "Project Categories"
+msgstr ""
+
+#: includes/class-post-types.php:88
+msgctxt "Taxonomy Singular Name"
+msgid "Project Category"
+msgstr ""
+
+#: includes/class-post-types.php:89
+msgid "Categories"
+msgstr ""
+
+#: includes/class-post-types.php:90
+msgid "All Categories"
+msgstr ""
+
+#: includes/class-post-types.php:91
+msgid "Parent Category"
+msgstr ""
+
+#: includes/class-post-types.php:92
+msgid "Parent Category:"
+msgstr ""
+
+#: includes/class-post-types.php:93
+msgid "New Category Name"
+msgstr ""
+
+#: includes/class-post-types.php:94
+msgid "Add New Project Category"
+msgstr ""
+
+#: includes/class-post-types.php:95
+msgid "Edit Category"
+msgstr ""
+
+#: includes/class-post-types.php:96
+msgid "Update Category"
+msgstr ""
+
+#: includes/class-post-types.php:97
+msgid "View Category"
+msgstr ""
+
+#: includes/class-post-types.php:98
+msgid "Separate Categories with commas"
+msgstr ""
+
+#: includes/class-post-types.php:99
+msgid "Add or remove Categories"
+msgstr ""
+
+#: includes/class-post-types.php:100 includes/class-post-types.php:147
+msgid "Choose from the most used"
+msgstr ""
+
+#: includes/class-post-types.php:101
+msgid "Popular Categories"
+msgstr ""
+
+#: includes/class-post-types.php:102
+msgid "Search Categories"
+msgstr ""
+
+#: includes/class-post-types.php:103 includes/class-post-types.php:150
+msgid "Not Found"
+msgstr ""
+
+#: includes/class-post-types.php:134
+msgctxt "Taxonomy General Name"
+msgid "Project Tags"
+msgstr ""
+
+#: includes/class-post-types.php:135
+msgctxt "Taxonomy Singular Name"
+msgid "Project Tag"
+msgstr ""
+
+#: includes/class-post-types.php:136
+msgid "Tags"
+msgstr ""
+
+#: includes/class-post-types.php:137
+msgid "All Tags"
+msgstr ""
+
+#: includes/class-post-types.php:138
+msgid "Parent Tag"
+msgstr ""
+
+#: includes/class-post-types.php:139
+msgid "Parent Tag :"
+msgstr ""
+
+#: includes/class-post-types.php:140
+msgid "New Tag Name"
+msgstr ""
+
+#: includes/class-post-types.php:141
+msgid "Add New Tag"
+msgstr ""
+
+#: includes/class-post-types.php:142
+msgid "Edit Tag "
+msgstr ""
+
+#: includes/class-post-types.php:143
+msgid "Update Tags"
+msgstr ""
+
+#: includes/class-post-types.php:144
+msgid "View Tag"
+msgstr ""
+
+#: includes/class-post-types.php:145
+msgid "Separate Tags with commas"
+msgstr ""
+
+#: includes/class-post-types.php:146
+msgid "Add or remove Tags"
+msgstr ""
+
+#: includes/class-post-types.php:148
+msgid "Popular Tags"
+msgstr ""
+
+#: includes/class-post-types.php:149
+msgid "Search Tags"
+msgstr ""
+
+#: includes/class-post-types.php:175
+msgctxt "Order status"
+msgid "Completed"
+msgstr ""
+
+#: includes/class-post-types.php:176
+msgid "Completed (%s)"
+msgid_plural "Completed (%s)"
+msgstr[0] ""
+msgstr[1] ""
+
+#: includes/class-post-types.php:184
+#: includes/wc-quick-donation-functions.php:37
+msgctxt "Order status"
+msgid "Donation On Hold"
+msgstr ""
+
+#: includes/class-post-types.php:189
+msgid "Donation On Hold <span class=\"count\">(%s)</span>"
+msgid_plural "DonationOn Hold <span class=\"count\">(%s)</span>"
+msgstr[0] ""
+msgstr[1] ""
+
+#: includes/class-post-types.php:192
+#: includes/wc-quick-donation-functions.php:36
+msgctxt "Order status"
+msgid "Donation Refunded"
+msgstr ""
+
+#: includes/class-post-types.php:197
+msgid "Refunded <span class=\"count\">(%s)</span>"
+msgid_plural "Refunded <span class=\"count\">(%s)</span>"
+msgstr[0] ""
+msgstr[1] ""
+
+#: includes/class-quick-donation-functions.php:241
+msgid "No Payment Gateway Configured In WooCommerce. Kindly Configure One"
+msgstr ""
+
+#: includes/emails/class-new-email.php:31
+msgid "New Donation"
+msgstr ""
+
+#: includes/emails/class-new-email.php:32
+msgid "Customer invoice emails can be sent to customers containing their order information and payment links."
+msgstr ""
+
+#: includes/emails/class-new-email.php:38
+msgid "Invoice for order {order_number} from {order_date}"
+msgstr ""
+
+#: includes/emails/class-new-email.php:39
+msgid "Invoice for order {order_number}"
+msgstr ""
+
+#: includes/emails/class-new-email.php:41
+msgid "Your {site_title} order from {order_date}"
+msgstr ""
+
+#: includes/emails/class-new-email.php:42
+msgid "Order {order_number} details"
+msgstr ""
+
+#: includes/emails/class-new-email.php:154
+msgid "Email Subject"
+msgstr ""
+
+#: includes/emails/class-new-email.php:156
+#: includes/emails/class-new-email.php:163
+#: includes/emails/class-new-email.php:170
+#: includes/emails/class-new-email.php:177
+msgid "Defaults to <code>%s</code>"
+msgstr ""
+
+#: includes/emails/class-new-email.php:161
+msgid "Email Heading"
+msgstr ""
+
+#: includes/emails/class-new-email.php:168
+msgid "Email Subject (paid)"
+msgstr ""
+
+#: includes/emails/class-new-email.php:175
+msgid "Email Heading (paid)"
+msgstr ""
+
+#: includes/emails/class-new-email.php:182
+msgid "Email Type"
+msgstr ""
+
+#: includes/emails/class-new-email.php:184
+msgid "Choose which format of email to send."
+msgstr ""
+
+#: includes/wc-quick-donation-functions.php:35
+msgctxt "Donation Completed"
+msgid "Donation Completed"
+msgstr ""
+
+#: template/cart/donation-cart-shipping.php:18
+msgid "Shipping #%d"
+msgstr ""
+
+#: template/cart/donation-cart-shipping.php:20
+#: template/cart/donation-cart-shipping.php:95
+msgid "Shipping"
+msgstr ""
+
+#: template/cart/donation-cart-shipping.php:57
+msgid "Please use the shipping calculator to see available shipping methods."
+msgstr ""
+
+#: template/cart/donation-cart-shipping.php:61
+msgid "Please continue to the checkout and enter your full address to see if there are any available shipping methods."
+msgstr ""
+
+#: template/cart/donation-cart-shipping.php:65
+msgid "Please fill in your details to see available shipping methods."
+msgstr ""
+
+#: template/cart/donation-cart-shipping.php:74
+#: template/cart/donation-cart-shipping.php:80
+msgid "There are no shipping methods available. Please double check your address, or contact us if you need any help."
+msgstr ""
+
+#: template/cart/donation-cart.php:28
+#: template/checkout/donation-review-order.php:18
+#: template/order/donation-order-details.php:21
+msgid "Amount"
+msgstr ""
+
+#: template/cart/donation-cart.php:48
+msgid "Remove this item"
+msgstr ""
+
+#: template/cart/donation-proceed-to-checkout-button.php:16
+msgid "Donate Now :) "
+msgstr ""
+
+#: template/checkout/donation-cart-errors.php:18
+msgid "There are some issues with the items in your cart (shown above). Please go back to the cart page and resolve these issues before checking out."
+msgstr ""
+
+#: template/checkout/donation-cart-errors.php:22
+msgid "Return To Cart"
+msgstr ""
+
+#: template/checkout/donation-form-billing.php:19
+msgid "Billing &amp; Shipping"
+msgstr ""
+
+#: template/checkout/donation-form-billing.php:42
+msgid "Create an account?"
+msgstr ""
+
+#: template/checkout/donation-form-billing.php:53
+msgid "Create an account by entering the information below. If you are a returning customer please login at the top of the page."
+msgstr ""
+
+#: template/checkout/donation-form-checkout.php:20
+msgid "You must be logged in to checkout."
+msgstr ""
+
+#: template/checkout/donation-form-checkout.php:39
+msgid "Your Donation"
+msgstr ""
+
+#: template/checkout/donation-form-login.php:18
+msgid "Returning customer?"
+msgstr ""
+
+#: template/checkout/donation-form-login.php:19
+msgid "Click here to login"
+msgstr ""
+
+#: template/checkout/donation-form-login.php:26
+msgid "If you have shopped with us before, please enter your details in the boxes below. If you are a new customer please proceed to the Billing &amp; Shipping section."
+msgstr ""
+
+#: template/checkout/donation-form-pay.php:20
+msgid "Product"
+msgstr ""
+
+#: template/checkout/donation-form-pay.php:21
+msgid "Qty"
+msgstr ""
+
+#: template/checkout/donation-form-pay.php:22
+msgid "Totals"
+msgstr ""
+
+#: template/checkout/donation-form-pay.php:55
+msgid "Payment"
+msgstr ""
+
+#: template/checkout/donation-form-pay.php:80
+msgid "Sorry, it seems that there are no available payment methods for your location. Please contact us if you require assistance or wish to make alternate arrangements."
+msgstr ""
+
+#: template/checkout/donation-form-pay.php:90
+msgid "Pay for order"
+msgstr ""
+
+#: template/checkout/donation-form-shipping.php:32
+msgid "Ship to a different address?"
+msgstr ""
+
+#: template/checkout/donation-form-shipping.php:58
+msgid "Additional Information"
+msgstr ""
+
+#: template/checkout/donation-payment.php:30
+msgid "Please fill in your details above to see available payment methods."
+msgstr ""
+
+#: template/checkout/donation-payment.php:32
+msgid "Sorry, it seems that there are no available payment methods for your state. Please contact us if you require assistance or wish to make alternate arrangements."
+msgstr ""
+
+#: template/checkout/donation-payment.php:43
+msgid "Since your browser does not support JavaScript, or it is disabled, please ensure you click the <em>Update Totals</em> button before placing your order. You may be charged more than the amount stated above if you fail to do so."
+msgstr ""
+
+#: template/checkout/donation-payment.php:43
+msgid "Update totals"
+msgstr ""
+
+#: template/checkout/donation-payment.php:53
+msgid "I&rsquo;ve read and accept the <a href=\"%s\" target=\"_blank\">terms &amp; conditions</a>"
+msgstr ""
+
+#: template/checkout/donation-review-order.php:17
+msgid "Donation for"
+msgstr ""
+
+#: template/checkout/donation-thankyou.php:17
+msgid "Unfortunately your order cannot be processed as the originating bank/merchant has declined your transaction."
+msgstr ""
+
+#: template/checkout/donation-thankyou.php:21
+msgid "Please attempt your purchase again or go to your account page."
+msgstr ""
+
+#: template/checkout/donation-thankyou.php:23
+msgid "Please attempt your purchase again."
+msgstr ""
+
+#: template/checkout/donation-thankyou.php:27
+#: template/myaccount/my-donations.php:76
+msgid "Pay"
+msgstr ""
+
+#: template/checkout/donation-thankyou.php:29
+msgid "My Account"
+msgstr ""
+
+#: template/checkout/donation-thankyou.php:35
+msgid "Thank you. Your Donation has been received."
+msgstr ""
+
+#: template/checkout/donation-thankyou.php:39
+msgid "Reference Number :"
+msgstr ""
+
+#: template/checkout/donation-thankyou.php:43
+msgid "Date:"
+msgstr ""
+
+#: template/checkout/donation-thankyou.php:63
+msgid "Thank you. Your order has been received."
+msgstr ""
+
+#: template/emails/donation-customer-invoice.php:20
+#: template/emails/plain/donation-customer-invoice.php:17
+msgid "An order has been created for you on %s. To pay for this order please use the following link: %s"
+msgstr ""
+
+#: template/emails/donation-customer-invoice.php:20
+msgid "pay"
+msgstr ""
+
+#: template/emails/donation-customer-invoice.php:26
+msgid "Order #%s"
+msgstr ""
+
+#: template/emails/donation-customer-invoice.php:32
+msgid "Quantity"
+msgstr ""
+
+#: template/emails/donation-customer-invoice.php:33
+msgid "Price"
+msgstr ""
+
+#: template/emails/plain/donation-customer-invoice.php:23
+msgid "Order number: %s"
+msgstr ""
+
+#: template/emails/plain/donation-customer-invoice.php:24
+msgid "jS F Y"
+msgstr ""
+
+#: template/myaccount/my-donations.php:26
+msgid "Recent Donations"
+msgstr ""
+
+#: template/myaccount/my-donations.php:35
+#: template/myaccount/my-donations.php:63
+msgid "Status"
+msgstr ""
+
+#: template/myaccount/my-donations.php:36
+#: template/myaccount/my-donations.php:66
+msgid "Total"
+msgstr ""
+
+#: template/myaccount/my-donations.php:48
+msgid "Order Number"
+msgstr ""
+
+#: template/myaccount/my-donations.php:50
+msgctxt "hash before order number"
+msgid "#"
+msgstr ""
+
+#: template/myaccount/my-donations.php:67
+msgid "%s for %s item"
+msgid_plural "%s for %s items"
+msgstr[0] ""
+msgstr[1] ""
+
+#: template/myaccount/my-donations.php:83
+msgid "Cancel"
+msgstr ""
+
+#: template/myaccount/my-donations.php:89
+msgid "View"
+msgstr ""
+
+#: template/myaccount/view-donation.php:18
+msgid "Placed on <mark class=\"order-date\">%s</mark> and is currently <mark class=\"order-status\">%s</mark>."
+msgstr ""
+
+#: template/myaccount/view-donation.php:22 template/order/tracking.php:25
+msgid "Order Updates"
+msgstr ""
+
+#: template/myaccount/view-donation.php:28 template/order/tracking.php:31
+msgid "l jS \\o\\f F Y, h:ia"
+msgstr ""
+
+#: template/order/form-tracking.php:20
+msgid "To track your order please enter your Order ID in the box below and press the \"Track\" button. This was given to you on your receipt and in the confirmation email you should have received."
+msgstr ""
+
+#: template/order/form-tracking.php:22
+msgid "Order ID"
+msgstr ""
+
+#: template/order/form-tracking.php:22
+msgid "Found in your order confirmation email."
+msgstr ""
+
+#: template/order/form-tracking.php:23
+msgid "Billing Email"
+msgstr ""
+
+#: template/order/form-tracking.php:23
+msgid "Email you used during checkout."
+msgstr ""
+
+#: template/order/form-tracking.php:26
+msgid "Track"
+msgstr ""
+
+#: template/order/order-again.php:16
+msgid "Order Again"
+msgstr ""
+
+#: template/order/order-details-customer.php:16
+msgid "Billing Address"
+msgstr ""
+
+#: template/order/order-details-customer.php:22
+msgid "Note:"
+msgstr ""
+
+#: template/order/order-details-customer.php:25
+msgid "Email:"
+msgstr ""
+
+#: template/order/order-details-customer.php:29
+msgid "Telephone:"
+msgstr ""
+
+#: template/order/tracking.php:14
+msgid "Order #%s which was made %s has the status &ldquo;%s&rdquo;"
+msgstr ""
+
+#: template/order/tracking.php:14
+msgid "ago"
+msgstr ""
+
+#: template/order/tracking.php:16
+msgid "and was completed"
+msgstr ""
+
+#: template/order/tracking.php:16
+msgid " ago"
+msgstr ""
+
+#: woocommerce-quick-donation.php:287
+msgid "WooCommerce Is Required. To Use This Plugin :)"
+msgstr ""
+#. Plugin Name of the plugin/theme
+msgid "WooCommerce Quick Donation"
+msgstr ""
+
+#. Plugin URI of the plugin/theme
+msgid "http://wordpress.org/plugins/woocommerce-quick-donation/"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid "Turns WooCommerce Into Online Donation"
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "Varun Sridharan"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "http://varunsridharan.in"
+msgstr ""

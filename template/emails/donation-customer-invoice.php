@@ -2,9 +2,9 @@
 /**
  * Customer invoice email
  *
- * @author 		WooThemes
- * @package 	WooCommerce/Templates/Emails
- * @version     2.4.0
+ * @author  Varun Sridharan
+ * @package WooCommerce Quick Donation/Templates/emails
+ * @version 0.1
  */
 
 if ( ! defined( 'ABSPATH' ) ) {

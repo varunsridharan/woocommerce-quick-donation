@@ -1,12 +1,13 @@
 <?php
 /**
  * Plugin Name:       WooCommerce Quick Donation
- * Plugin URI:        https://wordpress.org/plugins/woocommerce-plugin-boiler-plate/
+ * Plugin URI:        http://wordpress.org/plugins/woocommerce-quick-donation/
  * Description:       Turns WooCommerce Into Online Donation
  * Version:           1.3.5 BETA
  * Author:            Varun Sridharan
  * Author URI:        http://varunsridharan.in
  * Text Domain:       woocommerce-quick-donation
+ * Domain Path:       /languages/
  * License:           GPL-2.0+
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt 
  * GitHub Plugin URI: https://github.com/technofreaky/woocomerce-quick-donation
@@ -95,6 +96,7 @@ class WooCommerce_Quick_Donation {
      * Loads Required Plugins For Plugin
      */
     private function load_required_files(){
+        $this->load_files(WC_QD_INC.'wc-quick-donation-*.php'); 
         $this->load_files(WC_QD_ADMIN.'wps/*.php'); 
         $this->load_files(WC_QD_INC.'class-admin-notice.php');
         $this->load_files(WC_QD_INC.'class-post-*.php');
@@ -189,7 +191,6 @@ class WooCommerce_Quick_Donation {
      * Set Plugin Text Domain
      */
     public function after_plugins_loaded(){
-        
         load_plugin_textdomain(WC_QD_TXT, false, WC_QD_LANG );
     }
     
@@ -197,9 +198,9 @@ class WooCommerce_Quick_Donation {
      * load translated mo file based on wp settings
      */
     public function load_plugin_mo_files($mofile, $domain) {
-        if (WC_QD_TXT === $domain)
-            return WC_QD_LANG.'/'.get_locale().'.mo';
-
+        if (WC_QD_TXT === $domain){ 
+            return WC_QD_LANG.'/'.get_locale().'/'.get_locale().'.mo';
+        }
         return $mofile;
     }
     
@@ -226,7 +227,8 @@ class WooCommerce_Quick_Donation {
         $this->define('WC_QD_CSS',WC_QD_URL.'/includes/css/');
         
         $this->define('WC_QD_TEMPLATE',WC_QD_PATH.'template/'); # Plugin Template DIR
-        $this->define('WC_TEMPLATE','woocommerce/');
+        $this->define('WC_CORE_TEMPLATE','woocommerce/');
+        $this->define('WC_QD_THEME_TEMPLATE','/'.WC_CORE_TEMPLATE.'donation/');
         $this->define('WC_QD_LANG',WC_QD_PATH.'languages');
         $this->define('WC_QD_TXT','woocommerce-quick-donation'); #plugin lang Domain
 
@@ -272,11 +274,18 @@ class WooCommerce_Quick_Donation {
     
 }
 
-function WC_QD(){
-    return WooCommerce_Quick_Donation::get_instance();
-}
+require_once(plugin_dir_path(__FILE__).'includes/class-wc-dependencies.php');
+require_once(plugin_dir_path(__FILE__).'includes/class-admin-notice.php');
 
-$GLOBALS['woocommerce_quick_donation'] =  WC_QD();
+if(WC_QD_Dependencies()){
+    function WC_QD(){
+        return WooCommerce_Quick_Donation::get_instance();
+    }
+
+    $GLOBALS['woocommerce_quick_donation'] =  WC_QD();
+} else {
+    wc_qd_notice(__('WooCommerce Is Required. To Use This Plugin :)','woocommerce-quick-donation'),'error');
+}
 
 
 //Load language files for the theme

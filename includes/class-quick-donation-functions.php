@@ -150,9 +150,14 @@ class WooCommerce_Quick_Donation_Functions  {
         foreach($custom_attributes as $attr_key => $attr_val) {
             $attributes .= $attr_key.'="'.$attr_val.'" ';
         }
-        
-        $this->load_template('field-'.$type.'.php', WC_QD_TEMPLATE.'fields/' );
-        
+
+        $field_output = $this->load_template('field-'.$type.'.php', WC_QD_TEMPLATE.'fields/' , array('id' => $id, 
+                                                                                     'name' => $name, 
+                                                                                     'class' => $class, 
+                                                                                     'field_output' => $field_output, 
+                                                                                     'is_grouped' => $is_grouped, 
+                                                                                     'project_list' => $project_list, 
+                                                                                     'attributes' => $attributes));
         return $field_output;
     }
 
@@ -165,27 +170,37 @@ class WooCommerce_Quick_Donation_Functions  {
         $class = apply_filters('wcqd_project_price_text_class',array(),'text');
         $custom_attributes = apply_filters('wcqd_project_price_text_attribute',array(),'text');
         $value = '';
-        
-        
         $class = implode(' ',$class);
         $attributes = '';
         foreach($custom_attributes as $attr_key => $attr_val) {
             $attributes .= $attr_key.'="'.$attr_val.'" ';
         }
         
-        $this->load_template('field-text.php',WC_QD_TEMPLATE . 'fields/' );
+        
+
+        $field_output = $this->load_template('field-text.php',WC_QD_TEMPLATE . 'fields/' ,array('id' => $id,
+                                                                                'name' => $name,
+                                                                                'class' => $class,
+                                                                                'field_output' => $field_output,
+                                                                                'attributes' => $attributes,
+                                                                                'value' => $value));        
         
         return $field_output;
     }
     
-    public function load_template($file,$path){
+    public function load_template($file,$path,$args = array()){
+        $field_output = '';
         $wc_get_template = function_exists('wc_get_template') ? 'wc_get_template' : 'woocommerce_get_template';
-        $wc_get_template( $file,array(), '', $path); 
+        ob_start();
+        $wc_get_template( $file,$args, '', $path); 
+        $field_output = ob_get_clean(); 
+        ob_flush();
+        return $field_output;
     }
     
     public function locate_template($template){
         $default_path = WC_QD_TEMPLATE;
-        $template_path = WC_TEMPLATE.'donation/';
+        $template_path = WC_CORE_TEMPLATE.'donation/';
         $template = $template;
         $locate = wc_locate_template($template,$template_path, $default_path); 
         return $locate;
