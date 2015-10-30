@@ -32,6 +32,7 @@ class WooCommerce_Quick_Donation {
     public static $donation_id = null;
     public static $settings = null;
     public static $settings_values = null;
+    public static $email = null;
     private static $db = null;
     /**
      * Creates or returns an instance of this class.
@@ -103,6 +104,7 @@ class WooCommerce_Quick_Donation {
         $this->load_files(WC_QD_INC.'class-quick-donation-db.php');
         $this->load_files(WC_QD_INC.'class-install.php');
         $this->load_files(WC_QD_INC.'class-quick-donation-functions.php');
+        $this->load_files(WC_QD_INC.'class-quick-donation-email-functions.php');
         
         if($this->is_request('frontend')){
             $this->load_files(WC_QD_INC.'class-quick-donation-process.php');
@@ -120,7 +122,7 @@ class WooCommerce_Quick_Donation {
      * Inits loaded Class
      */
     private function init_class(){
-        
+        self::$email = new WooCommerce_Quick_Donation_Emails_Functions;
         self::$f = new WooCommerce_Quick_Donation_Functions;
         self::$settings = new WooCommerce_Quick_Donation_Settings;
         self::$db = new WooCommerce_Quick_Donation_DB; 

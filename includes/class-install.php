@@ -30,10 +30,7 @@ class WC_QD_INSTALL{
      */
     public static function check_donation_exists(){
         $exist = get_option(WC_QD_DB.'product_id');
-        
-        if($exist && get_post_status ($exist)){
-            return true;
-        }
+        if($exist && get_post_status ($exist)){ return true; }
         return false;
     }
     
