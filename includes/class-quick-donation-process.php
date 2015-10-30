@@ -184,7 +184,8 @@ class WooCommerce_Quick_Donation_Process extends WooCommerce_Quick_Donation  {
         return true;
     }
     
-    public function redirect_cart($key = WC_QD_DB.'redirect_user'){
+    public function redirect_cart($key = ''){
+    	if(empty($key)){$key = WC_QD_DB.'redirect_user';}
         if($this->is_donation_exists){
             $redirect = WC_QD()->settings()->get_option($key);
             $url = '';
