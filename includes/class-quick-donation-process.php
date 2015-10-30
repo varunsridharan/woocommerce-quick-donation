@@ -120,7 +120,8 @@ class WooCommerce_Quick_Donation_Process extends WooCommerce_Quick_Donation  {
     
     public function added_with_other_products(){
         global $woocommerce;
-        if(!empty($woocommerce->cart->get_cart())){ return true;  }
+        $cart = $woocommerce->cart->get_cart();
+        if(!empty($cart)){ return true;  }
         return false;
     }
     
