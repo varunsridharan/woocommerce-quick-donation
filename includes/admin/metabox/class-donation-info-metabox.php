@@ -199,7 +199,7 @@ class WC_Quick_Donation_Meta_Box_Order_Data {
 						<p class="form-field form-field-wide"><label for="order_status"><?php _e( 'Donation status:', WC_QD_TXT ) ?></label>
 						<select id="order_status" name="order_status" class="wc-enhanced-select">
 							<?php
-								$statuses = wc_qd_order_statuses();
+								$statuses = wc_get_order_statuses();
 								foreach ( $statuses as $status => $status_name ) {
 									echo '<option value="' . esc_attr( $status ) . '" ' . selected( $status, 'wc-' . $order->get_status(), false ) . '>' . esc_html( $status_name ) . '</option>';
 								}
