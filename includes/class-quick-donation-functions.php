@@ -14,9 +14,6 @@ class WooCommerce_Quick_Donation_Functions  {
             'field-select.php' => 'fields/field-select.php',
             'field-text.php' => 'fields/field-text.php',
             'myaccount/my-donations.php' => 'myaccount/my-donations.php',
-            
-            'emails/donation-customer-invoice.php' => 'emails/donation-customer-invoice.php',
-            'emails/plain/donation-customer-invoice.php' => 'emails/plain/donation-customer-invoice.php',
         ),
 
         'is_donation' => array( 
@@ -25,6 +22,7 @@ class WooCommerce_Quick_Donation_Functions  {
             'cart/cart-totals.php' => 'cart/donation-cart-totals.php',
             'cart/cart.php' => 'cart/donation-cart.php',
             'cart/proceed-to-checkout-button.php' => 'cart/donation-proceed-to-checkout-button.php',
+            
             'checkout/cart-errors.php' => 'checkout/donation-cart-errors.php',
             'checkout/form-billing.php' => 'checkout/donation-form-billing.php',
             'checkout/form-checkout.php' => 'checkout/donation-form-checkout.php',
@@ -38,22 +36,23 @@ class WooCommerce_Quick_Donation_Functions  {
         ),
         
         'after_order' => array(
-            'order/order-details.php' => 'order/donation-order-details.php',
             'checkout/thankyou.php' => 'checkout/donation-thankyou.php',
             'myaccount/view-order.php' => 'myaccount/view-donation.php',
-            'order/order-details-item.php' => 'order/order-details-item.php',
-            'order/order-details-customer.php' => 'order/order-details-customer.php',
 
-            
-            'emails/email-addresses.php' => 'emails/donation-email-addresses.php',
-            'emails/email-footer.php' => 'emails/donation-email-footer.php',
-            'emails/email-header.php' => 'emails/donation-email-header.php',
-            'emails/email-order-items.php' => 'emails/donation-email-order-items.php',
+            'order/order-details.php' => 'order/donation-order-details.php',
+            'order/order-details-item.php' => 'order/donation-order-details-item.php',
+            'order/order-details-customer.php' => 'order/donation-order-details-customer.php',
+
             'emails/email-styles.php' => 'emails/donation-email-styles.php',
             
-            
+            'emails/donation-customer-invoice.php' => 'emails/donation-customer-invoice.php',
+            'emails/email-addresses.php' => 'emails/donation-email-addresses.php',
+            'emails/donation-email-footer.php' => 'emails/donation-email-footer.php',
+            'emails/donation-email-header.php' => 'emails/donation-email-header.php',
+            'emails/email-order-items.php' => 'emails/donation-email-order-items.php',
             'emails/plain/email-addresses.php' => 'emails/plain/donation-email-addresses.php',
             'emails/plain/email-order-items.php' => 'emails/plain/donation-email-order-items.php',
+            'emails/plain/donation-customer-invoice.php' => 'emails/plain/donation-customer-invoice.php',
         )
         
         
@@ -219,7 +218,6 @@ class WooCommerce_Quick_Donation_Functions  {
     }
     
     public function wc_locate_template($template_full_path,$template_name,$template_dir){
-        
         if(file_exists($template_full_path)){ return $template_full_path; }
         
         $template_full_path = $template_full_path;
@@ -227,7 +225,13 @@ class WooCommerce_Quick_Donation_Functions  {
         if(isset(self::$search_template['general'][$template_name])){
             $template_full_path = WC_QD_TEMPLATE.self::$search_template['general'][$template_name];
         } 
-
+        if(isset(self::$search_template['is_donation'][$template_name])){
+            $template_full_path = WC_QD_TEMPLATE.self::$search_template['is_donation'][$template_name];
+        }
+        if(isset(self::$search_template['after_order'][$template_name])){
+            $template_full_path = WC_QD_TEMPLATE.self::$search_template['after_order'][$template_name];
+        }
+        
         return $template_full_path;
     }
     
@@ -271,19 +275,21 @@ class WooCommerce_Quick_Donation_Functions  {
     }
     
     public function get_template($located, $template_name, $args, $template_path, $default_path ){
-        $file = $located; 
+        $file = ''; 
         $order_id = 0;
-        
+        $found = false;
         if(isset($args['order_id'])){ $order_id = $args['order_id']; }
         if(isset($args['order']->id)){ $order_id = $args['order']->id; }
 
         if(isset(self::$search_template['general'][$template_name])){
             $file = WC_QD()->f()->locate_template(self::$search_template['general'][$template_name]);
+            $found = true;
         }
         
         if(WC_QD()->check_donation_exists_cart()){
             if(isset(self::$search_template['is_donation'][$template_name])){
                 $file = WC_QD()->f()->locate_template(self::$search_template['is_donation'][$template_name]);
+                $found = true;
             } 
         } 
         
@@ -291,9 +297,16 @@ class WooCommerce_Quick_Donation_Functions  {
         if(WC_QD()->db()->_is_donation($order_id)){
             if(isset(self::$search_template['after_order'][$template_name])){
                 $file = WC_QD()->f()->locate_template(self::$search_template['after_order'][$template_name]);
+                $found = true;
             } 
         }
         
-        return $file;
+        if($found){
+            return $file;
+        } else {
+            $file = wc_locate_template($template_name);
+            return $file;
+        }
+        return $located;
     }    
 }

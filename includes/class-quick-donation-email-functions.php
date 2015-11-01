@@ -30,7 +30,7 @@ class WooCommerce_Quick_Donation_Emails_Functions  {
     }
     
     public function wca_onhold(){
-        var_dump(4333);
+
     }
     
     public function check_order($order_id){
