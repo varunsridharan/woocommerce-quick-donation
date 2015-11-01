@@ -21,7 +21,7 @@ class WooCommerce_Quick_Donation_Process extends WooCommerce_Quick_Donation  {
             add_action('woocommerce_add_order_item_meta',array($this,'add_order_meta'),99,3);
             add_action( 'woocommerce_checkout_update_order_meta',array($this,'update_order_meta'));
             add_action( 'woocommerce_checkout_update_order_meta',  array($this,'save_order_id_db'));
-            add_action( 'woocommerce_email',array($this,'remove_email_actions'));
+            //add_action( 'woocommerce_email',array($this,'remove_email_actions'));
             add_filter( 'wc_quick_donation_cart_project_name', array($this,'change_donation_name'));
         } 
         $this->process_donation(); 
@@ -65,13 +65,6 @@ class WooCommerce_Quick_Donation_Process extends WooCommerce_Quick_Donation  {
                             array($email->emails['WC_Email_Customer_Completed_Order'],'trigger'));
 
         
-             // New order emails
-            add_action('woocommerce_order_status_pending_to_processing_notification',
-                            array($email->emails[WC_QD_DB.'new_donation_email'],'trigger'));
-            add_action('woocommerce_order_status_pending_to_completed_notification',
-                            array($email->emails[WC_QD_DB.'new_donation_email'],'trigger'));
-            add_action('woocommerce_order_status_pending_to_on-hold_notification',
-                            array($email->emails[WC_QD_DB.'new_donation_email'],'trigger'));
             add_action('woocommerce_order_status_failed_to_processing_notification',
                             array($email->emails[WC_QD_DB.'new_donation_email'],'trigger'));
             add_action('woocommerce_order_status_failed_to_completed_notification',
@@ -89,7 +82,14 @@ class WooCommerce_Quick_Donation_Process extends WooCommerce_Quick_Donation  {
             if($this->check_donation_already_exist()){
                 $message = WC_QD()->db()->get_message(WC_QD_DB.'donation_already_exist');
                 wc_add_notice($message,'error');
-                return ;
+                $this->redirect_cart($key = WC_QD_DB.'already_exist_redirect_user');
+                return false;
+            }
+            
+            if($this->added_with_other_products()){
+                $message = WC_QD()->db()->get_message(WC_QD_DB.'donation_with_other_products');
+                wc_add_notice($message,'error');
+                return false;
             }
             
             global $woocommerce;
@@ -118,7 +118,12 @@ class WooCommerce_Quick_Donation_Process extends WooCommerce_Quick_Donation  {
         }
     }
     
-    
+    public function added_with_other_products(){
+        global $woocommerce;
+        $cart = $woocommerce->cart->get_cart();
+        if(!empty($cart)){ return true;  }
+        return false;
+    }
     
     public function check_donation_already_exist(){
         global $woocommerce;
@@ -179,9 +184,10 @@ class WooCommerce_Quick_Donation_Process extends WooCommerce_Quick_Donation  {
         return true;
     }
     
-    public function redirect_cart(){
+    public function redirect_cart($key = ''){
+        if(empty($key)){$key = WC_QD_DB.'redirect_user';}
         if($this->is_donation_exists){
-            $redirect = WC_QD()->settings()->get_option(WC_QD_DB.'redirect_user');
+            $redirect = WC_QD()->settings()->get_option($key);
             $url = '';
             if($redirect == 'cart'){
                $url = WC()->cart->get_cart_url(); 

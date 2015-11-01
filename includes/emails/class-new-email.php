@@ -35,8 +35,8 @@ class WC_QD_Donation_New_Email extends WC_Email {
 		$this->template_html  = 'emails/donation-customer-invoice.php';
 		$this->template_plain = 'emails/plain/donation-customer-invoice.php';
 
-		$this->subject        = __( 'Invoice for order {order_number} from {order_date}', 'woocommerce');
-		$this->heading        = __( 'Invoice for order {order_number}', 'woocommerce');
+		$this->subject        = __( 'Reg : Your Recent Donation @ {site_title}', WC_QD_TXT);
+		$this->heading        = __( 'Thank you. Your Donation has been received for {project_name}', 'woocommerce');
 
 		$this->subject_paid   = __( 'Your {site_title} order from {order_date}', 'woocommerce');
 		$this->heading_paid   = __( 'Order {order_number} details', 'woocommerce');
@@ -71,9 +71,16 @@ class WC_QD_Donation_New_Email extends WC_Email {
 
 			$this->find['order-date']      = '{order_date}';
 			$this->find['order-number']    = '{order_number}';
-
+            $this->find['donation-project-name'] = '{project_name}';
+            
+            $order_id = $this->object->get_order_number();
+            $project_id = WC_QD()->db()->get_project_id($order_id);
+            $project_name = get_the_title($project_id);
+            
 			$this->replace['order-date']   = date_i18n( wc_date_format(), strtotime( $this->object->order_date ) );
 			$this->replace['order-number'] = $this->object->get_order_number();
+            $this->replace['donation-project-name'] = $project_name;
+        
 		}
 
 		if ( ! $this->get_recipient() ) {
@@ -91,12 +98,12 @@ class WC_QD_Donation_New_Email extends WC_Email {
 	 */
 	function get_subject() {
 		if ( $this->object->has_status( array( 'processing', 'completed' ) ) ) {
-			return apply_filters( 'woocommerce_email_subject_customer_invoice_paid', $this->format_string( $this->subject_paid ), $this->object );
+			return $this->format_string( $this->subject_paid );
 		} else {
-			return apply_filters( 'woocommerce_email_subject_customer_invoice', $this->format_string( $this->subject ), $this->object );
+			return $this->format_string( $this->subject );
 		}
 	}
-
+    
 	/**
 	 * get_heading function.
 	 *
@@ -105,9 +112,9 @@ class WC_QD_Donation_New_Email extends WC_Email {
 	 */
 	function get_heading() {
 		if ( $this->object->has_status( array( 'completed', 'processing' ) ) ) {
-			return apply_filters( 'woocommerce_email_heading_customer_invoice_paid', $this->format_string( $this->heading_paid ), $this->object );
+			return $this->format_string( $this->heading_paid );
 		} else {
-			return apply_filters( 'woocommerce_email_heading_customer_invoice', $this->format_string( $this->heading ), $this->object );
+			return $this->format_string( $this->heading );
 		}
 	}
 
@@ -125,6 +132,7 @@ class WC_QD_Donation_New_Email extends WC_Email {
 			'sent_to_admin' => false,
 			'plain_text'    => false
 		) );
+        
 		return ob_get_clean();
 	}
 

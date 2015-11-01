@@ -32,6 +32,7 @@ class WooCommerce_Quick_Donation {
     public static $donation_id = null;
     public static $settings = null;
     public static $settings_values = null;
+    public static $email = null;
     private static $db = null;
     /**
      * Creates or returns an instance of this class.
@@ -59,8 +60,8 @@ class WooCommerce_Quick_Donation {
      * Triggers When INIT Action Called
      */
     public function init(){
-        $this->init_class();
         $this->check_donation_product_exist();
+        $this->init_class();
         add_action('plugins_loaded', array( $this, 'after_plugins_loaded' ));
         add_filter('load_textdomain_mofile',  array( $this, 'load_plugin_mo_files' ), 10, 2);
     }
@@ -68,14 +69,22 @@ class WooCommerce_Quick_Donation {
     /**
      * Checks If Donation Product Exist In WooCommerce Products
      */
-    private function check_donation_product_exist(){
+    private function check_donation_product_exist($notice = true){
         $install = new WC_QD_INSTALL;
         if(! $install->check_donation_exists()){
             self::$is_donation_product_exist = false;
-            wc_qd_notice('WooCommerce Donation Product Not Exist','error');
+            if($notice){ wc_qd_notice('WooCommerce Donation Product Not Exist','error',true);}
         }
     }
-    
+
+        
+    /**
+     * Checks If Donation Product Exist In WooCommerce Products
+     */
+    public function donation_product_exist_public(){
+        $this->check_donation_product_exist();
+        return self::$is_donation_product_exist;
+    }
     /**
      * Checks If Donation Product Exists In Cart
      */
@@ -98,11 +107,12 @@ class WooCommerce_Quick_Donation {
     private function load_required_files(){
         $this->load_files(WC_QD_INC.'wc-quick-donation-*.php'); 
         $this->load_files(WC_QD_ADMIN.'wps/*.php'); 
-        $this->load_files(WC_QD_INC.'class-admin-notice.php');
+        //$this->load_files(WC_QD_INC.'class-admin-notice.php');
         $this->load_files(WC_QD_INC.'class-post-*.php');
         $this->load_files(WC_QD_INC.'class-quick-donation-db.php');
         $this->load_files(WC_QD_INC.'class-install.php');
         $this->load_files(WC_QD_INC.'class-quick-donation-functions.php');
+        $this->load_files(WC_QD_INC.'class-quick-donation-email-functions.php');
         
         if($this->is_request('frontend')){
             $this->load_files(WC_QD_INC.'class-quick-donation-process.php');
@@ -120,7 +130,7 @@ class WooCommerce_Quick_Donation {
      * Inits loaded Class
      */
     private function init_class(){
-        
+        self::$email = new WooCommerce_Quick_Donation_Emails_Functions;
         self::$f = new WooCommerce_Quick_Donation_Functions;
         self::$settings = new WooCommerce_Quick_Donation_Settings;
         self::$db = new WooCommerce_Quick_Donation_DB; 
@@ -281,10 +291,12 @@ if(WC_QD_Dependencies()){
     function WC_QD(){
         return WooCommerce_Quick_Donation::get_instance();
     }
-
     $GLOBALS['woocommerce_quick_donation'] =  WC_QD();
+    
 } else {
-    wc_qd_notice(__('WooCommerce Is Required. To Use This Plugin :)','woocommerce-quick-donation'),'error');
+   wc_qd_notice(__('WooCommerce Is Required. To Use This Plugin :)','woocommerce-quick-donation'),
+                'error',
+                array('times' => 1));
 }
 
 

@@ -58,6 +58,13 @@ class WooCommerce_Quick_Donation_Admin  {
                                                   'administrator',
                                                   'wc_qd_donors',
                                                   array($this,'donors_listing_page'));
+        
+        $this->donors_list = add_submenu_page('edit.php?post_type=wcqd_project',
+                                                  __('Support Request',WC_QD_TXT),
+                                                  __('Support Request',WC_QD_TXT),
+                                                  'administrator',
+                                                  'wc_qd_support',
+                                                  array($this,'support_request'));
     }
     
     
@@ -75,6 +82,7 @@ class WooCommerce_Quick_Donation_Admin  {
         $arr[] = $submenu[$name][15];
         $arr[] = $submenu[$name][16];
         $arr[] = $submenu[$name][17];
+        $arr[] = $submenu[$name][20];
         $submenu[$name] = $arr;
         return $menu_ord;
     }  
@@ -124,6 +132,12 @@ class WooCommerce_Quick_Donation_Admin  {
         donor_render_list_page($args); 
     }
         
+    public function support_request(){
+        require(WC_QD_ADMIN.'/sysinfo/sysinfo.php');
+        $sysinfo = new WooCommerce_Quick_Donation_SysInfo;
+        $sysinfo->setup();
+        $sysinfo->render_info();
+    }
     
     public function donation_orders_page(){
         global $wpdb;
@@ -164,10 +178,12 @@ class WooCommerce_Quick_Donation_Admin  {
         wp_enqueue_style(WC_QD_SLUG.'_quick_hacks',WC_QD_CSS.'admin-hack-style.css' , array(), WC_QD()->version, 'all' );  
         
         if('wcqd_project_page_WC_QD_settings' == $this->current_screen()){
-            wp_enqueue_style(WC_QD_SLUG.'_core_style',WC_QD_CSS.'admin-settings-style.css' , array(), WC_QD()->version, 'all' );  
+            wp_enqueue_style(WC_QD_SLUG.'_settings_style',WC_QD_CSS.'admin-settings-style.css' , array(), WC_QD()->version, 'all' );  
         }
         
-         
+        if('wcqd_project_page_wc_qd_support' == $this->current_screen()){
+            wp_enqueue_style(WC_QD_SLUG.'_sysinfo_style',WC_QD_CSS.'sysinfo.css' , array(), WC_QD()->version, 'all' );  
+        }
         
         if(in_array($this->current_screen() , $this->get_screen_ids())) {
             wp_enqueue_style(WC_QD_SLUG.'_core_style',WC_QD_CSS.'admin-style.css' , array(), WC_QD()->version, 'all' );  
@@ -182,6 +198,13 @@ class WooCommerce_Quick_Donation_Admin  {
         if(in_array($this->current_screen() , $this->get_screen_ids())) {
             wp_enqueue_script(WC_QD_SLUG.'_core_script', WC_QD_JS.'admin-script.js', array('jquery'), WC_QD()->version, false ); 
         }
+        if('wcqd_project_page_wc_qd_support' == $this->current_screen()){
+            wp_register_script(WC_QD_SLUG.'_sysinfo_script', WC_QD_JS.'sysinfo.js', array( 'jquery' ), WC_QD()->version,false );
+            wp_localize_script(WC_QD_SLUG.'_sysinfo_script', 'systemInfoAjax', array( 'ajaxurl' => admin_url( 'admin-ajax.php' ) ) );
+            wp_enqueue_script(WC_QD_SLUG.'_sysinfo_script');
+            
+        }
+            
 	}
     
     public function set_wc_screen_ids($screens){
