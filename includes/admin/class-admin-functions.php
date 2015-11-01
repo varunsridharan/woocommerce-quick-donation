@@ -17,53 +17,14 @@ if ( ! defined( 'WPINC' ) ) { die; }
 
 class WooCommerce_Quick_Donation_Admin_Function {
     
-    public function __construct(){
-        $this->check_template_files();
+    public function __construct(){ 
         add_action( 'post_row_actions', array($this,'protect_donation_product'),99,2);
         add_action( 'parse_query', array( $this, 'hide_donation_order_woocommerce_order' ) );
         add_filter( 'wc_order_types',array($this,'add_wc_order_types'),99,2);
     }   
     
     
-    public function check_template_files(){
-        $template_files = WC_Admin_Status::scan_template_files( WC_QD_TEMPLATE );
-        $outdated = false;
-        if(is_array($template_files)){
-            foreach($template_files as $file){
-                
-                $theme_file = false;
-                if ( file_exists( get_stylesheet_directory() . '/' . $file ) ) {
-                    $theme_file = get_stylesheet_directory() . '/' . $file;
-                } elseif ( file_exists( get_stylesheet_directory() . WC_QD_THEME_TEMPLATE . $file ) ) {
-                    $theme_file = get_stylesheet_directory() . WC_QD_THEME_TEMPLATE . $file;
-                } elseif ( file_exists( get_template_directory() . '/' . $file ) ) {
-                    $theme_file = get_template_directory() . '/' . $file;
-                } elseif( file_exists( get_template_directory() . WC_QD_THEME_TEMPLATE . $file ) ) {
-                    $theme_file = get_template_directory() . WC_QD_THEME_TEMPLATE . $file;
-                }   
-                
-                if ( $theme_file !== false ) {
-                    $core_version  = WC_Admin_Status::get_file_version(WC_QD_TEMPLATE.$file);
-                    $theme_version = WC_Admin_Status::get_file_version( $theme_file );
 
-                    if ( $core_version && $theme_version && version_compare( $theme_version, $core_version, '<' ) ) {
-                        $outdated = true;
-                        break;
-                    }
-                }
-            }
-            
-                
-            if ( $outdated ) {
-                $theme = wp_get_theme();
-                $message = sprintf( __( '<strong>Your theme (%s) contains outdated copies of some WooCommerce Quick Donation template files.</strong> These files may need updating to ensure they are compatible with the current version of WooCommerce Quick Donation. You can see which files are affected from the %ssystem status page%s. If in doubt, check with the author of the theme.', 'woocommerce' ), esc_html( $theme['Name'] ), '<a href="' . esc_url( admin_url( 'admin.php?page=wc-status' ) ) . '">', '</a>' );
-                wc_qd_notice($message,'error');
-            }        
-        }
-        
-    
-
-    }
     
     public function hide_donation_order_woocommerce_order($query) {
         global $pagenow,$post_type;  

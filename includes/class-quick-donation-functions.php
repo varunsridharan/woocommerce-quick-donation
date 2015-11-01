@@ -68,7 +68,7 @@ class WooCommerce_Quick_Donation_Functions  {
     }
     
     
-    public function wc_page_endpoint_title($title, $id){
+    public function wc_page_endpoint_title($title = '', $id = ''){
         if(is_page($id)){
             global $wp_query;
 

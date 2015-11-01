@@ -17,6 +17,9 @@ class WC_QD_Post_Types {
     * Registers Donation Post Type
     */
    public static function register_donation_posttype(){
+       if ( post_type_exists(WC_QD_PT) ) {
+			return;
+		}
         $args = array(
             'label'               => __( 'Quick Donation Project', WC_QD_TXT ),
             'description'         => __( 'WooCommerce Donation Projects', WC_QD_TXT ),
@@ -82,7 +85,9 @@ class WC_QD_Post_Types {
     * Registers Post Type Category
     */
    public static function register_donation_category(){
-   
+        if ( taxonomy_exists( WC_QD_CAT ) ) {
+            return;
+        }
         $labels = array(
                 'name'                       => _x( 'Project Categories', 'Taxonomy General Name', WC_QD_TXT ),
                 'singular_name'              => _x( 'Project Category', 'Taxonomy Singular Name', WC_QD_TXT ),
@@ -129,7 +134,9 @@ class WC_QD_Post_Types {
      * Registers Donation Tags
      */
     public static function register_donation_tags() {
-
+        if ( taxonomy_exists( 'wcqd_tags' ) ) {
+            return;
+        }
         $labels = array(
             'name'                       => _x( 'Project Tags', 'Taxonomy General Name', WC_QD_TXT ),
             'singular_name'              => _x( 'Project Tag', 'Taxonomy Singular Name', WC_QD_TXT ),

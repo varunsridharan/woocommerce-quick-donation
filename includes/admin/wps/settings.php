@@ -151,6 +151,7 @@ class WooCommerce_Quick_Donation_Settings {
         }
         
         $this->settings_values = $values;
+        return $values;
     }
 }
 
