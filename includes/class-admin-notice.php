@@ -501,7 +501,6 @@ if ( ! function_exists( 'wc_qd_notice' ) ) {
         $message = str_replace('$msgID$',$msgID,$message);
         $notice->setContent($message);
         $notice->setWrapper($wraper);
-        ///var_dump($notice->getId()); 
         WP_Admin_Notices::getInstance()->addNotice($notice);
     }
 }

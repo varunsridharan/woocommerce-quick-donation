@@ -68,7 +68,7 @@ class WooCommerce_Quick_Donation_SysInfo{
 	 *
 	 * @return void
 	 */
-	static function display() {
+	static function display($type = 'text') {
 		$browser = new Browser();
 		if ( get_bloginfo( 'version' ) < '3.4' ) {
 			$theme_data = get_theme_data( get_stylesheet_directory() . '/style.css' );
@@ -101,10 +101,35 @@ class WooCommerce_Quick_Donation_SysInfo{
 		} else {
 			$WP_REMOTE_POST = 'wp_remote_post() does not work' . "\n";
 		}
+        
+        if($type == 'table'){return self::display_output_table( $browser, $theme, $host, $WP_REMOTE_POST );}
 
 		return self::display_output( $browser, $theme, $host, $WP_REMOTE_POST );
 	}
 
+	/**
+	 * Render System Status
+	 *
+	 * Based on System Status submenu page in Easy Digital Downloads
+	 * by Pippin Williamson
+	 *
+	 * @since  1.0
+	 *
+	 * @param   string  Browser information
+	 * @param   string  Theme Data
+	 * @param   string  Theme name
+	 * @param   string  Host
+	 * @param   string  WP Remote Host
+	 * @return  string  Output of System Status display
+	 */
+	//Render Info Display
+	static function display_output_table( $browser, $theme, $host, $WP_REMOTE_POST ) {
+		global $wpdb;
+		ob_start();
+		include( WC_QD_SSS_VIEWS_DIR . 'table.php' );
+		return ob_get_clean();
+	}
+    
 	/**
 	 * Render System Status
 	 *
