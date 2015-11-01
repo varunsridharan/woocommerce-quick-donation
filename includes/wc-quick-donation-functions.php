@@ -8,7 +8,7 @@ if(! function_exists('wcqd_get_message')){
 } 
 
 if(! function_exists('wcqd_project_limit')){
-    function wcqd_project_limit($project_id = 0, $type = 'max'){
+    function wcqd_project_limit($project_id = 0, $type = 'min'){
         if(empty($project_id)){return false; }
         if($type !== 'min' && $type !== 'max'){return false;}
         $function_toCal = $type.'_project';
@@ -29,11 +29,10 @@ if(! function_exists('wcqd_get_project')){
 }
 
 if(! function_exists('wcqd_get_project_name')){
-    function wcqd_get_project_name($order_id = ''){ 
-        $title = false;
-        $project_id = wcqd_get_project($order_id);
-        wcqd_project_limit($project_id);
+    function wcqd_get_project_name($order_id = '', $default_title = ''){  
+        $project_id = wcqd_get_project($order_id); 
         $title = get_the_title($project_id);
+        if(empty($title)){return $default_title;}
         return $title;
     }
 }
