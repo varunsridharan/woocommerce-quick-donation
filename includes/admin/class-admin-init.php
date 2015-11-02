@@ -139,6 +139,7 @@ class WooCommerce_Quick_Donation_Admin  {
     public function init_admin_class(){
         $this->functions =  new WooCommerce_Quick_Donation_Admin_Function;
         $this->admin_order_page = new WooCommerce_Quick_Donation_Admin_Order_Page_Functions;
+        $this->admin_help = new WooCommerce_Quick_Donation_Admin_Help;
     }
  
     
@@ -180,7 +181,7 @@ class WooCommerce_Quick_Donation_Admin  {
             $args['meta_query'][]['value'] = $_GET['dproj'];
             $args['meta_query'][]['compare'] = '=';
         } 
-        if(isset($_GET['order_status'])){ $args['post_status'] = $_GET['order_status'];}    
+        if(isset($_GET['post_status'])){ $args['post_status'] = $_GET['post_status'];}    
         $wp_query = new WP_Query($args);
         require('wp-donation-listing-table.php');
         tt_render_list_page($wp_query);

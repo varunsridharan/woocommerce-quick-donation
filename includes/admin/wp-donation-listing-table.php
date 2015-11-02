@@ -107,6 +107,88 @@ class WC_Quick_Donation_Listing_Table extends WP_List_Table {
 	public function ajax_user_can() {
 		return current_user_can( get_post_type_object( $this->screen->post_type )->cap->edit_posts );
 	}
+    
+    public function process_bulk_action() {
+        global $pagenow;
+        if(!isset($_REQUEST['_wpnonce'])){return;}
+        $nonce = esc_attr( $_REQUEST['_wpnonce'] );
+        if ( ! wp_verify_nonce( $nonce, 'bulk-' . $this->_args['plural']  ) ) {
+          die( 'Invalid Nonce' );
+        }
+        
+        $post_ids = array_map('intval', $_REQUEST['post']);
+        $doaction = $this->current_action();
+        switch ( $doaction ) {
+            case 'trash':
+                $trashed = $locked = 0;
+
+                foreach( (array) $post_ids as $post_id ) {
+                    if ( !current_user_can( 'delete_post', $post_id) )
+                        wp_die( __('You are not allowed to move this item to the Trash.') );
+
+                    if ( wp_check_post_lock( $post_id ) ) {
+                        $locked++;
+                        continue;
+                    }
+
+                    if ( !wp_trash_post($post_id) )
+                        wp_die( __('Error in moving to Trash.') );
+
+                    $trashed++;
+                }
+
+                //$sendback = add_query_arg( array('trashed' => $trashed, 'ids' => join(',', $post_ids), 'locked' => $locked ), $sendback );
+                break;
+            case 'untrash':
+                $untrashed = 0;
+                foreach( (array) $post_ids as $post_id ) {
+                    if ( !current_user_can( 'delete_post', $post_id) )
+                        wp_die( __('You are not allowed to restore this item from the Trash.') );
+
+                    if ( !wp_untrash_post($post_id) )
+                        wp_die( __('Error in restoring from Trash.') );
+
+                    $untrashed++;
+                }
+                //$sendback = add_query_arg('untrashed', $untrashed, $sendback);
+                break;
+            case 'delete':
+                $deleted = 0;
+                foreach( (array) $post_ids as $post_id ) {
+                    $post_del = get_post($post_id);
+
+                    if ( !current_user_can( 'delete_post', $post_id ) )
+                        wp_die( __('You are not allowed to delete this item.') );
+
+                    if ( $post_del->post_type == 'attachment' ) {
+                        if ( ! wp_delete_attachment($post_id) )
+                            wp_die( __('Error in deleting.') );
+                    } else {
+                        if ( !wp_delete_post($post_id) )
+                            wp_die( __('Error in deleting.') );
+                    }
+                    $deleted++;
+                }
+                $sendback = add_query_arg('deleted', $deleted, $sendback);
+                break;
+            case 'edit':
+                if ( isset($_REQUEST['bulk_edit']) ) {
+                    $done = bulk_edit_posts($_REQUEST);
+
+                    if ( is_array($done) ) {
+                        $done['updated'] = count( $done['updated'] );
+                        $done['skipped'] = count( $done['skipped'] );
+                        $done['locked'] = count( $done['locked'] );
+                        $sendback = add_query_arg( $done, $sendback );
+                    }
+                }
+                break;
+        }
+        $redirect_url = menu_page_url('wc_qd_tools',false);
+        if(isset($_REQUEST['post_status']) && !empty($_REQUEST['post_status'])){$redirect_url .= '&post_status='.$_REQUEST['post_status'];}
+        wp_safe_redirect( admin_url() );
+    exit;
+    }    
 
 	/**
 	 *
@@ -119,7 +201,9 @@ class WC_Quick_Donation_Listing_Table extends WP_List_Table {
 		global $avail_post_stati, $per_page, $mode;
 
 		$avail_post_stati = wp_edit_posts_query();
-
+ 
+        $this->process_bulk_action();
+        
 		$this->set_hierarchical_display( is_post_type_hierarchical( $this->screen->post_type ) && 'menu_order title' == $this->querypost->query['orderby'] );
 
 		$total_items = $this->hierarchical_display ? $this->querypost->post_count : $this->querypost->found_posts;
@@ -225,7 +309,6 @@ class WC_Quick_Donation_Listing_Table extends WP_List_Table {
 
 		$status_links = array();
 		$num_posts = $this->wp_count_posts( $post_type, 'readable' );
-        
 		$class = '';
 		$allposts = '';
 
@@ -259,7 +342,7 @@ class WC_Quick_Donation_Listing_Table extends WP_List_Table {
 			number_format_i18n( $total_posts )
 		);
 
-		$status_links['all'] = "<a href='edit.php?post_type=$post_type{$allposts}'$class>" . $all_inner_html . '</a>';
+		$status_links['all'] = "<a href='edit.php?post_type=wcqd_project&amp;page=wc_qd_orders'$class>" . $all_inner_html . '</a>';
 
 		foreach ( get_post_stati(array('show_in_admin_status_list' => true), 'objects') as $status ) {
 			$class = '';
@@ -275,7 +358,7 @@ class WC_Quick_Donation_Listing_Table extends WP_List_Table {
 			if ( isset($_REQUEST['post_status']) && $status_name == $_REQUEST['post_status'] )
 				$class = ' class="current"';
 
-			$status_links[$status_name] = "<a href='edit.php?post_type=wcqd_project&amp;page=wc_qd_orders&amp;order_status=$status_name'$class>" . sprintf( translate_nooped_plural( $status->label_count, $num_posts->$status_name ), number_format_i18n( $num_posts->$status_name ) ) . '</a>';
+			$status_links[$status_name] = "<a href='edit.php?post_status=$status_name&amp;post_type=wcqd_project&amp;page=wc_qd_orders'$class>" . sprintf( translate_nooped_plural( $status->label_count, $num_posts->$status_name ), number_format_i18n( $num_posts->$status_name ) ) . '</a>';
 		}
 
 		if ( ! empty( $this->sticky_posts_count ) ) {
@@ -315,7 +398,7 @@ class WC_Quick_Donation_Listing_Table extends WP_List_Table {
 
 		return $actions;
 	}
-    
+
     public function get_donation_projects(){
         $args = array(
             'post_type'             => WC_QD_PT,
@@ -334,8 +417,6 @@ class WC_Quick_Donation_Listing_Table extends WP_List_Table {
             }
         echo '</select>';    
     }
-        
-        
 
 	/**
 	 * @global int $cat
@@ -363,7 +444,7 @@ class WC_Quick_Donation_Listing_Table extends WP_List_Table {
 				echo '<label class="screen-reader-text" for="cat">' . __( 'Filter by category' ) . '</label>';
 				wp_dropdown_categories( $dropdown_options );
 			}
-            $this->get_donation_projects();
+			$this->get_donation_projects();
 			/**
 			 * Fires before the Filter button on the Posts and Pages list tables.
 			 *
@@ -527,8 +608,8 @@ class WC_Quick_Donation_Listing_Table extends WP_List_Table {
 		global $per_page;
 
 		if ( empty( $posts ) )
-			$posts = $this->querypost->posts;
-        
+			$posts =  $this->querypost->posts;
+
 		add_filter( 'the_title', 'esc_html' );
 
 		if ( $this->hierarchical_display ) {
@@ -1074,36 +1155,519 @@ class WC_Quick_Donation_Listing_Table extends WP_List_Table {
 		return 'title';
 	}
 
+	/**
+	 * Generates and displays row action links.
+	 *
+	 * @since 4.3.0
+	 * @access protected
+	 *
+	 * @param object $post        Post being acted upon.
+	 * @param string $column_name Current column name.
+	 * @param string $primary     Primary column name.
+	 * @return string Row actions output for posts.
+	 */
+	protected function handle_row_actions( $post, $column_name, $primary ) {
+		if ( $primary !== $column_name ) {
+			return '';
+		}
 
+		$post_type_object = get_post_type_object( $post->post_type );
+		$can_edit_post = current_user_can( 'edit_post', $post->ID );
+		$actions = array();
+
+		if ( $can_edit_post && 'trash' != $post->post_status ) {
+			$actions['edit'] = '<a href="' . get_edit_post_link( $post->ID ) . '" title="' . esc_attr__( 'Edit this item' ) . '">' . __( 'Edit' ) . '</a>';
+			$actions['inline hide-if-no-js'] = '<a href="#" class="editinline" title="' . esc_attr__( 'Edit this item inline' ) . '">' . __( 'Quick&nbsp;Edit' ) . '</a>';
+		}
+
+		if ( current_user_can( 'delete_post', $post->ID ) ) {
+			if ( 'trash' == $post->post_status )
+				$actions['untrash'] = "<a title='" . esc_attr__( 'Restore this item from the Trash' ) . "' href='" . wp_nonce_url( admin_url( sprintf( $post_type_object->_edit_link . '&amp;action=untrash', $post->ID ) ), 'untrash-post_' . $post->ID ) . "'>" . __( 'Restore' ) . "</a>";
+			elseif ( EMPTY_TRASH_DAYS )
+				$actions['trash'] = "<a class='submitdelete' title='" . esc_attr__( 'Move this item to the Trash' ) . "' href='" . get_delete_post_link( $post->ID ) . "'>" . __( 'Trash' ) . "</a>";
+			if ( 'trash' == $post->post_status || !EMPTY_TRASH_DAYS )
+				$actions['delete'] = "<a class='submitdelete' title='" . esc_attr__( 'Delete this item permanently' ) . "' href='" . get_delete_post_link( $post->ID, '', true ) . "'>" . __( 'Delete Permanently' ) . "</a>";
+		}
+
+		if ( $post_type_object->public ) {
+			$title = _draft_or_post_title();
+			if ( in_array( $post->post_status, array( 'pending', 'draft', 'future' ) ) ) {
+				if ( $can_edit_post ) {
+					$preview_link = set_url_scheme( get_permalink( $post->ID ) );
+					/** This filter is documented in wp-admin/includes/meta-boxes.php */
+					$preview_link = apply_filters( 'preview_post_link', add_query_arg( 'preview', 'true', $preview_link ), $post );
+					$actions['view'] = '<a href="' . esc_url( $preview_link ) . '" title="' . esc_attr( sprintf( __( 'Preview &#8220;%s&#8221;' ), $title ) ) . '" rel="permalink">' . __( 'Preview' ) . '</a>';
+				}
+			} elseif ( 'trash' != $post->post_status ) {
+				$actions['view'] = '<a href="' . get_permalink( $post->ID ) . '" title="' . esc_attr( sprintf( __( 'View &#8220;%s&#8221;' ), $title ) ) . '" rel="permalink">' . __( 'View' ) . '</a>';
+			}
+		}
+
+		if ( is_post_type_hierarchical( $post->post_type ) ) {
+
+			/**
+			 * Filter the array of row action links on the Pages list table.
+			 *
+			 * The filter is evaluated only for hierarchical post types.
+			 *
+			 * @since 2.8.0
+			 *
+			 * @param array $actions An array of row action links. Defaults are
+			 *                         'Edit', 'Quick Edit', 'Restore, 'Trash',
+			 *                         'Delete Permanently', 'Preview', and 'View'.
+			 * @param WP_Post $post The post object.
+			 */
+			$actions = apply_filters( 'page_row_actions', $actions, $post );
+		} else {
+
+			/**
+			 * Filter the array of row action links on the Posts list table.
+			 *
+			 * The filter is evaluated only for non-hierarchical post types.
+			 *
+			 * @since 2.8.0
+			 *
+			 * @param array $actions An array of row action links. Defaults are
+			 *                         'Edit', 'Quick Edit', 'Restore, 'Trash',
+			 *                         'Delete Permanently', 'Preview', and 'View'.
+			 * @param WP_Post $post The post object.
+			 */
+			$actions = apply_filters( 'post_row_actions', $actions, $post );
+		}
+
+		return $this->row_actions( $actions );
+	}
 
 	/**
-	 * Generate the table navigation above or below the table
+	 * Outputs the hidden row displayed when inline editing
 	 *
 	 * @since 3.1.0
-	 * @access protected
-	 * @param string $which
+	 *
+	 * @global string $mode
 	 */
-	protected function display_tablenav( $which ) {
-		if ( 'top' == $which )
-			wp_nonce_field( 'bulk-' . $this->_args['plural'] );
-?>
-	<div class="tablenav <?php echo esc_attr( $which ); ?>">
+	public function inline_edit() {
+		global $mode;
 
-		<div class="alignleft actions bulkactions">
-			<?php $this->bulk_actions( $which ); ?>
-		</div>
-<?php
-		$this->extra_tablenav( $which );
-		$this->pagination( $which );
-?>
+		$screen = $this->screen;
 
-		<br class="clear" />
-	</div>
+		$post = get_default_post_to_edit( $screen->post_type );
+		$post_type_object = get_post_type_object( $screen->post_type );
+
+		$taxonomy_names = get_object_taxonomies( $screen->post_type );
+		$hierarchical_taxonomies = array();
+		$flat_taxonomies = array();
+		foreach ( $taxonomy_names as $taxonomy_name ) {
+
+			$taxonomy = get_taxonomy( $taxonomy_name );
+
+			$show_in_quick_edit = $taxonomy->show_in_quick_edit;
+
+			/**
+			 * Filter whether the current taxonomy should be shown in the Quick Edit panel.
+			 *
+			 * @since 4.2.0
+			 *
+			 * @param bool   $show_in_quick_edit Whether to show the current taxonomy in Quick Edit.
+			 * @param string $taxonomy_name      Taxonomy name.
+			 * @param string $post_type          Post type of current Quick Edit post.
+			 */
+			if ( ! apply_filters( 'quick_edit_show_taxonomy', $show_in_quick_edit, $taxonomy_name, $screen->post_type ) ) {
+				continue;
+			}
+
+			if ( $taxonomy->hierarchical )
+				$hierarchical_taxonomies[] = $taxonomy;
+			else
+				$flat_taxonomies[] = $taxonomy;
+		}
+
+		$m = ( isset( $mode ) && 'excerpt' == $mode ) ? 'excerpt' : 'list';
+		$can_publish = current_user_can( $post_type_object->cap->publish_posts );
+		$core_columns = array( 'cb' => true, 'date' => true, 'title' => true, 'categories' => true, 'tags' => true, 'comments' => true, 'author' => true );
+
+	?>
+
+	<form method="get"><table style="display: none"><tbody id="inlineedit">
+		<?php
+		$hclass = count( $hierarchical_taxonomies ) ? 'post' : 'page';
+		$bulk = 0;
+		while ( $bulk < 2 ) { ?>
+
+		<tr id="<?php echo $bulk ? 'bulk-edit' : 'inline-edit'; ?>" class="inline-edit-row inline-edit-row-<?php echo "$hclass inline-edit-" . $screen->post_type;
+			echo $bulk ? " bulk-edit-row bulk-edit-row-$hclass bulk-edit-{$screen->post_type}" : " quick-edit-row quick-edit-row-$hclass inline-edit-{$screen->post_type}";
+		?>" style="display: none"><td colspan="<?php echo $this->get_column_count(); ?>" class="colspanchange">
+
+		<fieldset class="inline-edit-col-left"><div class="inline-edit-col">
+			<h4><?php echo $bulk ? __( 'Bulk Edit' ) : __( 'Quick Edit' ); ?></h4>
+	<?php
+
+	if ( post_type_supports( $screen->post_type, 'title' ) ) :
+		if ( $bulk ) : ?>
+			<div id="bulk-title-div">
+				<div id="bulk-titles"></div>
+			</div>
+
+	<?php else : // $bulk ?>
+
+			<label>
+				<span class="title"><?php _e( 'Title' ); ?></span>
+				<span class="input-text-wrap"><input type="text" name="post_title" class="ptitle" value="" /></span>
+			</label>
+
+			<label>
+				<span class="title"><?php _e( 'Slug' ); ?></span>
+				<span class="input-text-wrap"><input type="text" name="post_name" value="" /></span>
+			</label>
+
+	<?php endif; // $bulk
+	endif; // post_type_supports title ?>
+
+	<?php if ( !$bulk ) : ?>
+			<fieldset class="inline-edit-date">
+			<legend><span class="title"><?php _e( 'Date' ); ?></span></legend>
+				<?php touch_time( 1, 1, 0, 1 ); ?>
+			</fieldset>
+			<br class="clear" />
+	<?php endif; // $bulk
+
+		if ( post_type_supports( $screen->post_type, 'author' ) ) :
+			$authors_dropdown = '';
+
+			if ( is_super_admin() || current_user_can( $post_type_object->cap->edit_others_posts ) ) :
+				$users_opt = array(
+					'hide_if_only_one_author' => false,
+					'who' => 'authors',
+					'name' => 'post_author',
+					'class'=> 'authors',
+					'multi' => 1,
+					'echo' => 0
+				);
+				if ( $bulk )
+					$users_opt['show_option_none'] = __( '&mdash; No Change &mdash;' );
+
+				if ( $authors = wp_dropdown_users( $users_opt ) ) :
+					$authors_dropdown  = '<label class="inline-edit-author">';
+					$authors_dropdown .= '<span class="title">' . __( 'Author' ) . '</span>';
+					$authors_dropdown .= $authors;
+					$authors_dropdown .= '</label>';
+				endif;
+			endif; // authors
+	?>
+
+	<?php if ( !$bulk ) echo $authors_dropdown;
+	endif; // post_type_supports author
+
+	if ( !$bulk && $can_publish ) :
+	?>
+
+			<div class="inline-edit-group">
+				<label class="alignleft">
+					<span class="title"><?php _e( 'Password' ); ?></span>
+					<span class="input-text-wrap"><input type="text" name="post_password" class="inline-edit-password-input" value="" /></span>
+				</label>
+
+				<em class="alignleft inline-edit-or">
+					<?php
+					/* translators: Between password field and private checkbox on post quick edit interface */
+					_e( '&ndash;OR&ndash;' );
+					?>
+				</em>
+				<label class="alignleft inline-edit-private">
+					<input type="checkbox" name="keep_private" value="private" />
+					<span class="checkbox-title"><?php _e( 'Private' ); ?></span>
+				</label>
+			</div>
+
+	<?php endif; ?>
+
+		</div></fieldset>
+
+	<?php if ( count( $hierarchical_taxonomies ) && !$bulk ) : ?>
+
+		<fieldset class="inline-edit-col-center inline-edit-categories"><div class="inline-edit-col">
+
+	<?php foreach ( $hierarchical_taxonomies as $taxonomy ) : ?>
+
+			<span class="title inline-edit-categories-label"><?php echo esc_html( $taxonomy->labels->name ) ?></span>
+			<input type="hidden" name="<?php echo ( $taxonomy->name == 'category' ) ? 'post_category[]' : 'tax_input[' . esc_attr( $taxonomy->name ) . '][]'; ?>" value="0" />
+			<ul class="cat-checklist <?php echo esc_attr( $taxonomy->name )?>-checklist">
+				<?php wp_terms_checklist( null, array( 'taxonomy' => $taxonomy->name ) ) ?>
+			</ul>
+
+	<?php endforeach; //$hierarchical_taxonomies as $taxonomy ?>
+
+		</div></fieldset>
+
+	<?php endif; // count( $hierarchical_taxonomies ) && !$bulk ?>
+
+		<fieldset class="inline-edit-col-right"><div class="inline-edit-col">
+
+	<?php
+		if ( post_type_supports( $screen->post_type, 'author' ) && $bulk )
+			echo $authors_dropdown;
+
+		if ( post_type_supports( $screen->post_type, 'page-attributes' ) ) :
+
+			if ( $post_type_object->hierarchical ) :
+		?>
+			<label>
+				<span class="title"><?php _e( 'Parent' ); ?></span>
+	<?php
+		$dropdown_args = array(
+			'post_type'         => $post_type_object->name,
+			'selected'          => $post->post_parent,
+			'name'              => 'post_parent',
+			'show_option_none'  => __( 'Main Page (no parent)' ),
+			'option_none_value' => 0,
+			'sort_column'       => 'menu_order, post_title',
+		);
+
+		if ( $bulk )
+			$dropdown_args['show_option_no_change'] =  __( '&mdash; No Change &mdash;' );
+
+		/**
+		 * Filter the arguments used to generate the Quick Edit page-parent drop-down.
+		 *
+		 * @since 2.7.0
+		 *
+		 * @see wp_dropdown_pages()
+		 *
+		 * @param array $dropdown_args An array of arguments.
+		 */
+		$dropdown_args = apply_filters( 'quick_edit_dropdown_pages_args', $dropdown_args );
+
+		wp_dropdown_pages( $dropdown_args );
+	?>
+			</label>
+
+	<?php
+			endif; // hierarchical
+
+			if ( !$bulk ) : ?>
+
+			<label>
+				<span class="title"><?php _e( 'Order' ); ?></span>
+				<span class="input-text-wrap"><input type="text" name="menu_order" class="inline-edit-menu-order-input" value="<?php echo $post->menu_order ?>" /></span>
+			</label>
+
+	<?php	endif; // !$bulk
+
+			if ( 'page' == $screen->post_type ) :
+	?>
+
+			<label>
+				<span class="title"><?php _e( 'Template' ); ?></span>
+				<select name="page_template">
+	<?php	if ( $bulk ) : ?>
+					<option value="-1"><?php _e( '&mdash; No Change &mdash;' ); ?></option>
+	<?php	endif; // $bulk ?>
+    				<?php
+					/** This filter is documented in wp-admin/includes/meta-boxes.php */
+					$default_title = apply_filters( 'default_page_template_title',  __( 'Default Template' ), 'quick-edit' );
+    				?>
+					<option value="default"><?php echo esc_html( $default_title ); ?></option>
+					<?php page_template_dropdown() ?>
+				</select>
+			</label>
+
+	<?php
+			endif; // page post_type
+		endif; // page-attributes
+	?>
+
+	<?php if ( count( $flat_taxonomies ) && !$bulk ) : ?>
+
+	<?php foreach ( $flat_taxonomies as $taxonomy ) : ?>
+		<?php if ( current_user_can( $taxonomy->cap->assign_terms ) ) : ?>
+			<label class="inline-edit-tags">
+				<span class="title"><?php echo esc_html( $taxonomy->labels->name ) ?></span>
+				<textarea cols="22" rows="1" name="tax_input[<?php echo esc_attr( $taxonomy->name )?>]" class="tax_input_<?php echo esc_attr( $taxonomy->name )?>"></textarea>
+			</label>
+		<?php endif; ?>
+
+	<?php endforeach; //$flat_taxonomies as $taxonomy ?>
+
+	<?php endif; // count( $flat_taxonomies ) && !$bulk  ?>
+
+	<?php if ( post_type_supports( $screen->post_type, 'comments' ) || post_type_supports( $screen->post_type, 'trackbacks' ) ) :
+		if ( $bulk ) : ?>
+
+			<div class="inline-edit-group">
+		<?php if ( post_type_supports( $screen->post_type, 'comments' ) ) : ?>
+			<label class="alignleft">
+				<span class="title"><?php _e( 'Comments' ); ?></span>
+				<select name="comment_status">
+					<option value=""><?php _e( '&mdash; No Change &mdash;' ); ?></option>
+					<option value="open"><?php _e( 'Allow' ); ?></option>
+					<option value="closed"><?php _e( 'Do not allow' ); ?></option>
+				</select>
+			</label>
+		<?php endif; if ( post_type_supports( $screen->post_type, 'trackbacks' ) ) : ?>
+			<label class="alignright">
+				<span class="title"><?php _e( 'Pings' ); ?></span>
+				<select name="ping_status">
+					<option value=""><?php _e( '&mdash; No Change &mdash;' ); ?></option>
+					<option value="open"><?php _e( 'Allow' ); ?></option>
+					<option value="closed"><?php _e( 'Do not allow' ); ?></option>
+				</select>
+			</label>
+		<?php endif; ?>
+			</div>
+
+	<?php else : // $bulk ?>
+
+			<div class="inline-edit-group">
+			<?php if ( post_type_supports( $screen->post_type, 'comments' ) ) : ?>
+				<label class="alignleft">
+					<input type="checkbox" name="comment_status" value="open" />
+					<span class="checkbox-title"><?php _e( 'Allow Comments' ); ?></span>
+				</label>
+			<?php endif; if ( post_type_supports( $screen->post_type, 'trackbacks' ) ) : ?>
+				<label class="alignleft">
+					<input type="checkbox" name="ping_status" value="open" />
+					<span class="checkbox-title"><?php _e( 'Allow Pings' ); ?></span>
+				</label>
+			<?php endif; ?>
+			</div>
+
+	<?php endif; // $bulk
+	endif; // post_type_supports comments or pings ?>
+
+			<div class="inline-edit-group">
+				<label class="inline-edit-status alignleft">
+					<span class="title"><?php _e( 'Status' ); ?></span>
+					<select name="_status">
+	<?php if ( $bulk ) : ?>
+						<option value="-1"><?php _e( '&mdash; No Change &mdash;' ); ?></option>
+	<?php endif; // $bulk ?>
+					<?php if ( $can_publish ) : // Contributors only get "Unpublished" and "Pending Review" ?>
+						<option value="publish"><?php _e( 'Published' ); ?></option>
+						<option value="future"><?php _e( 'Scheduled' ); ?></option>
+	<?php if ( $bulk ) : ?>
+						<option value="private"><?php _e( 'Private' ) ?></option>
+	<?php endif; // $bulk ?>
+					<?php endif; ?>
+						<option value="pending"><?php _e( 'Pending Review' ); ?></option>
+						<option value="draft"><?php _e( 'Draft' ); ?></option>
+					</select>
+				</label>
+
+	<?php if ( 'post' == $screen->post_type && $can_publish && current_user_can( $post_type_object->cap->edit_others_posts ) ) : ?>
+
+	<?php	if ( $bulk ) : ?>
+
+				<label class="alignright">
+					<span class="title"><?php _e( 'Sticky' ); ?></span>
+					<select name="sticky">
+						<option value="-1"><?php _e( '&mdash; No Change &mdash;' ); ?></option>
+						<option value="sticky"><?php _e( 'Sticky' ); ?></option>
+						<option value="unsticky"><?php _e( 'Not Sticky' ); ?></option>
+					</select>
+				</label>
+
+	<?php	else : // $bulk ?>
+
+				<label class="alignleft">
+					<input type="checkbox" name="sticky" value="sticky" />
+					<span class="checkbox-title"><?php _e( 'Make this post sticky' ); ?></span>
+				</label>
+
+	<?php	endif; // $bulk ?>
+
+	<?php endif; // 'post' && $can_publish && current_user_can( 'edit_others_cap' ) ?>
+
+			</div>
+
+	<?php
+
+	if ( $bulk && current_theme_supports( 'post-formats' ) && post_type_supports( $screen->post_type, 'post-formats' ) ) {
+		$post_formats = get_theme_support( 'post-formats' );
+
+		?>
+		<label class="alignleft">
+		<span class="title"><?php _ex( 'Format', 'post format' ); ?></span>
+		<select name="post_format">
+			<option value="-1"><?php _e( '&mdash; No Change &mdash;' ); ?></option>
+			<option value="0"><?php echo get_post_format_string( 'standard' ); ?></option>
+			<?php
+
+			foreach ( $post_formats[0] as $format ) {
+				?>
+				<option value="<?php echo esc_attr( $format ); ?>"><?php echo esc_html( get_post_format_string( $format ) ); ?></option>
+				<?php
+			}
+
+			?>
+		</select></label>
+	<?php
+
+	}
+
+	?>
+
+		</div></fieldset>
+
+	<?php
+		list( $columns ) = $this->get_column_info();
+
+		foreach ( $columns as $column_name => $column_display_name ) {
+			if ( isset( $core_columns[$column_name] ) )
+				continue;
+
+			if ( $bulk ) {
+
+				/**
+				 * Fires once for each column in Bulk Edit mode.
+				 *
+				 * @since 2.7.0
+				 *
+				 * @param string  $column_name Name of the column to edit.
+				 * @param WP_Post $post_type   The post type slug.
+				 */
+				do_action( 'bulk_edit_custom_box', $column_name, $screen->post_type );
+			} else {
+
+				/**
+				 * Fires once for each column in Quick Edit mode.
+				 *
+				 * @since 2.7.0
+				 *
+				 * @param string  $column_name Name of the column to edit.
+				 * @param WP_Post $post_type   The post type slug.
+				 */
+				do_action( 'quick_edit_custom_box', $column_name, $screen->post_type );
+			}
+
+		}
+	?>
+		<p class="submit inline-edit-save">
+			<button type="button" class="button-secondary cancel alignleft"><?php _e( 'Cancel' ); ?></button>
+			<?php if ( ! $bulk ) {
+				wp_nonce_field( 'inlineeditnonce', '_inline_edit', false );
+				?>
+				<button type="button" class="button-primary save alignright"><?php _e( 'Update' ); ?></button>
+				<span class="spinner"></span>
+			<?php } else {
+				submit_button( __( 'Update' ), 'button-primary alignright', 'bulk_edit', false );
+			} ?>
+			<input type="hidden" name="post_view" value="<?php echo esc_attr( $m ); ?>" />
+			<input type="hidden" name="screen" value="<?php echo esc_attr( $screen->id ); ?>" />
+			<?php if ( ! $bulk && ! post_type_supports( $screen->post_type, 'author' ) ) { ?>
+				<input type="hidden" name="post_author" value="<?php echo esc_attr( $post->post_author ); ?>" />
+			<?php } ?>
+			<span class="error" style="display:none"></span>
+			<br class="clear" />
+		</p>
+		</td></tr>
+	<?php
+		$bulk++;
+		}
+?>
+		</tbody></table></form>
 <?php
-	}    
-	
-    
+	}
 }
+
 
 function tt_render_list_page($shop = ''){  
     $wc_qd_donation_orders_listing = new WC_Quick_Donation_Listing_Table($shop);
@@ -1113,7 +1677,7 @@ function tt_render_list_page($shop = ''){
     <div id="icon-users" class="icon32"><br/></div>
     <h2>Donations</h2>
     <form id="movies-filter" method="get"> 
-        <input type="hidden" name="post_type" value="wc_qd_orders" />
+        <input type="hidden" name="post_type" value="wcqd_project" />
         <input type="hidden" name="page" value="<?php echo $_REQUEST['page'] ?>" />
         <?php $wc_qd_donation_orders_listing->search_box(__('Search Donations',WC_QD_TXT), 'post' ); ?>
         <?php  
