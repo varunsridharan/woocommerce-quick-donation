@@ -23,8 +23,9 @@ p.submit {
     text-align: left;
 }
 
-textarea#sss-textarea {
-	height: 500px;
+textarea#wcqdssstextarea {
+	height: 450px;
+    width: 100%;
 	font-family: Menlo,Monaco,monospace;
 	background: 0 0;
 	white-space: pre;

@@ -228,14 +228,28 @@ Client IP Address:        <?php echo sss_get_ip() . "\n"; ?>
 Simple Donation Product Exist : <?php echo WC_QD()->donation_product_exist_public(); ?>
 
 <?php
-$settings = WC_QD()->settings()->get_settings();
-foreach($settings as $id => $setting){
-    $value = $setting;
-    if(is_array($setting)){$value = json_encode($setting);}
-    echo $id .' : '.$value."\n";
-}
 
+foreach(WC_QD()->settings()->settings_field as $setting){
+    foreach($setting as $setK => $set){
+        echo "\n ".'-- '.$setK.' Settings'. " \n"; 
+        foreach($set as $s){
+            $value = WC_QD()->settings()->get_option($s['id']);
+            if(is_array($value)) {$value = json_encode($value);}
+            if(empty($value)){$value = 'null';}
+            echo $s['id'].' : '.$value." \n"; 
+        }
+    }
+}
 ?>
 
+## Template Override Information
 
+<?php 
+$override = WC_QD()->admin()->functions->get_OverRided();
+foreach($override as $temp){
+    $is_old = ''; 
+    if($temp['is_old']) { $is_old = '[You are using an outdated version. kindly update it]'; }
+    echo "".$temp['file']." || Core Version ".$temp['corev']." || Theme Version".$temp['themev']." $is_old". " \n"; 
+}
+?> 
 ### End WooCommerce Quick Donation Status ###

@@ -490,7 +490,7 @@ if(!has_action('init', array('WP_Admin_Notices', 'getInstance'))){
 if ( ! function_exists( 'wc_qd_notice' ) ) {
     function wc_qd_notice( $message, $type = 'update',$args = array()) {
         $notice = '';
-        $defaults = array('times' => 11,'screen' => array(),'users' => array(), 'wraper' => true);    
+        $defaults = array('times' => 1,'screen' => array(),'users' => array(), 'wraper' => true);    
         $args = wp_parse_args( $args, $defaults );
         extract($args);
         if($type == 'error'){$notice = new WP_Error_Notice($message,$times, $screen, $users);}

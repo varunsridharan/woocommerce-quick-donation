@@ -267,7 +267,7 @@ class WooCommerce_Quick_Donation {
 	 * string $type ajax, frontend or admin
 	 * @return bool
 	 */
-	private function is_request( $type ) {
+	public function is_request( $type ) {
 		switch ( $type ) {
 			case 'admin' :
 				return is_admin();

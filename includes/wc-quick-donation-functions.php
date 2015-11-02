@@ -55,7 +55,7 @@ if(! function_exists('wcqd_get_project_name')){
      * @return int / boolean  [returns project id if exist or returns false]
      */
     function wcqd_get_project_name($order_id = '', $default_title = ''){  
-        $project_id = wcqd_get_project($order_id); 
+        $project_id = wcqd_get_project_from_order($order_id); 
         $title = get_the_title($project_id);
         if(empty($title)){return $default_title;}
         return $title;
