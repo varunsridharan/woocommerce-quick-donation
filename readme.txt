@@ -6,7 +6,7 @@ Requires at least: 3.0 or higher
 Tested up to: 4.4
 WC requires at least: 1.0
 WC tested up to: 2.4.8
-Stable tag: 1.3.5 Beta
+Stable tag: 1.3.6 Beta
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -185,69 +185,92 @@ Yes you can! Join in on our <a href="https://github.com/technofreaky/woocomerce-
 
 
 == Changelog ==
-= 1.3.5 BETA =
-**Fixes**
+= 1.3.6 =
+ 
+* **Fixes** - Fixed Count Notification Bubble Count
+* **Fixes** - Metabox Error While Creating New Order Via Admin
+* **Fixes** - Fixed Template Load Issue
+* **Fixes** - Fixed issue when donation alredy exit in cart & redirect to checkout
+* **Tweaks** - Remodified WP LIST TABLE For Donation Listing
+* **Tweaks** - Renamed WC_TEMPLATE To WC_CORE_TEMPLATE
+* **Tweaks** - Changed Order Text To Donation in Order Details Metabox
+* **Tweaks** - Loaded Admin Notice Before
+* **Tweaks** - Moved Template File Check From admin functions to plugin install class
+* **Added** - Added Project & Doner Based Filter In Admin Listing
+* **Added** - New function to get user based donation ids get_user_donations_ids
+* **Added** - New template to list donations `myaccount/my-donations.php`
+* **Added** - Seperate Page For Listing Donors
+* **Added** - Function To Get Grouped Donation IDS By User & Project
+* **Added** - 3 New Templates Added Used for my account in front end [ `myaccount/view-donation.php, order/order-details-item.php, order/order-details-customer.php`]
+* **Added** - Plugin Template versioning #26
+* **Added** - Checked If WooCommerce Is Active [#23]
+* **Added** - FR Languages Translations
+* **Added** - Included Sys Info plugin
+* **Added** - Auto Flush Permalink
+* **Added** - wcqd_project_limit  function to get limit of a project
+* **Added** - wcqd_get_project_name from order id
+* **Added** - wcqd_get_project to get project id from order id
+* **Added** - Added default user configurable title for easy use
+* **Added** - Added Custom HEADER & FOOTER For Emails
 
-* Metabox Error While Creating New Order Via Admin
-* Fixed Count Notification Bubble Count
-* Minor Bug Fix
+**Issues Link**
+
+[#Shortcode position and page content ](https://wordpress.org/support/topic/shortcode-position-and-page-content?replies=7)
+
+[#21](https://github.com/technofreaky/woocomerce-quick-donation/issues/21)
+
+[#23](https://github.com/technofreaky/woocomerce-quick-donation/issues/23)
+
+[#26](https://github.com/technofreaky/woocomerce-quick-donation/issues/26)
+
+[#27](https://github.com/technofreaky/woocomerce-quick-donation/issues/27)
+
+[#33](https://github.com/technofreaky/woocomerce-quick-donation/issues/33)
+
+[#34](https://github.com/technofreaky/woocomerce-quick-donation/issues/34)
+
+[#35](https://github.com/technofreaky/woocomerce-quick-donation/issues/35)
+
+[#38](https://github.com/technofreaky/woocomerce-quick-donation/issues/38)
+
+= 1.3.5 BETA =
+* **Fixes** - Metabox Error While Creating New Order Via Admin
+* **Fixes** - Fixed Count Notification Bubble Count
+* **Fixes** - Minor Bug Fix
 
 
 = 1.3.4 BETA =
-**Fixes**
-
-* Menu Error In Front End When Logged In Using Custom ID
-
-**Tweaks**
-
-* Removed Unwated Metabox For Donation order Page
-* Added New Custom Metabox For Donation Order details
-* Added Few Functions In WC Quick Donation DB Class
-* Modifed Core WC Quick Donation Templates
-
-**Added**
-
-* Custom Cart Page Template Support
-* Custom Order Thank You Page & Order Details Tables Support
+* **Fixes** - Menu Error In Front End When Logged In Using Custom ID
+* **Tweaks** - Removed Unwated Metabox For Donation order Page
+* **Tweaks** - Modifed Core WC Quick Donation Templates
+* **Added** - Custom Cart Page Template Support
+* **Added** - New Custom Metabox For Donation Order details
+* **Added** - Few Functions In WC Quick Donation DB Class
+* **Added** - Custom Order Thank You Page & Order Details Tables Support
 
 = 1.3.3 BETA =
-**Fixes**
-
-* Moved Few DB functions from Functions class to db class
-* Fixed template override issue [https://github.com/technofreaky/woocomerce-quick-donation/issues/12]
-* Removed Unwated Metabox For Donation order Page
+* **Fixes** - Moved Few DB functions from Functions class to db class
+* **Fixes** - Fixed template override issue [https://github.com/technofreaky/woocomerce-quick-donation/issues/12]
+* **Fixes** - Removed Unwated Metabox For Donation order Page
 
 = 1.3.2 BETA =
-
-**New**
-
-* Added Quick Links At Plugin Listing Table
-* Error Message When User Trying To Add Another Donation To Cart
-* Already Exist Donation Error Message Option Added In Settings
-
-**Tweaks**
-
-* Standardized Coding 
-* Settings Page Modified
-
-**Fixes**
-
-* Changed `Donation` Name To `Project Name` at Checkout in Review Order Section
-* Quick Donation Menu Not Listed In Some WP Settings.
+* **New** - Added Quick Links At Plugin Listing Table
+* **New** - Error Message When User Trying To Add Another Donation To Cart
+* **New** - Already Exist Donation Error Message Option Added In Settings
+* **Tweaks** - Standardized Coding 
+* **Tweaks** - Settings Page Modified
+* **Fixes** - Changed `Donation` Name To `Project Name` at Checkout in Review Order Section
+* **Fixes** - Quick Donation Menu Not Listed In Some WP Settings.
 
 = 1.3.1 BETA =
-**Fixes**
-
-* Error At WooCommerce Settings Page
+* **Fixes** - Error At WooCommerce Settings Page
 
 = 1.3 Beta =
-**New**
-
-* Created Separate Custom Post Type For Donation
-* Created Separate Custom Settings Page
-* Total Plugin Redeveloped
-* Min & Max Donation Amount Based On Project
-* Separate Page For Donation Orders
+* **New** - Created Separate Custom Post Type For Donation
+* **New** - Created Separate Custom Settings Page
+* **New** - Total Plugin Redeveloped
+* **New** - Min & Max Donation Amount Based On Project
+* **New** - Separate Page For Donation Orders
 
 = 1.2 =
 * Added Widget For Donation Form
