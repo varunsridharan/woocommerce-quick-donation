@@ -1,11 +1,13 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: WC Quick Donation\n"
-"POT-Creation-Date: 2015-10-28 18:04+0100\n"
-"PO-Revision-Date: 2015-10-28 18:47+0100\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/woocommerce-quick-"
+"donation\n"
+"POT-Creation-Date: 2015-10-29 13:56:30+00:00\n"
+"PO-Revision-Date: 2015-11-05 15:56+0100\n"
 "Last-Translator: Pierre Blarre <pierre@negative-network.com>\n"
 "Language-Team: Negative Network <contact@negative-network.com>\n"
-"Language: en\n"
+"Language: fr_FR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -16,9 +18,19 @@ msgstr ""
 "X-Poedit-KeywordsList: _e;__\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: includes/admin/class-admin-functions.php:64
-msgid "Remove "
-msgstr "Retirer"
+#: includes/admin/class-admin-functions.php:59
+msgid ""
+"<strong>Your theme (%s) contains outdated copies of some WooCommerce Quick "
+"Donation template files.</strong> These files may need updating to ensure "
+"they are compatible with the current version of WooCommerce Quick Donation. "
+"You can see which files are affected from the %ssystem status page%s. If in "
+"doubt, check with the author of the theme."
+msgstr ""
+"<strong>Votre thème (%s) contient d'anciennes copies des templates de "
+"WooCommerce Quick Donation. </strong> Ces fichiers nécessitent peut-être "
+"d'être mis à jour pour assurer la compatibilité avec la version actuelle de "
+"WooCommerce Quick Donation. Vous pouvez consulter les fichiers concernés sur "
+"%ssystem status page%s. Dans le doute, consulter l'auteur de votre thème."
 
 #: includes/admin/class-admin-init.php:49
 msgid "Donation Orders"
@@ -26,7 +38,7 @@ msgstr "Commandes Donations"
 
 #: includes/admin/class-admin-init.php:50
 msgid "Donation's"
-msgstr "de la donation"
+msgstr "Donations"
 
 #: includes/admin/class-admin-init.php:56
 #: includes/admin/class-admin-init.php:57
@@ -68,16 +80,22 @@ msgstr "Donateur"
 
 #: includes/admin/class-admin-order-page.php:44
 #: template/cart/donation-cart.php:27 template/myaccount/my-donations.php:33
+#: template/myaccount/my-donations.php:54
 #: template/order/donation-order-details.php:20
 msgid "Project"
 msgstr "Projet"
 
+#: includes/admin/class-admin-order-page.php:68
+msgctxt "Order number by X"
+msgid "%s "
+msgstr "%s"
+
 #: includes/admin/class-admin-order-page.php:90
+#: includes/admin/metabox/class-donation-info-metabox.php:231
 msgid "Guest"
 msgstr "Invité"
 
 #: includes/admin/class-admin-order-page.php:104
-#, php-format
 msgid "%s Data"
 msgstr "%s des données"
 
@@ -201,12 +219,10 @@ msgid "Order"
 msgstr "Commande"
 
 #: includes/admin/metabox/class-donation-info-metabox.php:169
-#, php-format
 msgid "%s %s details"
 msgstr "%s %s les détails"
 
 #: includes/admin/metabox/class-donation-info-metabox.php:173
-#, php-format
 msgid "Payment via %s"
 msgstr "Paiement via %s"
 
@@ -215,16 +231,26 @@ msgid "Customer IP"
 msgstr "IP du client"
 
 #: includes/admin/metabox/class-donation-info-metabox.php:192
-msgid "General Details"
-msgstr "Détails généraux"
+#: includes/admin/metabox/class-donation-info-metabox.php:320
+#: template/order/donation-order-details.php:16
+msgid "Donation Details"
+msgstr "Détails du don"
 
 #: includes/admin/metabox/class-donation-info-metabox.php:194
-msgid "Order date:"
-msgstr "Date de commande:"
+msgid "Donation date:"
+msgstr "Date de la donation:"
+
+#: includes/admin/metabox/class-donation-info-metabox.php:196
+msgid "h"
+msgstr "h"
+
+#: includes/admin/metabox/class-donation-info-metabox.php:196
+msgid "m"
+msgstr "m"
 
 #: includes/admin/metabox/class-donation-info-metabox.php:199
-msgid "Order status:"
-msgstr "Statut de la commande:"
+msgid "Donation status:"
+msgstr "Statut de la donation"
 
 #: includes/admin/metabox/class-donation-info-metabox.php:210
 msgid "Customer:"
@@ -240,7 +266,7 @@ msgid "Donor Details"
 msgstr "Coordonnées du donateur"
 
 #: includes/admin/metabox/class-donation-info-metabox.php:238
-#: includes/admin/wp-donation-listing-table.php:304
+#: includes/admin/wp-donation-listing-table.php:305
 #: includes/admin/wp-donors-listing-table.php:349
 msgid "Edit"
 msgstr "Modifier"
@@ -260,7 +286,7 @@ msgid "No billing address set."
 msgstr "Aucune adresse de facturation."
 
 #: includes/admin/metabox/class-donation-info-metabox.php:286
-#: template/checkout/donation-thankyou.php:50
+#: template/checkout/donation-thankyou.php:49
 msgid "Payment Method:"
 msgstr "Mode de paiement:"
 
@@ -278,11 +304,6 @@ msgstr "Autre"
 msgid "Transaction ID"
 msgstr "ID de transaction"
 
-#: includes/admin/metabox/class-donation-info-metabox.php:320
-#: template/order/donation-order-details.php:16
-msgid "Donation Details"
-msgstr "Détails du don"
-
 #: includes/admin/metabox/class-donation-info-metabox.php:328
 #: includes/admin/metabox/html/html-donation-info.php:63
 #: includes/admin/metabox/html/html-donation-info.php:78
@@ -294,13 +315,16 @@ msgid "Project Name"
 msgstr "Nom du projet"
 
 #: includes/admin/metabox/html/html-donation-info.php:35
-#: template/donation-form.php:13
 msgid "Donation Amount"
 msgstr "Montant du don"
 
 #: includes/admin/metabox/html/html-donation-info.php:61
 msgid "No shipping address set."
 msgstr "Aucune adresse de livraison."
+
+#: includes/admin/metabox/html/html-donation-info.php:79
+msgid "Customer's notes about the order"
+msgstr "Notes du client sur la commande"
 
 #: includes/admin/metabox_framework/inc/common.php:53
 msgid "Documentation"
@@ -341,6 +365,23 @@ msgstr "Non"
 msgid "Select Files"
 msgstr "Sélectionnez les fichiers"
 
+#: includes/admin/metabox_framework/inc/fields/file-advanced.php:66
+msgctxt "file upload"
+msgid "Select or Upload Files"
+msgstr "Sélectionnez ou téléchargez des fichiers"
+
+#: includes/admin/metabox_framework/inc/fields/file-advanced.php:103
+#: includes/admin/metabox_framework/inc/fields/file.php:168
+msgctxt "file upload"
+msgid "Delete"
+msgstr "Effacer"
+
+#: includes/admin/metabox_framework/inc/fields/file-advanced.php:104
+#: includes/admin/metabox_framework/inc/fields/file.php:169
+msgctxt "file upload"
+msgid "Edit"
+msgstr "Modifier"
+
 #: includes/admin/metabox_framework/inc/fields/file-input.php:17
 msgid "Select File"
 msgstr "Choisir le fichier"
@@ -356,12 +397,10 @@ msgid "Remove"
 msgstr "Retirer"
 
 #: includes/admin/metabox_framework/inc/fields/file.php:19
-#, php-format
 msgid "You may only upload maximum %d file"
 msgstr "Vous ne pouvez pas télécharger plus de %d fichier"
 
 #: includes/admin/metabox_framework/inc/fields/file.php:20
-#, php-format
 msgid "You may only upload maximum %d files"
 msgstr "Vous ne pouvez pas télécharger plus de %d fichiers"
 
@@ -369,9 +408,55 @@ msgstr "Vous ne pouvez pas télécharger plus de %d fichiers"
 msgid "Error: Cannot delete file"
 msgstr "Erreur: Impossible de supprimer le fichier"
 
+#: includes/admin/metabox_framework/inc/fields/file.php:111
+msgctxt "file upload"
+msgid "Upload Files"
+msgstr "Télecharger des fichiers"
+
+#: includes/admin/metabox_framework/inc/fields/file.php:112
+msgctxt "file upload"
+msgid "+ Add new file"
+msgstr "+ Ajouter un nouveau fichier"
+
 #: includes/admin/metabox_framework/inc/fields/image-advanced.php:23
 msgid "Select Images"
 msgstr "Sélectionner les images"
+
+#: includes/admin/metabox_framework/inc/fields/image-advanced.php:71
+msgctxt "image upload"
+msgid "Select or Upload Images"
+msgstr "Sélectionner ou télécharger les images"
+
+#: includes/admin/metabox_framework/inc/fields/image-advanced.php:108
+#: includes/admin/metabox_framework/inc/fields/image.php:136
+msgctxt "image upload"
+msgid "Delete"
+msgstr "Effacer"
+
+#: includes/admin/metabox_framework/inc/fields/image-advanced.php:109
+#: includes/admin/metabox_framework/inc/fields/image.php:137
+msgctxt "image upload"
+msgid "Edit"
+msgstr "Modifier"
+
+#: includes/admin/metabox_framework/inc/fields/image.php:70
+#: includes/admin/metabox_framework/inc/fields/thickbox-image.php:34
+msgctxt "image upload"
+msgid "Upload Images"
+msgstr "Télécharger les images"
+
+#: includes/admin/metabox_framework/inc/fields/image.php:71
+msgctxt "image upload"
+msgid "+ Add new image"
+msgstr "+ Ajouter une nouvelle image"
+
+#: includes/admin/metabox_framework/inc/fields/key-value.php:19
+msgid "Key"
+msgstr "Clé"
+
+#: includes/admin/metabox_framework/inc/fields/key-value.php:20
+msgid "Value"
+msgstr "Valeur"
 
 #: includes/admin/metabox_framework/inc/fields/map.php:46
 msgid "Find Address"
@@ -385,13 +470,32 @@ msgstr "Code embed HTML non disponible."
 msgid "Preview"
 msgstr "Aperçu"
 
+#: includes/admin/metabox_framework/inc/fields/plupload-image.php:105
+msgctxt "image upload"
+msgid "Drop images here"
+msgstr "Faîtes glisser des images ici"
+
+#: includes/admin/metabox_framework/inc/fields/plupload-image.php:106
+msgctxt "image upload"
+msgid "or"
+msgstr "ou"
+
+#: includes/admin/metabox_framework/inc/fields/plupload-image.php:107
+msgctxt "image upload"
+msgid "Select Files"
+msgstr "Sélectionnez les fichiers"
+
+#: includes/admin/metabox_framework/inc/fields/plupload-image.php:182
+msgctxt "image upload"
+msgid "Allowed Image Files"
+msgstr "Fichiers images acceptés"
+
 #: includes/admin/metabox_framework/inc/fields/post.php:67
 msgid "Select a post"
 msgstr "Sélectionnez un post"
 
 #: includes/admin/metabox_framework/inc/fields/post.php:71
 #: includes/admin/metabox_framework/inc/fields/taxonomy.php:40
-#, php-format
 msgid "Select a %s"
 msgstr "Sélectionnez un(e) %s"
 
@@ -434,22 +538,6 @@ msgid "Select Payment gateway for users to pay for donation"
 msgstr ""
 "Sélectionnez la passerelle de paiement pour les utilisateurs pour payer "
 "leurs dons"
-
-#: includes/admin/settings/fields.php:31
-msgid ""
-"<div class=\"decs\"> <span> Add <code>{donation_amount}</code> To Get Ented "
-"Amount By User.  </span> \n"
-"               <span> Add <code>{min_amount}</code> To Get Minimum Required "
-"Amount From Selected Project </span> \n"
-"               <span> Add <code>{max_amount}</code> To Get Minimum Required "
-"Amount From Selected Project  </span> </div>"
-msgstr ""
-"<div class=\"decs\"> <span> Add <code>{donation_amount}</code> To Get Ented "
-"Amount By User.  </span> \n"
-"               <span> Add <code>{min_amount}</code> To Get Minimum Required "
-"Amount From Selected Project </span> \n"
-"               <span> Add <code>{max_amount}</code> To Get Minimum Required "
-"Amount From Selected Project  </span> </div>"
 
 #: includes/admin/settings/fields.php:41
 #: includes/admin/settings/settings-message.php:18
@@ -523,108 +611,131 @@ msgstr "Erreur Donation : "
 msgid "Error: Please Select Atlest 1 Payment Gateway."
 msgstr "Erreur: Veuillez sélectionner au moins 1 passerelle de paiement."
 
-#: includes/admin/wp-donation-listing-table.php:302
+#: includes/admin/wp-donation-listing-table.php:237
+msgctxt "posts"
+msgid "Mine <span class=\"count\">(%s)</span>"
+msgid_plural "Mine <span class=\"count\">(%s)</span>"
+msgstr[0] "%1$s <span class=\"count\">(%2$s)</span>"
+msgstr[1] "Les miens <span class=\"count\">(%s)</span>"
+
+#: includes/admin/wp-donation-listing-table.php:253
+msgctxt "posts"
+msgid "All <span class=\"count\">(%s)</span>"
+msgid_plural "All <span class=\"count\">(%s)</span>"
+msgstr[0] "%1$s <span class=\"count\">(%2$s)</span>"
+msgstr[1] "Tous <span class=\"count\">(%s)</span>"
+
+#: includes/admin/wp-donation-listing-table.php:284
+msgctxt "posts"
+msgid "Sticky <span class=\"count\">(%s)</span>"
+msgid_plural "Sticky <span class=\"count\">(%s)</span>"
+msgstr[0] "Mis en avant <span class=\"count\">(%s)</span>"
+msgstr[1] "Mis en avant <span class=\"count\">(%s)</span>"
+
+#: includes/admin/wp-donation-listing-table.php:303
 msgid "Restore"
 msgstr "Restaurer"
 
-#: includes/admin/wp-donation-listing-table.php:309
+#: includes/admin/wp-donation-listing-table.php:310
 msgid "Delete Permanently"
 msgstr "Supprimer définitivement"
 
-#: includes/admin/wp-donation-listing-table.php:311
+#: includes/admin/wp-donation-listing-table.php:312
 msgid "Move to Trash"
 msgstr "Mettre à la corbeille"
 
-#: includes/admin/wp-donation-listing-table.php:328
-#: template/donation-form.php:9
+#: includes/admin/wp-donation-listing-table.php:329
 #: template/emails/donation-customer-invoice.php:31
 msgid "Donation Project"
 msgstr "Projet de don"
 
-#: includes/admin/wp-donation-listing-table.php:354
+#: includes/admin/wp-donation-listing-table.php:355
 msgid "All categories"
 msgstr "Toutes catégories"
 
-#: includes/admin/wp-donation-listing-table.php:362
+#: includes/admin/wp-donation-listing-table.php:363
 msgid "Filter by category"
 msgstr "Filtrer par catégorie"
 
-#: includes/admin/wp-donation-listing-table.php:376
+#: includes/admin/wp-donation-listing-table.php:377
 msgid "Filter"
 msgstr "Filtre"
 
-#: includes/admin/wp-donation-listing-table.php:380
+#: includes/admin/wp-donation-listing-table.php:381
 msgid "Empty Trash"
 msgstr "Vider la corbeille"
 
-#: includes/admin/wp-donation-listing-table.php:434
+#. translators: manage posts column name
+#: includes/admin/wp-donation-listing-table.php:432
+msgctxt "column name"
+msgid "Title"
+msgstr "Titre"
+
+#: includes/admin/wp-donation-listing-table.php:435
 msgid "Author"
 msgstr "Auteur"
 
-#: includes/admin/wp-donation-listing-table.php:467
+#: includes/admin/wp-donation-listing-table.php:468
 msgid "Comments"
 msgstr "Commentaires"
 
-#: includes/admin/wp-donation-listing-table.php:469
+#: includes/admin/wp-donation-listing-table.php:470
 #: template/myaccount/my-donations.php:34
+#: template/myaccount/my-donations.php:60
 msgid "Date"
 msgstr "Date"
 
-#: includes/admin/wp-donation-listing-table.php:730
+#: includes/admin/wp-donation-listing-table.php:731
 #: includes/admin/wp-donors-listing-table.php:372
-#, php-format
 msgid "Select %s"
 msgstr "Select %s"
 
-#: includes/admin/wp-donation-listing-table.php:803
-#, php-format
+#: includes/admin/wp-donation-listing-table.php:804
 msgid "Edit &#8220;%s&#8221;"
 msgstr "Modifier &#8220;%s&#8221;"
 
-#: includes/admin/wp-donation-listing-table.php:821
-#, php-format
+#: includes/admin/wp-donation-listing-table.php:822
 msgid "%s is currently editing"
 msgstr "%s est actuellement édition"
 
-#: includes/admin/wp-donation-listing-table.php:850
+#: includes/admin/wp-donation-listing-table.php:851
 msgid "Unpublished"
 msgstr "Non publié"
 
-#: includes/admin/wp-donation-listing-table.php:853
+#: includes/admin/wp-donation-listing-table.php:854
 msgid "Y/m/d g:i:s a"
 msgstr "Y/m/d g:i:s a"
 
-#: includes/admin/wp-donation-listing-table.php:860
-#, php-format
+#: includes/admin/wp-donation-listing-table.php:861
 msgid "%s ago"
 msgstr "il y a %s"
 
-#: includes/admin/wp-donation-listing-table.php:862
+#: includes/admin/wp-donation-listing-table.php:863
 msgid "Y/m/d"
 msgstr "Y/m/d"
 
-#: includes/admin/wp-donation-listing-table.php:889
+#: includes/admin/wp-donation-listing-table.php:890
 msgid "Published"
 msgstr "Publié"
 
-#: includes/admin/wp-donation-listing-table.php:892
+#: includes/admin/wp-donation-listing-table.php:893
 msgid "Missed schedule"
 msgstr "Date manquée"
 
-#: includes/admin/wp-donation-listing-table.php:894
+#: includes/admin/wp-donation-listing-table.php:895
 msgid "Scheduled"
 msgstr "Date prévue"
 
-#: includes/admin/wp-donation-listing-table.php:897
+#: includes/admin/wp-donation-listing-table.php:898
 msgid "Last Modified"
 msgstr "Dernière mise à jour"
 
 #. translators: used between list items, there is a space after the comma
-#: includes/admin/wp-donation-listing-table.php:978
+#: includes/admin/wp-donation-listing-table.php:979
 msgid ", "
 msgstr ", "
 
-#: includes/admin/wp-donation-listing-table.php:1092
+#: includes/admin/wp-donation-listing-table.php:1093
 msgid "Search Donations"
 msgstr "Rechercher les dons"
 
@@ -632,9 +743,15 @@ msgstr "Rechercher les dons"
 msgid "No users found."
 msgstr "Aucun utilisateur trouvé."
 
+#: includes/admin/wp-donors-listing-table.php:169
+msgctxt "users"
+msgid "All <span class=\"count\">(%s)</span>"
+msgid_plural "All <span class=\"count\">(%s)</span>"
+msgstr[0] "Tous <span class=\"count\">(%s)</span>"
+msgstr[1] "Tous <span class=\"count\">(%s)</span>"
+
 #. translators: User role name with count
 #: includes/admin/wp-donors-listing-table.php:182
-#, php-format
 msgid "%1$s <span class=\"count\">(%2$s)</span>"
 msgstr "%1$s <span class=\"count\">(%2$s)</span>"
 
@@ -658,179 +775,244 @@ msgstr "Contribuer à"
 msgid "Total Donations"
 msgstr "Total des dons"
 
-#: includes/class-post-types.php:20
+#: includes/class-post-types.php:21
 msgid "Quick Donation Project"
 msgstr "Projet Quick Donation"
 
-#: includes/class-post-types.php:21
+#: includes/class-post-types.php:22
 msgid "WooCommerce Donation Projects"
 msgstr "Projets de donation WooCommerce"
 
+#: includes/class-post-types.php:49
+msgctxt "Post Type General Name"
+msgid "Quick Donation Projects"
+msgstr "Projets Quick Donation"
+
 #: includes/class-post-types.php:50
+msgctxt "Post Type Singular Name"
+msgid "Quick Donation Project"
+msgstr "Projet Quick Donation"
+
+#: includes/class-post-types.php:51
 msgid "Quick Donation"
 msgstr "Quick Donation"
 
-#: includes/class-post-types.php:51
+#: includes/class-post-types.php:52
 msgid "Donation"
 msgstr "Donation"
 
-#: includes/class-post-types.php:52
+#: includes/class-post-types.php:53
 msgid "Parent Project :"
 msgstr "Projet Parent:"
 
-#: includes/class-post-types.php:53
+#: includes/class-post-types.php:54
 msgid "All Project"
 msgstr "Tous les projets"
 
-#: includes/class-post-types.php:54
+#: includes/class-post-types.php:55
 msgid "Add New Project"
 msgstr "Ajouter un nouveau projet"
 
-#: includes/class-post-types.php:55
+#: includes/class-post-types.php:56
 msgid "Add Project"
 msgstr "Ajouter un projet"
 
-#: includes/class-post-types.php:56
+#: includes/class-post-types.php:57
 msgid "New Project"
 msgstr "Nouveau projet"
 
-#: includes/class-post-types.php:57
+#: includes/class-post-types.php:58
 msgid "Edit Project"
 msgstr "Modifier Projet"
 
-#: includes/class-post-types.php:58
+#: includes/class-post-types.php:59
 msgid "Update ProjectNot found in Trash"
 msgstr "Mise à jour du Projet. Non trouvé dans la corbeille"
 
-#: includes/class-post-types.php:59
+#: includes/class-post-types.php:60
 msgid "View Project"
 msgstr "Voir le projet"
 
-#: includes/class-post-types.php:60
+#: includes/class-post-types.php:61
 msgid "Search Project"
 msgstr "Recherche de projet"
 
-#: includes/class-post-types.php:61
+#: includes/class-post-types.php:62
 msgid "No Project Found"
 msgstr "Pas de projet trouvé"
 
-#: includes/class-post-types.php:62
+#: includes/class-post-types.php:63
 msgid "No Project Found in Trash"
 msgstr "Pas de projet trouvé dans la corbeille"
 
+#: includes/class-post-types.php:87
+msgctxt "Taxonomy General Name"
+msgid "Project Categories"
+msgstr "Catégories des projets"
+
 #: includes/class-post-types.php:88
+msgctxt "Taxonomy Singular Name"
+msgid "Project Category"
+msgstr "Catégorie du projet"
+
+#: includes/class-post-types.php:89
 msgid "Categories"
 msgstr "Catégories"
 
-#: includes/class-post-types.php:89
+#: includes/class-post-types.php:90
 msgid "All Categories"
 msgstr "Toutes les catégories"
 
-#: includes/class-post-types.php:90
+#: includes/class-post-types.php:91
 msgid "Parent Category"
 msgstr "Catégorie parente"
 
-#: includes/class-post-types.php:91
+#: includes/class-post-types.php:92
 msgid "Parent Category:"
 msgstr "Catégorie parente:"
 
-#: includes/class-post-types.php:92
+#: includes/class-post-types.php:93
 msgid "New Category Name"
 msgstr "Nouveau Nom de la catégorie"
 
-#: includes/class-post-types.php:93
+#: includes/class-post-types.php:94
 msgid "Add New Project Category"
 msgstr "Ajouter une nouvelle catégorie de projet"
 
-#: includes/class-post-types.php:94
+#: includes/class-post-types.php:95
 msgid "Edit Category"
 msgstr "Modifier une catégorie"
 
-#: includes/class-post-types.php:95
+#: includes/class-post-types.php:96
 msgid "Update Category"
 msgstr "Mettre à jour la Catégorie"
 
-#: includes/class-post-types.php:96
+#: includes/class-post-types.php:97
 msgid "View Category"
 msgstr "Voir la catégorie"
 
-#: includes/class-post-types.php:97
+#: includes/class-post-types.php:98
 msgid "Separate Categories with commas"
 msgstr "Séparez les catégories par des virgules"
 
-#: includes/class-post-types.php:98
+#: includes/class-post-types.php:99
 msgid "Add or remove Categories"
 msgstr "Ajouter ou supprimer des catégories"
 
-#: includes/class-post-types.php:99 includes/class-post-types.php:146
+#: includes/class-post-types.php:100 includes/class-post-types.php:147
 msgid "Choose from the most used"
 msgstr "Choisissez parmi les plus utilisés"
 
-#: includes/class-post-types.php:100
+#: includes/class-post-types.php:101
 msgid "Popular Categories"
 msgstr "Catégories populaires"
 
-#: includes/class-post-types.php:101
+#: includes/class-post-types.php:102
 msgid "Search Categories"
 msgstr "Recherche Catégories"
 
-#: includes/class-post-types.php:102 includes/class-post-types.php:149
+#: includes/class-post-types.php:103 includes/class-post-types.php:150
 msgid "Not Found"
 msgstr "Non trouvé"
 
+#: includes/class-post-types.php:134
+msgctxt "Taxonomy General Name"
+msgid "Project Tags"
+msgstr "Mots-clés du projet"
+
 #: includes/class-post-types.php:135
+msgctxt "Taxonomy Singular Name"
+msgid "Project Tag"
+msgstr "Mot-clé du projet"
+
+#: includes/class-post-types.php:136
 msgid "Tags"
 msgstr "Thèmes"
 
-#: includes/class-post-types.php:136
+#: includes/class-post-types.php:137
 msgid "All Tags"
 msgstr "Tous les thèmes"
 
-#: includes/class-post-types.php:137
+#: includes/class-post-types.php:138
 msgid "Parent Tag"
 msgstr "Thème parent"
 
-#: includes/class-post-types.php:138
+#: includes/class-post-types.php:139
 msgid "Parent Tag :"
 msgstr "Thème parent"
 
-#: includes/class-post-types.php:139
+#: includes/class-post-types.php:140
 msgid "New Tag Name"
 msgstr "Nom du nouveau thème"
 
-#: includes/class-post-types.php:140
+#: includes/class-post-types.php:141
 msgid "Add New Tag"
 msgstr "Ajouter un nouveau thème"
 
-#: includes/class-post-types.php:141
+#: includes/class-post-types.php:142
 msgid "Edit Tag "
 msgstr "Modifier le thème "
 
-#: includes/class-post-types.php:142
+#: includes/class-post-types.php:143
 msgid "Update Tags"
 msgstr "Mettre à jour les thèmes"
 
-#: includes/class-post-types.php:143
+#: includes/class-post-types.php:144
 msgid "View Tag"
 msgstr "Voir le thème"
 
-#: includes/class-post-types.php:144
+#: includes/class-post-types.php:145
 msgid "Separate Tags with commas"
 msgstr "Séparez les thèmes avec des virgules"
 
-#: includes/class-post-types.php:145
+#: includes/class-post-types.php:146
 msgid "Add or remove Tags"
 msgstr "Ajouter ou supprimer des thèmes"
 
-#: includes/class-post-types.php:147
+#: includes/class-post-types.php:148
 msgid "Popular Tags"
 msgstr "Thèmes populaires"
 
-#: includes/class-post-types.php:148
+#: includes/class-post-types.php:149
 msgid "Search Tags"
 msgstr "Rechercher des thèmes"
 
-#: includes/class-quick-donation-functions.php:226
+#: includes/class-post-types.php:175
+msgctxt "Order status"
+msgid "Completed"
+msgstr "Complété"
+
+#: includes/class-post-types.php:176
+msgid "Completed (%s)"
+msgid_plural "Completed (%s)"
+msgstr[0] "Complété ($s)"
+msgstr[1] "Complété(s)"
+
+#: includes/class-post-types.php:184
+#: includes/wc-quick-donation-functions.php:37
+msgctxt "Order status"
+msgid "Donation On Hold"
+msgstr "Don en attente"
+
+#: includes/class-post-types.php:189
+msgid "Donation On Hold <span class=\"count\">(%s)</span>"
+msgid_plural "DonationOn Hold <span class=\"count\">(%s)</span>"
+msgstr[0] "Donation en attente <span class=\"count\">(%s)</span>"
+msgstr[1] "%1$s <span class=\"count\">(%2$s)</span>"
+
+#: includes/class-post-types.php:192
+#: includes/wc-quick-donation-functions.php:36
+msgctxt "Order status"
+msgid "Donation Refunded"
+msgstr "Donation remboursée"
+
+#: includes/class-post-types.php:197
+msgid "Refunded <span class=\"count\">(%s)</span>"
+msgid_plural "Refunded <span class=\"count\">(%s)</span>"
+msgstr[0] "<span class=\"count\">(%s)</span> Remboursé"
+msgstr[1] "%1$s <span class=\"count\">(%2$s)</span>"
+
+#: includes/class-quick-donation-functions.php:241
 msgid "No Payment Gateway Configured In WooCommerce. Kindly Configure One"
 msgstr ""
 "Pas de passerelles de paiement configurées dans WooCommerce. Veuillez en "
@@ -870,7 +1052,6 @@ msgstr "Sujet de l'email"
 #: includes/emails/class-new-email.php:163
 #: includes/emails/class-new-email.php:170
 #: includes/emails/class-new-email.php:177
-#, php-format
 msgid "Defaults to <code>%s</code>"
 msgstr "Defaults to <code>%s</code>"
 
@@ -894,23 +1075,27 @@ msgstr "Type de l'email"
 msgid "Choose which format of email to send."
 msgstr "Choisissez le format d'email à envoyer."
 
-#: template/cart/donation-cart-shipping.php:20
-#, php-format
+#: includes/wc-quick-donation-functions.php:35
+msgctxt "Donation Completed"
+msgid "Donation Completed"
+msgstr "Donation complétée"
+
+#: template/cart/donation-cart-shipping.php:18
 msgid "Shipping #%d"
 msgstr "Livraison #%d"
 
-#: template/cart/donation-cart-shipping.php:22
-#: template/cart/donation-cart-shipping.php:97
+#: template/cart/donation-cart-shipping.php:20
+#: template/cart/donation-cart-shipping.php:95
 msgid "Shipping"
 msgstr "Livraison"
 
-#: template/cart/donation-cart-shipping.php:59
+#: template/cart/donation-cart-shipping.php:57
 msgid "Please use the shipping calculator to see available shipping methods."
 msgstr ""
 "S'il vous plaît utiliser le calculateur pour voir les méthodes de livraison "
 "disponibles."
 
-#: template/cart/donation-cart-shipping.php:63
+#: template/cart/donation-cart-shipping.php:61
 msgid ""
 "Please continue to the checkout and enter your full address to see if there "
 "are any available shipping methods."
@@ -918,14 +1103,14 @@ msgstr ""
 "Entrez votre adresse complète à la prochaine étape pour voir si il y a des "
 "méthodes de livraison disponibles."
 
-#: template/cart/donation-cart-shipping.php:67
+#: template/cart/donation-cart-shipping.php:65
 msgid "Please fill in your details to see available shipping methods."
 msgstr ""
 "Veuillez remplir vos coordonnées pour voir les méthodes de livraison "
 "disponibles."
 
-#: template/cart/donation-cart-shipping.php:76
-#: template/cart/donation-cart-shipping.php:82
+#: template/cart/donation-cart-shipping.php:74
+#: template/cart/donation-cart-shipping.php:80
 msgid ""
 "There are no shipping methods available. Please double check your address, "
 "or contact us if you need any help."
@@ -939,7 +1124,7 @@ msgstr ""
 msgid "Amount"
 msgstr "Montant"
 
-#: template/cart/donation-cart.php:48 template/donation-cart.php:50
+#: template/cart/donation-cart.php:48
 msgid "Remove this item"
 msgstr "Supprimer cet article"
 
@@ -1002,7 +1187,7 @@ msgstr ""
 "coordonnées ci-dessous. Si vous êtes un nouveau client veuillez procéder à "
 "l'étape de facturation &amp; de livraison "
 
-#: template/checkout/donation-form-pay.php:20 template/donation-cart.php:27
+#: template/checkout/donation-form-pay.php:20
 msgid "Product"
 msgstr "Produit"
 
@@ -1068,8 +1253,11 @@ msgstr ""
 "commande. Vous pouvez être facturé plus que le montant indiqué ci-dessus si "
 "vous n'effectuez pas cette action."
 
+#: template/checkout/donation-payment.php:43
+msgid "Update totals"
+msgstr "Mettre à jour les totaux"
+
 #: template/checkout/donation-payment.php:53
-#, php-format
 msgid ""
 "I&rsquo;ve read and accept the <a href=\"%s\" target=\"_blank\">terms &amp; "
 "conditions</a>"
@@ -1081,7 +1269,7 @@ msgstr ""
 msgid "Donation for"
 msgstr "Don pour"
 
-#: template/checkout/donation-thankyou.php:18
+#: template/checkout/donation-thankyou.php:17
 msgid ""
 "Unfortunately your order cannot be processed as the originating bank/"
 "merchant has declined your transaction."
@@ -1089,67 +1277,43 @@ msgstr ""
 "Malheureusement, votre commande ne peut être traitée car le système de "
 "paiemen a refusé votre transaction."
 
-#: template/checkout/donation-thankyou.php:22
+#: template/checkout/donation-thankyou.php:21
 msgid "Please attempt your purchase again or go to your account page."
 msgstr ""
 "S'il vous plaît essayer à nouveau votre achat ou aller sur la page de votre "
 "compte."
 
-#: template/checkout/donation-thankyou.php:24
+#: template/checkout/donation-thankyou.php:23
 msgid "Please attempt your purchase again."
 msgstr "S'il vous plaît essayer à nouveau"
 
-#: template/checkout/donation-thankyou.php:28
+#: template/checkout/donation-thankyou.php:27
 #: template/myaccount/my-donations.php:76
 msgid "Pay"
 msgstr "Payer"
 
-#: template/checkout/donation-thankyou.php:30
+#: template/checkout/donation-thankyou.php:29
 msgid "My Account"
 msgstr "Mon compte"
 
-#: template/checkout/donation-thankyou.php:36
+#: template/checkout/donation-thankyou.php:35
 msgid "Thank you. Your Donation has been received."
 msgstr "Merci. Votre don a bien été pris en compte."
 
-#: template/checkout/donation-thankyou.php:40
+#: template/checkout/donation-thankyou.php:39
 msgid "Reference Number :"
 msgstr "Numéro de référence :"
 
-#: template/checkout/donation-thankyou.php:44
+#: template/checkout/donation-thankyou.php:43
 msgid "Date:"
 msgstr "Date:"
 
-#: template/checkout/donation-thankyou.php:64
+#: template/checkout/donation-thankyou.php:63
 msgid "Thank you. Your order has been received."
 msgstr "Merci. Votre commande a été prise en compte."
 
-#: template/donation-cart.php:28
-#: template/emails/donation-customer-invoice.php:33
-msgid "Price"
-msgstr "Prix"
-
-#: template/donation-cart.php:29
-#: template/emails/donation-customer-invoice.php:32
-msgid "Quantity"
-msgstr "Quantité"
-
-#: template/donation-cart.php:30 template/myaccount/my-donations.php:36
-msgid "Total"
-msgstr "Total"
-
-#: template/donation-cart.php:128
-msgid "Coupon"
-msgstr "Coupon"
-
-#: template/donation-form.php:18
-#, fuzzy
-msgid "Add Donation"
-msgstr "Donation"
-
 #: template/emails/donation-customer-invoice.php:20
 #: template/emails/plain/donation-customer-invoice.php:17
-#, php-format
 msgid ""
 "An order has been created for you on %s. To pay for this order please use "
 "the following link: %s"
@@ -1162,12 +1326,18 @@ msgid "pay"
 msgstr "payer"
 
 #: template/emails/donation-customer-invoice.php:26
-#, php-format
 msgid "Order #%s"
 msgstr "Commande #%s"
 
+#: template/emails/donation-customer-invoice.php:32
+msgid "Quantity"
+msgstr "Quantité"
+
+#: template/emails/donation-customer-invoice.php:33
+msgid "Price"
+msgstr "Prix"
+
 #: template/emails/plain/donation-customer-invoice.php:23
-#, php-format
 msgid "Order number: %s"
 msgstr "Commande numéro %s"
 
@@ -1180,8 +1350,29 @@ msgid "Recent Donations"
 msgstr "Dons récents"
 
 #: template/myaccount/my-donations.php:35
+#: template/myaccount/my-donations.php:63
 msgid "Status"
 msgstr "Statut"
+
+#: template/myaccount/my-donations.php:36
+#: template/myaccount/my-donations.php:66
+msgid "Total"
+msgstr "Total"
+
+#: template/myaccount/my-donations.php:48
+msgid "Order Number"
+msgstr "Commande numéro"
+
+#: template/myaccount/my-donations.php:50
+msgctxt "hash before order number"
+msgid "#"
+msgstr "#"
+
+#: template/myaccount/my-donations.php:67
+msgid "%s for %s item"
+msgid_plural "%s for %s items"
+msgstr[0] "%s de %s élément"
+msgstr[1] "%s de %s éléments"
 
 #: template/myaccount/my-donations.php:83
 msgid "Cancel"
@@ -1191,8 +1382,7 @@ msgstr "Annuler"
 msgid "View"
 msgstr "Voir"
 
-#: template/myaccount/view-donation.php:20
-#, php-format
+#: template/myaccount/view-donation.php:18
 msgid ""
 "Placed on <mark class=\"order-date\">%s</mark> and is currently <mark class="
 "\"order-status\">%s</mark>."
@@ -1200,11 +1390,11 @@ msgstr ""
 "Placé sur <marque class =\"afin jour %s </marque> et est actuellement <mark "
 "class=\"d'état des commandes %s </marque>."
 
-#: template/myaccount/view-donation.php:24 template/order/tracking.php:25
+#: template/myaccount/view-donation.php:22 template/order/tracking.php:25
 msgid "Order Updates"
 msgstr "Mises à jour de la commande"
 
-#: template/myaccount/view-donation.php:30 template/order/tracking.php:31
+#: template/myaccount/view-donation.php:28 template/order/tracking.php:31
 msgid "l jS \\o\\f F Y, h:ia"
 msgstr "l jS \\o\\f F Y, h:ia"
 
@@ -1223,9 +1413,21 @@ msgstr ""
 msgid "Order ID"
 msgstr "Numéro de commande"
 
+#: template/order/form-tracking.php:22
+msgid "Found in your order confirmation email."
+msgstr "Trouvé dans l'email de confirmation de votre commande"
+
 #: template/order/form-tracking.php:23
 msgid "Billing Email"
 msgstr "Email de facturation"
+
+#: template/order/form-tracking.php:23
+msgid "Email you used during checkout."
+msgstr "L'email ustilisée lors de la validation de la commande."
+
+#: template/order/form-tracking.php:26
+msgid "Track"
+msgstr "Traquer"
 
 #: template/order/order-again.php:16
 msgid "Order Again"
@@ -1248,7 +1450,6 @@ msgid "Telephone:"
 msgstr "Téléphone:"
 
 #: template/order/tracking.php:14
-#, php-format
 msgid "Order #%s which was made %s has the status &ldquo;%s&rdquo;"
 msgstr "Commande #%s qui a été faite %s a le statut &ldquo;%s&rdquo;"
 
@@ -1263,3 +1464,60 @@ msgstr "et a été achevé"
 #: template/order/tracking.php:16
 msgid " ago"
 msgstr " depuis"
+
+#: woocommerce-quick-donation.php:287
+msgid "WooCommerce Is Required. To Use This Plugin :)"
+msgstr "WooCommerce est requis pour utiliser cette extension :)"
+
+#. Plugin Name of the plugin/theme
+msgid "WooCommerce Quick Donation"
+msgstr "WooCommerce Quick Donation"
+
+#. Plugin URI of the plugin/theme
+msgid "http://wordpress.org/plugins/woocommerce-quick-donation/"
+msgstr "http://wordpress.org/plugins/woocommerce-quick-donation/"
+
+#. Description of the plugin/theme
+msgid "Turns WooCommerce Into Online Donation"
+msgstr "Tranforme WooCommerce en platforme de donations en ligne"
+
+#. Author of the plugin/theme
+msgid "Varun Sridharan"
+msgstr "Varun Sridharan"
+
+#. Author URI of the plugin/theme
+msgid "http://varunsridharan.in"
+msgstr "http://varunsridharan.in"
+
+#~ msgid "Remove "
+#~ msgstr "Retirer"
+
+#~ msgid "General Details"
+#~ msgstr "Détails généraux"
+
+#~ msgid "Order date:"
+#~ msgstr "Date de commande:"
+
+#~ msgid "Order status:"
+#~ msgstr "Statut de la commande:"
+
+#~ msgid ""
+#~ "<div class=\"decs\"> <span> Add <code>{donation_amount}</code> To Get "
+#~ "Ented Amount By User.  </span> \n"
+#~ "               <span> Add <code>{min_amount}</code> To Get Minimum "
+#~ "Required Amount From Selected Project </span> \n"
+#~ "               <span> Add <code>{max_amount}</code> To Get Minimum "
+#~ "Required Amount From Selected Project  </span> </div>"
+#~ msgstr ""
+#~ "<div class=\"decs\"> <span> Add <code>{donation_amount}</code> To Get "
+#~ "Ented Amount By User.  </span> \n"
+#~ "               <span> Add <code>{min_amount}</code> To Get Minimum "
+#~ "Required Amount From Selected Project </span> \n"
+#~ "               <span> Add <code>{max_amount}</code> To Get Minimum "
+#~ "Required Amount From Selected Project  </span> </div>"
+
+#~ msgid "Coupon"
+#~ msgstr "Coupon"
+
+#~ msgid "Add Donation"
+#~ msgstr "Ajouter"
