@@ -132,9 +132,8 @@ class WooCommerce_Quick_Donation {
     private function init_class(){
         self::$db = new WooCommerce_Quick_Donation_DB; 
         self::$f = new WooCommerce_Quick_Donation_Functions;
-        self::$settings = new WooCommerce_Quick_Donation_Settings;
 		self::$email = new WooCommerce_Quick_Donation_Emails_Functions;
-        
+		      
         if($this->is_request('frontend')){
             self::$shortcode = new WooCommerce_Quick_Donation_Shortcode;
             $this->donation  =  new WooCommerce_Quick_Donation_Process;
@@ -144,6 +143,8 @@ class WooCommerce_Quick_Donation {
         if($this->is_request('admin')){
             $this->admin = new WooCommerce_Quick_Donation_Admin;
         }
+		
+		self::$settings = new WooCommerce_Quick_Donation_Settings;  
  
     }
     

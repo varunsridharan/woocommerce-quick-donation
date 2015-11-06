@@ -121,10 +121,11 @@ if (!class_exists('WP_Admin_Notices')) {
                    
             if(isset($_REQUEST[$this->REQUESTID])){
                 $nonce = $_REQUEST['_wpnonce'];
-                if (wp_verify_nonce( $nonce, 'WCQDREMOVEMSG' ) ) {   
+				//var_dump($nonce); exit;
+                //if (wp_verify_nonce( $nonce, 'WCQDREMOVEMSG' ) ) {   
                     $this->deleteNotice($_REQUEST[$this->REQUESTID]);
                     if (wp_get_referer()){ wp_safe_redirect( wp_get_referer() ); }
-                }
+                //}
             }
         }
 

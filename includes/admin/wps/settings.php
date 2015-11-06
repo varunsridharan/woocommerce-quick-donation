@@ -18,7 +18,7 @@ class WooCommerce_Quick_Donation_Settings {
         $this->get_settings();
         $this->add_settings_section();
         $this->create_callback_function();
-        $this->add_settings_fields();
+        
         
         $this->page_hook = $page_hook;
         
@@ -83,7 +83,7 @@ class WooCommerce_Quick_Donation_Settings {
  
 
     function admin_init(){
-        
+        $this->add_settings_fields();
         $this->settings->add_pages($this->settings_page);
         $sections = $this->settings_section;
         
