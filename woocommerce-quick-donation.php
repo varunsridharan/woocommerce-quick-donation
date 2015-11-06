@@ -133,7 +133,7 @@ class WooCommerce_Quick_Donation {
         self::$db = new WooCommerce_Quick_Donation_DB; 
         self::$f = new WooCommerce_Quick_Donation_Functions;
 		self::$email = new WooCommerce_Quick_Donation_Emails_Functions;
-		      
+	  self::$settings = new WooCommerce_Quick_Donation_Settings; 
         if($this->is_request('frontend')){
             self::$shortcode = new WooCommerce_Quick_Donation_Shortcode;
             $this->donation  =  new WooCommerce_Quick_Donation_Process;
@@ -144,7 +144,7 @@ class WooCommerce_Quick_Donation {
             $this->admin = new WooCommerce_Quick_Donation_Admin;
         }
 		
-		self::$settings = new WooCommerce_Quick_Donation_Settings;  
+		 
  
     }
     

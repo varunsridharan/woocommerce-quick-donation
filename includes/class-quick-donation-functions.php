@@ -116,7 +116,7 @@ class WooCommerce_Quick_Donation_Functions  {
             return self::$project_db_list;
         }
         $args = array(
-            'posts_per_page'   => 0,
+            'posts_per_page'   => -1,
             'offset'           => 0,
             'category'         => '',
             'category_name'    => '',
