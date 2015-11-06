@@ -35,6 +35,7 @@ class WooCommerce_Quick_Donation_Admin  {
     
     public function load_required_files(){
         WC_QD()->load_files(WC_QD_ADMIN.'metabox_framework/meta-box.php'); 
+		WC_QD()->load_files(WC_QD_ADMIN.'wp-donation-listing-table.php');
     } 
     
     public function init_hooks(){
@@ -52,36 +53,42 @@ class WooCommerce_Quick_Donation_Admin  {
     }
     
     public function admin_screen(){ 
+		
         if($this->sys_info == $this->current_screen()){
             if(!WC_QD()->is_request('ajax')){
                 $this->add_notice();
             }
         } 
+		
+		if($this->order_menu_slug == $this->current_screen()){
+			$donor_listing = new WC_Quick_Donation_Listing_Table;
+			$donor_listing->process_bulk_action();
+		}
     }
     
     public function sub_donation_order_menu(){
         
-        $this->order_menu_slug = add_submenu_page('edit.php?post_type=wcqd_project',
+        $this->order_menu_slug = add_submenu_page('edit.php?post_type='.WC_QD_PT,
                                                   __('Donation Orders',WC_QD_TXT),
                                                   __('Donation\'s',WC_QD_TXT),
                                                   'administrator',
                                                   'wc_qd_orders',
                                                   array($this,'donation_orders_page'));
         
-        $this->donors_list = add_submenu_page('edit.php?post_type=wcqd_project',
+        $this->donors_list = add_submenu_page('edit.php?post_type='.WC_QD_PT,
                                                   __('Donors List',WC_QD_TXT),
                                                   __('Donors List',WC_QD_TXT),
                                                   'administrator',
                                                   'wc_qd_donors',
                                                   array($this,'donors_listing_page'));
         
-        $this->sys_info = add_submenu_page('edit.php?post_type=wcqd_project',
+        $this->sys_info = add_submenu_page('edit.php?post_type='.WC_QD_PT,
                                                   __('System Tools',WC_QD_TXT),
                                                   __('System Tools',WC_QD_TXT),
                                                   'administrator',
                                                   'wc_qd_sys_info',
                                                   array($this,'system_tools'));
-        $this->tools = add_submenu_page('edit.php?post_type=wcqd_project',
+        $this->tools = add_submenu_page('edit.php?post_type='.WC_QD_PT,
                                                   __('',WC_QD_TXT),
                                                   __('',WC_QD_TXT),
                                                   'administrator',
@@ -95,6 +102,8 @@ class WooCommerce_Quick_Donation_Admin  {
         $name = 'edit.php?post_type='.WC_QD_PT;
         if(empty($submenu)){return $submenu;}
         $arr = array();
+		
+		$submenu[$name][18][2] = $submenu[$name][5][2].'&page='.$submenu[$name][18][2];
         $arr[] = $submenu[$name][18];
         $arr[] = $submenu[$name][19];
         $arr[] = $submenu[$name][5];
@@ -103,6 +112,7 @@ class WooCommerce_Quick_Donation_Admin  {
         $arr[] = $submenu[$name][16];
         $arr[] = $submenu[$name][17];
         $arr[] = $submenu[$name][20];
+		//var_dump($arr); exit;
         $submenu[$name] = $arr;
         return $menu_ord;
     }  
@@ -183,7 +193,7 @@ class WooCommerce_Quick_Donation_Admin  {
         } 
         if(isset($_GET['post_status'])){ $args['post_status'] = $_GET['post_status'];}    
         $wp_query = new WP_Query($args);
-        require('wp-donation-listing-table.php');
+        
         tt_render_list_page($wp_query);
     }
     

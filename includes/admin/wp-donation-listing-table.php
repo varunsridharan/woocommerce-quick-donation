@@ -7,6 +7,13 @@
  * @since 3.1.0
  * @access private
  */
+/**
+ * Check that 'class-wp-list-table.php' is available
+ */
+if(!class_exists('WP_List_Table')) :
+    require_once(ABSPATH . 'wp-admin/includes/class-wp-list-table.php');
+endif;
+
 class WC_Quick_Donation_Listing_Table extends WP_List_Table {
 
 	/**
@@ -70,23 +77,23 @@ class WC_Quick_Donation_Listing_Table extends WP_List_Table {
 	 *
 	 * @param array $args An associative array of arguments.
 	 */
-	public function __construct( $query,$args = array() ) {
-        global $post_type_object, $wpdb;
-        $this->querypost = $query;
-        set_current_screen( 'shop_order' );
-
-        parent::__construct( array(
-            'plural' => 'Donations',
-            'screen' => get_current_screen(),
-        ) );
-        
-        
-        $this->screen->post_type = 'shop_order';
-        //$this->screen->id = 'shop_order';
-        $post_type = $this->screen->post_type;
-        $post_type_object = get_post_type_object( $post_type );
-        $this->user_posts_count = 0;
-        $this->sticky_posts_count = 0;
+	public function __construct( $query = '',$args = array() ) {
+		if(!empty($query)){
+			global $post_type_object, $wpdb;
+			$this->querypost = $query;
+			$this->init();
+		}
+	}
+	
+	public function init(){
+		set_current_screen( 'shop_order' );
+		parent::__construct( array('plural' => 'Donations','screen' => get_current_screen(),));
+		$this->screen->post_type = 'shop_order';
+		//$this->screen->id = 'shop_order';
+		$post_type = $this->screen->post_type;
+		$post_type_object = get_post_type_object( $post_type );
+		$this->user_posts_count = 0;
+		$this->sticky_posts_count = 0;	
 	}
 
 	/**
@@ -112,19 +119,31 @@ class WC_Quick_Donation_Listing_Table extends WP_List_Table {
         global $pagenow;
         if(!isset($_REQUEST['_wpnonce'])){return;}
         $nonce = esc_attr( $_REQUEST['_wpnonce'] );
-        if ( ! wp_verify_nonce( $nonce, 'bulk-' . $this->_args['plural']  ) ) {
-          die( 'Invalid Nonce' );
+        if ( ! wp_verify_nonce( $nonce, 'bulk-donations') ) {
+          wp_die( __('Invalid Nonce for deleting WC Donation Orders', WC_QD_TXT));
         }
+		
+		//check_admin_referer('bulk-posts');
+		$pagenum = $this->get_pagenum();
+		$sendback = remove_query_arg( array('trashed', 'untrashed', 'deleted', 'locked', 'ids'), wp_get_referer() );
+		if ( ! $sendback )
+			$sendback = admin_url( $parent_file );
+		$sendback = add_query_arg( 'paged', $pagenum, $sendback );
+		if ( strpos($sendback, 'post.php') !== false )
+			$sendback = admin_url($post_new_file);		
         
         $post_ids = array_map('intval', $_REQUEST['post']);
+		$total_post = count($post_ids);
+		$ids = implode(', ',$post_ids);
         $doaction = $this->current_action();
+		$Notice_Txt = '';
         switch ( $doaction ) {
             case 'trash':
                 $trashed = $locked = 0;
 
                 foreach( (array) $post_ids as $post_id ) {
                     if ( !current_user_can( 'delete_post', $post_id) )
-                        wp_die( __('You are not allowed to move this item to the Trash.') );
+                        wp_die( __('You are not allowed to move this item to the Trash.'));
 
                     if ( wp_check_post_lock( $post_id ) ) {
                         $locked++;
@@ -135,9 +154,19 @@ class WC_Quick_Donation_Listing_Table extends WP_List_Table {
                         wp_die( __('Error in moving to Trash.') );
 
                     $trashed++;
+					$Notice_Txt = ' Trashed ';
                 }
-
-                //$sendback = add_query_arg( array('trashed' => $trashed, 'ids' => join(',', $post_ids), 'locked' => $locked ), $sendback );
+				
+                $sendback = add_query_arg( array('trashed' => $trashed, 'ids' => join(',', $post_ids), 'locked' => $locked ), $sendback );
+				
+				wc_qd_notice(
+					sprintf(
+						_n( '%s Donation Order Trashed  ( %s )', 
+						   '%s Donation Orders Trashed  ( %s )' , $total_post, $ids, WC_QD_TXT ),
+						$total_post,$ids
+					)
+				);
+				
                 break;
             case 'untrash':
                 $untrashed = 0;
@@ -150,7 +179,17 @@ class WC_Quick_Donation_Listing_Table extends WP_List_Table {
 
                     $untrashed++;
                 }
-                //$sendback = add_query_arg('untrashed', $untrashed, $sendback);
+                $sendback = add_query_arg('untrashed', $untrashed, $sendback);
+				
+				wc_qd_notice(
+					sprintf(
+						_n( '%s Donation Order restored from trash  ( %s )', 
+						    '%s Donation Orders restored from trash ( %s )' , $total_post, $ids, WC_QD_TXT ),
+						$total_post, 
+						$ids
+					)
+				);
+				
                 break;
             case 'delete':
                 $deleted = 0;
@@ -170,6 +209,14 @@ class WC_Quick_Donation_Listing_Table extends WP_List_Table {
                     $deleted++;
                 }
                 $sendback = add_query_arg('deleted', $deleted, $sendback);
+				wc_qd_notice(
+					sprintf(
+						_n( '%s Donation Order permanently deleted  ( %s )', 
+						    '%s Donation Orders permanently deleted ( %s )' , $total_post, $ids, WC_QD_TXT ),
+						$total_post, 
+						$ids
+					)
+				);
                 break;
             case 'edit':
                 if ( isset($_REQUEST['bulk_edit']) ) {
@@ -184,10 +231,10 @@ class WC_Quick_Donation_Listing_Table extends WP_List_Table {
                 }
                 break;
         }
-        $redirect_url = menu_page_url('wc_qd_tools',false);
-        if(isset($_REQUEST['post_status']) && !empty($_REQUEST['post_status'])){$redirect_url .= '&post_status='.$_REQUEST['post_status'];}
-        wp_safe_redirect( admin_url() );
-    exit;
+
+		$sendback = remove_query_arg( array('action', 'action2', 'tags_input', 'post_author', 'comment_status', 'ping_status', '_status', 'post', 'bulk_edit', 'post_view'), $sendback );
+       	wp_redirect($sendback);
+		exit();
     }    
 
 	/**
@@ -201,9 +248,7 @@ class WC_Quick_Donation_Listing_Table extends WP_List_Table {
 		global $avail_post_stati, $per_page, $mode;
 
 		$avail_post_stati = wp_edit_posts_query();
- 
-        $this->process_bulk_action();
-        
+
 		$this->set_hierarchical_display( is_post_type_hierarchical( $this->screen->post_type ) && 'menu_order title' == $this->querypost->query['orderby'] );
 
 		$total_items = $this->hierarchical_display ? $this->querypost->post_count : $this->querypost->found_posts;
@@ -317,6 +362,7 @@ class WC_Quick_Donation_Listing_Table extends WP_List_Table {
 		if ( $this->user_posts_count ) {
 			if ( isset( $_GET['author'] ) && ( $_GET['author'] == $current_user_id ) )
 				$class = ' class="current"';
+			$status_links['mine'] = "<a href='edit.php?post_type=$post_type&author=$current_user_id'$class>" . sprintf( _nx( 'Mine <span class="count">(%s)</span>', 'Mine <span class="count">(%s)</span>', $this->user_posts_count, 'posts' ), number_format_i18n( $this->user_posts_count ) ) . '</a>';
 			$status_links['mine'] = "<a href='edit.php?post_type=$post_type&author=$current_user_id'$class>" . sprintf( _nx( 'Mine <span class="count">(%s)</span>', 'Mine <span class="count">(%s)</span>', $this->user_posts_count, 'posts' ), number_format_i18n( $this->user_posts_count ) ) . '</a>';
 			$allposts = '&all_posts=1';
 			$class = '';
@@ -444,7 +490,9 @@ class WC_Quick_Donation_Listing_Table extends WP_List_Table {
 				echo '<label class="screen-reader-text" for="cat">' . __( 'Filter by category' ) . '</label>';
 				wp_dropdown_categories( $dropdown_options );
 			}
-			$this->get_donation_projects();
+			if(! $this->is_trash){
+				 $this->get_donation_projects();
+			}
 			/**
 			 * Fires before the Filter button on the Posts and Pages list tables.
 			 *
@@ -1172,6 +1220,7 @@ class WC_Quick_Donation_Listing_Table extends WP_List_Table {
 		}
 
 		$post_type_object = get_post_type_object( $post->post_type );
+
 		$can_edit_post = current_user_can( 'edit_post', $post->ID );
 		$actions = array();
 

@@ -53,8 +53,10 @@ class WooCommerce_Quick_Donation_Functions  {
             'emails/plain/email-addresses.php' => 'emails/plain/donation-email-addresses.php',
             'emails/plain/email-order-items.php' => 'emails/plain/donation-email-order-items.php',
             'emails/plain/donation-customer-invoice.php' => 'emails/plain/donation-customer-invoice.php',
+            
+            'emails/donation-processing.php' => 'emails/donation-processing.php',
+            'emails/plain/donation-processing.php' => 'emails/plain/donation-processing.php',
         )
-        
         
         );    
     
@@ -64,6 +66,10 @@ class WooCommerce_Quick_Donation_Functions  {
         add_action( 'woocommerce_available_payment_gateways',array($this,'remove_gateway'));
         add_filter( 'woocommerce_locate_template' , array($this,'wc_locate_template'),10,3);
         add_filter( 'the_title', array($this,'wc_page_endpoint_title' ),10,2);
+    }
+    
+    public function get_template_list(){
+        return self::$search_template;
     }
     
     
@@ -97,8 +103,8 @@ class WooCommerce_Quick_Donation_Functions  {
     
     public function add_email_classes($email_classes){
         $email_classes[WC_QD_DB.'new_donation_email'] = require(WC_QD_INC.'emails/class-new-email.php');
-        //$email_classes[WC_QD_DB.'processing_donation_email'] = require(WC_QD_INC.'emails/class-processing-email.php');
-        //$email_classes[WC_QD_DB.'completed_donation_email'] = require(WC_QD_INC.'emails/class-completed-email.php');
+        $email_classes[WC_QD_DB.'donation_processing_email'] = require(WC_QD_INC.'emails/class-processing-email.php');
+        $email_classes[WC_QD_DB.'donation_completed_email'] = require(WC_QD_INC.'emails/class-completed-email.php');
         return $email_classes;
     }
     

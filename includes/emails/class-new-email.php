@@ -48,8 +48,6 @@ class WC_QD_Donation_New_Email extends WC_Email {
 		$this->subject_paid   = $this->get_option( 'subject_paid', $this->subject_paid );
         
         add_filter('woocommerce_template_directory',array($this,'change_dir'),2,1);
-        add_action( 'woocommerce_donation_email_header', array( $this, 'email_header' ) );
-        add_action( 'woocommerce_donation_email_footer', array( $this, 'email_footer' ) );
 	}
     
     public function change_dir($dir){
@@ -58,22 +56,7 @@ class WC_QD_Donation_New_Email extends WC_Email {
     }
     
     
-
-	/**
-	 * Get the email header.
-	 *
-	 * @param mixed $email_heading heading for the email
-	 */
-	public function email_header( $email_heading ) {
-		wc_get_template( 'emails/donation-email-header.php', array( 'order' => $this->object, 'email_heading' => $email_heading ) );
-	}
-
-	/**
-	 * Get the email footer.
-	 */
-	public function email_footer() {
-		wc_get_template( 'emails/donation-email-footer.php',array( 'order' => $this->object) );
-	}    
+    
 	/**
 	 * Trigger.
 	 */
