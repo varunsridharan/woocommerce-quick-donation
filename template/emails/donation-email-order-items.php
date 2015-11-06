@@ -4,7 +4,7 @@
  *
  * @author 		WooThemes
  * @package 	WooCommerce/Templates/Emails
- * @version     2.1.2
+ * @version     0.1
  */
 
 if ( ! defined( 'ABSPATH' ) ) {

@@ -45,7 +45,7 @@ class WooCommerce_Quick_Donation_Functions  {
 
             'emails/email-styles.php' => 'emails/donation-email-styles.php',
             
-            'emails/donation-customer-invoice.php' => 'emails/donation-customer-invoice.php',
+            'emails/donation-admin-new.php' => 'emails/donation-admin-new.php',
             'emails/email-addresses.php' => 'emails/donation-email-addresses.php',
             'emails/donation-email-footer.php' => 'emails/donation-email-footer.php',
             'emails/donation-email-header.php' => 'emails/donation-email-header.php',

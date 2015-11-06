@@ -11,7 +11,9 @@ class WooCommerce_Quick_Donation_Process extends WooCommerce_Quick_Donation  {
         
     function __construct(){
         parent::__construct();
-        add_action( 'wp_loaded',array($this,'on_wp_loaded'),20);
+		add_action( 'woocommerce_checkout_update_order_meta',array($this,'save_order_id_db'),1);
+
+		add_action( 'wp_loaded',array($this,'on_wp_loaded'),20);
         add_filter( 'woocommerce_get_price', array($this,'get_price'),10,2);
     }
     
@@ -19,9 +21,6 @@ class WooCommerce_Quick_Donation_Process extends WooCommerce_Quick_Donation  {
         if($this->check_donation_exists_cart()){ 
             $this->is_donation_exists = true; 
             add_action('woocommerce_add_order_item_meta',array($this,'add_order_meta'),99,3);
-            add_action( 'woocommerce_checkout_update_order_meta',array($this,'update_order_meta'));
-            add_action( 'woocommerce_checkout_update_order_meta',  array($this,'save_order_id_db'));
-            //add_action( 'woocommerce_email',array($this,'remove_email_actions'));
             add_filter( 'wc_quick_donation_cart_project_name', array($this,'change_donation_name'));
         } 
         $this->process_donation(); 
@@ -106,6 +105,7 @@ class WooCommerce_Quick_Donation_Process extends WooCommerce_Quick_Donation  {
             
             $woocommerce->session->donation_price = $donate_price;
             $woocommerce->session->projects = $projects;
+			$woocommerce->session->is_donation_product = true;
             
             $donation_added = $woocommerce->cart->add_to_cart(self::$donation_id);
             
@@ -199,13 +199,7 @@ class WooCommerce_Quick_Donation_Process extends WooCommerce_Quick_Donation  {
         }
     }
 
-    public function update_order_meta($order_id){
-        global $woocommerce;
-
-        update_post_meta( $order_id,"_is_donation",true);
-        update_post_meta( $order_id,"_project_details",$woocommerce->session->projects);
-    }
-    
+	
     public function add_order_meta($item_id, $values, $cart_item_key){
         global $woocommerce;
         wc_add_order_item_meta( $item_id, "_project_details",$woocommerce->session->projects);	
@@ -215,9 +209,13 @@ class WooCommerce_Quick_Donation_Process extends WooCommerce_Quick_Donation  {
     
     public function save_order_id_db($order_id){
         global $woocommerce;
-        $project_id = intval($woocommerce->session->projects);
-        $user_id = get_current_user_id();
-        WC_QD()->db()->add_db_option($order_id,$project_id,$user_id);
+		if($this->check_donation_exists_cart()){
+			$project_id = intval($woocommerce->session->projects);
+			$user_id = get_current_user_id(); 
+			update_post_meta( $order_id,"_is_donation",true);
+			update_post_meta( $order_id,"_project_details",$woocommerce->session->projects);
+			WC_QD()->db()->add_db_option($order_id,$project_id,$user_id);
+		}
     }
     
     
@@ -235,7 +233,6 @@ class WooCommerce_Quick_Donation_Process extends WooCommerce_Quick_Donation  {
 	 */
 	public function get_price($price, $product){
 		global $woocommerce;
-         
         if($product->id == self::$donation_id){ 
             return isset($woocommerce->session->donation_price) ? floatval($woocommerce->session->donation_price) : 0; 
         } 
@@ -245,4 +242,4 @@ class WooCommerce_Quick_Donation_Process extends WooCommerce_Quick_Donation  {
 
 }
                        
-                       ?>
+?>

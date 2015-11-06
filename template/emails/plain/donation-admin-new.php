@@ -1,10 +1,10 @@
 <?php
 /**
- * Customer processing order email
+ * Customer invoice email (plain text)
  *
- * @author 		WooThemes
- * @package 	WooCommerce/Templates/Emails/Plain
- * @version     0.1
+ * @author  Varun Sridharan
+ * @package WooCommerce Quick Donation/Templates/emails/plain
+ * @version 0.1
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -13,7 +13,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 echo "= " . $email_heading . " =\n\n";
 
-echo __( "Your order has been received and is now being processed. Your order details are shown below for your reference:", 'woocommerce' ) . "\n\n";
+if ( $order->has_status( 'pending' ) )
+	echo sprintf( __( 'An order has been created for you on %s. To pay for this order please use the following link: %s', 'woocommerce' ), get_bloginfo( 'name', 'display' ), $order->get_checkout_payment_url() ) . "\n\n";
 
 echo "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n\n";
 
@@ -24,7 +25,19 @@ echo date_i18n( __( 'jS F Y', 'woocommerce' ), strtotime( $order->order_date ) )
 
 do_action( 'woocommerce_email_order_meta', $order, $sent_to_admin, $plain_text );
 
-echo "\n" . $order->email_order_items_table( $order->is_download_permitted(), true, $order->has_status( 'processing' ), '', '', true );
+echo "\n";
+
+switch ( $order->get_status() ) {
+	case "completed" :
+		echo $order->email_order_items_table( $order->is_download_permitted(), false, true, '', '', true );
+	break;
+	case "processing" :
+		echo $order->email_order_items_table( $order->is_download_permitted(), true, true, '', '', true );
+	break;
+	default :
+		echo $order->email_order_items_table( $order->is_download_permitted(), true, false, '', '', true );
+	break;
+}
 
 echo "==========\n\n";
 
@@ -37,9 +50,5 @@ if ( $totals = $order->get_order_item_totals() ) {
 echo "\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n\n";
 
 do_action( 'woocommerce_email_after_order_table', $order, $sent_to_admin, $plain_text );
-
-do_action( 'woocommerce_email_customer_details', $order, $sent_to_admin, $plain_text );
-
-echo "\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n\n";
 
 echo apply_filters( 'woocommerce_email_footer_text', get_option( 'woocommerce_email_footer_text' ) );

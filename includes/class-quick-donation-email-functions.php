@@ -61,8 +61,8 @@ class WooCommerce_Quick_Donation_Emails_Functions  {
         }
     }
     
-    public function check_order($order_id){
-        if(!WC_QD()->db()->_is_donation($order_id)){return;} 
+    public function check_order($order_id){ 
+        if(! WC_QD()->db()->_is_donation($order_id)){return;} 
         $this->remove_emails = true;
     }
     
