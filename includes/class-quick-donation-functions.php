@@ -14,9 +14,11 @@ class WooCommerce_Quick_Donation_Functions  {
             'field-select.php' => 'fields/field-select.php',
             'field-text.php' => 'fields/field-text.php',
             'myaccount/my-donations.php' => 'myaccount/my-donations.php',
+			'cart/mini-cart.php' => 'cart/donation-mini-cart.php',
         ),
 
         'is_donation' => array( 
+			
             'cart/cart-item-data.php' => 'cart/donation-cart-item-data',
             'cart/cart-shipping.php' => 'cart/donation-cart-shipping.php',
             'cart/cart-totals.php' => 'cart/donation-cart-totals.php',
