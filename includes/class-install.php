@@ -13,7 +13,7 @@ class WC_QD_INSTALL{
         self::check_template_files();
 
         if(! $donation_exist){
-            $post_id = self::create_donation(); 
+            $post_id = self::create_simple_donation(); 
             update_option(WC_QD_DB.'product_id',$post_id); 
         }
     }
@@ -71,7 +71,7 @@ class WC_QD_INSTALL{
      * Create Donation Product In WooCommerce
      * @return int donation Post id
      */
-    public static function create_donation(){
+    public static function create_simple_donation(){
         $userID = 1;
         if(get_current_user_id()){ $userID = get_current_user_id(); }
         

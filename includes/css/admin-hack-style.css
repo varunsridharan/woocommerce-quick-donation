@@ -1,6 +1,9 @@
 #woocommerce-quick-donation-order-data > h3,#woocommerce-quick-donation-order-data > .handlediv{display: none;}
-
 form#donors_listing div.tablenav {margin-top:0; height: auto;}
 form#donors_listing div.tablenav span.displaying-num {margin-top:0;}
 form#donors_listing div.bulkactions{display: none !important;}
 form#donors_listing div.tablenav-pages{height: auto; margin: 0;}
+
+table.wc_qd_system_toold span.description{margin-left: 10px;}
+span.wc_qd_error{font-weight: bold; color:red;}
+span.wcqdsuccess{font-weight: bold; color: green;}
