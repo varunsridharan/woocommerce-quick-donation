@@ -427,8 +427,8 @@ class WP_Donors_Listing_Table extends WP_List_Table {
                         $price = array();
                         
                         foreach($donation_ids as $donation){
-                            
                             $order = wc_get_order($donation);
+							if($order === false){ wcqd_delete_donation_entry($donation); continue;}
                             $prices = $order->get_total(); 
                             $currname = $order->get_order_currency();
                             if(! isset($price[$currname])){$price[$currname] = 0;}

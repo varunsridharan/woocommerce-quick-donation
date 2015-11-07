@@ -100,6 +100,13 @@ class WooCommerce_Quick_Donation_DB  {
         return array();
     }
     
+	public function delete_donation_entry($id){
+		global $wpdb;
+		$db_request = $wpdb->delete( WC_QD_TB, array('donationid' => $id)); 
+		return $db_request;
+	}
+	
+	
     public function extract_donation_id($ids){
         $return_ids = array();
         foreach($ids as $i){

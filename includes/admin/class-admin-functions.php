@@ -21,11 +21,18 @@ class WooCommerce_Quick_Donation_Admin_Function {
         add_action( 'post_row_actions', array($this,'protect_donation_product'),99,2);
         add_action( 'parse_query', array( $this, 'hide_donation_order_woocommerce_order' ) );
         add_filter( 'wc_order_types',array($this,'add_wc_order_types'),1,2);
+		add_action( 'delete_post', array($this,'delete_donation'));
 		add_action( 'wp_ajax_CreateDonationProduct', array($this,'create_donation_product') );
     }   
     
     
-
+	public function delete_donation($id){
+		if('shop_order' == get_post_type($id)){
+			if(wcqd_is_donation($id)){
+				WC_QD()->db()->delete_donation_entry($id);
+			}
+		}
+	}
     
     public function hide_donation_order_woocommerce_order($query) {
         global $pagenow,$post_type;  

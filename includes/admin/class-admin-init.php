@@ -102,18 +102,24 @@ class WooCommerce_Quick_Donation_Admin  {
         $name = 'edit.php?post_type='.WC_QD_PT;
         if(empty($submenu)){return $submenu;}
         $arr = array();
-		
-		$submenu[$name][18][2] = $submenu[$name][5][2].'&page='.$submenu[$name][18][2];
-        $arr[] = $submenu[$name][18];
-        $arr[] = $submenu[$name][19];
-        $arr[] = $submenu[$name][5];
+		$seperator = array();
+		$seperator[0] = '';
+		$seperator[1] = 'read';
+		$seperator[2] = 'separator10';
+		$seperator[3] = '';
+		$seperator[4] = 'wp-menu-separator';
+		$arr[] = $submenu[$name][5];
         $arr[] = $submenu[$name][10];
         $arr[] = $submenu[$name][15];
         $arr[] = $submenu[$name][16];
-        $arr[] = $submenu[$name][17];
+		$arr[] = $seperator;
+		$arr[] = $submenu[$name][18];
+        $arr[] = $submenu[$name][19];
+		$arr[] = $seperator;
+		$arr[] = $submenu[$name][17];
         $arr[] = $submenu[$name][20];
-		//var_dump($arr); exit;
-        $submenu[$name] = $arr;
+
+		$submenu[$name] = $arr;
         return $menu_ord;
     }  
     

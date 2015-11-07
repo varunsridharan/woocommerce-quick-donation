@@ -62,5 +62,11 @@ if(! function_exists('wcqd_get_project_name')){
     }
 }
 
+if(! function_exists('wcqd_delete_donation_entry')){
+	function wcqd_delete_donation_entry($id){
+		return WC_QD()->db()->delete_donation_entry($id);
+	}
+		
+}
    
 ?>

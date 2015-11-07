@@ -66,6 +66,7 @@ class WooCommerce_Quick_Donation_Functions  {
         add_action( 'woocommerce_available_payment_gateways',array($this,'remove_gateway'));
         add_filter( 'woocommerce_locate_template' , array($this,'wc_locate_template'),10,3);
         add_filter( 'the_title', array($this,'wc_page_endpoint_title' ),10,2);
+		add_filter( 'wp_count_posts', array($this,'modify_wp_count_posts'),99,3);
     }
     
     public function get_template_list(){
@@ -315,4 +316,32 @@ class WooCommerce_Quick_Donation_Functions  {
         }
         return $located;
     }    
+	
+	public function modify_wp_count_posts($old_status,$type, $perm = '' ) {
+		global $wpdb;
+		 
+		if ( ! post_type_exists( $type ) ) { return new stdClass;}
+		$cache_key = _count_posts_cache_key( $type, $perm );
+		$counts = wp_cache_get( $cache_key, 'wc_qd_modified_wp_count_posts' );
+				
+		if ( false !== $counts ) { return apply_filters( 'wc_qd_modified_wp_count_posts', $counts, $type, $perm ); }
+		$query = "SELECT post_status, COUNT( * ) AS num_posts FROM {$wpdb->posts} WHERE  ";
+		$query .= " ID NOT IN (SELECT donationid FROM `".WC_QD_TB."`) ";
+		$query .= " AND post_type = %s ";
+		if ( 'readable' == $perm && is_user_logged_in() ) {
+			$post_type_object = get_post_type_object($type);
+			if ( ! current_user_can( $post_type_object->cap->read_private_posts ) ) {
+				$query .= $wpdb->prepare( " AND (post_status != 'private' OR ( post_author = %d AND post_status = 'private' ))",
+					get_current_user_id()
+				);
+			}
+		}
+		$query .= ' GROUP BY post_status';
+		$results = (array) $wpdb->get_results( $wpdb->prepare( $query, $type ), ARRAY_A );
+		$counts = array_fill_keys( get_post_stati(), 0 );
+		foreach ( $results as $row ) { $counts[ $row['post_status'] ] = $row['num_posts']; }
+		$counts = (object) $counts;
+		wp_cache_set( $cache_key, $counts, 'wc_qd_modified_wp_count_posts' );
+		return apply_filters( 'wc_qd_modified_wp_count_posts', $counts, $type, $perm );
+	}	
 }
