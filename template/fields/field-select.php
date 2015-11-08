@@ -4,22 +4,26 @@
  *
  * @author  Varun Sridharan
  * @package WooCommerce Quick Donation/Templates/fields
- * @version 0.1
+ * @version 0.2
  */
 ?>
 
 <select id="<?php echo $id; ?>" name="<?php echo $name; ?>" class="<?php echo $class.' '.$attributes;?>">
 <?php
+
 foreach($project_list as $id => $val){
-    
+    $attr = '';
     if(is_array($val)){
         $field_output .= ' <optgroup label="'.$id.'">';
         foreach($val as $k =>$v){
-            $field_output .= '<option value="'.$k.'">'.$v.'</option>';
+			$attr = '';
+			if($pre_selected == $k){$attr = 'selected';}
+            $field_output .= '<option value="'.$k.'" '.$attr.'>'.$v.'</option>';
         }   
         $field_output .= ' </optgroup>';
     } else {
-        $field_output .= '<option value="'.$id.'">'.$val.'</option>';
+		if($pre_selected == $k){$attr = 'selected';}
+        $field_output .= '<option value="'.$id.'" '.$attr.'>'.$val.'</option>';
     }
     
 }

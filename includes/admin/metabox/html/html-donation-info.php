@@ -58,9 +58,9 @@
 <div class="order_data_column" style="display:none; visibility: hidden;">
 <?php
 echo '<div class="address">';
-if ( $order->get_formatted_shipping_address() ) { echo '<p><strong>' . __( 'Address', 'woocommerce' ) . ':</strong>' . wp_kses( $order->get_formatted_shipping_address(), array( 'br' => array() ) ) . '</p>'; } else { echo '<p class="none_set"><strong>' . __( 'Address', 'woocommerce' ) . ':</strong> ' . __( 'No shipping address set.', 'woocommerce' ) . '</p>'; }
+if ( $order->get_formatted_shipping_address() ) { echo '<p><strong>' . __( 'Address', WC_QD_TXT ) . ':</strong>' . wp_kses( $order->get_formatted_shipping_address(), array( 'br' => array() ) ) . '</p>'; } else { echo '<p class="none_set"><strong>' . __( 'Address', WC_QD_TXT ) . ':</strong> ' . __( 'No shipping address set.', WC_QD_TXT ) . '</p>'; }
 if ( ! empty( self::$shipping_fields ) ) { foreach ( self::$shipping_fields as $key => $field ) { if ( isset( $field['show'] ) && false === $field['show'] ) { continue; }  $field_name = 'shipping_' . $key;  if ( ! empty( $order->$field_name ) ) { echo '<p><strong>' . esc_html( $field['label'] ) . ':</strong> ' . make_clickable( esc_html( $order->$field_name ) ) . '</p>'; } } }
-if ( apply_filters( 'woocommerce_enable_order_notes_field', 'yes' == get_option( 'woocommerce_enable_order_comments', 'yes' ) ) && $post->post_excerpt ) { echo '<p><strong>' . __( 'Customer Provided Note', 'woocommerce' ) . ':</strong> ' . nl2br( esc_html( $post->post_excerpt ) ) . '</p>'; }
+if ( apply_filters( 'woocommerce_enable_order_notes_field', 'yes' == get_option( 'woocommerce_enable_order_comments', 'yes' ) ) && $post->post_excerpt ) { echo '<p><strong>' . __( 'Customer Provided Note', WC_QD_TXT ) . ':</strong> ' . nl2br( esc_html( $post->post_excerpt ) ) . '</p>'; }
 echo '</div>';
 echo '<div class="edit_address">';
 if ( ! empty( self::$shipping_fields ) ) { foreach ( self::$shipping_fields as $key => $field ) { if ( ! isset( $field['type'] ) ) { $field['type'] = 'hidden'; } if ( ! isset( $field['id'] ) ){ $field['id'] = '_shipping_' . $key; }
@@ -75,8 +75,8 @@ break;
 
 if ( apply_filters( 'woocommerce_enable_order_notes_field', 'yes' == get_option( 'woocommerce_enable_order_comments', 'yes' ) ) ) {
 ?>
-<p class="form-field form-field-wide"><label for="excerpt"><?php _e( 'Customer Provided Note', 'woocommerce' ) ?>:</label>
-<textarea rows="1" cols="40" name="excerpt" tabindex="6" id="excerpt" placeholder="<?php esc_attr_e( 'Customer\'s notes about the order', 'woocommerce' ); ?>"><?php echo wp_kses_post( $post->post_excerpt ); ?></textarea></p>
+<p class="form-field form-field-wide"><label for="excerpt"><?php _e( 'Customer Provided Note', WC_QD_TXT ) ?>:</label>
+<textarea rows="1" cols="40" name="excerpt" tabindex="6" id="excerpt" placeholder="<?php esc_attr_e( 'Customer\'s notes about the order', WC_QD_TXT ); ?>"><?php echo wp_kses_post( $post->post_excerpt ); ?></textarea></p>
 <?php
 }
 

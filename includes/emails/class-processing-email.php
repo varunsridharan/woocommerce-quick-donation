@@ -29,7 +29,7 @@ class WC_QD_Processing_donation extends WC_Email {
 		$this->description      = __( 'This is an order notification sent to customers containing their donation details after payment.', WC_QD_TXT);
 
 		$this->heading          = __( 'Reg : Your {site_title} donation receipt from {order_date}', WC_QD_TXT);
-		$this->subject          = __( 'Thanks for donation', 'woocommerce' );
+		$this->subject          = __( 'Thanks for donation', WC_QD_TXT );
 
 		$this->template_html    = 'emails/donation-processing.php';
 		$this->template_plain   = 'emails/plain/donation-processing.php';

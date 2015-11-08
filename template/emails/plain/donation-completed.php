@@ -13,14 +13,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 echo "= " . $email_heading . " =\n\n";
 
-echo sprintf( __( "Hi there. Your recent order on %s has been completed. Your order details are shown below for your reference:", 'woocommerce' ), get_option( 'blogname' ) ) . "\n\n";
+echo sprintf( __( "Hi there. Your recent order on %s has been completed. Your order details are shown below for your reference:", WC_QD_TXT ), get_option( 'blogname' ) ) . "\n\n";
 
 echo "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n\n";
 
 do_action( 'woocommerce_email_before_order_table', $order, $sent_to_admin, $plain_text );
 
-echo strtoupper( sprintf( __( 'Order number: %s', 'woocommerce' ), $order->get_order_number() ) ) . "\n";
-echo date_i18n( __( 'jS F Y', 'woocommerce' ), strtotime( $order->order_date ) ) . "\n";
+echo strtoupper( sprintf( __( 'Order number: %s', WC_QD_TXT ), $order->get_order_number() ) ) . "\n";
+echo date_i18n( __( 'jS F Y', WC_QD_TXT ), strtotime( $order->order_date ) ) . "\n";
 
 do_action( 'woocommerce_email_order_meta', $order, $sent_to_admin, $plain_text );
 

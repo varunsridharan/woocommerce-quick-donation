@@ -8,7 +8,7 @@ $fields['settings_general']['general'][] = array(
     'label'   => __( 'Redirect User To', WC_QD_TXT),
     'desc'    => __( 'After Donation Added To Cart',WC_QD_TXT),
     'size '   => 'small',
-    'options' => array('cart' => 'Cart Page' , 'checkout' => 'Checkout Page'),
+    'options' => array('cart' => __('Cart Page',WC_QD_TXT) , 'checkout' => __('Checkout Page',WC_QD_TXT)),
     'attr'    => array('class' => 'wc-enhanced-select','style' => 'width:auto;max-width:35%;')
 );
 
@@ -19,7 +19,7 @@ $fields['settings_general']['general'][] = array(
     'label'   => __( 'Donation Exist Redirect', WC_QD_TXT),
     'desc'    => __( 'Redirect User When Donation Already Exist In Cart',WC_QD_TXT),
     'size '   => 'small',
-    'options' => array('' => 'None', 'cart' => 'Cart Page' , 'checkout' => 'Checkout Page'),
+    'options' => array('cart' => __('Cart Page',WC_QD_TXT) , 'checkout' => __('Checkout Page',WC_QD_TXT)),
     'attr'    => array('class' => 'wc-enhanced-select','style' => 'width:auto;max-width:35%;')
 );
 
@@ -34,15 +34,12 @@ $fields['settings_general']['general'][] = array(
 ); 
 
 /** Message Settings **/
-
-
-  
 $fields['settings_message']['message'][] =  array(
-	'desc'  => __( '<div class="decs"> <span> Add <code>{donation_amount}</code> To Get Ented Amount By User.  </span> 
-               <span> Add <code>{min_amount}</code> To Get Minimum Required Amount From Selected Project </span> 
-               <span> Add <code>{max_amount}</code> To Get Minimum Required Amount From Selected Project  </span> </div>',WC_QD_TXT),
+	'desc'  => sprintf(__( '<span> Add <code>%s</code> To Get Ented Amount By User.</span>  <br/>
+               <span> Add <code>%s</code> To Get Minimum Required Amount From Selected Project </span>   <br/>
+               <span> Add <code>%s</code> To Get Minimum Required Amount From Selected Project  </span>',WC_QD_TXT),'{donation_amount}','{min_amount}','{max_amount}'),
 	'id'    =>  WC_QD_DB.'empty_donation_msg_1',
-    'attr'  => array('style' => 'min-width:35%; width:auto;max-width:75%;'),
+    'attr'  => array('style' => 'min-width:50%; width:auto;max-width:75%;'),
 	'type'  => 'content'
 );
 
@@ -51,7 +48,7 @@ $fields['settings_message']['message'][] =  array(
 	'label' => __( 'Donation Conflict', WC_QD_TXT),
 	'desc'  => __( 'Custom Message To Show When User Trying To Add Donation With Other Products',WC_QD_TXT),
 	'id'    =>   WC_QD_DB.'donation_with_other_products',
-    'attr'  => array('style' => 'min-width:35%; width:auto;max-width:75%;'),
+    'attr'  => array('style' => 'min-width:50%; width:auto;max-width:75%;'),
 	'type'  => 'textarea'
 );
 
@@ -59,7 +56,7 @@ $fields['settings_message']['message'][] =  array(
 	'label' => __( 'Empty Donation Amount', WC_QD_TXT),
 	'desc'  => __( 'Custom Message To Show When Empty Donation Entered',WC_QD_TXT),
 	'id'    =>   WC_QD_DB.'empty_donation_msg',
-    'attr'  => array('style' => 'min-width:35%; width:auto;max-width:75%;'),
+    'attr'  => array('style' => 'min-width:50%; width:auto;max-width:75%;'),
 	'type'  => 'textarea'
 );
 
@@ -67,7 +64,7 @@ $fields['settings_message']['message'][] = array(
 	'label'     => __( 'Donation Already Exist', WC_QD_TXT),
 	'desc'     => __( 'Custom Message To Show When User Trying To Add Another Donation To Cart',WC_QD_TXT),
 	'id'       =>  WC_QD_DB.'donation_already_exist',
-	'attr'  => array('style' => 'min-width:35%; width:auto;max-width:75%;'),
+	'attr'  => array('style' => 'min-width:50%; width:auto;max-width:75%;'),
 	'type'     => 'textarea',
 	
 );
@@ -76,7 +73,7 @@ $fields['settings_message']['message'][] =  array(
 	'label' => __( 'Invalid Donation Amount', WC_QD_TXT),
 	'desc'  => __( 'Custom Message To Show When Invalid Donation Entered',WC_QD_TXT),
 	'id'    =>  WC_QD_DB.'invalid_donation_msg',
-    'attr'  => array('style' => 'min-width:35%; width:auto;max-width:75%;'),
+    'attr'  => array('style' => 'min-width:50%; width:auto;max-width:75%;'),
 	'type'  => 'textarea'
 );
  
@@ -84,7 +81,7 @@ $fields['settings_message']['message'][] =  array(
 	'label' => __( 'Minimum Required Donation Amount', WC_QD_TXT),
 	'desc'  => __( 'Custom Message To Show When Minimum Required Donation Not Entered',WC_QD_TXT),
 	'id'    =>  WC_QD_DB.'min_rda_msg',
-    'attr'  => array('style' => 'min-width:35%; width:auto;max-width:75%;'),
+    'attr'  => array('style' => 'min-width:50%; width:auto;max-width:75%;'),
 	'type'  => 'textarea'
 );
 
@@ -92,6 +89,43 @@ $fields['settings_message']['message'][] =  array(
 	'label' =>__( 'Maximum Required Donation Amount', WC_QD_TXT),
 	'desc'  => __( 'Custom Message To Show When Maximum Required Donation Not Entered ',WC_QD_TXT),
 	'id'    =>  WC_QD_DB.'max_rda_msg',
-    'attr'  => array('style' => 'min-width:35%; width:auto;max-width:75%;'),
+    'attr'  => array('style' => 'min-width:50%; width:auto;max-width:75%;'),
 	'type'  => 'textarea'
 );
+
+
+/** Shortcode Settings **/
+$fields['settings_shortcode']['shortcode'][] = array(
+	'id'      =>  WC_QD_DB.'default_render_type',
+    'type'    => 'select',
+    'label'   => __( 'Pre Selected Project Name', WC_QD_TXT),
+    'desc'    => __( 'default project render type',WC_QD_TXT),
+    'size '   => 'small',
+    'options' => array('select' => __('Select Box',WC_QD_TXT), 'radio' => __('Radio Button',WC_QD_TXT)),
+    'attr'    => array('class' => 'wc-enhanced-select','style' => 'width:auto;max-width:35%;')		
+);
+
+$fields['settings_shortcode']['shortcode'][] = array(
+	'id'      =>  WC_QD_DB.'shortcode_show_errors',
+    'type'    => 'select',
+    'label'   => __( 'Show Errors', WC_QD_TXT),
+    'desc'    => __( 'Set to hide errors when <code> wc_print_notice</code> called before loading dontion form',WC_QD_TXT),
+    'size '   => 'small',
+    'options' => array('true' => __('Show Errors',WC_QD_TXT), 'false' => __('Hide Errors',WC_QD_TXT)),
+    'attr'    => array('class' => 'wc-enhanced-select','style' => 'width:auto;max-width:35%;')		
+);
+
+
+$fields['settings_shortcode']['shortcode'][] = array(
+	'id'      =>  WC_QD_DB.'pre_selected_project',
+    'type'    => 'select',
+    'label'   => __( 'Pre Selected Project Name', WC_QD_TXT),
+    'desc'    => __( 'this value will be selected in donation project box',WC_QD_TXT),
+    'size '   => 'small',
+    'options' => WC_QD()->f()->get_porject_list(),
+    'attr'    => array('class' => 'wc-enhanced-select','style' => 'width:auto;max-width:35%;')		
+);
+//WC_QD()->f()->get_porject_list()
+?>
+
+

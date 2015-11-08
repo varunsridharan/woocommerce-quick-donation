@@ -244,7 +244,7 @@ class WooCommerce_Quick_Donation_Admin  {
     
     public function set_wc_screen_ids($screens){
         $screen = $screens; 
-        $screen[] = 'wcqd_project_page_WC_QD_settings';
+        $screen[] = WC_QD_PT.'_page_wc_qd_settings';
         $screen[] = $this->order_menu_slug;
         $screen[] = $this->donors_list;
         $screen[] = $this->sys_info; 
@@ -269,8 +269,7 @@ class WooCommerce_Quick_Donation_Admin  {
         $screen_ids = array();
         $screen_ids[] = 'edit-product';
         $screen_ids[] = 'product';
-        $screen_ids[] = WC_QD_PT.'_page_wc_qd_settings';
-        $screen_ids[] = 'wcqd_project_page_WC_QD_settings';
+        $screen_ids[] = WC_QD_PT.'_page_wc_qd_settings'; 
         $screen_ids[] = $this->order_menu_slug;
         $screen_ids[] = $this->order_menu_slug;
         $screen_ids[] = $this->donors_list;

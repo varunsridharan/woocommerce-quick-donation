@@ -17,11 +17,8 @@ class WooCommerce_Quick_Donation_Emails_Functions  {
         add_action('woocommerce_order_status_failed',array($this,'check_order'),1);
         add_action( 'woocommerce_email',array($this,'remove_email_actions'),1);
         
-        // Triggers for this email
         add_action( 'woocommerce_donation_email_header', array( $this, 'email_header' ) );
         add_action( 'woocommerce_donation_email_footer', array( $this, 'email_footer' ) );        
-        
-        
         //add_filter( 'woocommerce_template_directory',    array( $this, 'change_dir'),2,2);
     }
     

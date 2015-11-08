@@ -11,13 +11,17 @@ class WC_QD_INSTALL{
         self::post_register();
         self::wc_qd_table_install();
         self::check_template_files();
-
+		self::add_options();
         if(! $donation_exist){
             $post_id = self::create_simple_donation(); 
-            update_option(WC_QD_DB.'product_id',$post_id); 
+			update_option(WC_QD_DB.'product_id',$post_id); 
         }
+		
     }
     
+    /**
+     * Registers Custom Post, Custom Taxonomy
+     */
     public static function post_register(){
         WC_QD_Post_Types::register_donation_posttype();
         WC_QD_Post_Types::register_donation_category();
@@ -66,6 +70,49 @@ class WC_QD_INSTALL{
         require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
         dbDelta( $sql ); 
     }    
+	
+
+	public static function add_options(){
+		$general_settings = self::general_section_settings();
+		$message_settings = self::message_section_settings();
+		$shortcode_settings = self::shortcode_section_settings();
+
+		add_option( 'wc_qd_general', $general_settings);
+		add_option('wc_qd_message', $message_settings);
+		add_option('wc_qd_shortcode',$shortcode_settings);
+		add_option('wc_qd_anh_notices', '');
+	}
+	
+	
+	private static function general_section_settings(){
+		$s = array();
+		$s['section_id'] = 'general';
+		$s[WC_QD_DB_SETTINGS.'_redirect_user'] = 'checkout';
+		$s[WC_QD_DB_SETTINGS.'_already_exist_redirect_user'] = 'cart';
+		return $s;
+	}
+	
+	private static function message_section_settings(){
+		$s = array();
+		$s['section_id'] = 'message';
+		$s[WC_QD_DB_SETTINGS.'_donation_with_other_products'] = 'Unable To Process Donation. Kindly Complete The Exist Order ';
+		$s[WC_QD_DB_SETTINGS.'_empty_donation_msg'] = 'Please Enter A Donation Amount';
+		$s[WC_QD_DB_SETTINGS.'_donation_already_exist'] = 'Donation Already Exist In Cart. Kindly Complete The Existing';
+		$s[WC_QD_DB_SETTINGS.'_invalid_donation_msg'] = 'Invalid Donation Amount Entered [{donation_amount}]';
+		$s[WC_QD_DB_SETTINGS.'_min_rda_msg'] = 'Please Enter Minimum of {min_amount}.';
+		$s[WC_QD_DB_SETTINGS.'_max_rda_msg'] = 'Please Enter Maximum of {max_amount}.';	
+		return $s;
+	}
+
+	private static function shortcode_section_settings(){
+		$s['section_id'] = 'shortcode';
+		$s[WC_QD_DB_SETTINGS.'_default_render_type'] = 'select';
+		$s[WC_QD_DB_SETTINGS.'_shortcode_show_errors'] = 'true';
+		$s[WC_QD_DB_SETTINGS.'_pre_selected_project'] = '';	
+		return $s;
+	}
+
+	
      
     /**
      * Create Donation Product In WooCommerce
@@ -96,14 +143,18 @@ class WC_QD_INSTALL{
         update_post_meta($post_id, '_sku', 'checkout-donation');   			
         return $post_id;
     }
-    
+    /**
+     * Gets ALl Core Templates
+     */
     public static function get_template_list(){
         $core_tempalte_list = WC_Admin_Status::scan_template_files( WC_QD_TEMPLATE );
         return $core_tempalte_list;
     }
     
     
-    
+    /**
+     * Checks For Template Version 
+     */
     public static function check_template_files(){
         $template_files = self::get_template_list();
         $outdated = false;
@@ -137,7 +188,7 @@ class WC_QD_INSTALL{
                 $theme = wp_get_theme(); 
                 $message = sprintf(
                     __( '<p> <strong>Your theme (%s) contains outdated copies of some WooCommerce Quick Donation template files.</strong> These files may need updating to ensure they are compatible with the current version of WooCommerce Quick Donation. You can see which files are affected from the %ssystem status page%s. If in doubt, check with the author of the theme. </p> <p class="submit">%sLear More About Templates%s %s</p>',
-                       'woocommerce' ), 
+                      WC_QD_TXT), 
                     esc_html( $theme['Name'] ), 
                     '<a href="' . admin_url( 'admin.php?page=wc-status' ) . '">','</a>',
                     '<a  target="_blank" href="" class="button-primary" href="">','</a>', 

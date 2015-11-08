@@ -23,19 +23,21 @@ class WooCommerce_Quick_Donation_Shortcode {
     
     public function shortcode_handler($settings){
         global $donation_box,$donation_price,$currency;
+		
         $settings = shortcode_atts( array(
-        'type' => 'select',
-        'grouped' => false,
-        'show_erros' => true,
+			'type' => wcqd_get_option(WC_QD_DB.'default_render_type'),
+			'grouped' => false,
+			'show_errors' => wcqd_get_option(WC_QD_DB.'shortcode_show_errors'),
+			'selected_value' => wcqd_get_option(WC_QD_DB.'pre_selected_project'),
         ), $settings );
         
-        $donation_box = WC_QD()->f()->generate_donation_selbox($settings['grouped'],$settings['type']);
+        $donation_box = WC_QD()->f()->generate_donation_selbox($settings['grouped'],$settings['type'],$settings['selected_value']);
         $donation_price =  WC_QD()->f()->generate_price_box();
         $currency = get_woocommerce_currency_symbol();
         $return_value = '';
         $messages = '';
-        
-        if($settings['show_erros']){
+		
+        if($settings['show_errors']){
             ob_start();
             wc_print_notices();
             $messages .= ob_get_clean(); 

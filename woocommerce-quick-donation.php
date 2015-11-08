@@ -248,6 +248,7 @@ class WooCommerce_Quick_Donation {
 
         $this->define('WC_QD_TB',$wpdb->prefix . 'wc_quick_donation');
         $this->define('WC_QD_DB','wc_qd_');
+		$this->define('WC_QD_DB_SETTINGS','wc_qd');
         $this->define('WC_QD_PT','wcqd_project');
         $this->define('WC_QD_CAT','wcqd_category');
         $this->define('WC_QD_TAG','wcqd_tags'); 

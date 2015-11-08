@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 		<td class="td" style="text-align:left; font-family: 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif;" valign="top" width="50%">
 
-			<h3><?php _e( 'Billing address', 'woocommerce' ); ?></h3>
+			<h3><?php _e( 'Billing address', WC_QD_TXT ); ?></h3>
 
 			<p class="text"><?php echo $order->get_formatted_billing_address(); ?></p>
 
@@ -27,7 +27,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 		<td class="td" style="text-align:left; font-family: 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif;" valign="top" width="50%">
 
-			<h3><?php _e( 'Shipping address', 'woocommerce' ); ?></h3>
+			<h3><?php _e( 'Shipping address', WC_QD_TXT ); ?></h3>
 
 			<p class="text"><?php echo $shipping; ?></p>
 

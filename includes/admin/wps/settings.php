@@ -1,5 +1,4 @@
 <?php
-
 class WooCommerce_Quick_Donation_Settings {
     private $page_hook = '';
     public $settings;
@@ -9,6 +8,7 @@ class WooCommerce_Quick_Donation_Settings {
     private $create_function;
     private $settings_key;
     private $settings_values;
+	
     function __construct($page_hook = '') {
         $this->settings_section = array();
         $this->settings_fields = array();
@@ -18,22 +18,25 @@ class WooCommerce_Quick_Donation_Settings {
         $this->get_settings();
         $this->add_settings_section();
         $this->create_callback_function();
+
+		$this->page_hook = $page_hook;
         
         
-        $this->page_hook = $page_hook;
-        
-        $this->settings = new WC_Quick_Donation_Settings();
         
         if(empty($page_hook)) {
             add_action( 'admin_menu', array( $this, 'admin_menu' ) );
         }
+		add_action( 'current_screen', array( $this, 'admin_screen' ));
         add_action( 'admin_init', array( $this, 'admin_init' ) );
     }
     
     
     function admin_menu() {
-		$this->page_hook = add_submenu_page('edit.php?post_type=wcqd_project','Settings Page','Settings Page','administrator','WC_QD_settings', array( $this, 'admin_page' ) );
-        $this->page_hook = 'wc_qd';
+		$this->page_hook = add_submenu_page('edit.php?post_type='.WC_QD_PT,
+											__('Settings Page',WC_QD_TXT),
+											__('Settings Page',WC_QD_TXT),
+											'administrator','wc_qd_settings', array( $this, 'admin_page' ) );
+        //$this->page_hook = 'wc_qd';
 	}
     
     
@@ -81,8 +84,14 @@ class WooCommerce_Quick_Donation_Settings {
         $this->settings_field = $fields;
     }
  
+	function admin_screen($hook){
+		if($this->page_hook == $hook->id){
+			//$this->settings->init( $this->pages, WC_QD_DB_SETTINGS );
+		}
+	}
 
     function admin_init(){
+		$this->settings = new WC_Quick_Donation_Settings();
         $this->add_settings_fields();
         $this->settings->add_pages($this->settings_page);
         $sections = $this->settings_section;
@@ -105,8 +114,8 @@ class WooCommerce_Quick_Donation_Settings {
                 
             } 
         }
-        
-        $this->settings->init( $pages, $this->page_hook );
+		
+		$this->settings->init($pages, WC_QD_DB_SETTINGS );
     }
     
     
@@ -115,20 +124,10 @@ class WooCommerce_Quick_Donation_Settings {
 		settings_errors();
 		$this->settings->render_header();
 		echo $this->settings->debug;
-
-
 		$this->settings->render_form();
 		echo '</div>';
 	}
-
-
-	//function validate_section( $fields ) {
-    //    global $send_fields; 
-    //    $send_fields =  $fields; 
-    //    include(WC_QD_ADMIN.'settings/validate.php');
-	//	return $fields;
-	//}
-    
+ 
     function get_option($id = ''){
         if( ! empty($this->settings_values) &&  ! empty($id)){
             if(isset($this->settings_values[$id])){
@@ -154,7 +153,5 @@ class WooCommerce_Quick_Donation_Settings {
         return $values;
     }
 }
-
-
 
 ?>

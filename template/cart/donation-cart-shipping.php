@@ -15,9 +15,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 <tr class="shipping">
 	<th><?php
 		if ( $show_package_details ) {
-			printf( __( 'Shipping #%d', 'woocommerce' ), $index + 1 );
+			printf( __( 'Shipping #%d', WC_QD_TXT ), $index + 1 );
 		} else {
-			_e( 'Shipping', 'woocommerce' );
+			_e( 'Shipping', WC_QD_TXT);
 		}
 	?></th>
 	<td>
@@ -54,15 +54,15 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 			<?php if ( is_cart() && get_option( 'woocommerce_enable_shipping_calc' ) === 'yes' ) : ?>
 
-				<p><?php _e( 'Please use the shipping calculator to see available shipping methods.', 'woocommerce' ); ?></p>
+				<p><?php _e( 'Please use the shipping calculator to see available shipping methods.', WC_QD_TXT ); ?></p>
 
 			<?php elseif ( is_cart() ) : ?>
 
-				<p><?php _e( 'Please continue to the checkout and enter your full address to see if there are any available shipping methods.', 'woocommerce' ); ?></p>
+				<p><?php _e( 'Please continue to the checkout and enter your full address to see if there are any available shipping methods.', WC_QD_TXT ); ?></p>
 
 			<?php else : ?>
 
-				<p><?php _e( 'Please fill in your details to see available shipping methods.', 'woocommerce' ); ?></p>
+				<p><?php _e( 'Please fill in your details to see available shipping methods.', WC_QD_TXT ); ?></p>
 
 			<?php endif; ?>
 
@@ -71,13 +71,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<?php if ( is_cart() ) : ?>
 
 				<?php echo apply_filters( 'woocommerce_cart_no_shipping_available_html',
-					'<p>' . __( 'There are no shipping methods available. Please double check your address, or contact us if you need any help.', 'woocommerce' ) . '</p>'
+					'<p>' . __( 'There are no shipping methods available. Please double check your address, or contact us if you need any help.', WC_QD_TXT ) . '</p>'
 				); ?>
 
 			<?php else : ?>
 
 				<?php echo apply_filters( 'woocommerce_no_shipping_available_html',
-					'<p>' . __( 'There are no shipping methods available. Please double check your address, or contact us if you need any help.', 'woocommerce' ) . '</p>'
+					'<p>' . __( 'There are no shipping methods available. Please double check your address, or contact us if you need any help.', WC_QD_TXT ) . '</p>'
 				); ?>
 
 			<?php endif; ?>
@@ -92,7 +92,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 					}
 				}
 
-				echo '<p class="woocommerce-shipping-contents"><small>' . __( 'Shipping', 'woocommerce' ) . ': ' . implode( ', ', $product_names ) . '</small></p>';
+				echo '<p class="woocommerce-shipping-contents"><small>' . __( 'Shipping', WC_QD_TXT ) . ': ' . implode( ', ', $product_names ) . '</small></p>';
 			?>
 		<?php endif; ?>
 

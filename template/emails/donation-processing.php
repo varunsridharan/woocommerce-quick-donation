@@ -19,13 +19,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 <?php do_action( 'woocommerce_email_before_order_table', $order, $sent_to_admin, $plain_text ); ?>
 
-<h2><?php printf( __( 'Donation #%s', 'woocommerce' ), $order->get_order_number() ); ?></h2>
+<h2><?php printf( __( 'Donation #%s', WC_QD_TXT ), $order->get_order_number() ); ?></h2>
 
 <table class="td" cellspacing="0" cellpadding="6" style="width: 100%; font-family: 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif;" border="1">
 	<thead>
 		<tr>
-			<th class="td" scope="col" style="text-align:left;"><?php _e( 'Project', 'woocommerce' ); ?></th>
-			<th class="td" scope="col" style="text-align:left;"><?php _e( 'Price', 'woocommerce' ); ?></th>
+			<th class="td" scope="col" style="text-align:left;"><?php _e( 'Project', WC_QD_TXT ); ?></th>
+			<th class="td" scope="col" style="text-align:left;"><?php _e( 'Price', WC_QD_TXT ); ?></th>
 		</tr>
 	</thead>
 	<tbody>

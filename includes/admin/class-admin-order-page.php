@@ -65,7 +65,7 @@ class WooCommerce_Quick_Donation_Admin_Order_Page_Functions {
             $link = get_permalink($project_ID);
             printf('<a href="%s"> %s </a> ',$link,$title);
         } else if('order_id' == $column){
-            printf( _x( '%s ', 'Order number by X', 'woocommerce' ), '<a href="' . admin_url( 'post.php?post=' . absint( $post->ID ) . '&action=edit' ) . '" class="row-title"><strong>#' . esc_attr( $the_order->get_order_number() ) . '</strong></a>' );
+            printf( _x( '%s ', 'Order number by X', WC_QD_TXT ), '<a href="' . admin_url( 'post.php?post=' . absint( $post->ID ) . '&action=edit' ) . '" class="row-title"><strong>#' . esc_attr( $the_order->get_order_number() ) . '</strong></a>' );
         } else if ('by_user' == $column){
             if ( $the_order->user_id ) {
                 $user_info = get_userdata( $the_order->user_id );
@@ -87,7 +87,7 @@ class WooCommerce_Quick_Donation_Admin_Order_Page_Functions {
                 if ( $the_order->billing_first_name || $the_order->billing_last_name ) {
                     $username = trim( $the_order->billing_first_name . ' ' . $the_order->billing_last_name );
                 } else {
-                    $username = __( 'Guest', 'woocommerce' );
+                    $username = __( 'Guest', WC_QD_TXT );
                 }
             }
 
@@ -101,7 +101,7 @@ class WooCommerce_Quick_Donation_Admin_Order_Page_Functions {
             remove_meta_box('woocommerce-order-items','shop_order','normal');
             remove_meta_box('woocommerce-order-downloads','shop_order','normal');
             remove_meta_box('woocommerce-order-data','shop_order','normal');
-            add_meta_box( 'woocommerce-quick-donation-order-data', sprintf( __( '%s Data', 'woocommerce' ), 'Donation' ), 'WC_Quick_Donation_Meta_Box_Order_Data::output', 'shop_order', 'normal', 'high' );
+            add_meta_box( 'woocommerce-quick-donation-order-data', sprintf( __( '%s Data', WC_QD_TXT ), 'Donation' ), 'WC_Quick_Donation_Meta_Box_Order_Data::output', 'shop_order', 'normal', 'high' );
             
             remove_action( 'woocommerce_process_shop_order_meta', 'WC_Meta_Box_Order_Data::save', 40);
         }

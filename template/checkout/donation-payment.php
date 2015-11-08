@@ -27,9 +27,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 				}
 			} else {
 				if ( ! WC()->customer->get_country() ) {
-					$no_gateways_message = __( 'Please fill in your details above to see available payment methods.', 'woocommerce' );
+					$no_gateways_message = __( 'Please fill in your details above to see available payment methods.', WC_QD_TXT );
 				} else {
-					$no_gateways_message = __( 'Sorry, it seems that there are no available payment methods for your state. Please contact us if you require assistance or wish to make alternate arrangements.', 'woocommerce' );
+					$no_gateways_message = __( 'Sorry, it seems that there are no available payment methods for your state. Please contact us if you require assistance or wish to make alternate arrangements.', WC_QD_TXT );
 				}
 
 				echo '<li>' . apply_filters( 'woocommerce_no_available_payment_methods_message', $no_gateways_message ) . '</li>';
@@ -40,7 +40,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 	<div class="form-row place-order">
 
-		<noscript><?php _e( 'Since your browser does not support JavaScript, or it is disabled, please ensure you click the <em>Update Totals</em> button before placing your order. You may be charged more than the amount stated above if you fail to do so.', 'woocommerce' ); ?><br/><input type="submit" class="button alt" name="woocommerce_checkout_update_totals" value="<?php esc_attr_e( 'Update totals', 'woocommerce' ); ?>" /></noscript>
+		<noscript><?php _e( 'Since your browser does not support JavaScript, or it is disabled, please ensure you click the <em>Update Totals</em> button before placing your order. You may be charged more than the amount stated above if you fail to do so.', WC_QD_TXT ); ?><br/><input type="submit" class="button alt" name="woocommerce_checkout_update_totals" value="<?php esc_attr_e( 'Update totals', WC_QD_TXT ); ?>" /></noscript>
 
 		<?php wp_nonce_field( 'woocommerce-process_checkout' ); ?>
 
@@ -50,7 +50,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 		<?php if ( wc_get_page_id( 'terms' ) > 0 && apply_filters( 'woocommerce_checkout_show_terms', true ) ) : ?>
 			<p class="form-row terms">
-				<label for="terms" class="checkbox"><?php printf( __( 'I&rsquo;ve read and accept the <a href="%s" target="_blank">terms &amp; conditions</a>', 'woocommerce' ), esc_url( wc_get_page_permalink( 'terms' ) ) ); ?></label>
+				<label for="terms" class="checkbox"><?php printf( __( 'I&rsquo;ve read and accept the <a href="%s" target="_blank">terms &amp; conditions</a>', WC_QD_TXT ), esc_url( wc_get_page_permalink( 'terms' ) ) ); ?></label>
 				<input type="checkbox" class="input-checkbox" name="terms" <?php checked( apply_filters( 'woocommerce_terms_is_checked_default', isset( $_POST['terms'] ) ), true ); ?> id="terms" />
 			</p>
 		<?php endif; ?>

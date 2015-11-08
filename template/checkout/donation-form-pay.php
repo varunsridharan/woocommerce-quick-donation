@@ -17,9 +17,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<table class="shop_table">
 		<thead>
 			<tr>
-				<th class="product-name"><?php _e( 'Product', 'woocommerce' ); ?></th>
-				<th class="product-quantity"><?php _e( 'Qty', 'woocommerce' ); ?></th>
-				<th class="product-total"><?php _e( 'Totals', 'woocommerce' ); ?></th>
+				<th class="product-name"><?php _e( 'Product', WC_QD_TXT ); ?></th>
+				<th class="product-quantity"><?php _e( 'Qty', WC_QD_TXT ); ?></th>
+				<th class="product-total"><?php _e( 'Totals', WC_QD_TXT ); ?></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -52,7 +52,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 	<div id="payment">
 		<?php if ( $order->needs_payment() ) : ?>
-		<h3><?php _e( 'Payment', 'woocommerce' ); ?></h3>
+		<h3><?php _e( 'Payment', WC_QD_TXT ); ?></h3>
 		<ul class="payment_methods methods">
 			<?php
 				if ( $available_gateways = WC()->payment_gateways->get_available_payment_gateways() ) {
@@ -77,7 +77,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 					}
 				} else {
 
-					echo '<p>' . __( 'Sorry, it seems that there are no available payment methods for your location. Please contact us if you require assistance or wish to make alternate arrangements.', 'woocommerce' ) . '</p>';
+					echo '<p>' . __( 'Sorry, it seems that there are no available payment methods for your location. Please contact us if you require assistance or wish to make alternate arrangements.', WC_QD_TXT ) . '</p>';
 
 				}
 			?>
@@ -87,7 +87,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<div class="form-row">
 			<?php wp_nonce_field( 'woocommerce-pay' ); ?>
 			<?php
-				$pay_order_button_text = apply_filters( 'woocommerce_pay_order_button_text', __( 'Pay for order', 'woocommerce' ) );
+				$pay_order_button_text = apply_filters( 'woocommerce_pay_order_button_text', __( 'Pay for order', WC_QD_TXT ) );
 
 				echo apply_filters( 'woocommerce_pay_order_button_html', '<input type="submit" class="button alt" id="place_order" value="' . esc_attr( $pay_order_button_text ) . '" data-value="' . esc_attr( $pay_order_button_text ) . '" />' );
 			?>

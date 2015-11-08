@@ -15,18 +15,18 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 <?php do_action( 'woocommerce_donation_email_header', $email_heading ); ?>
 
-<p><?php printf( __( "Hi there. Your recent order on %s has been completed. Your order details are shown below for your reference:", 'woocommerce' ), get_option( 'blogname' ) ); ?></p>
+<p><?php printf( __( "Hi there. Your recent order on %s has been completed. Your order details are shown below for your reference:", WC_QD_TXT ), get_option( 'blogname' ) ); ?></p>
 
 <?php do_action( 'woocommerce_email_before_order_table', $order, $sent_to_admin, $plain_text ); ?>
 
-<h2><?php printf( __( 'Order #%s', 'woocommerce' ), $order->get_order_number() ); ?></h2>
+<h2><?php printf( __( 'Order #%s', WC_QD_TXT ), $order->get_order_number() ); ?></h2>
 
 <table class="td" cellspacing="0" cellpadding="6" style="width: 100%; font-family: 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif;" border="1">
 	<thead>
 		<tr>
-			<th class="td" scope="col" style="text-align:left;"><?php _e( 'Product', 'woocommerce' ); ?></th>
-			<th class="td" scope="col" style="text-align:left;"><?php _e( 'Quantity', 'woocommerce' ); ?></th>
-			<th class="td" scope="col" style="text-align:left;"><?php _e( 'Price', 'woocommerce' ); ?></th>
+			<th class="td" scope="col" style="text-align:left;"><?php _e( 'Product', WC_QD_TXT ); ?></th>
+			<th class="td" scope="col" style="text-align:left;"><?php _e( 'Quantity', WC_QD_TXT ); ?></th>
+			<th class="td" scope="col" style="text-align:left;"><?php _e( 'Price', WC_QD_TXT ); ?></th>
 		</tr>
 	</thead>
 	<tbody>

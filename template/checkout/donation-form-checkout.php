@@ -17,7 +17,7 @@ do_action( 'woocommerce_before_checkout_form', $checkout );
 
 // If checkout registration is disabled and not logged in, the user cannot checkout
 if ( ! $checkout->enable_signup && ! $checkout->enable_guest_checkout && ! is_user_logged_in() ) {
-	echo apply_filters( 'woocommerce_checkout_must_be_logged_in_message', __( 'You must be logged in to checkout.', 'woocommerce' ) );
+	echo apply_filters( 'woocommerce_checkout_must_be_logged_in_message', __( 'You must be logged in to checkout.', WC_QD_TXT ) );
 	return;
 }
 
@@ -36,7 +36,7 @@ $get_checkout_url = apply_filters( 'woocommerce_get_checkout_url', WC()->cart->g
 
 		<?php do_action( 'woocommerce_checkout_after_customer_details' ); ?>
 
-		<h3 id="order_review_heading"><?php _e( 'Your Donation', 'woocommerce' ); ?></h3>
+		<h3 id="order_review_heading"><?php _e( 'Your Donation', WC_QD_TXT ); ?></h3>
 
 	<?php endif; ?>
 

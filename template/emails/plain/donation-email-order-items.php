@@ -32,10 +32,10 @@ foreach ( $items as $item_id => $item ) :
 		echo ( $item_meta_content = $item_meta->display( true, true ) ) ? "\n" . $item_meta_content : '';
 
 		// Quantity
-		echo "\n" . sprintf( __( 'Quantity: %s', 'woocommerce' ), apply_filters( 'woocommerce_email_order_item_quantity', $item['qty'], $item ) );
+		echo "\n" . sprintf( __( 'Quantity: %s', WC_QD_TXT ), apply_filters( 'woocommerce_email_order_item_quantity', $item['qty'], $item ) );
 
 		// Cost
-		echo "\n" . sprintf( __( 'Cost: %s', 'woocommerce' ), $order->get_formatted_line_subtotal( $item ) );
+		echo "\n" . sprintf( __( 'Cost: %s', WC_QD_TXT ), $order->get_formatted_line_subtotal( $item ) );
 
 		// Download URLs
 		if ( $show_download_links && $_product->exists() && $_product->is_downloadable() ) {
@@ -46,9 +46,9 @@ foreach ( $items as $item_id => $item ) :
 				$i++;
 
 				if ( count( $download_files ) > 1 ) {
-					$prefix = sprintf( __( 'Download %d', 'woocommerce' ), $i );
+					$prefix = sprintf( __( 'Download %d', WC_QD_TXT ), $i );
 				} elseif ( $i == 1 ) {
-					$prefix = __( 'Download', 'woocommerce' );
+					$prefix = __( 'Download', WC_QD_TXT );
 				}
 
 				echo "\n" . $prefix . '(' . esc_html( $file['name'] ) . '): ' . esc_url( $file['download_url'] );

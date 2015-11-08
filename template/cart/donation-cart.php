@@ -25,7 +25,7 @@ do_action( 'woocommerce_before_cart' ); ?>
 			<th class="product-remove" style="width:10%;">&nbsp;</th>
 			<th class="product-thumbnail" style="width:20%;">&nbsp;</th>
 			<th class="product-name"><?php _e( 'Project', WC_QD_TXT ); ?></th>
-			<th class="product-price"><?php _e( 'Amount', 'woocommerce' ); ?></th>  
+			<th class="product-price"><?php _e( 'Amount', WC_QD_TXT ); ?></th>  
 		</tr>
 	</thead>
 	<tbody>
@@ -45,7 +45,7 @@ do_action( 'woocommerce_before_cart' ); ?>
 							echo apply_filters( 'woocommerce_cart_item_remove_link', sprintf(
 								'<a href="%s" class="remove" title="%s" data-product_id="%s" data-product_sku="%s">&times;</a>',
 								esc_url( WC()->cart->get_remove_url( $cart_item_key ) ),
-								__( 'Remove this item', 'woocommerce' ),
+								__( 'Remove this item', WC_QD_TXT ),
 								esc_attr( $product_id ),
 								esc_attr( $_product->get_sku() )
 							), $cart_item_key );

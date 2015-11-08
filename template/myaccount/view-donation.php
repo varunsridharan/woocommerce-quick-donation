@@ -19,13 +19,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 <?php if ( $notes = $order->get_customer_order_notes() ) :
 	?>
-	<h2><?php _e( 'Order Updates', 'woocommerce' ); ?></h2>
+	<h2><?php _e( 'Order Updates', WC_QD_TXT ); ?></h2>
 	<ol class="commentlist notes">
 		<?php foreach ( $notes as $note ) : ?>
 		<li class="comment note">
 			<div class="comment_container">
 				<div class="comment-text">
-					<p class="meta"><?php echo date_i18n( __( 'l jS \o\f F Y, h:ia', 'woocommerce' ), strtotime( $note->comment_date ) ); ?></p>
+					<p class="meta"><?php echo date_i18n( __( 'l jS \o\f F Y, h:ia', WC_QD_TXT ), strtotime( $note->comment_date ) ); ?></p>
 					<div class="description">
 						<?php echo wpautop( wptexturize( $note->comment_content ) ); ?>
 					</div>

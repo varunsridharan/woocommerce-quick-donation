@@ -155,16 +155,17 @@ class WooCommerce_Quick_Donation_Functions  {
     }
     
      
-    public function generate_donation_selbox($grouped = false,$type = 'select'){
+    public function generate_donation_selbox($grouped = false,$type = 'select',$selected=''){
         global $id, $name, $class, $field_output, $is_grouped, $project_list,$attributes;
         $field_output = '';
+		
         $id = 'donation_project';
         $name = 'wc_qd_donate_project_name';
         $class = apply_filters('wcqd_project_name_'.$type.'_class',array(),$type);
         $custom_attributes = apply_filters('wcqd_project_name_'.$type.'_attribute',array(),$type);
         $is_grouped = $grouped;
         $project_list = $this->get_porject_list($grouped);
-        
+		
         $class = implode(' ',$class);
         $attributes = '';
         foreach($custom_attributes as $attr_key => $attr_val) {
@@ -177,6 +178,7 @@ class WooCommerce_Quick_Donation_Functions  {
                                                                                      'field_output' => $field_output, 
                                                                                      'is_grouped' => $is_grouped, 
                                                                                      'project_list' => $project_list, 
+																					 'pre_selected' => $selected,
                                                                                      'attributes' => $attributes));
         return $field_output;
     }

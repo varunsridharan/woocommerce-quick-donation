@@ -45,26 +45,26 @@ if ( $customer_orders ) : ?>
 				$item_count = $order->get_item_count();
 
 				?><tr class="order">
-					<td class="order-number" data-title="<?php esc_attr_e( 'Order Number', 'woocommerce' ); ?>">
+					<td class="order-number" data-title="<?php esc_attr_e( 'Order Number', WC_QD_TXT ); ?>">
 						<a href="<?php echo esc_url( $order->get_view_order_url() ); ?>">
-							<?php echo _x( '#', 'hash before order number', 'woocommerce' ) . $order->get_order_number(); ?>
+							<?php echo _x( '#', 'hash before order number', WC_QD_TXT ) . $order->get_order_number(); ?>
 						</a>
 					</td>
             
-                    <td class="order-number" data-title="<?php esc_attr_e( 'Project', 'woocommerce' ); ?>">
+                    <td class="order-number" data-title="<?php esc_attr_e( 'Project', WC_QD_TXT ); ?>">
 						<?php $project_id = WC_QD()->db()->get_project_id($order->id);?>
                         <a href="<?php echo get_permalink($project_id); ?>">
 							<?php echo get_the_title($project_id); ?>
 						</a>
 					</td>
-					<td class="order-date" data-title="<?php esc_attr_e( 'Date', 'woocommerce' ); ?>">
+					<td class="order-date" data-title="<?php esc_attr_e( 'Date', WC_QD_TXT ); ?>">
 						<time datetime="<?php echo date( 'Y-m-d', strtotime( $order->order_date ) ); ?>" title="<?php echo esc_attr( strtotime( $order->order_date ) ); ?>"><?php echo date_i18n( get_option( 'date_format' ), strtotime( $order->order_date ) ); ?></time>
 					</td>
-					<td class="order-status" data-title="<?php esc_attr_e( 'Status', 'woocommerce' ); ?>" style="text-align:left; white-space:nowrap;">
+					<td class="order-status" data-title="<?php esc_attr_e( 'Status', WC_QD_TXT ); ?>" style="text-align:left; white-space:nowrap;">
 						<?php echo wc_get_order_status_name( $order->get_status() ); ?>
 					</td>
-					<td class="order-total" data-title="<?php esc_attr_e( 'Total', 'woocommerce' ); ?>">
-						<?php echo sprintf( _n( '%s for %s item', '%s for %s items', $item_count, 'woocommerce' ), $order->get_formatted_order_total(), $item_count ); ?>
+					<td class="order-total" data-title="<?php esc_attr_e( 'Total', WC_QD_TXT ); ?>">
+						<?php echo sprintf( _n( '%s for %s item', '%s for %s items', $item_count, WC_QD_TXT ), $order->get_formatted_order_total(), $item_count ); ?>
 					</td>
 					<td class="order-actions">
 						<?php
@@ -73,20 +73,20 @@ if ( $customer_orders ) : ?>
 							if ( $order->needs_payment() ) {
 								$actions['pay'] = array(
 									'url'  => $order->get_checkout_payment_url(),
-									'name' => __( 'Pay', 'woocommerce' )
+									'name' => __( 'Pay', WC_QD_TXT )
 								);
 							}
 
 							if ( in_array( $order->get_status(), apply_filters( 'woocommerce_valid_order_statuses_for_cancel', array( 'pending', 'failed' ), $order ) ) ) {
 								$actions['cancel'] = array(
 									'url'  => $order->get_cancel_order_url( wc_get_page_permalink( 'myaccount' ) ),
-									'name' => __( 'Cancel', 'woocommerce' )
+									'name' => __( 'Cancel', WC_QD_TXT )
 								);
 							}
 
 							$actions['view'] = array(
 								'url'  => $order->get_view_order_url(),
-								'name' => __( 'View', 'woocommerce' )
+								'name' => __( 'View', WC_QD_TXT )
 							);
 
 							$actions = apply_filters( 'woocommerce_my_account_my_orders_actions', $actions, $order );

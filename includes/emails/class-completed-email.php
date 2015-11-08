@@ -26,10 +26,10 @@ class WC_QD_donation_completed_email extends WC_Email {
 
 		$this->id             =  WC_QD_DB.'donation_completed_email';
 		$this->title          = __( 'Completed Donation', WC_QD_TXT);
-		$this->description    = __( 'Order complete emails are sent to customers when their orders are marked completed and usually indicate that their orders have been shipped.', 'woocommerce' );
+		$this->description    = __( 'Order complete emails are sent to customers when their orders are marked completed and usually indicate that their orders have been shipped.', WC_QD_TXT );
 
 		$this->heading        = __( 'Your Donation for {project_name} is complete', WC_QD_TXT);
-		$this->subject        = __( 'Your {site_title} donation from {order_date} is complete', 'woocommerce' );
+		$this->subject        = __( 'Your {site_title} donation from {order_date} is complete', WC_QD_TXT );
 
 		$this->template_html  = 'emails/donation-completed.php';
 		$this->template_plain = 'emails/plain/donation-completed.php';
@@ -135,30 +135,30 @@ class WC_QD_donation_completed_email extends WC_Email {
 	function init_form_fields() {
 		$this->form_fields = array(
 			'enabled' => array(
-				'title'         => __( 'Enable/Disable', 'woocommerce' ),
+				'title'         => __( 'Enable/Disable', WC_QD_TXT ),
 				'type'          => 'checkbox',
-				'label'         => __( 'Enable this email notification', 'woocommerce' ),
+				'label'         => __( 'Enable this email notification', WC_QD_TXT ),
 				'default'       => 'yes'
 			),
 			'subject' => array(
-				'title'         => __( 'Subject', 'woocommerce' ),
+				'title'         => __( 'Subject', WC_QD_TXT ),
 				'type'          => 'text',
-				'description'   => sprintf( __( 'Defaults to <code>%s</code>', 'woocommerce' ), $this->subject ),
+				'description'   => sprintf( __( 'Defaults to <code>%s</code>', WC_QD_TXT ), $this->subject ),
 				'placeholder'   => '',
 				'default'       => ''
 			),
 			'heading' => array(
-				'title'         => __( 'Email Heading', 'woocommerce' ),
+				'title'         => __( 'Email Heading', WC_QD_TXT ),
 				'type'          => 'text',
-				'description'   => sprintf( __( 'Defaults to <code>%s</code>', 'woocommerce' ), $this->heading ),
+				'description'   => sprintf( __( 'Defaults to <code>%s</code>', WC_QD_TXT ), $this->heading ),
 				'placeholder'   => '',
 				'default'       => ''
 			),
 
             'email_type' => array(
-				'title'         => __( 'Email type', 'woocommerce' ),
+				'title'         => __( 'Email type', WC_QD_TXT ),
 				'type'          => 'select',
-				'description'   => __( 'Choose which format of email to send.', 'woocommerce' ),
+				'description'   => __( 'Choose which format of email to send.', WC_QD_TXT ),
 				'default'       => 'html',
 				'class'         => 'email_type wc-enhanced-select',
 				'options'       => $this->get_email_type_options()

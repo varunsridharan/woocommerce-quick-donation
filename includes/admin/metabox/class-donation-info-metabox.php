@@ -40,91 +40,91 @@ class WC_Quick_Donation_Meta_Box_Order_Data {
 
 		self::$billing_fields = apply_filters( 'woocommerce_admin_billing_fields', array(
 			'first_name' => array(
-				'label' => __( 'First Name', 'woocommerce' ),
+				'label' => __( 'First Name', WC_QD_TXT ),
 				'show'  => false
 			),
 			'last_name' => array(
-				'label' => __( 'Last Name', 'woocommerce' ),
+				'label' => __( 'Last Name', WC_QD_TXT ),
 				'show'  => false
 			),
 			'company' => array(
-				'label' => __( 'Company', 'woocommerce' ),
+				'label' => __( 'Company', WC_QD_TXT ),
 				'show'  => false
 			),
 			'address_1' => array(
-				'label' => __( 'Address 1', 'woocommerce' ),
+				'label' => __( 'Address 1', WC_QD_TXT ),
 				'show'  => false
 			),
 			'address_2' => array(
-				'label' => __( 'Address 2', 'woocommerce' ),
+				'label' => __( 'Address 2', WC_QD_TXT ),
 				'show'  => false
 			),
 			'city' => array(
-				'label' => __( 'City', 'woocommerce' ),
+				'label' => __( 'City', WC_QD_TXT ),
 				'show'  => false
 			),
 			'postcode' => array(
-				'label' => __( 'Postcode', 'woocommerce' ),
+				'label' => __( 'Postcode', WC_QD_TXT ),
 				'show'  => false
 			),
 			'country' => array(
-				'label'   => __( 'Country', 'woocommerce' ),
+				'label'   => __( 'Country', WC_QD_TXT ),
 				'show'    => false,
 				'class'   => 'js_field-country select short',
 				'type'    => 'select',
-				'options' => array( '' => __( 'Select a country&hellip;', 'woocommerce' ) ) + WC()->countries->get_allowed_countries()
+				'options' => array( '' => __( 'Select a country&hellip;', WC_QD_TXT ) ) + WC()->countries->get_allowed_countries()
 			),
 			'state' => array(
-				'label' => __( 'State/County', 'woocommerce' ),
+				'label' => __( 'State/County', WC_QD_TXT ),
 				'class'   => 'js_field-state select short',
 				'show'  => false
 			),
 			'email' => array(
-				'label' => __( 'Email', 'woocommerce' ),
+				'label' => __( 'Email', WC_QD_TXT ),
 			),
 			'phone' => array(
-				'label' => __( 'Phone', 'woocommerce' ),
+				'label' => __( 'Phone', WC_QD_TXT ),
 			),
 		) );
 
 		self::$shipping_fields = apply_filters( 'woocommerce_admin_shipping_fields', array(
 			'first_name' => array(
-				'label' => __( 'First Name', 'woocommerce' ),
+				'label' => __( 'First Name', WC_QD_TXT ),
 				'show'  => false
 			),
 			'last_name' => array(
-				'label' => __( 'Last Name', 'woocommerce' ),
+				'label' => __( 'Last Name', WC_QD_TXT ),
 				'show'  => false
 			),
 			'company' => array(
-				'label' => __( 'Company', 'woocommerce' ),
+				'label' => __( 'Company', WC_QD_TXT ),
 				'show'  => false
 			),
 			'address_1' => array(
-				'label' => __( 'Address 1', 'woocommerce' ),
+				'label' => __( 'Address 1', WC_QD_TXT ),
 				'show'  => false
 			),
 			'address_2' => array(
-				'label' => __( 'Address 2', 'woocommerce' ),
+				'label' => __( 'Address 2', WC_QD_TXT ),
 				'show'  => false
 			),
 			'city' => array(
-				'label' => __( 'City', 'woocommerce' ),
+				'label' => __( 'City', WC_QD_TXT ),
 				'show'  => false
 			),
 			'postcode' => array(
-				'label' => __( 'Postcode', 'woocommerce' ),
+				'label' => __( 'Postcode', WC_QD_TXT ),
 				'show'  => false
 			),
 			'country' => array(
-				'label'   => __( 'Country', 'woocommerce' ),
+				'label'   => __( 'Country', WC_QD_TXT ),
 				'show'    => false,
 				'type'    => 'select',
 				'class'   => 'js_field-country select short',
-				'options' => array( '' => __( 'Select a country&hellip;', 'woocommerce' ) ) + WC()->countries->get_shipping_countries()
+				'options' => array( '' => __( 'Select a country&hellip;', WC_QD_TXT ) ) + WC()->countries->get_shipping_countries()
 			),
 			'state' => array(
-				'label' => __( 'State/County', 'woocommerce' ),
+				'label' => __( 'State/County', WC_QD_TXT ),
 				'class'   => 'js_field-state select short',
 				'show'  => false
 			),
@@ -162,15 +162,15 @@ class WC_Quick_Donation_Meta_Box_Order_Data {
 			#post-body-content, #titlediv { display:none }
 		</style>
 		<div class="panel-wrap woocommerce">
-			<input name="post_title" type="hidden" value="<?php echo empty( $post->post_title ) ? __( 'Order', 'woocommerce' ) : esc_attr( $post->post_title ); ?>" />
+			<input name="post_title" type="hidden" value="<?php echo empty( $post->post_title ) ? __( 'Order', WC_QD_TXT ) : esc_attr( $post->post_title ); ?>" />
 			<input name="post_status" type="hidden" value="<?php echo esc_attr( $post->post_status ); ?>" />
 			<div id="order_data" class="panel">
 
-				<h2><?php echo esc_html( sprintf( __( '%s %s details', 'woocommerce' ), $donation_type_object->labels->menu_name, $order->get_order_number() ) ); ?></h2>
+				<h2><?php echo esc_html( sprintf( __( '%s %s details', WC_QD_TXT ), $donation_type_object->labels->menu_name, $order->get_order_number() ) ); ?></h2>
 				<p class="order_number"><?php
 
 					if ( $payment_method ) {
-						printf( __( 'Payment via %s', 'woocommerce' ), ( isset( $payment_gateways[ $payment_method ] ) ? esc_html( $payment_gateways[ $payment_method ]->get_title() ) : esc_html( $payment_method ) ) );
+						printf( __( 'Payment via %s', WC_QD_TXT ), ( isset( $payment_gateways[ $payment_method ] ) ? esc_html( $payment_gateways[ $payment_method ]->get_title() ) : esc_html( $payment_method ) ) );
 
 						if ( $transaction_id = $order->get_transaction_id() ) {
 								if ( isset( $payment_gateways[ $payment_method ] ) && ( $url = $payment_gateways[ $payment_method ]->get_transaction_url( $order ) ) ) {
@@ -183,7 +183,7 @@ class WC_Quick_Donation_Meta_Box_Order_Data {
 					}
 
 					if ( $ip_address = get_post_meta( $post->ID, '_customer_ip_address', true ) ) {
-						echo __( 'Customer IP', 'woocommerce' ) . ': ' . esc_html( $ip_address );
+						echo __( 'Customer IP', WC_QD_TXT ) . ': ' . esc_html( $ip_address );
 					}
 				?></p>
 
@@ -193,7 +193,7 @@ class WC_Quick_Donation_Meta_Box_Order_Data {
 
 						<p class="form-field form-field-wide"><label for="order_date"><?php _e( 'Donation date:', WC_QD_TXT ) ?></label>
                             <input type="hidden" name="post_is_donation" value="TRUE"/>
-							<input type="text" class="date-picker" name="order_date" id="order_date" maxlength="10" value="<?php echo date_i18n( 'Y-m-d', strtotime( $post->post_date ) ); ?>" pattern="[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|1[0-9]|2[0-9]|3[01])" />@<input type="text" class="hour" placeholder="<?php esc_attr_e( 'h', 'woocommerce' ) ?>" name="order_date_hour" id="order_date_hour" maxlength="2" size="2" value="<?php echo date_i18n( 'H', strtotime( $post->post_date ) ); ?>" pattern="\-?\d+(\.\d{0,})?" />:<input type="text" class="minute" placeholder="<?php esc_attr_e( 'm', 'woocommerce' ) ?>" name="order_date_minute" id="order_date_minute" maxlength="2" size="2" value="<?php echo date_i18n( 'i', strtotime( $post->post_date ) ); ?>" pattern="\-?\d+(\.\d{0,})?" />
+							<input type="text" class="date-picker" name="order_date" id="order_date" maxlength="10" value="<?php echo date_i18n( 'Y-m-d', strtotime( $post->post_date ) ); ?>" pattern="[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|1[0-9]|2[0-9]|3[01])" />@<input type="text" class="hour" placeholder="<?php esc_attr_e( 'h', WC_QD_TXT ) ?>" name="order_date_hour" id="order_date_hour" maxlength="2" size="2" value="<?php echo date_i18n( 'H', strtotime( $post->post_date ) ); ?>" pattern="\-?\d+(\.\d{0,})?" />:<input type="text" class="minute" placeholder="<?php esc_attr_e( 'm', WC_QD_TXT ) ?>" name="order_date_minute" id="order_date_minute" maxlength="2" size="2" value="<?php echo date_i18n( 'i', strtotime( $post->post_date ) ); ?>" pattern="\-?\d+(\.\d{0,})?" />
 						</p>
 
 						<p class="form-field form-field-wide"><label for="order_status"><?php _e( 'Donation status:', WC_QD_TXT ) ?></label>
@@ -207,7 +207,7 @@ class WC_Quick_Donation_Meta_Box_Order_Data {
 						</select></p>
 
 						<p class="form-field form-field-wide wc-customer-user">
-							<label for="customer_user"><?php _e( 'Customer:', 'woocommerce' ) ?> <?php
+							<label for="customer_user"><?php _e( 'Customer:', WC_QD_TXT ) ?> <?php
 								if ( ! empty( $order->customer_user ) ) {
 									$args = array( 'post_status' => 'all',
 										'post_type'      => 'shop_order',
@@ -215,7 +215,7 @@ class WC_Quick_Donation_Meta_Box_Order_Data {
 									);
 									printf( '<a href="%s">%s &rarr;</a>',
 										esc_url( add_query_arg( $args, admin_url( 'edit.php' ) ) ),
-										__( 'View other orders', 'woocommerce' )
+										__( 'View other orders', WC_QD_TXT )
 									);
 								}
 							?></label>
@@ -228,24 +228,24 @@ class WC_Quick_Donation_Meta_Box_Order_Data {
 								$user_string = esc_html( $user->display_name ) . ' (#' . absint( $user->ID ) . ' &ndash; ' . esc_html( $user->user_email ) . ')';
 							}
 							?>
-							<input type="hidden" class="wc-customer-search" id="customer_user" name="customer_user" data-placeholder="<?php esc_attr_e( 'Guest', 'woocommerce' ); ?>" data-selected="<?php echo htmlspecialchars( $user_string ); ?>" value="<?php echo $user_id; ?>" data-allow_clear="true" />
+							<input type="hidden" class="wc-customer-search" id="customer_user" name="customer_user" data-placeholder="<?php esc_attr_e( 'Guest', WC_QD_TXT ); ?>" data-selected="<?php echo htmlspecialchars( $user_string ); ?>" value="<?php echo $user_id; ?>" data-allow_clear="true" />
 						</p>
 						<?php do_action( 'woocommerce_admin_order_data_after_order_details', $order ); ?>
 					</div>
 					<div class="order_data_column">
 						<h4>
-							<?php _e( 'Donor Details', 'woocommerce' ); ?>
-							<a href="#" class="edit_address"><?php _e( 'Edit', 'woocommerce' ); ?></a>
-							<a href="#" class="tips load_customer_billing" data-tip="<?php esc_attr_e( 'Load billing address', 'woocommerce' ); ?>" style="display:none;"><?php _e( 'Load billing address', 'woocommerce' ); ?></a>
+							<?php _e( 'Donor Details', WC_QD_TXT ); ?>
+							<a href="#" class="edit_address"><?php _e( 'Edit', WC_QD_TXT ); ?></a>
+							<a href="#" class="tips load_customer_billing" data-tip="<?php esc_attr_e( 'Load billing address', WC_QD_TXT ); ?>" style="display:none;"><?php _e( 'Load billing address', WC_QD_TXT ); ?></a>
 						</h4>
 						<?php
 							// Display values
 							echo '<div class="address">';
 
 								if ( $order->get_formatted_billing_address() ) {
-									echo '<p><strong>' . __( 'Address', 'woocommerce' ) . ':</strong>' . wp_kses( $order->get_formatted_billing_address(), array( 'br' => array() ) ) . '</p>';
+									echo '<p><strong>' . __( 'Address', WC_QD_TXT ) . ':</strong>' . wp_kses( $order->get_formatted_billing_address(), array( 'br' => array() ) ) . '</p>';
 								} else {
-									echo '<p class="none_set"><strong>' . __( 'Address', 'woocommerce' ) . ':</strong> ' . __( 'No billing address set.', 'woocommerce' ) . '</p>';
+									echo '<p class="none_set"><strong>' . __( 'Address', WC_QD_TXT ) . ':</strong> ' . __( 'No billing address set.', WC_QD_TXT ) . '</p>';
 								}
 
 								foreach ( self::$billing_fields as $key => $field ) {
@@ -283,9 +283,9 @@ class WC_Quick_Donation_Meta_Box_Order_Data {
 							}
 							?>
 							<p class="form-field form-field-wide">
-								<label><?php _e( 'Payment Method:', 'woocommerce' ); ?></label>
+								<label><?php _e( 'Payment Method:', WC_QD_TXT ); ?></label>
 								<select name="_payment_method" id="_payment_method" class="first">
-									<option value=""><?php _e( 'N/A', 'woocommerce' ); ?></option>
+									<option value=""><?php _e( 'N/A', WC_QD_TXT ); ?></option>
 									<?php
 										$found_method 	= false;
 
@@ -299,16 +299,16 @@ class WC_Quick_Donation_Meta_Box_Order_Data {
 										}
 
 										if ( ! $found_method && ! empty( $payment_method ) ) {
-											echo '<option value="' . esc_attr( $payment_method ) . '" selected="selected">' . __( 'Other', 'woocommerce' ) . '</option>';
+											echo '<option value="' . esc_attr( $payment_method ) . '" selected="selected">' . __( 'Other', WC_QD_TXT ) . '</option>';
 										} else {
-											echo '<option value="other">' . __( 'Other', 'woocommerce' ) . '</option>';
+											echo '<option value="other">' . __( 'Other', WC_QD_TXT ) . '</option>';
 										}
 									?>
 								</select>
 							</p>
 							<?php
 
-							woocommerce_wp_text_input( array( 'id' => '_transaction_id', 'label' => __( 'Transaction ID', 'woocommerce' ) ) );
+							woocommerce_wp_text_input( array( 'id' => '_transaction_id', 'label' => __( 'Transaction ID', WC_QD_TXT ) ) );
 
 							echo '</div>';
 
@@ -325,7 +325,7 @@ class WC_Quick_Donation_Meta_Box_Order_Data {
                                 require(WC_QD_ADMIN.'metabox/html/html-donation-info.php');
         
 								if ( apply_filters( 'woocommerce_enable_order_notes_field', 'yes' == get_option( 'woocommerce_enable_order_comments', 'yes' ) ) && $post->post_excerpt ) {
-									echo '<p><strong>' . __( 'Customer Provided Note', 'woocommerce' ) . ':</strong> ' . nl2br( esc_html( $post->post_excerpt ) ) . '</p>';
+									echo '<p><strong>' . __( 'Customer Provided Note', WC_QD_TXT ) . ':</strong> ' . nl2br( esc_html( $post->post_excerpt ) ) . '</p>';
 								}
 
 							echo '</div>';

@@ -63,8 +63,26 @@ if(! function_exists('wcqd_get_project_name')){
 }
 
 if(! function_exists('wcqd_delete_donation_entry')){
+	/**
+	 * Delets An Entry From WP_WC_quick_donation
+	 * @param  [[Type]] $id [[Description]]
+	 * @return [[Type]] [[Description]]
+	 */
 	function wcqd_delete_donation_entry($id){
 		return WC_QD()->db()->delete_donation_entry($id);
+	}
+		
+}
+
+
+if(! function_exists('wcqd_get_option')){
+	/**
+	 * gets value for the setting id
+	 * @param  id of settings 
+	 * @return String / Array
+	 */
+	function wcqd_get_option($id){
+		return WC_QD()->settings()->get_option($id);
 	}
 		
 }
