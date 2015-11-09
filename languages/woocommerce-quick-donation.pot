@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the WooCommerce Quick Donation package.
 msgid ""
 msgstr ""
-"Project-Id-Version: WooCommerce Quick Donation 1.3.5 BETA\n"
+"Project-Id-Version: WooCommerce Quick Donation 1.3.6 BETA\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/woocommerce-quick-donation\n"
-"POT-Creation-Date: 2015-10-29 13:56:30+00:00\n"
+"POT-Creation-Date: 2015-11-08 06:17:19+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -12,44 +12,242 @@ msgstr ""
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 
-#: includes/admin/class-admin-functions.php:59
-msgid "<strong>Your theme (%s) contains outdated copies of some WooCommerce Quick Donation template files.</strong> These files may need updating to ensure they are compatible with the current version of WooCommerce Quick Donation. You can see which files are affected from the %ssystem status page%s. If in doubt, check with the author of the theme."
+#: includes/admin/class-admin-functions.php:139
+#: includes/admin/class-admin-functions.php:146
+msgid "Donation Product Created"
 msgstr ""
 
-#: includes/admin/class-admin-init.php:49
+#: includes/admin/class-admin-functions.php:151
+msgid "Force Create Donation Product"
+msgstr ""
+
+#: includes/admin/class-admin-help.php:41
+#: includes/admin/class-admin-help.php:45
+msgid "General Settings"
+msgstr ""
+
+#: includes/admin/class-admin-help.php:49
+msgid "Product Settings"
+msgstr ""
+
+#: includes/admin/class-admin-help.php:53
+msgid "Tax Settings"
+msgstr ""
+
+#: includes/admin/class-admin-help.php:57
+msgid "Checkout Settings"
+msgstr ""
+
+#: includes/admin/class-admin-help.php:61
+#: includes/admin/class-admin-help.php:85
+msgid "Shipping Settings"
+msgstr ""
+
+#: includes/admin/class-admin-help.php:65
+msgid "Account Settings"
+msgstr ""
+
+#: includes/admin/class-admin-help.php:69
+msgid "Email Settings"
+msgstr ""
+
+#: includes/admin/class-admin-help.php:73
+msgid "Webhook Settings"
+msgstr ""
+
+#: includes/admin/class-admin-help.php:77
+msgid "PayPal Standard"
+msgstr ""
+
+#: includes/admin/class-admin-help.php:81
+msgid "Simplify Commerce"
+msgstr ""
+
+#: includes/admin/class-admin-help.php:89
+msgid "Free Shipping"
+msgstr ""
+
+#: includes/admin/class-admin-help.php:93
+msgid "Local Delivery"
+msgstr ""
+
+#: includes/admin/class-admin-help.php:97
+msgid "Local Pickup"
+msgstr ""
+
+#: includes/admin/class-admin-help.php:101
+#: includes/admin/class-admin-help.php:105
+#: includes/admin/class-admin-help.php:109
+#: includes/admin/class-admin-help.php:113
+msgid "Product Categories, Tags, Shipping Classes, &amp; Attributes"
+msgstr ""
+
+#: includes/admin/class-admin-help.php:117
+msgid "Simple Products"
+msgstr ""
+
+#: includes/admin/class-admin-help.php:121
+#: includes/admin/class-admin-help.php:188
+#: includes/admin/class-admin-help.php:206 includes/admin/views/tools.php:9
+msgid "System Status"
+msgstr ""
+
+#: includes/admin/class-admin-help.php:125
+msgid "Reports"
+msgstr ""
+
+#: includes/admin/class-admin-help.php:129
+#: includes/admin/class-admin-help.php:133
+msgid "Coupons"
+msgstr ""
+
+#: includes/admin/class-admin-help.php:137
+#: includes/admin/class-admin-help.php:141
+msgid "Managing Orders"
+msgstr ""
+
+#: includes/admin/class-admin-help.php:164
+#: includes/admin/class-admin-help.php:166
+msgid "WooCommerce 101"
+msgstr ""
+
+#: includes/admin/class-admin-help.php:173
+#: includes/admin/class-admin-help.php:175
+#: includes/admin/metabox_framework/inc/common.php:53
+msgid "Documentation"
+msgstr ""
+
+#: includes/admin/class-admin-help.php:176
+msgid "Should you need help understanding, using, or extending WooCommerce, please read our documentation. You will find all kinds of resources including snippets, tutorials and much more."
+msgstr ""
+
+#: includes/admin/class-admin-help.php:177
+msgid "WooCommerce Documentation"
+msgstr ""
+
+#: includes/admin/class-admin-help.php:177
+msgid "Developer API Docs"
+msgstr ""
+
+#: includes/admin/class-admin-help.php:183
+#: includes/admin/class-admin-help.php:185
+msgid "Support"
+msgstr ""
+
+#: includes/admin/class-admin-help.php:186
+msgid "After %sreading the documentation%s, for further assistance you can use the %scommunity forums%s on WordPress.org to talk with other users. If however you are a WooThemes customer, or need help with premium add-ons sold by WooThemes, please %suse our helpdesk%s."
+msgstr ""
+
+#: includes/admin/class-admin-help.php:187
+msgid "Before asking for help we recommend checking the system status page to identify any problems with your configuration."
+msgstr ""
+
+#: includes/admin/class-admin-help.php:188
+msgid "WordPress.org Forums"
+msgstr ""
+
+#: includes/admin/class-admin-help.php:188
+msgid "WooThemes Customer Support"
+msgstr ""
+
+#: includes/admin/class-admin-help.php:193
+#: includes/admin/class-admin-help.php:195
+msgid "Education"
+msgstr ""
+
+#: includes/admin/class-admin-help.php:196
+msgid "If you would like to learn about using WooCommerce from an expert, consider following a WooCommerce course ran by one of our educational partners."
+msgstr ""
+
+#: includes/admin/class-admin-help.php:197
+msgid "View Education Partners"
+msgstr ""
+
+#: includes/admin/class-admin-help.php:202
+#: includes/admin/class-admin-help.php:204
+msgid "Found a bug?"
+msgstr ""
+
+#: includes/admin/class-admin-help.php:205
+msgid "If you find a bug within WooCommerce core you can create a ticket via <a href=\"%s\">Github issues</a>. Ensure you read the <a href=\"%s\">contribution guide</a> prior to submitting your report. To help us solve your issue, please be as descriptive as possible and include your <a href=\"%s\">system status report</a>."
+msgstr ""
+
+#: includes/admin/class-admin-help.php:206
+msgid "Report a bug"
+msgstr ""
+
+#: includes/admin/class-admin-help.php:211
+msgid "For more information:"
+msgstr ""
+
+#: includes/admin/class-admin-help.php:212
+msgid "About WooCommerce"
+msgstr ""
+
+#: includes/admin/class-admin-help.php:213
+msgid "WordPress.org Project"
+msgstr ""
+
+#: includes/admin/class-admin-help.php:214
+msgid "Github Project"
+msgstr ""
+
+#: includes/admin/class-admin-help.php:215
+msgid "Official Themes"
+msgstr ""
+
+#: includes/admin/class-admin-help.php:216
+msgid "Official Extensions"
+msgstr ""
+
+#: includes/admin/class-admin-init.php:31
+msgid "Please copy and paste this information in your ticket when contacting support:"
+msgstr ""
+
+#: includes/admin/class-admin-init.php:32
+msgid "Get System Report"
+msgstr ""
+
+#: includes/admin/class-admin-init.php:72
 msgid "Donation Orders"
 msgstr ""
 
-#: includes/admin/class-admin-init.php:50
+#: includes/admin/class-admin-init.php:73
 msgid "Donation's"
 msgstr ""
 
-#: includes/admin/class-admin-init.php:56
-#: includes/admin/class-admin-init.php:57
+#: includes/admin/class-admin-init.php:79
+#: includes/admin/class-admin-init.php:80
 msgid "Donors List"
 msgstr ""
 
-#: includes/admin/class-admin-init.php:227
+#: includes/admin/class-admin-init.php:86
+#: includes/admin/class-admin-init.php:87
+#: includes/admin/views/tools_view.php:14
+msgid "System Tools"
+msgstr ""
+
+#: includes/admin/class-admin-init.php:291
 msgid "Settings"
 msgstr ""
 
-#: includes/admin/class-admin-init.php:228
+#: includes/admin/class-admin-init.php:292
 msgid "F.A.Q"
 msgstr ""
 
-#: includes/admin/class-admin-init.php:229
+#: includes/admin/class-admin-init.php:293
 msgid "View On Github"
 msgstr ""
 
-#: includes/admin/class-admin-init.php:230
+#: includes/admin/class-admin-init.php:294
 msgid "Report Issue"
 msgstr ""
 
-#: includes/admin/class-admin-init.php:231
+#: includes/admin/class-admin-init.php:295
 msgid "Donate"
 msgstr ""
 
-#: includes/admin/class-admin-init.php:232
+#: includes/admin/class-admin-init.php:296
 msgid "Contact Author"
 msgstr ""
 
@@ -63,7 +261,9 @@ msgid "Donor"
 msgstr ""
 
 #: includes/admin/class-admin-order-page.php:44
-#: template/cart/donation-cart.php:27 template/myaccount/my-donations.php:33
+#: template/cart/donation-cart.php:27 template/emails/donation-admin-new.php:31
+#: template/emails/donation-processing.php:27
+#: template/myaccount/my-donations.php:33
 #: template/myaccount/my-donations.php:54
 #: template/order/donation-order-details.php:20
 msgid "Project"
@@ -105,39 +305,6 @@ msgstr ""
 
 #: includes/admin/class-metabox.php:41
 msgid "Show Or Hide In Donation Form"
-msgstr ""
-
-#: includes/admin/donation-settings.php:26
-#: includes/admin/donation-settings.php:27
-msgid "Tab 2"
-msgstr ""
-
-#: includes/admin/donation-settings.php:36
-msgid "First Section"
-msgstr ""
-
-#: includes/admin/donation-settings.php:40
-msgid "Second Section."
-msgstr ""
-
-#: includes/admin/donation-settings.php:46
-msgid "Welcome to the second page"
-msgstr ""
-
-#: includes/admin/donation-settings.php:61
-msgid "Text field label (required)"
-msgstr ""
-
-#: includes/admin/donation-settings.php:63
-msgid "This is a required field."
-msgstr ""
-
-#: includes/admin/donation-settings.php:91
-msgid "WP Settings Example"
-msgstr ""
-
-#: includes/admin/donation-settings.php:121
-msgid "Error: please enter some text."
 msgstr ""
 
 #: includes/admin/metabox/class-donation-info-metabox.php:43
@@ -199,6 +366,7 @@ msgid "Phone"
 msgstr ""
 
 #: includes/admin/metabox/class-donation-info-metabox.php:165
+#: includes/admin/wp-donation-listing-table.php:1498
 msgid "Order"
 msgstr ""
 
@@ -250,7 +418,8 @@ msgid "Donor Details"
 msgstr ""
 
 #: includes/admin/metabox/class-donation-info-metabox.php:238
-#: includes/admin/wp-donation-listing-table.php:305
+#: includes/admin/wp-donation-listing-table.php:434
+#: includes/admin/wp-donation-listing-table.php:1228
 #: includes/admin/wp-donors-listing-table.php:349
 msgid "Edit"
 msgstr ""
@@ -275,7 +444,7 @@ msgid "Payment Method:"
 msgstr ""
 
 #: includes/admin/metabox/class-donation-info-metabox.php:288
-#: template/order/order-details-customer.php:18
+#: template/order/donation-order-details-customer.php:18
 msgid "N/A"
 msgstr ""
 
@@ -308,10 +477,6 @@ msgstr ""
 
 #: includes/admin/metabox/html/html-donation-info.php:79
 msgid "Customer's notes about the order"
-msgstr ""
-
-#: includes/admin/metabox_framework/inc/common.php:53
-msgid "Documentation"
 msgstr ""
 
 #: includes/admin/metabox_framework/inc/common.php:54
@@ -451,6 +616,7 @@ msgid "Embed HTML not available."
 msgstr ""
 
 #: includes/admin/metabox_framework/inc/fields/oembed.php:77
+#: includes/admin/wp-donation-listing-table.php:1248
 msgid "Preview"
 msgstr ""
 
@@ -501,224 +667,532 @@ msgid "Please correct the errors highlighted below and try again."
 msgstr ""
 
 #: includes/admin/settings/fields.php:8
-#: includes/admin/settings/settings-general.php:7
 msgid "Redirect User To"
 msgstr ""
 
 #: includes/admin/settings/fields.php:9
-#: includes/admin/settings/settings-general.php:8
 msgid "After Donation Added To Cart"
 msgstr ""
 
-#: includes/admin/settings/fields.php:16
-#: includes/admin/settings/settings-general.php:18
+#: includes/admin/settings/fields.php:11 includes/admin/settings/fields.php:22
+msgid "Cart Page"
+msgstr ""
+
+#: includes/admin/settings/fields.php:11 includes/admin/settings/fields.php:22
+msgid "Checkout Page"
+msgstr ""
+
+#: includes/admin/settings/fields.php:19
+msgid "Donation Exist Redirect"
+msgstr ""
+
+#: includes/admin/settings/fields.php:20
+msgid "Redirect User When Donation Already Exist In Cart"
+msgstr ""
+
+#: includes/admin/settings/fields.php:27
 msgid "Donation Payment Gateway"
 msgstr ""
 
-#: includes/admin/settings/fields.php:17
+#: includes/admin/settings/fields.php:28
 msgid "Select Payment gateway for users to pay for donation"
 msgstr ""
 
-#: includes/admin/settings/fields.php:31
+#: includes/admin/settings/fields.php:38
 msgid ""
-"<div class=\"decs\"> <span> Add <code>{donation_amount}</code> To Get Ented Amount By User.  </span> \n"
-"               <span> Add <code>{min_amount}</code> To Get Minimum Required Amount From Selected Project </span> \n"
-"               <span> Add <code>{max_amount}</code> To Get Minimum Required Amount From Selected Project  </span> </div>"
+"<span> Add <code>%s</code> To Get Ented Amount By User.</span>  <br/>\n"
+"               <span> Add <code>%s</code> To Get Minimum Required Amount From Selected Project </span>   <br/>\n"
+"               <span> Add <code>%s</code> To Get Minimum Required Amount From Selected Project  </span>"
 msgstr ""
 
-#: includes/admin/settings/fields.php:41
-#: includes/admin/settings/settings-message.php:18
+#: includes/admin/settings/fields.php:48
+msgid "Donation Conflict"
+msgstr ""
+
+#: includes/admin/settings/fields.php:49
+msgid "Custom Message To Show When User Trying To Add Donation With Other Products"
+msgstr ""
+
+#: includes/admin/settings/fields.php:56
 msgid "Empty Donation Amount"
 msgstr ""
 
-#: includes/admin/settings/fields.php:42
-#: includes/admin/settings/settings-general.php:19
-#: includes/admin/settings/settings-message.php:19
+#: includes/admin/settings/fields.php:57
 msgid "Custom Message To Show When Empty Donation Entered"
 msgstr ""
 
-#: includes/admin/settings/fields.php:50
+#: includes/admin/settings/fields.php:64
 msgid "Donation Already Exist"
 msgstr ""
 
-#: includes/admin/settings/fields.php:51
+#: includes/admin/settings/fields.php:65
 msgid "Custom Message To Show When User Trying To Add Another Donation To Cart"
 msgstr ""
 
-#: includes/admin/settings/fields.php:59
-#: includes/admin/settings/settings-message.php:27
+#: includes/admin/settings/fields.php:73
 msgid "Invalid Donation Amount"
 msgstr ""
 
-#: includes/admin/settings/fields.php:60
-#: includes/admin/settings/settings-message.php:28
+#: includes/admin/settings/fields.php:74
 msgid "Custom Message To Show When Invalid Donation Entered"
 msgstr ""
 
-#: includes/admin/settings/fields.php:67
-#: includes/admin/settings/settings-message.php:38
+#: includes/admin/settings/fields.php:81
 msgid "Minimum Required Donation Amount"
 msgstr ""
 
-#: includes/admin/settings/fields.php:68
-#: includes/admin/settings/settings-message.php:39
+#: includes/admin/settings/fields.php:82
 msgid "Custom Message To Show When Minimum Required Donation Not Entered"
 msgstr ""
 
-#: includes/admin/settings/fields.php:75
-#: includes/admin/settings/settings-message.php:46
+#: includes/admin/settings/fields.php:89
 msgid "Maximum Required Donation Amount"
 msgstr ""
 
-#: includes/admin/settings/fields.php:76
-#: includes/admin/settings/settings-message.php:47
+#: includes/admin/settings/fields.php:90
 msgid "Custom Message To Show When Maximum Required Donation Not Entered "
 msgstr ""
 
-#: includes/admin/settings/settings-general.php:3
+#: includes/admin/settings/fields.php:101
+#: includes/admin/settings/fields.php:122
+msgid "Pre Selected Project Name"
+msgstr ""
+
+#: includes/admin/settings/fields.php:102
+msgid "default project render type"
+msgstr ""
+
+#: includes/admin/settings/fields.php:104
+msgid "Select Box"
+msgstr ""
+
+#: includes/admin/settings/fields.php:104
+msgid "Radio Button"
+msgstr ""
+
+#: includes/admin/settings/fields.php:111
+#: includes/admin/settings/fields.php:114
+msgid "Show Errors"
+msgstr ""
+
+#: includes/admin/settings/fields.php:112
+msgid "Set to hide errors when <code> wc_print_notice</code> called before loading dontion form"
+msgstr ""
+
+#: includes/admin/settings/fields.php:114
+msgid "Hide Errors"
+msgstr ""
+
+#: includes/admin/settings/fields.php:123
+msgid "this value will be selected in donation project box"
+msgstr ""
+
+#: includes/admin/settings/pages.php:4
 msgid "General"
 msgstr ""
 
-#: includes/admin/settings/settings-message.php:3
+#: includes/admin/settings/pages.php:5
 msgid "Message"
 msgstr ""
 
-#: includes/admin/settings/settings-message.php:8
-msgid "Donation Error : "
+#: includes/admin/settings/pages.php:6
+msgid "ShortCode"
 msgstr ""
 
 #: includes/admin/settings/validate-general.php:4
-#: includes/admin/settings/validate.php:6
 msgid "Error: Please Select Atlest 1 Payment Gateway."
 msgstr ""
 
-#: includes/admin/wp-donation-listing-table.php:237
+#: includes/admin/sysinfo/includes/viewer.php:24
+msgid "Users with this URL can view a plain-text version of your System Status.<br />This link can be handy in support forums, as access to this information can be removed after you receive the help you need.<br />Generating a new URL will safely void access to all who have the existing URL."
+msgstr ""
+
+#: includes/admin/sysinfo/includes/viewer.php:25
+#: includes/admin/sysinfo/views/simple-system-status.php:12
+msgid "To copy the System Status, click below then press Ctrl + C (PC) or Cmd + C (Mac)."
+msgstr ""
+
+#: includes/admin/sysinfo/includes/viewer.php:25
+msgid "test url"
+msgstr ""
+
+#: includes/admin/sysinfo/includes/viewer.php:27
+msgid "Generate New URL"
+msgstr ""
+
+#: includes/admin/sysinfo/views/simple-system-status.php:2
+msgid "WC Quick Donation System Status"
+msgstr ""
+
+#: includes/admin/views/sys_info_view.php:11
+msgid "To copy the System Status, click below then press Ctrl + C (PC) or Cmd + C (Mac)"
+msgstr ""
+
+#: includes/admin/views/tools.php:10
+msgid "Tools"
+msgstr ""
+
+#: includes/admin/views/tools_view.php:2
+msgid " This will help you to create a new donation product. if not exist"
+msgstr ""
+
+#: includes/admin/views/tools_view.php:4
+msgid "Donation Product Dose Not Exist In WooCommerce. Please Create It "
+msgstr ""
+
+#: includes/admin/views/tools_view.php:19
+msgid "Reinstall Donation Product"
+msgstr ""
+
+#: includes/admin/views/tools_view.php:22
+msgid "Create Donation Product"
+msgstr ""
+
+#: includes/admin/wp-donation-listing-table.php:123
+msgid "Invalid Nonce for deleting WC Donation Orders"
+msgstr ""
+
+#: includes/admin/wp-donation-listing-table.php:146
+msgid "You are not allowed to move this item to the Trash."
+msgstr ""
+
+#: includes/admin/wp-donation-listing-table.php:154
+msgid "Error in moving to Trash."
+msgstr ""
+
+#: includes/admin/wp-donation-listing-table.php:164
+msgid "%s Donation Order Trashed  ( %s )"
+msgid_plural "%s Donation Orders Trashed  ( %s )"
+msgstr[0] ""
+msgstr[1] ""
+
+#: includes/admin/wp-donation-listing-table.php:175
+msgid "You are not allowed to restore this item from the Trash."
+msgstr ""
+
+#: includes/admin/wp-donation-listing-table.php:178
+msgid "Error in restoring from Trash."
+msgstr ""
+
+#: includes/admin/wp-donation-listing-table.php:186
+msgid "%s Donation Order restored from trash  ( %s )"
+msgid_plural "%s Donation Orders restored from trash ( %s )"
+msgstr[0] ""
+msgstr[1] ""
+
+#: includes/admin/wp-donation-listing-table.php:200
+msgid "You are not allowed to delete this item."
+msgstr ""
+
+#: includes/admin/wp-donation-listing-table.php:204
+#: includes/admin/wp-donation-listing-table.php:207
+msgid "Error in deleting."
+msgstr ""
+
+#: includes/admin/wp-donation-listing-table.php:214
+msgid "%s Donation Order permanently deleted  ( %s )"
+msgid_plural "%s Donation Orders permanently deleted ( %s )"
+msgstr[0] ""
+msgstr[1] ""
+
+#: includes/admin/wp-donation-listing-table.php:365
+#: includes/admin/wp-donation-listing-table.php:366
 msgctxt "posts"
 msgid "Mine <span class=\"count\">(%s)</span>"
 msgid_plural "Mine <span class=\"count\">(%s)</span>"
 msgstr[0] ""
 msgstr[1] ""
 
-#: includes/admin/wp-donation-listing-table.php:253
+#: includes/admin/wp-donation-listing-table.php:382
 msgctxt "posts"
 msgid "All <span class=\"count\">(%s)</span>"
 msgid_plural "All <span class=\"count\">(%s)</span>"
 msgstr[0] ""
 msgstr[1] ""
 
-#: includes/admin/wp-donation-listing-table.php:284
+#: includes/admin/wp-donation-listing-table.php:413
 msgctxt "posts"
 msgid "Sticky <span class=\"count\">(%s)</span>"
 msgid_plural "Sticky <span class=\"count\">(%s)</span>"
 msgstr[0] ""
 msgstr[1] ""
 
-#: includes/admin/wp-donation-listing-table.php:303
+#: includes/admin/wp-donation-listing-table.php:432
+#: includes/admin/wp-donation-listing-table.php:1234
 msgid "Restore"
 msgstr ""
 
-#: includes/admin/wp-donation-listing-table.php:310
+#: includes/admin/wp-donation-listing-table.php:439
+#: includes/admin/wp-donation-listing-table.php:1238
 msgid "Delete Permanently"
 msgstr ""
 
-#: includes/admin/wp-donation-listing-table.php:312
+#: includes/admin/wp-donation-listing-table.php:441
 msgid "Move to Trash"
 msgstr ""
 
-#: includes/admin/wp-donation-listing-table.php:329
-#: template/emails/donation-customer-invoice.php:31
+#: includes/admin/wp-donation-listing-table.php:458
 msgid "Donation Project"
 msgstr ""
 
-#: includes/admin/wp-donation-listing-table.php:355
+#: includes/admin/wp-donation-listing-table.php:482
 msgid "All categories"
 msgstr ""
 
-#: includes/admin/wp-donation-listing-table.php:363
+#: includes/admin/wp-donation-listing-table.php:490
 msgid "Filter by category"
 msgstr ""
 
-#: includes/admin/wp-donation-listing-table.php:377
+#: includes/admin/wp-donation-listing-table.php:506
 msgid "Filter"
 msgstr ""
 
-#: includes/admin/wp-donation-listing-table.php:381
+#: includes/admin/wp-donation-listing-table.php:510
 msgid "Empty Trash"
 msgstr ""
 
 #. translators: manage posts column name
 
-#: includes/admin/wp-donation-listing-table.php:432
+#: includes/admin/wp-donation-listing-table.php:561
 msgctxt "column name"
 msgid "Title"
 msgstr ""
 
-#: includes/admin/wp-donation-listing-table.php:435
+#: includes/admin/wp-donation-listing-table.php:564
+#: includes/admin/wp-donation-listing-table.php:1399
 msgid "Author"
 msgstr ""
 
-#: includes/admin/wp-donation-listing-table.php:468
+#: includes/admin/wp-donation-listing-table.php:597
+#: includes/admin/wp-donation-listing-table.php:1547
 msgid "Comments"
 msgstr ""
 
-#: includes/admin/wp-donation-listing-table.php:470
+#: includes/admin/wp-donation-listing-table.php:599
+#: includes/admin/wp-donation-listing-table.php:1376
 #: template/myaccount/my-donations.php:34
 #: template/myaccount/my-donations.php:60
 msgid "Date"
 msgstr ""
 
-#: includes/admin/wp-donation-listing-table.php:731
+#: includes/admin/wp-donation-listing-table.php:860
 #: includes/admin/wp-donors-listing-table.php:372
 msgid "Select %s"
 msgstr ""
 
-#: includes/admin/wp-donation-listing-table.php:804
+#: includes/admin/wp-donation-listing-table.php:933
 msgid "Edit &#8220;%s&#8221;"
 msgstr ""
 
-#: includes/admin/wp-donation-listing-table.php:822
+#: includes/admin/wp-donation-listing-table.php:951
 msgid "%s is currently editing"
 msgstr ""
 
-#: includes/admin/wp-donation-listing-table.php:851
+#: includes/admin/wp-donation-listing-table.php:980
 msgid "Unpublished"
 msgstr ""
 
-#: includes/admin/wp-donation-listing-table.php:854
+#: includes/admin/wp-donation-listing-table.php:983
 msgid "Y/m/d g:i:s a"
 msgstr ""
 
-#: includes/admin/wp-donation-listing-table.php:861
+#: includes/admin/wp-donation-listing-table.php:990
 msgid "%s ago"
 msgstr ""
 
-#: includes/admin/wp-donation-listing-table.php:863
+#: includes/admin/wp-donation-listing-table.php:992
 msgid "Y/m/d"
 msgstr ""
 
-#: includes/admin/wp-donation-listing-table.php:890
+#: includes/admin/wp-donation-listing-table.php:1019
+#: includes/admin/wp-donation-listing-table.php:1593
 msgid "Published"
 msgstr ""
 
-#: includes/admin/wp-donation-listing-table.php:893
+#: includes/admin/wp-donation-listing-table.php:1022
 msgid "Missed schedule"
 msgstr ""
 
-#: includes/admin/wp-donation-listing-table.php:895
+#: includes/admin/wp-donation-listing-table.php:1024
+#: includes/admin/wp-donation-listing-table.php:1594
 msgid "Scheduled"
 msgstr ""
 
-#: includes/admin/wp-donation-listing-table.php:898
+#: includes/admin/wp-donation-listing-table.php:1027
 msgid "Last Modified"
 msgstr ""
 
 #. translators: used between list items, there is a space after the comma
 
-#: includes/admin/wp-donation-listing-table.php:979
+#: includes/admin/wp-donation-listing-table.php:1108
 msgid ", "
 msgstr ""
 
-#: includes/admin/wp-donation-listing-table.php:1093
+#: includes/admin/wp-donation-listing-table.php:1228
+msgid "Edit this item"
+msgstr ""
+
+#: includes/admin/wp-donation-listing-table.php:1229
+msgid "Edit this item inline"
+msgstr ""
+
+#: includes/admin/wp-donation-listing-table.php:1229
+msgid "Quick&nbsp;Edit"
+msgstr ""
+
+#: includes/admin/wp-donation-listing-table.php:1234
+msgid "Restore this item from the Trash"
+msgstr ""
+
+#: includes/admin/wp-donation-listing-table.php:1236
+msgid "Move this item to the Trash"
+msgstr ""
+
+#: includes/admin/wp-donation-listing-table.php:1236
+msgid "Trash"
+msgstr ""
+
+#: includes/admin/wp-donation-listing-table.php:1238
+msgid "Delete this item permanently"
+msgstr ""
+
+#: includes/admin/wp-donation-listing-table.php:1248
+msgid "Preview &#8220;%s&#8221;"
+msgstr ""
+
+#: includes/admin/wp-donation-listing-table.php:1251
+msgid "View &#8220;%s&#8221;"
+msgstr ""
+
+#: includes/admin/wp-donation-listing-table.php:1251
+#: template/myaccount/my-donations.php:89
+msgid "View"
+msgstr ""
+
+#: includes/admin/wp-donation-listing-table.php:1350
+msgid "Bulk Edit"
+msgstr ""
+
+#: includes/admin/wp-donation-listing-table.php:1350
+msgid "Quick Edit"
+msgstr ""
+
+#: includes/admin/wp-donation-listing-table.php:1362
+msgid "Title"
+msgstr ""
+
+#: includes/admin/wp-donation-listing-table.php:1367
+msgid "Slug"
+msgstr ""
+
+#: includes/admin/wp-donation-listing-table.php:1395
+#: includes/admin/wp-donation-listing-table.php:1475
+#: includes/admin/wp-donation-listing-table.php:1511
+#: includes/admin/wp-donation-listing-table.php:1549
+#: includes/admin/wp-donation-listing-table.php:1558
+#: includes/admin/wp-donation-listing-table.php:1590
+#: includes/admin/wp-donation-listing-table.php:1611
+#: includes/admin/wp-donation-listing-table.php:1639
+msgid "&mdash; No Change &mdash;"
+msgstr ""
+
+#: includes/admin/wp-donation-listing-table.php:1414
+msgid "Password"
+msgstr ""
+
+#. translators: Between password field and private checkbox on post quick edit
+#. interface
+
+#: includes/admin/wp-donation-listing-table.php:1421
+msgid "&ndash;OR&ndash;"
+msgstr ""
+
+#: includes/admin/wp-donation-listing-table.php:1426
+#: includes/admin/wp-donation-listing-table.php:1596
+msgid "Private"
+msgstr ""
+
+#: includes/admin/wp-donation-listing-table.php:1463
+msgid "Parent"
+msgstr ""
+
+#: includes/admin/wp-donation-listing-table.php:1469
+msgid "Main Page (no parent)"
+msgstr ""
+
+#: includes/admin/wp-donation-listing-table.php:1508
+msgid "Template"
+msgstr ""
+
+#: includes/admin/wp-donation-listing-table.php:1515
+msgid "Default Template"
+msgstr ""
+
+#: includes/admin/wp-donation-listing-table.php:1550
+#: includes/admin/wp-donation-listing-table.php:1559
+msgid "Allow"
+msgstr ""
+
+#: includes/admin/wp-donation-listing-table.php:1551
+#: includes/admin/wp-donation-listing-table.php:1560
+msgid "Do not allow"
+msgstr ""
+
+#: includes/admin/wp-donation-listing-table.php:1556
+msgid "Pings"
+msgstr ""
+
+#: includes/admin/wp-donation-listing-table.php:1572
+msgid "Allow Comments"
+msgstr ""
+
+#: includes/admin/wp-donation-listing-table.php:1577
+msgid "Allow Pings"
+msgstr ""
+
+#: includes/admin/wp-donation-listing-table.php:1587
+#: template/myaccount/my-donations.php:35
+#: template/myaccount/my-donations.php:63
+msgid "Status"
+msgstr ""
+
+#: includes/admin/wp-donation-listing-table.php:1599
+msgid "Pending Review"
+msgstr ""
+
+#: includes/admin/wp-donation-listing-table.php:1600
+msgid "Draft"
+msgstr ""
+
+#: includes/admin/wp-donation-listing-table.php:1609
+#: includes/admin/wp-donation-listing-table.php:1612
+msgid "Sticky"
+msgstr ""
+
+#: includes/admin/wp-donation-listing-table.php:1613
+msgid "Not Sticky"
+msgstr ""
+
+#: includes/admin/wp-donation-listing-table.php:1621
+msgid "Make this post sticky"
+msgstr ""
+
+#: includes/admin/wp-donation-listing-table.php:1637
+msgctxt "post format"
+msgid "Format"
+msgstr ""
+
+#: includes/admin/wp-donation-listing-table.php:1693
+#: template/myaccount/my-donations.php:83
+msgid "Cancel"
+msgstr ""
+
+#: includes/admin/wp-donation-listing-table.php:1697
+#: includes/admin/wp-donation-listing-table.php:1700
+msgid "Update"
+msgstr ""
+
+#: includes/admin/wp-donation-listing-table.php:1731
 msgid "Search Donations"
 msgstr ""
 
@@ -759,305 +1233,350 @@ msgstr ""
 msgid "Total Donations"
 msgstr ""
 
-#: includes/class-post-types.php:21
+#: includes/admin/wps/settings.php:36 includes/admin/wps/settings.php:37
+msgid "Settings Page"
+msgstr ""
+
+#: includes/class-install.php:190
+msgid "<p> <strong>Your theme (%s) contains outdated copies of some WooCommerce Quick Donation template files.</strong> These files may need updating to ensure they are compatible with the current version of WooCommerce Quick Donation. You can see which files are affected from the %ssystem status page%s. If in doubt, check with the author of the theme. </p> <p class=\"submit\">%sLear More About Templates%s %s</p>"
+msgstr ""
+
+#: includes/class-post-types.php:24
 msgid "Quick Donation Project"
 msgstr ""
 
-#: includes/class-post-types.php:22
+#: includes/class-post-types.php:25
 msgid "WooCommerce Donation Projects"
 msgstr ""
 
-#: includes/class-post-types.php:49
+#: includes/class-post-types.php:52
 msgctxt "Post Type General Name"
 msgid "Quick Donation Projects"
 msgstr ""
 
-#: includes/class-post-types.php:50
+#: includes/class-post-types.php:53
 msgctxt "Post Type Singular Name"
 msgid "Quick Donation Project"
 msgstr ""
 
-#: includes/class-post-types.php:51
+#: includes/class-post-types.php:54
 msgid "Quick Donation"
 msgstr ""
 
-#: includes/class-post-types.php:52
+#: includes/class-post-types.php:55
 msgid "Donation"
 msgstr ""
 
-#: includes/class-post-types.php:53
+#: includes/class-post-types.php:56
 msgid "Parent Project :"
 msgstr ""
 
-#: includes/class-post-types.php:54
+#: includes/class-post-types.php:57
 msgid "All Project"
 msgstr ""
 
-#: includes/class-post-types.php:55
+#: includes/class-post-types.php:58
 msgid "Add New Project"
 msgstr ""
 
-#: includes/class-post-types.php:56
+#: includes/class-post-types.php:59
 msgid "Add Project"
 msgstr ""
 
-#: includes/class-post-types.php:57
+#: includes/class-post-types.php:60
 msgid "New Project"
 msgstr ""
 
-#: includes/class-post-types.php:58
+#: includes/class-post-types.php:61
 msgid "Edit Project"
 msgstr ""
 
-#: includes/class-post-types.php:59
+#: includes/class-post-types.php:62
 msgid "Update ProjectNot found in Trash"
 msgstr ""
 
-#: includes/class-post-types.php:60
+#: includes/class-post-types.php:63
 msgid "View Project"
 msgstr ""
 
-#: includes/class-post-types.php:61
+#: includes/class-post-types.php:64
 msgid "Search Project"
 msgstr ""
 
-#: includes/class-post-types.php:62
+#: includes/class-post-types.php:65
 msgid "No Project Found"
 msgstr ""
 
-#: includes/class-post-types.php:63
+#: includes/class-post-types.php:66
 msgid "No Project Found in Trash"
 msgstr ""
 
-#: includes/class-post-types.php:87
+#: includes/class-post-types.php:92
 msgctxt "Taxonomy General Name"
 msgid "Project Categories"
 msgstr ""
 
-#: includes/class-post-types.php:88
+#: includes/class-post-types.php:93
 msgctxt "Taxonomy Singular Name"
 msgid "Project Category"
 msgstr ""
 
-#: includes/class-post-types.php:89
+#: includes/class-post-types.php:94
 msgid "Categories"
 msgstr ""
 
-#: includes/class-post-types.php:90
+#: includes/class-post-types.php:95
 msgid "All Categories"
 msgstr ""
 
-#: includes/class-post-types.php:91
+#: includes/class-post-types.php:96
 msgid "Parent Category"
 msgstr ""
 
-#: includes/class-post-types.php:92
+#: includes/class-post-types.php:97
 msgid "Parent Category:"
 msgstr ""
 
-#: includes/class-post-types.php:93
+#: includes/class-post-types.php:98
 msgid "New Category Name"
 msgstr ""
 
-#: includes/class-post-types.php:94
+#: includes/class-post-types.php:99
 msgid "Add New Project Category"
 msgstr ""
 
-#: includes/class-post-types.php:95
+#: includes/class-post-types.php:100
 msgid "Edit Category"
 msgstr ""
 
-#: includes/class-post-types.php:96
+#: includes/class-post-types.php:101
 msgid "Update Category"
 msgstr ""
 
-#: includes/class-post-types.php:97
+#: includes/class-post-types.php:102
 msgid "View Category"
 msgstr ""
 
-#: includes/class-post-types.php:98
+#: includes/class-post-types.php:103
 msgid "Separate Categories with commas"
 msgstr ""
 
-#: includes/class-post-types.php:99
+#: includes/class-post-types.php:104
 msgid "Add or remove Categories"
 msgstr ""
 
-#: includes/class-post-types.php:100 includes/class-post-types.php:147
+#: includes/class-post-types.php:105 includes/class-post-types.php:154
 msgid "Choose from the most used"
 msgstr ""
 
-#: includes/class-post-types.php:101
+#: includes/class-post-types.php:106
 msgid "Popular Categories"
 msgstr ""
 
-#: includes/class-post-types.php:102
+#: includes/class-post-types.php:107
 msgid "Search Categories"
 msgstr ""
 
-#: includes/class-post-types.php:103 includes/class-post-types.php:150
+#: includes/class-post-types.php:108 includes/class-post-types.php:157
 msgid "Not Found"
 msgstr ""
 
-#: includes/class-post-types.php:134
+#: includes/class-post-types.php:141
 msgctxt "Taxonomy General Name"
 msgid "Project Tags"
 msgstr ""
 
-#: includes/class-post-types.php:135
+#: includes/class-post-types.php:142
 msgctxt "Taxonomy Singular Name"
 msgid "Project Tag"
 msgstr ""
 
-#: includes/class-post-types.php:136
+#: includes/class-post-types.php:143
 msgid "Tags"
 msgstr ""
 
-#: includes/class-post-types.php:137
+#: includes/class-post-types.php:144
 msgid "All Tags"
 msgstr ""
 
-#: includes/class-post-types.php:138
+#: includes/class-post-types.php:145
 msgid "Parent Tag"
 msgstr ""
 
-#: includes/class-post-types.php:139
+#: includes/class-post-types.php:146
 msgid "Parent Tag :"
 msgstr ""
 
-#: includes/class-post-types.php:140
+#: includes/class-post-types.php:147
 msgid "New Tag Name"
 msgstr ""
 
-#: includes/class-post-types.php:141
+#: includes/class-post-types.php:148
 msgid "Add New Tag"
 msgstr ""
 
-#: includes/class-post-types.php:142
+#: includes/class-post-types.php:149
 msgid "Edit Tag "
 msgstr ""
 
-#: includes/class-post-types.php:143
+#: includes/class-post-types.php:150
 msgid "Update Tags"
 msgstr ""
 
-#: includes/class-post-types.php:144
+#: includes/class-post-types.php:151
 msgid "View Tag"
 msgstr ""
 
-#: includes/class-post-types.php:145
+#: includes/class-post-types.php:152
 msgid "Separate Tags with commas"
 msgstr ""
 
-#: includes/class-post-types.php:146
+#: includes/class-post-types.php:153
 msgid "Add or remove Tags"
 msgstr ""
 
-#: includes/class-post-types.php:148
+#: includes/class-post-types.php:155
 msgid "Popular Tags"
 msgstr ""
 
-#: includes/class-post-types.php:149
+#: includes/class-post-types.php:156
 msgid "Search Tags"
 msgstr ""
 
-#: includes/class-post-types.php:175
+#: includes/class-post-types.php:182
 msgctxt "Order status"
 msgid "Completed"
 msgstr ""
 
-#: includes/class-post-types.php:176
+#: includes/class-post-types.php:183
 msgid "Completed (%s)"
 msgid_plural "Completed (%s)"
 msgstr[0] ""
 msgstr[1] ""
 
-#: includes/class-post-types.php:184
-#: includes/wc-quick-donation-functions.php:37
+#: includes/class-post-types.php:191
 msgctxt "Order status"
 msgid "Donation On Hold"
 msgstr ""
 
-#: includes/class-post-types.php:189
+#: includes/class-post-types.php:196
 msgid "Donation On Hold <span class=\"count\">(%s)</span>"
 msgid_plural "DonationOn Hold <span class=\"count\">(%s)</span>"
 msgstr[0] ""
 msgstr[1] ""
 
-#: includes/class-post-types.php:192
-#: includes/wc-quick-donation-functions.php:36
+#: includes/class-post-types.php:199
 msgctxt "Order status"
 msgid "Donation Refunded"
 msgstr ""
 
-#: includes/class-post-types.php:197
+#: includes/class-post-types.php:204
 msgid "Refunded <span class=\"count\">(%s)</span>"
 msgid_plural "Refunded <span class=\"count\">(%s)</span>"
 msgstr[0] ""
 msgstr[1] ""
 
-#: includes/class-quick-donation-functions.php:241
+#: includes/class-quick-donation-functions.php:269
 msgid "No Payment Gateway Configured In WooCommerce. Kindly Configure One"
 msgstr ""
 
-#: includes/emails/class-new-email.php:31
-msgid "New Donation"
+#: includes/emails/class-completed-email.php:28
+msgid "Completed Donation"
 msgstr ""
 
-#: includes/emails/class-new-email.php:32
-msgid "Customer invoice emails can be sent to customers containing their order information and payment links."
+#: includes/emails/class-completed-email.php:29
+msgid "Order complete emails are sent to customers when their orders are marked completed and usually indicate that their orders have been shipped."
 msgstr ""
 
-#: includes/emails/class-new-email.php:38
-msgid "Invoice for order {order_number} from {order_date}"
+#: includes/emails/class-completed-email.php:31
+msgid "Your Donation for {project_name} is complete"
 msgstr ""
 
-#: includes/emails/class-new-email.php:39
-msgid "Invoice for order {order_number}"
+#: includes/emails/class-completed-email.php:32
+msgid "Your {site_title} donation from {order_date} is complete"
 msgstr ""
 
-#: includes/emails/class-new-email.php:41
-msgid "Your {site_title} order from {order_date}"
+#: includes/emails/class-completed-email.php:138
+#: includes/emails/class-new-email.php:123
+msgid "Enable/Disable"
 msgstr ""
 
-#: includes/emails/class-new-email.php:42
-msgid "Order {order_number} details"
+#: includes/emails/class-completed-email.php:140
+#: includes/emails/class-new-email.php:125
+msgid "Enable this email notification"
 msgstr ""
 
-#: includes/emails/class-new-email.php:154
-msgid "Email Subject"
+#: includes/emails/class-completed-email.php:144
+#: includes/emails/class-new-email.php:136
+msgid "Subject"
 msgstr ""
 
-#: includes/emails/class-new-email.php:156
-#: includes/emails/class-new-email.php:163
-#: includes/emails/class-new-email.php:170
-#: includes/emails/class-new-email.php:177
+#: includes/emails/class-completed-email.php:146
+#: includes/emails/class-completed-email.php:153
 msgid "Defaults to <code>%s</code>"
 msgstr ""
 
-#: includes/emails/class-new-email.php:161
+#: includes/emails/class-completed-email.php:151
+#: includes/emails/class-new-email.php:143
 msgid "Email Heading"
 msgstr ""
 
-#: includes/emails/class-new-email.php:168
-msgid "Email Subject (paid)"
+#: includes/emails/class-completed-email.php:159
+#: includes/emails/class-new-email.php:150
+msgid "Email type"
 msgstr ""
 
-#: includes/emails/class-new-email.php:175
-msgid "Email Heading (paid)"
-msgstr ""
-
-#: includes/emails/class-new-email.php:182
-msgid "Email Type"
-msgstr ""
-
-#: includes/emails/class-new-email.php:184
+#: includes/emails/class-completed-email.php:161
+#: includes/emails/class-new-email.php:152
 msgid "Choose which format of email to send."
 msgstr ""
 
-#: includes/wc-quick-donation-functions.php:35
-msgctxt "Donation Completed"
-msgid "Donation Completed"
+#: includes/emails/class-new-email.php:28
+msgid "New Donation "
+msgstr ""
+
+#: includes/emails/class-new-email.php:29
+msgid "New order emails are sent to the recipient list when an order is received. you can use <code> {project_name} </code> to get project name any where in the below fields"
+msgstr ""
+
+#: includes/emails/class-new-email.php:31
+msgid "New customer donation for {project_name}"
+msgstr ""
+
+#: includes/emails/class-new-email.php:32
+msgid "[{site_title}] New customer donation ({order_number}) - {order_date}"
+msgstr ""
+
+#: includes/emails/class-new-email.php:129
+msgid "Recipient(s)"
+msgstr ""
+
+#: includes/emails/class-new-email.php:131
+msgid "Enter recipients (comma separated) for this email. Defaults to <code>%s</code>."
+msgstr ""
+
+#: includes/emails/class-new-email.php:138
+msgid "This controls the email subject line. Leave blank to use the default subject: <code>%s</code>."
+msgstr ""
+
+#: includes/emails/class-new-email.php:145
+msgid "This controls the main heading contained within the email notification. Leave blank to use the default heading: <code>%s</code>."
+msgstr ""
+
+#: includes/emails/class-processing-email.php:28
+msgid "Processing Donation"
+msgstr ""
+
+#: includes/emails/class-processing-email.php:29
+msgid "This is an order notification sent to customers containing their donation details after payment."
+msgstr ""
+
+#: includes/emails/class-processing-email.php:31
+msgid "Reg : Your {site_title} donation receipt from {order_date}"
+msgstr ""
+
+#: includes/emails/class-processing-email.php:32
+msgid "Thanks for donation"
 msgstr ""
 
 #: template/cart/donation-cart-shipping.php:18
@@ -1092,8 +1611,24 @@ msgstr ""
 msgid "Amount"
 msgstr ""
 
-#: template/cart/donation-cart.php:48
+#: template/cart/donation-cart.php:48 template/cart/donation-mini-cart.php:41
 msgid "Remove this item"
+msgstr ""
+
+#: template/cart/donation-mini-cart.php:61
+msgid "No products in the cart."
+msgstr ""
+
+#: template/cart/donation-mini-cart.php:69
+msgid "Subtotal"
+msgstr ""
+
+#: template/cart/donation-mini-cart.php:74
+msgid "View Cart"
+msgstr ""
+
+#: template/cart/donation-mini-cart.php:75
+msgid "Checkout"
 msgstr ""
 
 #: template/cart/donation-proceed-to-checkout-button.php:16
@@ -1141,6 +1676,7 @@ msgid "If you have shopped with us before, please enter your details in the boxe
 msgstr ""
 
 #: template/checkout/donation-form-pay.php:20
+#: template/emails/donation-completed.php:27
 msgid "Product"
 msgstr ""
 
@@ -1233,42 +1769,98 @@ msgstr ""
 msgid "Thank you. Your order has been received."
 msgstr ""
 
-#: template/emails/donation-customer-invoice.php:20
-#: template/emails/plain/donation-customer-invoice.php:17
+#: template/emails/donation-admin-new.php:20
+#: template/emails/plain/donation-admin-new.php:17
 msgid "An order has been created for you on %s. To pay for this order please use the following link: %s"
 msgstr ""
 
-#: template/emails/donation-customer-invoice.php:20
+#: template/emails/donation-admin-new.php:20
 msgid "pay"
 msgstr ""
 
-#: template/emails/donation-customer-invoice.php:26
-msgid "Order #%s"
+#: template/emails/donation-admin-new.php:26
+msgid "Donation ID #%s"
 msgstr ""
 
-#: template/emails/donation-customer-invoice.php:32
-msgid "Quantity"
-msgstr ""
-
-#: template/emails/donation-customer-invoice.php:33
+#: template/emails/donation-admin-new.php:32
+#: template/emails/donation-completed.php:29
+#: template/emails/donation-processing.php:28
 msgid "Price"
 msgstr ""
 
-#: template/emails/plain/donation-customer-invoice.php:23
+#: template/emails/donation-completed.php:18
+#: template/emails/plain/donation-completed.php:16
+msgid "Hi there. Your recent order on %s has been completed. Your order details are shown below for your reference:"
+msgstr ""
+
+#: template/emails/donation-completed.php:22
+msgid "Order #%s"
+msgstr ""
+
+#: template/emails/donation-completed.php:28
+msgid "Quantity"
+msgstr ""
+
+#: template/emails/donation-email-addresses.php:20
+#: template/emails/plain/donation-email-addresses.php:14
+msgid "Billing address"
+msgstr ""
+
+#: template/emails/donation-email-addresses.php:30
+#: template/emails/plain/donation-email-addresses.php:18
+msgid "Shipping address"
+msgstr ""
+
+#: template/emails/donation-email-order-items.php:29
+msgid "Product Image"
+msgstr ""
+
+#: template/emails/donation-email-order-items.php:34
+msgid "Donation For : "
+msgstr ""
+
+#: template/emails/donation-processing.php:18
+msgid "Your donation has been received and is now being processed. Your donation details are shown below for your reference:"
+msgstr ""
+
+#: template/emails/donation-processing.php:22
+msgid "Donation #%s"
+msgstr ""
+
+#: template/emails/plain/donation-admin-new.php:23
+#: template/emails/plain/donation-completed.php:22
+#: template/emails/plain/donation-processing.php:22
 msgid "Order number: %s"
 msgstr ""
 
-#: template/emails/plain/donation-customer-invoice.php:24
+#: template/emails/plain/donation-admin-new.php:24
+#: template/emails/plain/donation-completed.php:23
+#: template/emails/plain/donation-processing.php:23
 msgid "jS F Y"
+msgstr ""
+
+#: template/emails/plain/donation-email-order-items.php:35
+msgid "Quantity: %s"
+msgstr ""
+
+#: template/emails/plain/donation-email-order-items.php:38
+msgid "Cost: %s"
+msgstr ""
+
+#: template/emails/plain/donation-email-order-items.php:49
+msgid "Download %d"
+msgstr ""
+
+#: template/emails/plain/donation-email-order-items.php:51
+msgid "Download"
+msgstr ""
+
+#: template/emails/plain/donation-processing.php:16
+msgid "Your order has been received and is now being processed. Your order details are shown below for your reference:"
 msgstr ""
 
 #: template/myaccount/my-donations.php:26
 msgid "Recent Donations"
-msgstr ""
-
-#: template/myaccount/my-donations.php:35
-#: template/myaccount/my-donations.php:63
-msgid "Status"
 msgstr ""
 
 #: template/myaccount/my-donations.php:36
@@ -1291,87 +1883,85 @@ msgid_plural "%s for %s items"
 msgstr[0] ""
 msgstr[1] ""
 
-#: template/myaccount/my-donations.php:83
-msgid "Cancel"
-msgstr ""
-
-#: template/myaccount/my-donations.php:89
-msgid "View"
-msgstr ""
-
 #: template/myaccount/view-donation.php:18
 msgid "Placed on <mark class=\"order-date\">%s</mark> and is currently <mark class=\"order-status\">%s</mark>."
 msgstr ""
 
-#: template/myaccount/view-donation.php:22 template/order/tracking.php:25
+#: template/myaccount/view-donation.php:22
+#: template/order/donation-tracking.php:25
 msgid "Order Updates"
 msgstr ""
 
-#: template/myaccount/view-donation.php:28 template/order/tracking.php:31
+#: template/myaccount/view-donation.php:28
+#: template/order/donation-tracking.php:31
 msgid "l jS \\o\\f F Y, h:ia"
 msgstr ""
 
-#: template/order/form-tracking.php:20
+#: template/order/donation-form-tracking.php:20
 msgid "To track your order please enter your Order ID in the box below and press the \"Track\" button. This was given to you on your receipt and in the confirmation email you should have received."
 msgstr ""
 
-#: template/order/form-tracking.php:22
+#: template/order/donation-form-tracking.php:22
 msgid "Order ID"
 msgstr ""
 
-#: template/order/form-tracking.php:22
+#: template/order/donation-form-tracking.php:22
 msgid "Found in your order confirmation email."
 msgstr ""
 
-#: template/order/form-tracking.php:23
+#: template/order/donation-form-tracking.php:23
 msgid "Billing Email"
 msgstr ""
 
-#: template/order/form-tracking.php:23
+#: template/order/donation-form-tracking.php:23
 msgid "Email you used during checkout."
 msgstr ""
 
-#: template/order/form-tracking.php:26
+#: template/order/donation-form-tracking.php:26
 msgid "Track"
 msgstr ""
 
-#: template/order/order-again.php:16
+#: template/order/donation-order-again.php:16
 msgid "Order Again"
 msgstr ""
 
-#: template/order/order-details-customer.php:16
+#: template/order/donation-order-details-customer.php:16
 msgid "Billing Address"
 msgstr ""
 
-#: template/order/order-details-customer.php:22
+#: template/order/donation-order-details-customer.php:22
 msgid "Note:"
 msgstr ""
 
-#: template/order/order-details-customer.php:25
+#: template/order/donation-order-details-customer.php:25
 msgid "Email:"
 msgstr ""
 
-#: template/order/order-details-customer.php:29
+#: template/order/donation-order-details-customer.php:29
 msgid "Telephone:"
 msgstr ""
 
-#: template/order/tracking.php:14
+#: template/order/donation-tracking.php:14
 msgid "Order #%s which was made %s has the status &ldquo;%s&rdquo;"
 msgstr ""
 
-#: template/order/tracking.php:14
+#: template/order/donation-tracking.php:14
 msgid "ago"
 msgstr ""
 
-#: template/order/tracking.php:16
+#: template/order/donation-tracking.php:16
 msgid "and was completed"
 msgstr ""
 
-#: template/order/tracking.php:16
+#: template/order/donation-tracking.php:16
 msgid " ago"
 msgstr ""
 
-#: woocommerce-quick-donation.php:287
+#: woocommerce-quick-donation.php:77
+msgid "WooCommerce Donation Product Not Exist"
+msgstr ""
+
+#: woocommerce-quick-donation.php:302
 msgid "WooCommerce Is Required. To Use This Plugin :)"
 msgstr ""
 #. Plugin Name of the plugin/theme

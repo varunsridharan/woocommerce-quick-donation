@@ -249,9 +249,9 @@ class WooCommerce_Quick_Donation_Functions  {
     
     public function remove_gateway($gateways){
         if(WC_QD()->check_donation_exists_cart()){
-           // var_dump($gateway);
            $allowed_gateway = WC_QD()->settings()->get_option(WC_QD_DB.'payment_gateway');
-           foreach($gateways as $gateway){
+           if($allowed_gateway === false){return $gateways;}
+			foreach($gateways as $gateway){
                 if(! in_array($gateway->id,$allowed_gateway)){
                     unset($gateways[$gateway->id]);
                 }
