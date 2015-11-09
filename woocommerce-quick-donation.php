@@ -3,7 +3,7 @@
  * Plugin Name:       WooCommerce Quick Donation
  * Plugin URI:        http://wordpress.org/plugins/woocommerce-quick-donation/
  * Description:       Turns WooCommerce Into Online Donation
- * Version:           1.3.6 BETA
+ * Version:           1.3.7 BETA
  * Author:            Varun Sridharan
  * Author URI:        http://varunsridharan.in
  * Text Domain:       woocommerce-quick-donation
@@ -19,7 +19,8 @@ class WooCommerce_Quick_Donation {
 	/**
 	 * @var string
 	 */
-	public $version = '1.3.6';
+	public $version = '1.3.7';
+	public $db_version = '1.0';
 
 	/**
 	 * @var WooCommerce The single instance of the class
@@ -226,8 +227,8 @@ class WooCommerce_Quick_Donation {
         $this->define('WC_QD','WooCommerce Quick Donation'); # Plugin Name
         $this->define('WC_QD_SLUG','wc-qd'); # Plugin Slug
         
-        $this->define('WC_QD_DB_V','1.0');
-        $this->define('WC_QD_V','1.0');
+        $this->define('WC_QD_DB_V',$this->db_version);
+        $this->define('WC_QD_V',$this->version);
         
         $this->define('WC_QD_FILE',plugin_basename( __FILE__ ));
         

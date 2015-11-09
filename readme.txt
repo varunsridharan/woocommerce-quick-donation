@@ -6,7 +6,7 @@ Requires at least: 3.0 or higher
 Tested up to: 4.4
 WC requires at least: 1.0
 WC tested up to: 2.4.8
-Stable tag: 1.3.6 Beta
+Stable tag: 1.3.7 Beta
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -14,6 +14,7 @@ Turns WooCommerce Into Online Donation.
 
 == Description ==
 <h1> Dear User I am still trying to make things plugin more stable and prefect if you find any bug / any feature is required please open an issue at <a href="https://github.com/technofreaky/woocomerce-quick-donation/issues">GitHub</a> or <a href="https://wordpress.org/support/plugin/woocommerce-quick-donation">WordPress Support</a> </h1>
+
 
 WooCommerce Shopping Cart Donation which makes WooComerce to use for online donation purpose.
 This plugin will create a new product in the name of **donation**.
@@ -38,73 +39,7 @@ Email : plugin@varunsridharan.in / kindly post it in github.
 1. type : select | radio
 2. grouped : true | false
 </code>
-
-**Modifying Template**
-<code>
-1. Create A folder named *donation* under <code> your-theme/woocommerce/</code>
-2. Copy all files from <code>woocommerce-quick-donation/template/</code>
-3. Paste in <code> your-theme/woocommerce/donation/</code>
-</code>
-
-<h3>Plugin Template List</h3>
-**Checkout Page Template**
-<code>
-checkout/donation-cart-errors.php
-checkout/donation-form-billing.php
-checkout/donation-form-checkout.php
-checkout/donation-form-coupon.php
-checkout/donation-form-login.php
-checkout/donation-form-pay.php
-checkout/donation-form-shipping.php
-checkout/donation-payment-method.php
-checkout/donation-payment.php
-checkout/donation-review-order.php
-checkout/donation-thankyou.php
-order/donation-order-details.php
-</code>
-
-
-**Cart Page Template**
-<code>
-cart/donation-cart-item-data
-cart/donation-cart-shipping.php
-cart/donation-cart-totals.php
-cart/donation-cart.php
-cart/donation-proceed-to-checkout-button.php
-</code>
-
-**Email Template**
-<code>
-emails/donation-customer-invoice.php
-emails/plain/donation-customer-invoice.php
-</code>
-
-**Plugin Template**
-<code>
-donation-form.php
-fields/field-radio.php
-fields/field-select.php
-fields/field-text.php
-</code>
-
-<h3>Actions Hooks</h3>
-<code>
-wc_quick_donation_before_doantion_form
-wc_quick_donation_after_doantion_form
-</code>
-
-<h3> Filter Hooks </h3>
-<code>
-wcqd_project_name_select_class
-wcqd_project_name_select_attribute
-wcqd_project_name_radio_class
-wcqd_project_name_radio_attribute
-wcqd_project_price_text_class
-wcqd_project_price_text_attribute
-wc_quick_donation_settings_tab
-wc_quick_donation_settings_section
-wc_quick_donation_settings_fields
-</code>
+ 
 
 == Screenshots ==
 1. Menu In WP-ADMIN View
@@ -185,6 +120,21 @@ Yes you can! Join in on our <a href="https://github.com/technofreaky/woocomerce-
 
 
 == Changelog ==
+= 1.3.7 =
+
+* **Added** - French translation
+* **Added** - Processing & Completed Email Templates
+* **Added** - System Tools (Create Donation Product)
+* **Added** - Auto Config Default Settings When Installing
+* **Added** - Pre Config Shortcode settings via admin
+* **Fixed** - Email Template Call Issue (admin-new-donation)
+* **Fixed** - Donation projects in front end limited to 5
+* **Fixed** - Wrong Count In WC Orders (Counted With Donations)
+* **Fixed** - Donor Stats Not Countend With Donation Order Is Deleted
+* **Fixed** - Cart Mini Widget (Template Added)
+* **Fixed** - Error When No Payment Gateway Configured
+* **Fixed** - Trash & Restore Issue For Donation Orders
+
 = 1.3.6 =
  
 * **Fixes** - Fixed Count Notification Bubble Count
@@ -214,24 +164,15 @@ Yes you can! Join in on our <a href="https://github.com/technofreaky/woocomerce-
 * **Added** - Added Custom HEADER & FOOTER For Emails
 
 **Issues Link**
-
-[#Shortcode position and page content ](https://wordpress.org/support/topic/shortcode-position-and-page-content?replies=7)
-
-[#21](https://github.com/technofreaky/woocomerce-quick-donation/issues/21)
-
-[#23](https://github.com/technofreaky/woocomerce-quick-donation/issues/23)
-
-[#26](https://github.com/technofreaky/woocomerce-quick-donation/issues/26)
-
-[#27](https://github.com/technofreaky/woocomerce-quick-donation/issues/27)
-
-[#33](https://github.com/technofreaky/woocomerce-quick-donation/issues/33)
-
-[#34](https://github.com/technofreaky/woocomerce-quick-donation/issues/34)
-
-[#35](https://github.com/technofreaky/woocomerce-quick-donation/issues/35)
-
-[#38](https://github.com/technofreaky/woocomerce-quick-donation/issues/38)
+[#Shortcode position and page content ](https://wordpress.org/support/topic/shortcode-position-and-page-content?replies=7),
+[#21](https://github.com/technofreaky/woocomerce-quick-donation/issues/21), 
+[#23](https://github.com/technofreaky/woocomerce-quick-donation/issues/23), 
+[#26](https://github.com/technofreaky/woocomerce-quick-donation/issues/26), 
+[#27](https://github.com/technofreaky/woocomerce-quick-donation/issues/27), 
+[#33](https://github.com/technofreaky/woocomerce-quick-donation/issues/33), 
+[#34](https://github.com/technofreaky/woocomerce-quick-donation/issues/34), 
+[#35](https://github.com/technofreaky/woocomerce-quick-donation/issues/35), 
+[#38](https://github.com/technofreaky/woocomerce-quick-donation/issues/38),
 
 = 1.3.5 BETA =
 * **Fixes** - Metabox Error While Creating New Order Via Admin
