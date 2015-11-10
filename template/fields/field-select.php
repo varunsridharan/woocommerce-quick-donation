@@ -4,7 +4,7 @@
  *
  * @author  Varun Sridharan
  * @package WooCommerce Quick Donation/Templates/fields
- * @version 0.2
+ * @version 0.3
  */
 ?>
 
@@ -22,7 +22,7 @@ foreach($project_list as $id => $val){
         }   
         $field_output .= ' </optgroup>';
     } else {
-		if($pre_selected == $k){$attr = 'selected';}
+		if($pre_selected == $id){$attr = 'selected';}
         $field_output .= '<option value="'.$id.'" '.$attr.'>'.$val.'</option>';
     }
     

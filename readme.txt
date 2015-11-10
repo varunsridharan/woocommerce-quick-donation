@@ -5,8 +5,8 @@ Tags: WooCommerce,Quick Dontion,quick donation,online donation,wordpress donatio
 Requires at least: 3.0 or higher
 Tested up to: 4.4
 WC requires at least: 1.0
-WC tested up to: 2.4.8
-Stable tag: 1.3.7 Beta
+WC tested up to: 2.4.10
+Stable tag: 1.3.7.1 Beta
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -120,6 +120,12 @@ Yes you can! Join in on our <a href="https://github.com/technofreaky/woocomerce-
 
 
 == Changelog ==
+= 1.3.7.1 =
+* **Fixed** - Fixed Empty Trash Issue
+* **Fixed** - [`T_PAAMAYIM_NEKUDOTAYIM` Critical: Update to latest kills admin area] (https://github.com/technofreaky/woocomerce-quick-donation/issues/58) After Last UPDATE [1.3.7]
+* **Added** - Option To Clear Donation Log In system tools menu
+
+
 = 1.3.7 =
 
 * **Added** - French translation

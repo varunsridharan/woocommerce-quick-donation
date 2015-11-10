@@ -177,7 +177,7 @@ class WooCommerce_Quick_Donation_Admin  {
         define('WC_QD_QRY_OVERRIDE',true);
         $order_ids = WC_QD()->db()->get_donation_order_ids();
         $order_ids = WC_QD()->db()->extract_donation_id($order_ids);
-
+		if(empty($order_ids)) { $order_ids[] = 0;}
         $args = array('posts_per_page' => '0',
                       'post_type' => 'shop_order', 
                       'post_status' =>  array_keys(wc_get_order_statuses()),
@@ -197,9 +197,9 @@ class WooCommerce_Quick_Donation_Admin  {
             $args['meta_query'][]['value'] = $_GET['dproj'];
             $args['meta_query'][]['compare'] = '=';
         } 
-        if(isset($_GET['post_status'])){ $args['post_status'] = $_GET['post_status'];}    
-        $wp_query = new WP_Query($args);
-        
+        if(isset($_GET['post_status'])){ $args['post_status'] = $_GET['post_status'];}
+
+		$wp_query = new WP_Query($args);
         tt_render_list_page($wp_query);
     }
     

@@ -19,8 +19,21 @@ if(! WC_QD()->donation_product_exist_public()){
 				<td><?php _e('Reinstall Donation Product',WC_QD_TXT); ?> </td>
 				<td>
 					<p>
-						<button type="button" class="wcqdAjaxCall button clear_transients" href="<?php echo wp_nonce_url(admin_url('admin-ajax.php?action=CreateDonationProduct'),'CreateDonationProduct'); ?>"><?php _e('Create Donation Product',WC_QD_TXT); ?></button>
+						<button type="button" class="wcqdAjaxCall button clear_transients" 
+								href="<?php echo wp_nonce_url(admin_url('admin-ajax.php?action=CreateDonationProduct'),'CreateDonationProduct'); ?>"><?php _e('Create Donation Product',WC_QD_TXT); ?></button>
 						<span class="description"><?php echo $product_exist; ?></span>
+					</p>
+				</td>
+			</tr>
+			
+			<tr class="clear_transients">
+				<td><?php _e('Clear Donation Log',WC_QD_TXT); ?> </td>
+				<td>
+					<p>
+						<button type="button" class="ConfirmAction wcqdAjaxCall button" 
+								data-alert-text="Are You Sure Want To Clear All Logs"
+								href="<?php echo wp_nonce_url(admin_url('admin-ajax.php?action=ClearDonationLog'),'ClearDonationLog'); ?>"><?php _e('Clear Log',WC_QD_TXT); ?></button>
+						<span class="description"><?php _e('Clear Logs From WC Donation Table. which resets user donation count & other logs'); ?></span>
 					</p>
 				</td>
 			</tr>

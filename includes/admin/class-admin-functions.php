@@ -22,7 +22,10 @@ class WooCommerce_Quick_Donation_Admin_Function {
         add_action( 'parse_query', array( $this, 'hide_donation_order_woocommerce_order' ) );
         add_filter( 'wc_order_types',array($this,'add_wc_order_types'),1,2);
 		add_action( 'delete_post', array($this,'delete_donation'));
+		
 		add_action( 'wp_ajax_CreateDonationProduct', array($this,'create_donation_product') );
+		add_action( 'wp_ajax_ClearDonationLog', array($this,'clear_wc_qd_logs') );
+		
     }   
     
     
@@ -123,7 +126,7 @@ class WooCommerce_Quick_Donation_Admin_Function {
 	
 	public function create_donation_product(){
 		if(! isset($_REQUEST['_wpnonce'])) {
-			echo '<span class="wc_qd_error">Invalid Nonce. kindly try again</span>';
+			echo '<span class="wc_qd_error">'.__('Invalid Nonce. kindly try again',WC_QD_TXT).'</span>';
 			exit;
 		}
 		
@@ -134,14 +137,14 @@ class WooCommerce_Quick_Donation_Admin_Function {
 			$donation_exist = $install::check_donation_exists();
 			
 			if(isset($_REQUEST['force'])){
-				$post_id = $install::$callBack_function(); 
+				$post_id = $install->$callBack_function(); 
 				update_option(WC_QD_DB.'product_id',$post_id); 
 				echo '<span class="wcqdsuccess">'.__('Donation Product Created',WC_QD_TXT).'</span>';
 				exit;
 			}
 			
 			if(! $donation_exist){
-				$post_id = $install::$callBack_function(); 
+				$post_id = $install->$callBack_function(); 
 				update_option(WC_QD_DB.'product_id',$post_id); 
 				echo '<span class="wcqdsuccess">'.__('Donation Product Created',WC_QD_TXT).'</span>';
 			} else {
@@ -151,6 +154,20 @@ class WooCommerce_Quick_Donation_Admin_Function {
 					   '.__('Force Create Donation Product',WC_QD_TXT).'</button>';
 			}
 		}  
+		
+		exit;
+	}
+	
+	public function clear_wc_qd_logs(){ 
+		if(! isset($_REQUEST['_wpnonce'])) {
+			echo '<span class="wc_qd_error">'.__('Invalid Nonce. kindly try again',WC_QD_TXT).'</span>';
+			exit;
+		}
+
+		if(wp_verify_nonce($_REQUEST['_wpnonce'], 'ClearDonationLog')){	
+			$delete = WC_QD()->db()->delete_donation_logs();
+			echo '<span class="wcqdsuccess">'.sprintf(__('%s Records Deleted',WC_QD_TXT),$delete).'</span>';
+		}
 		
 		exit;
 	}

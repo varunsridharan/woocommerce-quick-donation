@@ -12,6 +12,7 @@
     $links = '';
     foreach($pages as $pageid => $page){
         $class = 'nav-tab ';
+		
         $url = menu_page_url($pageid, false ); 
 
         if($active == $pageid){$class .= ' nav-tab-active'; }

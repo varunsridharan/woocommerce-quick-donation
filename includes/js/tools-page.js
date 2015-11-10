@@ -6,6 +6,13 @@ jQuery(document).ready(function(){
 		if(jQuery(this).hasClass('wcqdAutoRemove')){
 			autoRemove = true;
 		}
+		
+		if(jQuery(this).hasClass('ConfirmAction')){
+			var r = confirm(jQuery(this).attr('data-alert-text'));
+			if (r != true) { return ; }
+		}
+		
+		
 		var Spinner = jQuery('<span class="spinner WCQDSpinner"></span>');
 		var Clicked = jQuery(this);
 		var POST_URL = jQuery(this).attr('href');

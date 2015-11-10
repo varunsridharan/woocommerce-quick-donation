@@ -116,121 +116,140 @@ class WC_Quick_Donation_Listing_Table extends WP_List_Table {
 	}
     
     public function process_bulk_action() {
-        global $pagenow;
+        global $pagenow, $wpdb;
         if(!isset($_REQUEST['_wpnonce'])){return;}
         $nonce = esc_attr( $_REQUEST['_wpnonce'] );
         if ( ! wp_verify_nonce( $nonce, 'bulk-donations') ) {
           wp_die( __('Invalid Nonce for deleting WC Donation Orders', WC_QD_TXT));
         }
 		
-		//check_admin_referer('bulk-posts');
-		$pagenum = $this->get_pagenum();
-		$sendback = remove_query_arg( array('trashed', 'untrashed', 'deleted', 'locked', 'ids'), wp_get_referer() );
-		if ( ! $sendback )
-			$sendback = admin_url( $parent_file );
-		$sendback = add_query_arg( 'paged', $pagenum, $sendback );
-		if ( strpos($sendback, 'post.php') !== false )
-			$sendback = admin_url($post_new_file);		
-        
-        $post_ids = array_map('intval', $_REQUEST['post']);
-		$total_post = count($post_ids);
-		$ids = implode(', ',$post_ids);
-        $doaction = $this->current_action();
-		$Notice_Txt = '';
-        switch ( $doaction ) {
-            case 'trash':
-                $trashed = $locked = 0;
-
-                foreach( (array) $post_ids as $post_id ) {
-                    if ( !current_user_can( 'delete_post', $post_id) )
-                        wp_die( __('You are not allowed to move this item to the Trash.'));
-
-                    if ( wp_check_post_lock( $post_id ) ) {
-                        $locked++;
-                        continue;
-                    }
-
-                    if ( !wp_trash_post($post_id) )
-                        wp_die( __('Error in moving to Trash.') );
-
-                    $trashed++;
-					$Notice_Txt = ' Trashed ';
-                }
+		$doaction = $this->current_action();
+		if($doaction){
+			$pagenum = $this->get_pagenum();
+			$sendback = remove_query_arg( array('trashed', 'untrashed', 'deleted', 'locked', 'ids'), wp_get_referer() );
+			if ( ! $sendback )
+				$sendback = admin_url( $parent_file );
+			$sendback = add_query_arg( 'paged', $pagenum, $sendback );
+			if ( strpos($sendback, 'post.php') !== false )
+				$sendback = admin_url($post_new_file);		
+			
+			if(isset($_REQUEST['post'])){
+				$post_ids = array_map('intval', $_REQUEST['post']);
 				
-                $sendback = add_query_arg( array('trashed' => $trashed, 'ids' => join(',', $post_ids), 'locked' => $locked ), $sendback );
-				
-				wc_qd_notice(
-					sprintf(
-						_n( '%s Donation Order Trashed  ( %s )', 
-						   '%s Donation Orders Trashed  ( %s )' , $total_post, $ids, WC_QD_TXT ),
-						$total_post,$ids
-					)
-				);
-				
-                break;
-            case 'untrash':
-                $untrashed = 0;
-                foreach( (array) $post_ids as $post_id ) {
-                    if ( !current_user_can( 'delete_post', $post_id) )
-                        wp_die( __('You are not allowed to restore this item from the Trash.') );
+			}
+			var_dump($this->screen);
 
-                    if ( !wp_untrash_post($post_id) )
-                        wp_die( __('Error in restoring from Trash.') );
+			if ( 'delete_all' == $doaction ) {
+				// Prepare for deletion of all posts with a specified post status (i.e. Empty trash).
+				$post_status = preg_replace('/[^a-z0-9_-]+/i', '', 'trash');
+				// Validate the post status exists.
+				if ( get_post_status_object( $post_status ) ) {
+					$post_ids = $wpdb->get_col( $wpdb->prepare( "SELECT ID FROM $wpdb->posts WHERE post_type=%s AND post_status = %s", 'shop_order', $post_status ) );
+				}
+				$doaction = 'delete';
+			}			
+			
+			$total_post = count($post_ids);
+			$ids = implode(', ',$post_ids);
+			
+			$Notice_Txt = '';
+			switch ( $doaction ) {
+				case 'trash':
+					$trashed = $locked = 0;
 
-                    $untrashed++;
-                }
-                $sendback = add_query_arg('untrashed', $untrashed, $sendback);
-				
-				wc_qd_notice(
-					sprintf(
-						_n( '%s Donation Order restored from trash  ( %s )', 
-						    '%s Donation Orders restored from trash ( %s )' , $total_post, $ids, WC_QD_TXT ),
-						$total_post, 
-						$ids
-					)
-				);
-				
-                break;
-            case 'delete':
-                $deleted = 0;
-                foreach( (array) $post_ids as $post_id ) {
-                    $post_del = get_post($post_id);
+					foreach( (array) $post_ids as $post_id ) {
+						if ( !current_user_can( 'delete_post', $post_id) )
+							wp_die( __('You are not allowed to move this item to the Trash.'));
 
-                    if ( !current_user_can( 'delete_post', $post_id ) )
-                        wp_die( __('You are not allowed to delete this item.') );
+						if ( wp_check_post_lock( $post_id ) ) {
+							$locked++;
+							continue;
+						}
 
-                    if ( $post_del->post_type == 'attachment' ) {
-                        if ( ! wp_delete_attachment($post_id) )
-                            wp_die( __('Error in deleting.') );
-                    } else {
-                        if ( !wp_delete_post($post_id) )
-                            wp_die( __('Error in deleting.') );
-                    }
-                    $deleted++;
-                }
-                $sendback = add_query_arg('deleted', $deleted, $sendback);
-				wc_qd_notice(
-					sprintf(
-						_n( '%s Donation Order permanently deleted  ( %s )', 
-						    '%s Donation Orders permanently deleted ( %s )' , $total_post, $ids, WC_QD_TXT ),
-						$total_post, 
-						$ids
-					)
-				);
-                break;
-            case 'edit':
-                if ( isset($_REQUEST['bulk_edit']) ) {
-                    $done = bulk_edit_posts($_REQUEST);
+						if ( !wp_trash_post($post_id) )
+							wp_die( __('Error in moving to Trash.') );
 
-                    if ( is_array($done) ) {
-                        $done['updated'] = count( $done['updated'] );
-                        $done['skipped'] = count( $done['skipped'] );
-                        $done['locked'] = count( $done['locked'] );
-                        $sendback = add_query_arg( $done, $sendback );
-                    }
-                }
-                break;
-        }
+						$trashed++;
+						$Notice_Txt = ' Trashed ';
+					}
+
+					$sendback = add_query_arg( array('trashed' => $trashed, 'ids' => join(',', $post_ids), 'locked' => $locked ), $sendback );
+
+					wc_qd_notice(
+						sprintf(
+							_n( '%s Donation Order Trashed  ( %s )', 
+							   '%s Donation Orders Trashed  ( %s )' , $total_post, $ids, WC_QD_TXT ),
+							$total_post,$ids
+						)
+					);
+
+					break;
+				case 'untrash':
+					$untrashed = 0;
+					foreach( (array) $post_ids as $post_id ) {
+						if ( !current_user_can( 'delete_post', $post_id) )
+							wp_die( __('You are not allowed to restore this item from the Trash.') );
+
+						if ( !wp_untrash_post($post_id) )
+							wp_die( __('Error in restoring from Trash.') );
+
+						$untrashed++;
+					}
+					$sendback = add_query_arg('untrashed', $untrashed, $sendback);
+
+					wc_qd_notice(
+						sprintf(
+							_n( '%s Donation Order restored from trash  ( %s )', 
+								'%s Donation Orders restored from trash ( %s )' , $total_post, $ids, WC_QD_TXT ),
+							$total_post, 
+							$ids
+						)
+					);
+
+					break;
+				case 'delete':
+					$deleted = 0;
+					foreach( (array) $post_ids as $post_id ) {
+						$post_del = get_post($post_id);
+
+						if ( !current_user_can( 'delete_post', $post_id ) )
+							wp_die( __('You are not allowed to delete this item.') );
+
+						if ( $post_del->post_type == 'attachment' ) {
+							if ( ! wp_delete_attachment($post_id) )
+								wp_die( __('Error in deleting.') );
+						} else {
+							if ( !wp_delete_post($post_id) )
+								wp_die( __('Error in deleting.') );
+						}
+						$deleted++;
+					}
+					$sendback = add_query_arg('deleted', $deleted, $sendback);
+					wc_qd_notice(
+						sprintf(
+							_n( '%s Donation Order permanently deleted  ( %s )', 
+								'%s Donation Orders permanently deleted ( %s )' , $total_post, $ids, WC_QD_TXT ),
+							$total_post, 
+							$ids
+						)
+					);
+					break;
+				case 'edit':
+					if ( isset($_REQUEST['bulk_edit']) ) {
+						$done = bulk_edit_posts($_REQUEST);
+
+						if ( is_array($done) ) {
+							$done['updated'] = count( $done['updated'] );
+							$done['skipped'] = count( $done['skipped'] );
+							$done['locked'] = count( $done['locked'] );
+							$sendback = add_query_arg( $done, $sendback );
+						}
+					}
+					break;
+			}
+		
+		}
+
 
 		$sendback = remove_query_arg( array('action', 'action2', 'tags_input', 'post_author', 'comment_status', 'ping_status', '_status', 'post', 'bulk_edit', 'post_view'), $sendback );
        	wp_redirect($sendback);
@@ -334,8 +353,7 @@ class WC_Quick_Donation_Listing_Table extends WP_List_Table {
         foreach ( $results as $row ) {$counts[ $row['post_status'] ] = $row['num_posts'];}
 
         $counts = (object) $counts;
-        wp_cache_set( $cache_key.'_donation', $counts, 'counts' );
-
+        wp_cache_set( $cache_key.'_donation', $counts, 'counts' ); 
         return $counts;
     }    
 	/**
