@@ -69,13 +69,27 @@ class WooCommerce_Quick_Donation_Functions  {
         add_filter( 'woocommerce_locate_template' , array($this,'wc_locate_template'),10,3);
         add_filter( 'the_title', array($this,'wc_page_endpoint_title' ),10,2);
 		add_filter( 'wp_count_posts', array($this,'modify_wp_count_posts'),99,3);
+		
+		add_filter( 'query_vars', array( $this, 'add_query_vars'), 0 );
     }
     
     public function get_template_list(){
         return self::$search_template;
     }
     
-    
+   	
+	/**
+	 * add_query_vars function.
+	 *
+	 * @access public
+	 * @param array $vars
+	 * @return array
+	 */
+	public function add_query_vars( $vars ) {
+		$vars[] = 'donate-now';
+		return $vars;
+	}
+	
     public function wc_page_endpoint_title($title = '', $id = ''){
         if(is_page($id)){
             global $wp_query;
@@ -184,28 +198,50 @@ class WooCommerce_Quick_Donation_Functions  {
     }
 
     
-    public function generate_price_box(){
+    public function generate_price_box($predefined = false){
         global $id, $name, $class, $field_output,$attributes,$value;
+		$type = 'text';
+		if($predefined){$type = 'select';}
         $field_output = '';
         $id = 'donation_price';
         $name = 'wc_qd_donate_project_price';
-        $class = apply_filters('wcqd_project_price_text_class',array(),'text');
-        $custom_attributes = apply_filters('wcqd_project_price_text_attribute',array(),'text');
+        $class = apply_filters('wcqd_project_price_class',array(),$type);
+        $custom_attributes = apply_filters('wcqd_project_price_attribute',array(),$type);
         $value = '';
+		$pre_amt = array();
         $class = implode(' ',$class);
         $attributes = '';
         foreach($custom_attributes as $attr_key => $attr_val) {
             $attributes .= $attr_key.'="'.$attr_val.'" ';
         }
-        
-        
-
-        $field_output = $this->load_template('field-text.php',WC_QD_TEMPLATE . 'fields/' ,array('id' => $id,
+		
+		if($predefined){
+			
+			$amount = wcqd_get_option(WC_QD_DB.'pre_defined_amount');
+			$amount = explode('|',$amount);
+			$c = get_woocommerce_currency_symbol();
+			foreach($amount as $amts){
+				$pre_amt[$amts] = $c.''.$amts;
+			}
+			 
+		}
+		
+        $project_list = $pre_amt;
+        $field_output = $this->load_template('field-'.$type.'.php', WC_QD_TEMPLATE.'fields/' , array('id' => $id, 
+                                                                                     'name' => $name, 
+                                                                                     'class' => $class, 
+                                                                                     'field_output' => $field_output, 
+                                                                                     'is_grouped' => false, 
+                                                                                     'project_list' => $project_list, 
+																					 'pre_selected' => false,
+                                                                                     'attributes' => $attributes,
+																					  'value' => $value));		
+        /*$field_output = $this->load_template('field-text.php',WC_QD_TEMPLATE . 'fields/' ,array('id' => $id,
                                                                                 'name' => $name,
                                                                                 'class' => $class,
                                                                                 'field_output' => $field_output,
                                                                                 'attributes' => $attributes,
-                                                                                'value' => $value));        
+                                                                                'value' => $value));    */    
         
         return $field_output;
     }
@@ -347,5 +383,42 @@ class WooCommerce_Quick_Donation_Functions  {
 		$counts = (object) $counts;
 		wp_cache_set( $cache_key, $counts, 'wc_qd_modified_wp_count_posts' );
 		return apply_filters( 'wc_qd_modified_wp_count_posts', $counts, $type, $perm );
+	}	
+	
+	
+	
+	public function get_donate_link($donation_id='364',$amount = 10,$echo = false){
+		$data = array('donate' => true, 'id' =>$donation_id,'amount'=>$amount);
+		$url = $this->encryptor('encrypt', http_build_query($data));
+		$url = site_url().'/donate-now/'.$url;
+		if($echo){echo $url; return;}
+		return $url; 
+	}
+	
+	public function encryptor($action, $string) {
+		$output = false;
+
+		$encrypt_method = "AES-256-CBC";
+		//pls set your unique hashing key
+		$secret_key = 'muni';
+		$secret_iv = 'muni123';
+
+		// hash
+		$key = hash('sha256', $secret_key);
+
+		// iv - encrypt method AES-256-CBC expects 16 bytes - else you will get a warning
+		$iv = substr(hash('sha256', $secret_iv), 0, 16);
+
+		//do the encyption given text/string/number
+		if( $action == 'encrypt' ) {
+			$output = openssl_encrypt($string, $encrypt_method, $key, 0, $iv);
+			$output = base64_encode($output);
+		}
+		else if( $action == 'decrypt' ){
+			//decrypt the given text/string/number
+			$output = openssl_decrypt(base64_decode($string), $encrypt_method, $key, 0, $iv);
+		}
+
+		return $output;
 	}	
 }

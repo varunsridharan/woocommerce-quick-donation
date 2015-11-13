@@ -1,13 +1,8 @@
 <?php
 /**
  * functionality of the plugin.
- *
  * @link       @TODO
  * @since      1.0
- *
- * @package    @TODO
- * @subpackage @TODO
- *
  * @package    @TODO
  * @subpackage @TODO
  * @author     Varun Sridharan <varunsridharan23@gmail.com>
@@ -29,10 +24,12 @@ class WooCommerce_Quick_Donation_Shortcode {
 			'grouped' => false,
 			'show_errors' => wcqd_get_option(WC_QD_DB.'shortcode_show_errors'),
 			'selected_value' => wcqd_get_option(WC_QD_DB.'pre_selected_project'),
+			'defined_amount' => false
         ), $settings );
         
         $donation_box = WC_QD()->f()->generate_donation_selbox($settings['grouped'],$settings['type'],$settings['selected_value']);
-        $donation_price =  WC_QD()->f()->generate_price_box();
+        $donation_price =  WC_QD()->f()->generate_price_box($settings['defined_amount']);
+		
         $currency = get_woocommerce_currency_symbol();
         $return_value = '';
         $messages = '';
@@ -44,15 +41,14 @@ class WooCommerce_Quick_Donation_Shortcode {
             ob_flush();
         }
 
-       // ob_start();
-        do_action('wc_quick_donation_before_doantion_form',$return_value , $settings['type'],$settings['grouped']);
+
+		do_action('wc_quick_donation_before_doantion_form',$return_value , $settings['type'],$settings['grouped']);
         $messages .= WC_QD()->f()->load_template('donation-form.php',WC_QD_TEMPLATE,array('donation_box' => $donation_box,
                                                                              'donation_price' => $donation_price,
                                                                              'currency' => $currency));
         do_action('wc_quick_donation_after_doantion_form',$return_value , $settings['type'],$settings['grouped']);
-        //$messages .= ob_get_clean(); 
-        
-        return $messages;
+
+		return $messages;
     }
 
 }

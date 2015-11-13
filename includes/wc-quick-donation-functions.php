@@ -86,5 +86,14 @@ if(! function_exists('wcqd_get_option')){
 	}
 		
 }
+
+
+if(! function_exists('wcqd_get_donate_link')){
+	function wcqd_get_donate_link($donation_id='364',$amount = 10,$echo = false){
+		$link = WC_QD()->f()->get_donate_link($donation_id,$amount,false);
+		if($echo){ echo $link; return; }
+		return $link;		
+	}
+}
    
 ?>

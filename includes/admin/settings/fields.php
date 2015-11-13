@@ -125,7 +125,12 @@ $fields['settings_shortcode']['shortcode'][] = array(
     'options' => WC_QD()->f()->get_porject_list(),
     'attr'    => array('class' => 'wc-enhanced-select','style' => 'width:auto;max-width:35%;')		
 );
-//WC_QD()->f()->get_porject_list()
-?>
 
-
+$fields['settings_shortcode']['shortcode'][] = array(
+	'id'      =>  WC_QD_DB.'pre_defined_amount',
+    'type'    => 'textarea',
+    'label'   => __( 'Pre Defined Project Amount', WC_QD_TXT),
+    'desc'    => __( 'Enter Donation Amount Like <code> 10|20|30|40 </code>',WC_QD_TXT),
+    'size '   => 'small', 
+	'attr'  => array('style' => 'min-width:35%; width:auto;max-width:75%;')	
+);

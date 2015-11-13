@@ -12,11 +12,23 @@ class WooCommerce_Quick_Donation_Process extends WooCommerce_Quick_Donation  {
     function __construct(){
         parent::__construct();
 		add_action( 'woocommerce_checkout_update_order_meta',array($this,'save_order_id_db'),1);
-
+		
+		add_action( 'pre_get_posts', array( $this, 'add_doantion_via_link' ) );
 		add_action( 'wp_loaded',array($this,'on_wp_loaded'),20);
         add_filter( 'woocommerce_get_price', array($this,'get_price'),10,2);
     }
     
+	public function add_doantion_via_link($wp_query){
+		if(isset($wp_query->query_vars['donate-now'])){
+			$get_string = WC_QD()->f()->encryptor('decrypt', $wp_query->query_vars['donate-now']);
+			parse_str($get_string, $get_array); 
+			$this->process_donation(true,$get_array['id'],$get_array['amount']);
+			exit;
+		}
+		return $wp_query;
+	}
+	
+	
     public function on_wp_loaded(){
         if($this->check_donation_exists_cart()){ 
             $this->is_donation_exists = true; 
@@ -74,10 +86,10 @@ class WooCommerce_Quick_Donation_Process extends WooCommerce_Quick_Donation  {
         
         
         
-    }
-     
-    public function process_donation(){
-        if(isset($_POST['donation_add'])){
+    } 
+	
+    public function process_donation($donate_add = false,$project_id = null,$amount=null){
+        if(isset($_POST['donation_add']) || $donate_add === true){
             if($this->check_donation_already_exist()){
                 $message = WC_QD()->db()->get_message(WC_QD_DB.'donation_already_exist');
                 wc_add_notice($message,'error');
@@ -92,8 +104,8 @@ class WooCommerce_Quick_Donation_Process extends WooCommerce_Quick_Donation  {
             }
             
             global $woocommerce;
-            $donateprice = isset($_POST['wc_qd_donate_project_price']) ? $_POST['wc_qd_donate_project_price'] : false;
-			$projects = isset($_POST['wc_qd_donate_project_name']) && !empty($_POST['wc_qd_donate_project_name']) ? $_POST['wc_qd_donate_project_name'] : false;
+            $donateprice = isset($_POST['wc_qd_donate_project_price']) ? $_POST['wc_qd_donate_project_price'] : $amount;
+			$projects = isset($_POST['wc_qd_donate_project_name']) && !empty($_POST['wc_qd_donate_project_name']) ? $_POST['wc_qd_donate_project_name'] : $project_id;
 
             $check_donation_price = $this->check_donation_price_status($donateprice);
             if( ! $check_donation_price){return false;}
