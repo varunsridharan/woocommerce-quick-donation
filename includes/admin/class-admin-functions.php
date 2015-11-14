@@ -134,7 +134,7 @@ class WooCommerce_Quick_Donation_Admin_Function {
 			$type = 'simple';
 			$install = new WC_QD_INSTALL;
 			$callBack_function = 'create_'.$type.'_donation';
-			$donation_exist = $install::check_donation_exists();
+			$donation_exist = $install->check_donation_exists();
 			
 			if(isset($_REQUEST['force'])){
 				$post_id = $install->$callBack_function(); 
