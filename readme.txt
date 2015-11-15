@@ -6,7 +6,7 @@ Requires at least: 3.0 or higher
 Tested up to: 4.4
 WC requires at least: 1.0
 WC tested up to: 2.4.10
-Stable tag: 1.3.7.1 Beta
+Stable tag: 1.3.8 Beta
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -38,6 +38,9 @@ Email : plugin@varunsridharan.in / kindly post it in github.
 <code>
 1. type : select | radio
 2. grouped : true | false
+3. show_errors : true | false
+4. selected_value : Project ID
+5. defined_amount :  true | false {Amount Can Be Defined In Settings Page}
 </code>
  
 
@@ -120,6 +123,13 @@ Yes you can! Join in on our <a href="https://github.com/technofreaky/woocomerce-
 
 
 == Changelog ==
+= 1.3.8 =
+* **Added** - option get donate link using {wcqd_get_donate_link} function
+* **Added** - Predefined Amount Option
+
+* **Fixed** - [Blank pages] (https://github.com/technofreaky/woocomerce-quick-donation/issues/56)
+* **Fixed** - [Latest version will not activate] (https://github.com/technofreaky/woocomerce-quick-donation/issues/62)
+
 = 1.3.7.1 =
 * **Fixed** - Fixed Empty Trash Issue
 * **Fixed** - [`T_PAAMAYIM_NEKUDOTAYIM` Critical: Update to latest kills admin area] (https://github.com/technofreaky/woocomerce-quick-donation/issues/58) After Last UPDATE [1.3.7]

@@ -83,21 +83,15 @@ class WC_QD_INSTALL{
 		$message_settings = self::message_section_settings();
 		$shortcode_settings = self::shortcode_section_settings();
 
-		add_option( 'wc_qd_general', $general_settings);
+		$general_settings = add_option('wc_qd_general', $general_settings);
 		add_option('wc_qd_message', $message_settings);
 		add_option('wc_qd_shortcode',$shortcode_settings);
 		add_option('wc_qd_anh_notices', '');
-		
-		$message = __('Please Configure Any One Payment Gatway To Get Plugin Work :) ', WC_QD_TXT);
-		$message = sprintf(
-			__( '<p>Please Configure Any One Payment Gatway To Get Plugin Work :) </p> 
-			     <p class="submit">%s Config Gateway %s %s</p>',
-			  WC_QD_TXT),   
-			'<a class="button button-primary" href="' . admin_url( 'edit.php?post_type='.WC_QD_PT.'&page=wc_qd_settings' ) . '">','</a>', 
-			wc_qd_remove_link('class="button" ') 
 
-		);
-		wc_qd_notice($message,'error',array('times' => 0,'wraper' => false));		 
+		if($general_settings){
+			$message = sprintf(__('<p>Please Configure Any One Payment Gatway To Get Plugin Work :) </p> <p class="submit">%s Config Gateway %s %s</p>',WC_QD_TXT),'<a class="button button-primary" href="' . admin_url( 'edit.php?post_type='.WC_QD_PT.'&page=wc_qd_settings' ) . '">','</a>',wc_qd_remove_link('class="button" '));
+			wc_qd_notice($message,'error',array('times' => 0,'wraper' => false));		 
+		}
 	}
 	
 	

@@ -15,6 +15,7 @@ class WooCommerce_Quick_Donation_Functions  {
             'field-text.php' => 'fields/field-text.php',
             'myaccount/my-donations.php' => 'myaccount/my-donations.php',
 			'cart/mini-cart.php' => 'cart/donation-mini-cart.php',
+			'projects/single.php' => 'projects/single.php',
         ),
 
         'is_donation' => array( 
@@ -71,12 +72,22 @@ class WooCommerce_Quick_Donation_Functions  {
 		add_filter( 'wp_count_posts', array($this,'modify_wp_count_posts'),99,3);
 		
 		add_filter( 'query_vars', array( $this, 'add_query_vars'), 0 );
+		//add_filter('single_template',array($this,'cpt_page_template'));
     }
+				   
     
     public function get_template_list(){
         return self::$search_template;
     }
     
+	public function cpt_page_template($template){
+		$template = $template;
+		if(WC_QD_PT == get_post_type(get_queried_object_id())){
+			$template_located = $this->locate_template('projects/single.php');
+			if(!empty($template_located)){$template = $template_located;}
+		}
+		return $template;
+	}
    	
 	/**
 	 * add_query_vars function.

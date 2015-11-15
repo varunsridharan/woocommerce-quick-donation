@@ -3,7 +3,7 @@
  * Plugin Name:       WooCommerce Quick Donation
  * Plugin URI:        http://wordpress.org/plugins/woocommerce-quick-donation/
  * Description:       Turns WooCommerce Into Online Donation
- * Version:           1.3.7.1 BETA
+ * Version:           1.3.8 BETA
  * Author:            Varun Sridharan
  * Author URI:        http://varunsridharan.in
  * Text Domain:       woocommerce-quick-donation
@@ -19,7 +19,7 @@ class WooCommerce_Quick_Donation {
 	/**
 	 * @var string
 	 */
-	public $version = '1.3.7';
+	public $version = '1.3.8';
 	public $db_version = '1.0';
 
 	/**
@@ -298,6 +298,25 @@ if(WC_QD_Dependencies()){
         return WooCommerce_Quick_Donation::get_instance();
     }
     $GLOBALS['woocommerce_quick_donation'] =  WC_QD();
+	
+	include(WC_QD_INC.'class-activate-welcome.php');
+	$default_args = array(
+	'dbslug' => WC_QD_DB,
+	'welcome_slug' => WC_QD_TXT.'-welcome-page',
+	'wp_plugin_slug' => WC_QD_TXT,
+	'wp_plugin_url' => 'http://wordpress.org/plugins/woocommerce-quick-donation/',
+	'tweet_text' => 'Turns WooCommerce Into Online Donation',
+	'twitter_user' => 'varunsridharan2',
+	'twitter_hash' => 'WCQD',
+	'gitub_user' => 'technofreaky',
+	'github_repo' => 'woocomerce-quick-donation',
+	'plugin_name' => WC_QD,
+	'version' => WC_QD_V,
+	'template' => WC_QD_INC.'views/welcome-page.php',
+	'menu_name' => WC_QD.' Welcome Page',
+	'plugin_file' => __FILE__,
+	);
+	new wp_wc_wcqd_welcome_page($default_args);	
     
 } else {
    wc_qd_notice(__('WooCommerce Is Required. To Use This Plugin :)','woocommerce-quick-donation'),
