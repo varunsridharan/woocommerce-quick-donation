@@ -66,6 +66,7 @@ class WooCommerce_Quick_Donation {
         $this->init_class();
         add_action('plugins_loaded', array( $this, 'after_plugins_loaded' ));
         add_filter('load_textdomain_mofile',  array( $this, 'load_plugin_mo_files' ), 10, 2);
+		add_action( 'wp_enqueue_scripts', array( $this,'enqueue_and_register_styles') ); 
     }
     
     /**
@@ -107,7 +108,8 @@ class WooCommerce_Quick_Donation {
      * Loads Required Plugins For Plugin
      */
     private function load_required_files(){
-        $this->load_files(WC_QD_INC.'wc-quick-donation-*.php'); 
+        $this->load_files(WC_QD_INC.'vars.php'); 
+		$this->load_files(WC_QD_INC.'wc-quick-donation-*.php'); 
         $this->load_files(WC_QD_ADMIN.'wps/*.php'); 
         //$this->load_files(WC_QD_INC.'class-admin-notice.php');
         $this->load_files(WC_QD_INC.'class-post-*.php');
@@ -218,6 +220,13 @@ class WooCommerce_Quick_Donation {
         }
         return $mofile;
     }
+	
+	
+	
+	public function enqueue_and_register_styles(){
+		wp_register_style('woocommerce-quick-donation', WC_QD_CSS.'wc-qd-style.css');
+		wp_enqueue_style('woocommerce-quick-donation');
+	}
     
     /**
      * Define Required Constant

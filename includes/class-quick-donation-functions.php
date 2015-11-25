@@ -7,63 +7,11 @@ if ( ! defined( 'WPINC' ) ) { die; }
 
 class WooCommerce_Quick_Donation_Functions  {
     protected static $project_db_list = null;
-    public static $search_template =   array(
-        'general' => array(
-            'donation-form.php' => 'donation-form.php',
-            'field-radio.php' => 'fields/field-radio.php',
-            'field-select.php' => 'fields/field-select.php',
-            'field-text.php' => 'fields/field-text.php',
-            'myaccount/my-donations.php' => 'myaccount/my-donations.php',
-			'cart/mini-cart.php' => 'cart/donation-mini-cart.php',
-			'projects/single.php' => 'projects/single.php',
-        ),
-
-        'is_donation' => array( 
-			
-            'cart/cart-item-data.php' => 'cart/donation-cart-item-data',
-            'cart/cart-shipping.php' => 'cart/donation-cart-shipping.php',
-            'cart/cart-totals.php' => 'cart/donation-cart-totals.php',
-            'cart/cart.php' => 'cart/donation-cart.php',
-            'cart/proceed-to-checkout-button.php' => 'cart/donation-proceed-to-checkout-button.php',
-            
-            'checkout/cart-errors.php' => 'checkout/donation-cart-errors.php',
-            'checkout/form-billing.php' => 'checkout/donation-form-billing.php',
-            'checkout/form-checkout.php' => 'checkout/donation-form-checkout.php',
-            'checkout/form-coupon.php' => 'checkout/donation-form-coupon.php',
-            'checkout/form-login.php' => 'checkout/donation-form-login.php',
-            'checkout/form-pay.php' => 'checkout/donation-form-pay.php',
-            'checkout/form-shipping.php' => 'checkout/donation-form-shipping.php',
-            'checkout/payment-method.php' => 'checkout/donation-payment-method.php',
-            'checkout/payment.php' => 'checkout/donation-payment.php',
-            'checkout/review-order.php' => 'checkout/donation-review-order.php',
-        ),
-        
-        'after_order' => array(
-            'checkout/thankyou.php' => 'checkout/donation-thankyou.php',
-            'myaccount/view-order.php' => 'myaccount/view-donation.php',
-
-            'order/order-details.php' => 'order/donation-order-details.php',
-            'order/order-details-item.php' => 'order/donation-order-details-item.php',
-            'order/order-details-customer.php' => 'order/donation-order-details-customer.php',
-
-            'emails/email-styles.php' => 'emails/donation-email-styles.php',
-            
-            'emails/donation-admin-new.php' => 'emails/donation-admin-new.php',
-            'emails/email-addresses.php' => 'emails/donation-email-addresses.php',
-            'emails/donation-email-footer.php' => 'emails/donation-email-footer.php',
-            'emails/donation-email-header.php' => 'emails/donation-email-header.php',
-            'emails/email-order-items.php' => 'emails/donation-email-order-items.php',
-            'emails/plain/email-addresses.php' => 'emails/plain/donation-email-addresses.php',
-            'emails/plain/email-order-items.php' => 'emails/plain/donation-email-order-items.php',
-            'emails/plain/donation-customer-invoice.php' => 'emails/plain/donation-customer-invoice.php',
-            
-            'emails/donation-processing.php' => 'emails/donation-processing.php',
-            'emails/plain/donation-processing.php' => 'emails/plain/donation-processing.php',
-        )
-        
-        );    
+    public static $search_template = null;    
     
     function __construct(){
+		global $wc_qd_template_list; 
+		self::$search_template = $wc_qd_template_list;
         add_filter( 'wc_get_template',array($this,'get_template'),10,5);
         add_filter( 'woocommerce_email_classes',  array($this,'add_email_classes'));
         add_action( 'woocommerce_available_payment_gateways',array($this,'remove_gateway'));
@@ -189,9 +137,12 @@ class WooCommerce_Quick_Donation_Functions  {
         $class = apply_filters('wcqd_project_name_'.$type.'_class',array(),$type);
         $custom_attributes = apply_filters('wcqd_project_name_'.$type.'_attribute',array(),$type);
         $is_grouped = $grouped;
-        $project_list = $this->get_porject_list($grouped);
-		
-        $class = implode(' ',$class);
+		$project_list = '';
+		if($type != 'hidden'){
+			$project_list = $this->get_porject_list($grouped);
+		} 
+
+		$class = implode(' ',$class);
         $attributes = '';
         foreach($custom_attributes as $attr_key => $attr_val) {
             $attributes .= $attr_key.'="'.$attr_val.'" ';
@@ -212,6 +163,7 @@ class WooCommerce_Quick_Donation_Functions  {
     public function generate_price_box($predefined = false){
         global $id, $name, $class, $field_output,$attributes,$value;
 		$type = 'text';
+		$field_type = 'number';
 		if($predefined){$type = 'select';}
         $field_output = '';
         $id = 'donation_price';
@@ -246,13 +198,8 @@ class WooCommerce_Quick_Donation_Functions  {
                                                                                      'project_list' => $project_list, 
 																					 'pre_selected' => false,
                                                                                      'attributes' => $attributes,
-																					  'value' => $value));		
-        /*$field_output = $this->load_template('field-text.php',WC_QD_TEMPLATE . 'fields/' ,array('id' => $id,
-                                                                                'name' => $name,
-                                                                                'class' => $class,
-                                                                                'field_output' => $field_output,
-                                                                                'attributes' => $attributes,
-                                                                                'value' => $value));    */    
+																					 'value' => $value,
+																					 'field_type' => $field_type));		  
         
         return $field_output;
     }

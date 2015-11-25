@@ -1,0 +1,40 @@
+.wcqd-single-quick-container {
+	border: 1px solid #ddd;
+	width: auto;
+	max-width: 300px;
+	padding: 20px;
+}
+
+.wcqd-single-quick-container h3 {
+	margin-top: 0;
+	padding-top: 0;
+	font-family: inherit;
+	color: #000;
+}
+
+.wcqd-single-quick-container p {
+	font-family: inherit;
+	color: #666;
+}
+
+.wcqd-single-quick-container input[type="number"] {
+	padding: 5px;
+	width: 60%;
+	max-width: 60%;
+	font-size: 14px;
+	margin: 0 10px 0 0;
+}
+
+.wcqd-single-quick-container input[type="submit"] {
+	padding: 8px;
+	border: none;
+	font-size: 14px;
+	color: #000;
+	background: #ddd;
+}
+
+.wcqd-single-quick-container input[type="submit"]:hover {
+	cursor: pointer;
+	background: #444;
+	color: #fff;
+}

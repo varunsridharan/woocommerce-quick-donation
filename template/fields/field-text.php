@@ -8,7 +8,7 @@
  */ 
 ?>
 <input 
-       type="text" 
+       type="<?php echo $field_type; ?>" 
        id="<?php echo $id; ?>" 
        name="<?php echo $name; ?>" 
        class="<?php echo $class.' '.$attributes;  ?>"
