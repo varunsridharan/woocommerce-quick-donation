@@ -54,9 +54,10 @@ class WooCommerce_Quick_Donation_Shortcode {
 
 	
 	public function wc_quick_donation_single_handler($settings){
+		
 		$settings = shortcode_atts( array( 
-			'title' => true, 
-			'content' => true,
+			'title' => 'true', 
+			'content' => 'true',
 			'defined_amount' => false,
 			'id' => false,
 		), $settings );
@@ -69,11 +70,11 @@ class WooCommerce_Quick_Donation_Shortcode {
 		$donation_price =  WC_QD()->f()->generate_price_box($settings['defined_amount']);
 		$donation_price .= WC_QD()->f()->generate_donation_selbox(false,'hidden',$settings['id']); 
 		
-		if($settings['title']){
+		if($settings['title'] == 'true'){
 			$title = get_the_title($settings['id']);
 		}
 		
-		if($settings['content']){
+		if($settings['content'] == 'true'){
 			$content = get_the_excerpt();
 		}
 		
