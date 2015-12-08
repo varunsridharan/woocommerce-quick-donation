@@ -124,9 +124,9 @@ class WC_Quick_Donation_Listing_Table extends WP_List_Table {
         }
 		
 		$doaction = $this->current_action();
+		$sendback = remove_query_arg( array('trashed', 'untrashed', 'deleted', 'locked', 'ids', 'dproj'), wp_get_referer() );
 		if($doaction){
 			$pagenum = $this->get_pagenum();
-			$sendback = remove_query_arg( array('trashed', 'untrashed', 'deleted', 'locked', 'ids'), wp_get_referer() );
 			if ( ! $sendback )
 				$sendback = admin_url( $parent_file );
 			$sendback = add_query_arg( 'paged', $pagenum, $sendback );
@@ -245,6 +245,10 @@ class WC_Quick_Donation_Listing_Table extends WP_List_Table {
 							$sendback = add_query_arg( $done, $sendback );
 						}
 					}
+					break;
+
+				case 'dproj':
+					$sendback = add_query_arg( array('dproj'=>$_REQUEST['dproj']), $sendback );
 					break;
 			}
 		
@@ -539,6 +543,9 @@ class WC_Quick_Donation_Listing_Table extends WP_List_Table {
 	public function current_action() {
 		if ( isset( $_REQUEST['delete_all'] ) || isset( $_REQUEST['delete_all2'] ) )
 			return 'delete_all';
+
+		if ( isset( $_REQUEST['dproj'] ) and $_REQUEST['dproj'] != '' )
+			return 'dproj';
 
 		return parent::current_action();
 	}
