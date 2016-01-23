@@ -308,10 +308,11 @@ class WooCommerce_Quick_Donation_Functions  {
         
         if($found){
             return $file;
-        } else {
+        } /*else {
             $file = wc_locate_template($template_name);
             return $file;
-        }
+        }*/
+		
         return $located;
     }    
 	

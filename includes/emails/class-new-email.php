@@ -35,7 +35,7 @@ class WC_QD_Donation_New_Email extends WC_Email {
 		$this->template_html    = 'emails/donation-admin-new.php';
 		$this->template_plain   = 'emails/plain/admin-new-order.php';
 
-		add_filter('woocommerce_template_directory',array($this,'change_dir'),2,1);
+		add_filter('woocommerce_template_directory',array($this,'change_dir'),2,2);
 
 		// Call parent constructor
 		parent::__construct();
@@ -47,7 +47,8 @@ class WC_QD_Donation_New_Email extends WC_Email {
 			$this->recipient = get_option( 'admin_email' );
 	}
 
-	public function change_dir($dir){
+	public function change_dir($dir,$template){
+		if(! in_array($template,array('emails/donation-completed.php','emails/plain/donation-completed.php'))){return $dir;}
         $dir = $dir.'/donation';
         return $dir;
     }
