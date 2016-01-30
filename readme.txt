@@ -2,11 +2,11 @@
 Contributors: varunms
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=9MLKDVUVB7WBJ
 Tags: WooCommerce,Quick Dontion,quick donation,online donation,wordpress donation,simple donation,donation form,WC donation,Online Payment,Payment,Online,Donate,Monthly Goal,affiliate, cart, checkout, commerce, configurable, digital, download, downloadable, e-commerce, ecommerce, inventory, reports, sales, sell, shipping, shop, shopping, stock, store, tax, variable, widgets, woothemes, wordpress ecommerce
-Requires at least: 3.0 or higher
-Tested up to: 4.4
+Requires at least: 3.0
+Tested up to: 4.4.1
 WC requires at least: 1.0
-WC tested up to: 2.4.10
-Stable tag: 1.3.8 Beta
+WC tested up to: 2.5
+Stable tag: 1.3.9 Beta
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -32,15 +32,23 @@ Email : plugin@varunsridharan.in / kindly post it in github.
 * Custom Error Messages
 
 
-**This Plugin Can called by using the below short code** `[wc_quick_donation]`
+**This Plugin Can called by using the below short code** `[wc_quick_donation]` OR `[wc_qd_single]`
 
-**Shortcode Variables**
+** [wc_quick_donation] Shortcode Variables**
 <code>
 1. type : select | radio
 2. grouped : true | false
 3. show_errors : true | false
 4. selected_value : Project ID
 5. defined_amount :  true | false {Amount Can Be Defined In Settings Page}
+</code>
+
+** [wc_qd_single] Shortcode Variables**
+<code>
+1. title : true | false
+2. content : true | false
+3. defined_amount :  true | false {Amount Can Be Defined In Settings Page}
+4. id : Project ID
 </code>
  
 
@@ -119,10 +127,13 @@ Oops. Please User github / WordPress to post bugs.  <a href="https://github.com/
 **WooCommerce Quick Donation is awesome! Can I contribute?**
 Yes you can! Join in on our <a href="https://github.com/technofreaky/woocomerce-quick-donation/">GitHub repository :)</a>
 
-== Screenshots ==
-
 
 == Changelog ==
+= 1.3.9 =
+* **Fixed** - Minor Bugs
+* **Tweaks** - Updated With Latest WP & WC Version
+* **Added** - New Shortcode to get a single project [wc_qd_single]
+
 = 1.3.8 =
 * **Added** - option get donate link using {wcqd_get_donate_link} function
 * **Added** - Predefined Amount Option
