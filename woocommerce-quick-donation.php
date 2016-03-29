@@ -56,6 +56,8 @@ class WooCommerce_Quick_Donation {
         $this->load_required_files();
         register_activation_hook( __FILE__,array('WC_QD_INSTALL','INIT') );
         add_action( 'init', array( $this, 'init' ));
+        add_action('plugins_loaded', array( $this, 'after_plugins_loaded' ));
+        add_filter('load_textdomain_mofile',  array( $this, 'load_plugin_mo_files' ), 10, 2);
     }
     
     /**
@@ -64,9 +66,8 @@ class WooCommerce_Quick_Donation {
     public function init(){
         $this->check_donation_product_exist();
         $this->init_class();
-        add_action('plugins_loaded', array( $this, 'after_plugins_loaded' ));
-        add_filter('load_textdomain_mofile',  array( $this, 'load_plugin_mo_files' ), 10, 2);
-		add_action( 'wp_enqueue_scripts', array( $this,'enqueue_and_register_styles') ); 
+        
+        add_action( 'wp_enqueue_scripts', array( $this,'enqueue_and_register_styles') ); 
     }
     
     /**
