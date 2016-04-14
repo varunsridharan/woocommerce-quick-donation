@@ -20,7 +20,7 @@
         </tr>
         <tr>
             <td></td>
-            <td><input type="submit" name="donation_add" value="Add Donation"/></td>
+            <td><input type="submit" name="donation_add" value="<?php _e( 'Add Donation', WC_QD_TXT ) ?>"/></td>
         </tr>
     </table>
     
