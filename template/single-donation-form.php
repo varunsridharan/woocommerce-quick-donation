@@ -19,7 +19,7 @@
 	<?php }?>
 	
 	<?php echo $donation_price; ?>
-	<input type="submit" name="donation_add" value="Add Donation"/>
+	<input type="submit" name="donation_add" value="<?php _e( 'Add Donation', WC_QD_TXT ) ?>"/>
      
 </form>
 </div>
