@@ -11,5 +11,6 @@
        type="<?php echo $field_type; ?>" 
        id="<?php echo $id; ?>" 
        name="<?php echo $name; ?>" 
+       step="any"
        class="<?php echo $class.' '.$attributes;  ?>"
        value="<?php echo $value; ?>" />
