@@ -114,8 +114,11 @@ class WooCommerce_Quick_Donation_Process extends WooCommerce_Quick_Donation  {
             
             $price_check = $this->check_min_max($projects,$donate_price);
             if(!$price_check){return false;}
-            
-            $woocommerce->session->donation_price = $donate_price;
+            global $WOOCS;
+            $currencies = $WOOCS->get_currencies();
+            $value = $donate_price / $currencies[$WOOCS->current_currency]['rate'];
+
+            $woocommerce->session->donation_price = $value;
             $woocommerce->session->projects = $projects;
 			$woocommerce->session->is_donation_product = true;
             
@@ -172,7 +175,7 @@ class WooCommerce_Quick_Donation_Process extends WooCommerce_Quick_Donation  {
         $price = intval($price);
         
         if($min_required){
-            $min_required = intval($min_required);
+            $min_required = floatval(WC_QD()->f()->get_price_in_current_currency(floatval($min_required)));
             if($price < $min_required){
                 $id = WC_QD_DB.'min_rda_msg';
                 $search_replace = array('{donation_amount}' => $price, '{min_amount}' => $min_required);
@@ -184,7 +187,7 @@ class WooCommerce_Quick_Donation_Process extends WooCommerce_Quick_Donation  {
         
         
         if($max_required){
-            $max_required = intval($max_required);
+            $max_required = floatval(WC_QD()->f()->get_price_in_current_currency(floatval($max_required)));
             if($price > $max_required){
                 $id = WC_QD_DB.'max_rda_msg';
                 $search_replace = array('{donation_amount}' => $price, '{max_amount}' => $max_required);

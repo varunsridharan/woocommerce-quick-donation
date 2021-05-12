@@ -184,7 +184,7 @@ class WooCommerce_Quick_Donation_Functions  {
 			$amount = explode('|',$amount);
 			$c = get_woocommerce_currency_symbol();
 			foreach($amount as $amts){
-				$pre_amt[$amts] = $c.''.$amts;
+				$pre_amt[$amts] = $c.''.$this->get_price_in_current_currency(floatval($amts));
 			}
 			 
 		}
@@ -353,7 +353,20 @@ class WooCommerce_Quick_Donation_Functions  {
 		if($echo){echo $url; return;}
 		return $url; 
 	}
-	
+
+
+  public function get_current_currency() {
+      global $WOOCS;
+      if($this->currency_switcher) return $WOOCS->current_currency;
+      return get_woocommerce_currency();
+   }
+
+   public function get_price_in_current_currency($price) {
+      global $WOOCS;
+      if($this->currency_switcher) return apply_filters('woocs_exchange_value', $price);
+      return $price;
+   }
+
 	public function encryptor($action, $string) {
 		$output = false;
 
